@@ -3,19 +3,25 @@ package wordle.domain;
 import org.assertj.core.util.VisibleForTesting;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 class Word {
 
+    private static final Pattern pattern = Pattern.compile("^[A-Za-z]+$");
     private final char value;
     private final Position position;
 
     Word(final char value, final int position) {
-        if (!Character.isAlphabetic(value)) {
+        if (!isAlphabet(value)) {
             throw new IllegalArgumentException("Input is not alphabetic: " + value);
         }
 
         this.value = Character.toLowerCase(value);
         this.position = new Position(position);
+    }
+
+    private boolean isAlphabet(final char value) {
+        return pattern.matcher(String.valueOf(value)).matches();
     }
 
     @VisibleForTesting

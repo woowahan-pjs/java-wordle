@@ -18,7 +18,7 @@ class WordTest {
     }
 
     @ParameterizedTest
-    @ValueSource(chars = {'1', '0', '-', '?', '@'})
+    @ValueSource(chars = {'1', '0', '-', '?', '@', 'ㄱ', '아', '부'})
     void Word생성실패_String이아님(final char input) {
         assertThatThrownBy(() -> new Word(input, input))
                 .isInstanceOf(IllegalArgumentException.class);
