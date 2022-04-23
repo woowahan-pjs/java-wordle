@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WordTest {
 
@@ -15,4 +16,12 @@ class WordTest {
 
         assertThat(word.getValue()).isEqualTo(lowerInput);
     }
+
+    @ParameterizedTest
+    @ValueSource(chars = {'1', '0', '-', '?', '@'})
+    void Word생성실패_String이아님(final char input) {
+        assertThatThrownBy(() -> new Word(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
