@@ -8,6 +8,25 @@
 
 ---
 
+## 기능 구현 사항
+### model(domain)
++ Words : 입력 단어 리스트(hello,label,spell,spill)
+  + Word : 단어 하나(hello)
+    + letter : 단어 1글자(h)
+    + position : 위치(1,2,3,4,5)
++ Grid : 입력 결과 리스트(⬜⬜🟨🟩⬜,🟨⬜⬜⬜🟩,🟩🟩⬜🟩🟩,🟩🟩🟩🟩🟩)
+  + tiles : 판별 한 줄(⬜⬜🟨🟩⬜)
+    + tile : 색깔
+    + position : 위치(1,2,3,4,5)
+  + isFinish(): 6번의 정상 입력이 진행되었는지 확인
++ tileStatus : 판별 결과 enum(초록색, 노란색, 회색)
++ game : 게임 객체
++ gameStatus : 게임 결과 enum(진행중, 종료-성공, 종료-실패)
+
+### 출력
+
+---
+
 ## 🚀 기능 요구 사항
 
 선풍적인 인기를 끌었던 영어 단어 맞추기 게임이다.
@@ -61,7 +80,7 @@ spill
 ## 🎯 프로그래밍 요구 사항
 
 - JDK 11 버전에서 실행 가능해야 한다. **JDK 11에서 정상적으로 동작하지 않을 경우 0점 처리한다.**
-- 프로그램 실행의 시작점은 `Application`의 `main()`이다.
+- 프로그램 실행의 시작점은 `wordle.Application`의 `main()`이다.
 - [Java 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/master/styleguide/java) 가이드를 준수하며 프로그래밍한다.
 - 프로그래밍 요구 사항에서 별도의 변경 불가 안내가 없는 한 자유롭게 파일을 수정하고 패키지를 이동할 수 있다.
 - indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
