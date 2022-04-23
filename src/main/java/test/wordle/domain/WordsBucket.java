@@ -2,14 +2,15 @@ package test.wordle.domain;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;import java.util.ArrayList;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class WordsBucket {
-    final List<Words> words = new ArrayList<>();
+    private final List<Words> words = new ArrayList<>();
 
-    public List<Words> readWordsFile(final String filePath) {
+    public WordsBucket(final String filePath) {
         try {
             final List<String> tmp = Files.readAllLines(Path.of(filePath));
             for (String word : tmp) {
@@ -18,6 +19,9 @@ public class WordsBucket {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return words;
+    }
+
+    public int size() {
+        return words.size();
     }
 }
