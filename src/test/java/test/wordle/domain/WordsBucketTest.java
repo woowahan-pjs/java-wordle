@@ -3,9 +3,9 @@ package test.wordle.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WordsBucketTest {
-
 
     @Test
     void WordsBucket생성() {
@@ -13,4 +13,11 @@ class WordsBucketTest {
 
         assertThat(wordsBucket.size()).isNotZero();
     }
+
+    @Test
+    void WordsBucket생성실패() {
+        assertThatThrownBy(() -> new WordsBucket("src/main/resources/error.txt"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
