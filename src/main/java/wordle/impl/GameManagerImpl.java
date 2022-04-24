@@ -18,8 +18,6 @@ public class GameManagerImpl implements GameManager {
     private Judgement judgement;
     private Printer printer;
 
-    private String answer;
-
     public GameManagerImpl() {
         this.userInput = new UserInputImpl();
         this.wordGenerator = new WordGeneratorImpl();
@@ -27,14 +25,10 @@ public class GameManagerImpl implements GameManager {
         this.printer = new PrinterImpl();
     }
 
-    private void init() {
-        this.answer = wordGenerator.execute();
-        System.out.println(OPENING_PHRASE);
-    }
-
     @Override
     public void start() {
-        init();
+        final String answer = wordGenerator.execute();
+        System.out.println(OPENING_PHRASE);
         for (int i = 0; i < PROGRESS_COUNT; i++) {
             UserWord userWord = userInput.execute();
             JudgeResult judgeResult = judgement.execute(answer, userWord.getValue());
