@@ -49,7 +49,7 @@ class CharacterTest {
 
     @DisplayName("단어의 위치값을 확인한다.")
     @Test
-    void checkWordPositon() {
+    void checkWordPosition() {
         Character character = new Character("a", 0);
 
         assertThat(character.getPosition()).isEqualTo(0);
