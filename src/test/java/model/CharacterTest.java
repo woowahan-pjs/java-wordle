@@ -54,4 +54,15 @@ class CharacterTest {
 
         assertThat(character.getPosition()).isEqualTo(0);
     }
+
+    @DisplayName("문자가 동일하고 같은 위치에 있으면 match, 문자만 동일하면 exist, 둘다 동일하지 않으면 nonExist")
+    @ParameterizedTest
+    @CsvSource({"a,1,b,1,nonExist", "a,1,a,1,match", "a,1,a,2,exist"})
+    void checkPositionAndValue(String value1, int position, String value2, int position2, String result) {
+        Character input = new Character(value1, position);
+        Character answer = new Character(value2, position2);
+
+        //match , exist , nonExist
+        assertThat(input.isSame(answer)).isEqualTo(result);
+    }
 }
