@@ -1,4 +1,4 @@
-package test.wordle.domain;
+package wordle.domain;
 
 import java.io.IOException;
 import java.nio.file.Files;

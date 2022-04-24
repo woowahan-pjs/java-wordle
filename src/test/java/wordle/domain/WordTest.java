@@ -1,4 +1,4 @@
-package test.wordle.domain;
+package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,4 @@
-package test.wordle.domain;
+package wordle.domain;
 
 public enum MatchStatus {
     GREEN,
