@@ -1,5 +1,7 @@
 package wordle.design;
 
+import wordle.vo.JudgeResult;
+
 public interface Judgement {
-    public boolean execute(String answer, String input); // 유저 인풋을 판단
+    public JudgeResult execute(String answer, String input); // 유저 인풋을 판단
 }
