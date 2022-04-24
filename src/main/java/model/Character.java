@@ -12,7 +12,7 @@ public class Character implements Comparable<Character> {
 
     public Character(String value, int position) {
         validate(value);
-        this.value = value;
+        this.value = convertToLowercase(value);
         this.position = position;
     }
 
