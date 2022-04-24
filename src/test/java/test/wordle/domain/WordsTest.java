@@ -1,5 +1,6 @@
 package test.wordle.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,6 +22,23 @@ class WordsTest {
     void Words생성실패(final String input) {
         assertThatThrownBy(() -> new Words(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void contain_가지고있음() {
+        final Word word = new Word('a', 1);
+        final Words words = new Words("happy");
+
+        assertThat(words.contains(word)).isTrue();
+    }
+
+
+    @Test
+    void contain_가지고있지않음() {
+        final Word word = new Word('z', 1);
+        final Words words = new Words("happy");
+
+        assertThat(words.contains(word)).isFalse();
     }
 
 }

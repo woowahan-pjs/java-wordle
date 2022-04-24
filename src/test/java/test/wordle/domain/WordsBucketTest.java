@@ -29,7 +29,7 @@ class WordsBucketTest {
         final Answer answer = wordsBucket.findAnswer(today);
 
         assertThat(answer).isNotNull();
-        assertThat(answer.matches(new Words("rebut"))).isTrue();
+        assertThat(answer.matches(new Words("rebut")).isCorrect()).isTrue();
     }
 
 }

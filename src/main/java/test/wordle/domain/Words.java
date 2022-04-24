@@ -14,12 +14,20 @@ public class Words {
         }
         wordList = new ArrayList<>();
         for (final char input : text.toCharArray()) {
-            wordList.add(new Word(input));
+            wordList.add(new Word(input, input));
         }
     }
 
     public int length() {
         return wordList.size();
+    }
+
+    public List<Word> getWordList() {
+        return wordList;
+    }
+
+    public boolean contains(final Word word) {
+        return wordList.contains(word);
     }
 
     @Override
