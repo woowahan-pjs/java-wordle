@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Characters {
@@ -27,5 +28,39 @@ public class Characters {
         if (value.length() != WORD_LENGTH) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public List<String> match(Characters answer) {
+        List<Character> answerTemp = answer.characterList;
+        String[] answerGroup = new String[WORD_LENGTH];
+        Arrays.fill(answerGroup, "nonExist");
+
+        for (int index = 0; index < WORD_LENGTH; index++) {
+            if (characterList.get(index).isSame(answerTemp.get(index)).equals("match")) {
+                answerGroup[index] = "match";
+                answerTemp.remove(index);
+            }
+        }
+
+        for (int index = 0; index < WORD_LENGTH; index++) {
+            if (!answerGroup[index].equals("match")) {
+                answerGroup[index] = inputMatchAnswer(characterList.get(index), answerTemp);
+                answerTemp.remove(index);
+            }
+        }
+
+        return List.of(answerGroup);
+    }
+
+    public String inputMatchAnswer(Character character, List<Character> answerTemp) {
+        String result = "nonExist";
+
+        for (int index = 0; index < answerTemp.size(); index++) {
+            if (character.isSame(answerTemp.get(index)).equals("exist")) {
+                result = "exist";
+            }
+        }
+
+        return result;
     }
 }
