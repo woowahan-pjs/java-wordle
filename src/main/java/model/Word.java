@@ -2,17 +2,14 @@ package model;
 
 public class Word {
 
-    private String value;
+    private final Characters characters;
 
     Word(String value) {
-        this.value = value;
+        this.characters = new Characters(value);
     }
 
     public static Word create(String value) {
         return new Word(value);
     }
 
-    public int length() {
-        return value.length();
-    }
 }
