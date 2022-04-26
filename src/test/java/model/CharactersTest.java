@@ -35,9 +35,9 @@ class CharactersTest {
         Characters input = new Characters("abcde");
         Characters answer = new Characters("abeee");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("match", "match", "nonExist", "nonExist", "match");
+        assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열을 비교한다.(포함되지만 위치가 다른 문자가 존재하는 경우)")
@@ -46,9 +46,9 @@ class CharactersTest {
         Characters input = new Characters("abcde");
         Characters answer = new Characters("abece");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("match", "match", "exist", "nonExist", "match");
+        assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.EXIST, Result.NON_EXIST, Result.MATCH);
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열이 모두 일치한다.")
@@ -57,9 +57,9 @@ class CharactersTest {
         Characters input = new Characters("abcde");
         Characters answer = new Characters("abcde");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("match", "match", "match", "match", "match");
+        assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH, Result.MATCH, Result.MATCH);
     }
 
     //입력에서 두개인 경우 -> 1개만 존재 , 2개다 존재
@@ -70,9 +70,9 @@ class CharactersTest {
         Characters input = new Characters("abcee");
         Characters answer = new Characters("gtyre");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("nonExist", "nonExist", "nonExist", "nonExist", "match");
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 한개만 존재하는 경우")
@@ -81,9 +81,9 @@ class CharactersTest {
         Characters input = new Characters("abcbd");
         Characters answer = new Characters("gtbre");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("nonExist", "exist", "nonExist", "nonExist", "nonExist");
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 하나는 매칭되고 하나는 존재하는 경우")
@@ -92,9 +92,9 @@ class CharactersTest {
         Characters input = new Characters("abcee");
         Characters answer = new Characters("gtere");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("nonExist", "nonExist", "nonExist", "exist", "match");
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.EXIST, Result.MATCH);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 존재하지 않는 경우")
@@ -103,9 +103,9 @@ class CharactersTest {
         Characters input = new Characters("abcee");
         Characters answer = new Characters("gtqrq");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("nonExist", "nonExist", "nonExist", "nonExist", "nonExist");
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST);
     }
 
     @DisplayName("정답 문자열에는 해당 문자가 두개이면서 입력문자열에 매칭되는 문자가 한개일 경우")
@@ -114,8 +114,8 @@ class CharactersTest {
         Characters input = new Characters("abcbe");
         Characters answer = new Characters("gtere");
 
-        List<String> result = input.match(answer);
+        List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly("nonExist", "nonExist", "nonExist", "nonExist", "match");
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
     }
 }

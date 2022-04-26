@@ -1,9 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 public class Characters {
 
@@ -30,38 +30,35 @@ public class Characters {
             throw new IllegalArgumentException();
         }
     }
+    //Todo 현재 메서드에서는 두 가지 일을 하는것 같다. 분리해보자. set을 통해 값을 변경하고 있는데 이 부분을 불변으로 바꿀수는 없을까?
+    public List<Result> match(Characters answer) {
+        Map<Character,Character> check = new HashMap<>();
 
-    public List<String> match(Characters answer) {
-        List<Character> answerTemp = answer.characterList;
-        String[] answerGroup = new String[WORD_LENGTH];
-        Arrays.fill(answerGroup, "nonExist");
+        List<Result> list = new ArrayList<>();
+        for (Character input : characterList) {
+            inputMatchAnswer(input, answer, check);
+            list.add(Result.NON_EXIST);
+        }
 
-        for (int index = 0; index < WORD_LENGTH; index++) {
-            if (characterList.get(index).isSame(answerTemp.get(index)).equals("match")) {
-                answerGroup[index] = "match";
-                answerTemp.remove(index);
+        for (Character ans : answer.characterList) {
+            if(check.containsKey(ans)){
+                Character input = check.get(ans);
+                list.set(input.getPosition(), input.isSame(ans));
             }
         }
 
-        for (int index = 0; index < WORD_LENGTH; index++) {
-            if (!answerGroup[index].equals("match")) {
-                answerGroup[index] = inputMatchAnswer(characterList.get(index), answerTemp);
-                answerTemp.remove(index);
-            }
-        }
-
-        return List.of(answerGroup);
+        return list;
     }
-
-    public String inputMatchAnswer(Character character, List<Character> answerTemp) {
-        String result = "nonExist";
-
-        for (int index = 0; index < answerTemp.size(); index++) {
-            if (character.isSame(answerTemp.get(index)).equals("exist")) {
-                result = "exist";
+    //Todo Character로 로직 이동을 할 수 있지 않을까?
+    private void inputMatchAnswer(Character input, Characters answer, Map<Character, Character> check) {
+        for (Character ans : answer.characterList) {
+            if(input.isSame(ans) == Result.MATCH){
+                check.put(ans,input);
+                return;
+            }
+            if(input.isSame(ans) == Result.EXIST && !check.containsKey(ans)){
+                check.put(ans,input);
             }
         }
-
-        return result;
     }
 }
