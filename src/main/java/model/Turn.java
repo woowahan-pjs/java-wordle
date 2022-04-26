@@ -8,7 +8,7 @@ public class Turn {
     private int turn;
 
     public Turn() {
-        this.turn = INIT_VALUE;
+        this(INIT_VALUE);
     }
 
     public int increase() {
