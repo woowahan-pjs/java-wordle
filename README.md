@@ -9,10 +9,38 @@
 ---
 
 ## 기능 구현 사항
+
+* ConsoleInput.java
+- [x] '정답을 입력해 주세요.' 문구와 함께 단어를 입력받는다
+
+* ConsoleOutput.java
++ [x] 글자 수가 5자가 아닌 경우
+  + [ ] '글자 수는 5글자여야 합니다.' 문구를 출력한다.
++ [ ] 글자 수가 맞는 경우
+  + WordPool 에 있는 단어인 경우
+    + [ ] 정답과 비교한 결과를 출력한다
+  + WordPool 에 없는 단어인 경우
+    + [ ] '단어가 목록에 없습니다.' 문구를 출력한다.
++ [ ] 입력된 단어가 영문자가 아닌 경우
+  + [ ] '영문자만 입력 가능합니다.' 문구를 출력한다.
+
+* WordPool.java
+  + words.txt에 있는 단어를 모두 들고 있는 객체
+
+- TODO
+  - [x] List<String> wordList -> WordPool 객체로 뽑기
+  - [x] 입력된 단어가 WordPool에 존재하는지 비교
+  - [ ] 입력된 단어가 WordPool에 존재한다면 정답과 비교 
+  - [ ] 총 6번의 정상 입력을 받아야 게임이 종료된다. 그전까지는 계속 사용자의 입력을 받는다.
+  - [ ] Word
+    - [ ] Letter
+      - [ ] Alphabet, Position 비교 메서드
+        - return tile Status
+
 ### model(domain)
-+ Words : 입력 단어 리스트(hello,label,spell,spill)
-  + Word : 단어 하나(hello)
-    + letter : 단어 1글자(h)
++ Word : 단어 하나(hello)
+  + Letter : 단어 1글자(h)
+    + Alphabet : 알파벳(h)
     + position : 위치(1,2,3,4,5)
 + Grid : 입력 결과 리스트(⬜⬜🟨🟩⬜,🟨⬜⬜⬜🟩,🟩🟩⬜🟩🟩,🟩🟩🟩🟩🟩)
   + tiles : 판별 한 줄(⬜⬜🟨🟩⬜)
@@ -23,8 +51,16 @@
 + game : 게임 객체
 + gameStatus : 게임 결과 enum(진행중, 종료-성공, 종료-실패)
 
+### util
++ WordsGenerator : 유효 단어 목록 생성기
+
 ### 출력
 
+### 고민했던 부분
++ Validator를 어디에 위치시킬 것인가?
+  + Controller, Word 생성 메서드
++ Validator 내 validate 메서드 외 private 메서드를 private으로 가져가도 되는지?
++ Letter 내 Alphabet, Position 가 과도하게 객체를 쪼갠 것인지?
 ---
 
 ## 🚀 기능 요구 사항
