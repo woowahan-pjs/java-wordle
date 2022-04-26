@@ -4,8 +4,6 @@ public class Character implements Comparable<Character> {
 
     private static final String INPUT_RANGE = "[a-zA-Z]";
     private static final int POSITION_INIT = 0;
-    private static final int MATCH = 0;
-
 
     private int position;
     private String value;
