@@ -36,4 +36,8 @@ public class Character implements Comparable<Character> {
     public int getPosition() {
         return this.position;
     }
+
+    public Result isSame(Character answer) {
+        return Result.valueOf(this, answer);
+    }
 }
