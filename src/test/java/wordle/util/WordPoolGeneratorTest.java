@@ -2,17 +2,16 @@ package wordle.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WordsGeneratorTest {
+class WordPoolGeneratorTest {
 
 	@Test
 	@DisplayName("words.txt 파일의 추출로 가져온 단어의 갯수는 0보다 커야한다")
 	void wordsGeneratorTest() {
 		// given & when
-		List<String> wordList = WordsGenerator.generate();
+		WordPool wordList = WordPoolGenerator.generate();
 		int wordListSize = wordList.size();
 
 		// then
