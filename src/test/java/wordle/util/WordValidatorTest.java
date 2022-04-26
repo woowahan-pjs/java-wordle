@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import wordle.model.WordPool;
 
 class WordValidatorTest {
 
@@ -52,13 +52,13 @@ class WordValidatorTest {
 	void validateNotExistedWord(String normalUserInput)
 		throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 		// given
-		List<String> wordList = Arrays.asList("disco", "jelly", "table", "alert");
+		WordPool wordPool = new WordPool(Arrays.asList("disco", "jelly", "table", "alert"));
 		WordValidator wordValidator = new WordValidator();
-		Method method = wordValidator.getClass().getDeclaredMethod("validateExistedWord", String.class, List.class);
+		Method method = wordValidator.getClass().getDeclaredMethod("validateExistedWord", String.class, WordPool.class);
 		method.setAccessible(true);
 
 		// when
-		boolean isValid = (boolean) method.invoke(wordValidator, normalUserInput, wordList);
+		boolean isValid = (boolean) method.invoke(wordValidator, normalUserInput, wordPool);
 
 		// then
 		assertThat(isValid).isFalse();
@@ -70,13 +70,13 @@ class WordValidatorTest {
 	void validateExistedWord(String normalUserInput)
 		throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 		// given
-		List<String> wordList = Arrays.asList("disco", "jelly", "table", "alert");
+		WordPool wordPool = new WordPool(Arrays.asList("disco", "jelly", "table", "alert"));
 		WordValidator wordValidator = new WordValidator();
-		Method method = wordValidator.getClass().getDeclaredMethod("validateExistedWord", String.class, List.class);
+		Method method = wordValidator.getClass().getDeclaredMethod("validateExistedWord", String.class, WordPool.class);
 		method.setAccessible(true);
 
 		// when
-		boolean isValid = (boolean) method.invoke(wordValidator, normalUserInput, wordList);
+		boolean isValid = (boolean) method.invoke(wordValidator, normalUserInput, wordPool);
 
 		// then
 		assertThat(isValid).isTrue();
