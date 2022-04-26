@@ -1,13 +1,13 @@
 package wordle.util;
 
-import java.util.List;
+import wordle.model.WordPool;
 
 public class WordValidator {
 
 	private static final int WORD_LENGTH = 5;
 	private static final String WORD_PATTERN = "^[A-Za-z]+$";
 
-	public static boolean validate(String userInput, List<String> wordList) {
+	public static boolean validate(String userInput, WordPool wordPool) {
 		// 글자 수가 5자가 아닌 경우
 		if (!validateWordLength(userInput)) {
 			return false;
@@ -17,7 +17,7 @@ public class WordValidator {
 			return false;
 		}
 		// 단어 목록에 일치하는 단어가 있는지 없는지
-		if (!validateExistedWord(userInput, wordList)) {
+		if (!validateExistedWord(userInput, wordPool)) {
 			return false;
 		}
 		return true;
@@ -31,7 +31,7 @@ public class WordValidator {
 		return userInput.matches(WORD_PATTERN);
 	}
 
-	private static boolean validateExistedWord(String userInput, List<String> wordList) {
-		return wordList.contains(userInput);
+	private static boolean validateExistedWord(String userInput, WordPool wordPool) {
+		return wordPool.contains(userInput);
 	}
 }
