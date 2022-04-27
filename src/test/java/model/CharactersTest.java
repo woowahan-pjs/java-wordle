@@ -20,8 +20,7 @@ class CharactersTest {
         assertThat(result).hasSize(5);
     }
 
-    @DisplayName("5글자가 아니면 예외처리")
-    @ParameterizedTest
+    @ParameterizedTest (name = "5글자가 아닌 입력문자 {0}를 입력하면 에외처리")
     @ValueSource(strings = {"abcd", "abcdef"})
     void characterLengthValid(String input) {
         assertThatThrownBy(() -> {
@@ -37,7 +36,8 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
+        assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.NON_EXIST, Result.NON_EXIST,
+                Result.MATCH);
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열을 비교한다.(포함되지만 위치가 다른 문자가 존재하는 경우)")
@@ -62,8 +62,6 @@ class CharactersTest {
         assertThat(result).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH, Result.MATCH, Result.MATCH);
     }
 
-    //입력에서 두개인 경우 -> 1개만 존재 , 2개다 존재
-    //답에서 두개인 경우 -> 1개만 존재, 2개다 존재
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 한개만 매칭되는 경우")
     @Test
     void matchDuplicationInputCharacter1() {
@@ -72,7 +70,8 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST,
+                Result.MATCH);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 한개만 존재하는 경우")
@@ -83,7 +82,8 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.NON_EXIST, Result.EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST);
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.EXIST, Result.NON_EXIST, Result.NON_EXIST,
+                Result.NON_EXIST);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 하나는 매칭되고 하나는 존재하는 경우")
@@ -94,7 +94,8 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.EXIST, Result.MATCH);
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.EXIST,
+                Result.MATCH);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 존재하지 않는 경우")
@@ -105,7 +106,8 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST);
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST,
+                Result.NON_EXIST);
     }
 
     @DisplayName("정답 문자열에는 해당 문자가 두개이면서 입력문자열에 매칭되는 문자가 한개일 경우")
@@ -116,6 +118,7 @@ class CharactersTest {
 
         List<Result> result = input.match(answer);
 
-        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.MATCH);
+        assertThat(result).containsExactly(Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST, Result.NON_EXIST,
+                Result.MATCH);
     }
 }
