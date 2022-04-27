@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ public class Characters {
 
     private static final int WORD_LENGTH = 5;
 
-    private List<Character> characterList;
+    private final List<Character> characterList;
 
     public Characters(String inputString) {
         validate(inputString);
@@ -30,34 +31,35 @@ public class Characters {
             throw new IllegalArgumentException();
         }
     }
-    //Todo 현재 메서드에서는 두 가지 일을 하는것 같다. 분리해보자. set을 통해 값을 변경하고 있는데 이 부분을 불변으로 바꿀수는 없을까?
+
     public List<Result> match(Characters answer) {
-        Map<Character,Character> check = new HashMap<>();
+        Result[] r = new Result[5];
+        Arrays.fill(r, Result.NON_EXIST);
 
-        List<Result> list = new ArrayList<>();
-        for (Character input : characterList) {
-            inputMatchAnswer(input, answer, check);
-            list.add(Result.NON_EXIST);
+        for(int i = 0; i < 5; i++) {
+            inputMatchAnswer(characterList.get(i), answer, r);
         }
 
-        for (Character ans : answer.characterList) {
-            if(check.containsKey(ans)){
-                Character input = check.get(ans);
-                list.set(input.getPosition(), input.isSame(ans));
-            }
+        for(int i = 0; i < 5; i++) {
+            inputMatchAnswer2(characterList.get(i), answer, r);
         }
 
-        return list;
+        return List.of(r);
     }
-    //Todo Character로 로직 이동을 할 수 있지 않을까?
-    private void inputMatchAnswer(Character input, Characters answer, Map<Character, Character> check) {
-        for (Character ans : answer.characterList) {
-            if(input.isSame(ans) == Result.MATCH){
-                check.put(ans,input);
+
+    private void inputMatchAnswer(Character input, Characters answer, Result[] r) {
+        for(int i = 0; i < 5; i++) {
+            if (r[input.getPosition()] == Result.NON_EXIST && input.isSame(answer.characterList.get(i)) == Result.MATCH) {
+                r[input.getPosition()] = Result.MATCH;
                 return;
             }
-            if(input.isSame(ans) == Result.EXIST && !check.containsKey(ans)){
-                check.put(ans,input);
+        }
+    }
+
+    private void inputMatchAnswer2(Character input, Characters answer, Result[] r) {
+        for(int i = 0; i < 5; i++) {
+            if (r[input.getPosition()] == Result.NON_EXIST && r[i] == Result.NON_EXIST && input.isSame(answer.characterList.get(i)) == Result.EXIST) {
+                r[input.getPosition()] = Result.EXIST;
             }
         }
     }

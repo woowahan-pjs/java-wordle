@@ -4,9 +4,11 @@ public class Character implements Comparable<Character> {
 
     private static final String INPUT_RANGE = "[a-zA-Z]";
     private static final int POSITION_INIT = 0;
+    private static final int MATCH_VALUE = 0;
 
-    private int position;
-    private String value;
+
+    private final int position;
+    private final String value;
 
     public Character(String value) {
         this(value, POSITION_INIT);
@@ -38,6 +40,22 @@ public class Character implements Comparable<Character> {
     }
 
     public Result isSame(Character answer) {
-        return Result.valueOf(this, answer);
+        if(isMatchValue(answer) && isMatchPosition(answer)) {
+            return Result.MATCH;
+        }
+
+        if(isMatchValue(answer) && !isMatchPosition(answer)) {
+            return Result.EXIST;
+        }
+
+        return Result.NON_EXIST;
+    }
+
+    private boolean isMatchPosition(Character answer) {
+        return position == answer.getPosition();
+    }
+
+    private boolean isMatchValue(Character answer) {
+        return value.compareTo(answer.value) == MATCH_VALUE;
     }
 }

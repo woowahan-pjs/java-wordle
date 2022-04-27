@@ -29,7 +29,7 @@ public class Turn {
     }
 
     public boolean isGameOver() {
-        if(turn == BOUNDARY_VALUE) {
+        if (turn == BOUNDARY_VALUE) {
             return true;
         }
 
