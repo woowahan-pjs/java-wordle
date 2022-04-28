@@ -29,16 +29,18 @@ public class Letter {
 	}
 
 	private void isAlphabet(char alphabet) {
-		if(Character.isAlphabetic(alphabet)) {
+		if (alphabet >= 'a' && alphabet <= 'z') {
+			return;
+		}
+		if (alphabet >= 'A' && alphabet <= 'Z') {
 			return;
 		}
 		throw new IllegalArgumentException(INVALID_ALPHABET_MESSAGE);
 	}
 
 	private void isValidRange(int position) {
-		if (MINIMUM_POSITION <= position && position <= MAXIMUM_POSITION) {
-			return;
+		if (!(MINIMUM_POSITION <= position && position <= MAXIMUM_POSITION)) {
+			throw new IllegalArgumentException(INVALID_POSITION_MESSAGE);
 		}
-		throw new IllegalArgumentException(INVALID_POSITION_MESSAGE);
 	}
 }
