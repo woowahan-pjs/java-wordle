@@ -6,6 +6,10 @@ public class WordsMatchResult {
 
     private final List<MatchStatus> matchStatusList;
 
+    public List<MatchStatus> getMatchStatusList() {
+        return matchStatusList;
+    }
+
     public WordsMatchResult(final List<MatchStatus> matchesList) {
         this.matchStatusList = matchesList;
     }

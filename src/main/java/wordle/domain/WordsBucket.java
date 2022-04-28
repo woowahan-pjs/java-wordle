@@ -40,4 +40,8 @@ public class WordsBucket {
         return (int) ChronoUnit.DAYS.between(targetDate, today);
     }
 
+    public boolean contains(Words words) {
+        return this.words.contains(words);
+    }
+
 }

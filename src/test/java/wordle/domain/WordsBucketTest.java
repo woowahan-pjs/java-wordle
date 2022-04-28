@@ -32,4 +32,18 @@ class WordsBucketTest {
         assertThat(answer.matches(new Words("rebut")).isCorrect()).isTrue();
     }
 
+    @Test
+    void contains가True() {
+        final WordsBucket wordsBucket = new WordsBucket("src/test/resources/words.txt");
+
+        assertThat(wordsBucket.contains(new Words("cigar"))).isTrue();
+    }
+
+    @Test
+    void contains가False() {
+        final WordsBucket wordsBucket = new WordsBucket("src/test/resources/words.txt");
+
+        assertThat(wordsBucket.contains(new Words("cigam"))).isFalse();
+    }
+
 }

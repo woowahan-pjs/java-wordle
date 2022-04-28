@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WordsMatchResultTest {
+
     @Test
     void isCorrect가_True() {
         final List<MatchStatus> matchStatusList = List.of(MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN);
