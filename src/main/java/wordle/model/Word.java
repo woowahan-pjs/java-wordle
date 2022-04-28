@@ -5,14 +5,23 @@ import java.util.List;
 
 public class Word {
 
+	public static final int VALID_WORD_LENGTH = 5;
+	public static final String INVALID_WORD_LENGTH_MESSAGE = "단어는 5글자여야 합니다.";
 	private List<Letter> letters = new ArrayList<>();
 
 	public Word(String input) {
+		validateInputWordLength(input);
 		createLetters(input);
 	}
 
 	public List<Letter> getLetters() {
 		return letters;
+	}
+
+	private void validateInputWordLength(String input) {
+		if (input.length() != VALID_WORD_LENGTH) {
+			throw new IllegalArgumentException(INVALID_WORD_LENGTH_MESSAGE);
+		}
 	}
 
 	private void createLetters(String input) {
