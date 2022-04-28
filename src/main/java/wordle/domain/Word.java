@@ -20,6 +20,10 @@ public class Word {
         return value;
     }
 
+    public int getPosition() {
+        return position.value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

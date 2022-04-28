@@ -32,13 +32,18 @@ class WordsTest {
         assertThat(words.contains(word)).isTrue();
     }
 
-
     @Test
     void contain_가지고있지않음() {
         final Word word = new Word('z', 1);
         final Words words = new Words("happy");
 
         assertThat(words.contains(word)).isFalse();
+    }
+
+    @Test
+    void position체크() {
+        final Words words = new Words("happy");
+        assertThat(words.getWordList().get(0).getPosition()).isEqualTo(0);
     }
 
 }

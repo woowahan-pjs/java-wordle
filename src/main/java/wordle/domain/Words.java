@@ -13,8 +13,8 @@ public class Words {
             throw new IllegalArgumentException("length of the word must be 5");
         }
         wordList = new ArrayList<>();
-        for (final char input : text.toCharArray()) {
-            wordList.add(new Word(input, input));
+        for (int i = 0; i < text.length(); i++) {
+            wordList.add(new Word(text.charAt(i),i));
         }
     }
 

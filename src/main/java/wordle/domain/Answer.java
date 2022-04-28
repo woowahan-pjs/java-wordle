@@ -25,18 +25,13 @@ public class Answer {
             return MatchStatus.GREY;
         }
 
-        return hasGreen(word)
+        return isGreen(word)
                 ? MatchStatus.GREEN
                 : MatchStatus.YELLOW;
     }
 
-    private boolean hasGreen(final Word word) {
-        final List<MatchStatus> matchesList = new ArrayList<>();
-        for (final Word value : answer.getWordList()) {
-            matchesList.add(word.matches(value));
-        }
-
-        return matchesList.contains(MatchStatus.GREEN);
+    private boolean isGreen(final Word word) {
+        return word.equals(answer.getWordList().get(word.getPosition()));
     }
 
     private boolean notContains(final Word word) {
