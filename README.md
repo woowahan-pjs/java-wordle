@@ -78,11 +78,12 @@ spill
 - . 일단 확정
 - ? 아직 모름 애매...
 
-- [ ] 하나의 글자는 Letter 이다. (Letter class)
-    - [ ] Letter는 영문자이어야 한다.
-- [ ] 영어 단어는 Letters 이다. (Letters class)
-    - [ ]여러 개의 Letter는 Letters 이다.
-    - [ ] Letters는 5글자로 이루어져 있다.
+- [x] 하나의 글자는 Letter 이다. (Letter class)
+    - [ ] Letter는 영문자이어야 한다. ?
+- [x] 영어 단어는 Letters 이다. (Letters class)
+    - [x] 영단어야만 한다. 
+    - [x] 여러 개의 Letter는 Letters 이다.
+    - [x] Letters는 5글자로 이루어져 있다.
 - [ ] 오늘의 정답은 Answer 가 가지고 있다.  (Answer class)
     - [ ] Answer의 정답은 Game이 준다?
     - [ ] Answer는 제출된 단어를 비교 할 수 있다.
