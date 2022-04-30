@@ -15,9 +15,9 @@ public class WordleGameRunner {
         printGameStart();
 
         // 입력 받기 > 유효성 검사 (5글자)
-        final String usersWord = inputUsersWord();
+        final String givenWord = inputUsersWord();
 
-        // words.txt 파일 읽기
+        // words.txt 파일 읽은 후 정답 추출
 
         // 비교
 
@@ -29,21 +29,21 @@ public class WordleGameRunner {
     }
 
     private String inputUsersWord() {
-        resultView.printInputValidWord();
+        resultView.printInputWord();
 
         do {
-            final String usersWord = inputView.inputUsersWord();
+            final String givenWord = inputView.inputUsersWord();
 
-            if (validateUsersWord(usersWord)) {
-                return usersWord;
+            if (validateLength(givenWord)) {
+                return givenWord;
             }
 
-            resultView.printInvalidWord();
-            resultView.printInputValidWord();
+            resultView.printRetryInputWord();
+            resultView.printInputWord();
         } while (true);
     }
 
-    private boolean validateUsersWord(String usersWord) {
-        return usersWord.length() == VALID_WORD_LENGTH;
+    private boolean validateLength(String word) {
+        return word.length() == VALID_WORD_LENGTH;
     }
 }
