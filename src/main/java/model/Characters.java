@@ -1,7 +1,10 @@
 package model;
 
+import static model.Result.EXIST;
+import static model.Result.MATCH;
+import static model.Result.NON_EXIST;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,57 +12,61 @@ import java.util.Map;
 public class Characters {
 
     private static final int WORD_LENGTH = 5;
+    public static final String OUT_OF_WORD_LENGTH_ERR_MSG = "문자열의 길이가 5자가 아닙니다.(입력된 문자열의 길이는 %d입니다.)";
 
-    private final List<Character> characterList;
+    private final List<Character> characters;
 
     public Characters(String inputString) {
         validate(inputString);
+        this.characters = createCharacters(inputString);
+    }
+
+    private List<Character> createCharacters(String inputString) {
         List<Character> characterList = new ArrayList<>();
         String[] split = inputString.split("");
         for (int i = 0; i < WORD_LENGTH; i++) {
             characterList.add(new Character(split[i], i));
         }
-        this.characterList = characterList;
+        return characterList;
     }
 
-    public List<Character> getCharacters() {
-        return characterList;
+    public List<Character> convertToList() {
+        return characters;
     }
 
     private void validate(String value) {
         if (value.length() != WORD_LENGTH) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.format(OUT_OF_WORD_LENGTH_ERR_MSG,value.length()));
         }
     }
 
-    public List<Result> match(Characters answer) {
-        Result[] r = new Result[5];
-        Arrays.fill(r, Result.NON_EXIST);
+    public Results match(Characters answer) {
+        Map<Character, Character> check = new HashMap<>();
 
-        for(int i = 0; i < 5; i++) {
-            inputMatchAnswer(characterList.get(i), answer, r);
+        List<Result> list = new ArrayList<>();
+        for (Character input : characters) {
+            inputMatchAnswer(input, answer, check);
+            list.add(NON_EXIST);
         }
 
-        for(int i = 0; i < 5; i++) {
-            inputMatchAnswer2(characterList.get(i), answer, r);
-        }
-
-        return List.of(r);
-    }
-
-    private void inputMatchAnswer(Character input, Characters answer, Result[] r) {
-        for(int i = 0; i < 5; i++) {
-            if (r[input.getPosition()] == Result.NON_EXIST && input.isSame(answer.characterList.get(i)) == Result.MATCH) {
-                r[input.getPosition()] = Result.MATCH;
-                return;
+        for (Character ans : answer.characters) {
+            if (check.containsKey(ans)) {
+                Character input = check.get(ans);
+                list.set(input.getPosition(), input.isSame(ans));
             }
         }
+
+        return new Results(list);
     }
 
-    private void inputMatchAnswer2(Character input, Characters answer, Result[] r) {
-        for(int i = 0; i < 5; i++) {
-            if (r[input.getPosition()] == Result.NON_EXIST && r[i] == Result.NON_EXIST && input.isSame(answer.characterList.get(i)) == Result.EXIST) {
-                r[input.getPosition()] = Result.EXIST;
+    private void inputMatchAnswer(Character input, Characters answer, Map<Character, Character> check) {
+        for (Character ans : answer.characters) {
+            if (input.isSame(ans) == MATCH) {
+                check.put(ans, input);
+                return;
+            }
+            if (input.isSame(ans) == EXIST && !check.containsKey(ans)) {
+                check.put(ans, input);
             }
         }
     }

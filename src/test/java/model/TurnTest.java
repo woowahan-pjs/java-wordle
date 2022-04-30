@@ -17,7 +17,7 @@ class TurnTest {
 
         int result = turn.increase();
 
-        assertThat(result).isEqualTo(2);
+        assertThat(result).isEqualTo(1);
     }
 
     @DisplayName("턴이 6회 초과 증가시 예외발생")

@@ -1,11 +1,15 @@
 package model;
 
+import static model.Result.EXIST;
+import static model.Result.MATCH;
+import static model.Result.NON_EXIST;
+
 public class Character implements Comparable<Character> {
 
     private static final String INPUT_RANGE = "[a-zA-Z]";
     private static final int POSITION_INIT = 0;
     private static final int MATCH_VALUE = 0;
-
+    public static final String ILLEGAL_INPUT_ERR_MSG = "영어만 입력이 가능합니다.";
 
     private final int position;
     private final String value;
@@ -22,7 +26,7 @@ public class Character implements Comparable<Character> {
 
     private void validate(String value) {
         if (!value.matches(INPUT_RANGE)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ILLEGAL_INPUT_ERR_MSG);
         }
     }
 
@@ -40,15 +44,15 @@ public class Character implements Comparable<Character> {
     }
 
     public Result isSame(Character answer) {
-        if(isMatchValue(answer) && isMatchPosition(answer)) {
-            return Result.MATCH;
+        if (isMatchValue(answer) && isMatchPosition(answer)) {
+            return MATCH;
         }
 
-        if(isMatchValue(answer) && !isMatchPosition(answer)) {
-            return Result.EXIST;
+        if (isMatchValue(answer) && !isMatchPosition(answer)) {
+            return EXIST;
         }
 
-        return Result.NON_EXIST;
+        return NON_EXIST;
     }
 
     private boolean isMatchPosition(Character answer) {

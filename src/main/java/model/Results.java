@@ -1,19 +1,15 @@
 package model;
 
-import static model.Result.*;
+import static model.Result.MATCH;
 
 import java.util.List;
 
 public class Results {
 
-    private List<Result> results;
+    private final List<Result> results;
 
     public Results(List<Result> results) {
         this.results = results;
-    }
-
-    public Results() {
-        this(List.of(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST));
     }
 
     public boolean isMatch() {
@@ -21,7 +17,7 @@ public class Results {
                 .allMatch(result -> result == MATCH);
     }
 
-    public List<Result> getResults() {
+    public List<Result> convertToList() {
         return results;
     }
 }

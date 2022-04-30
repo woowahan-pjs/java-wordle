@@ -1,5 +1,6 @@
 package model;
 
+import static model.Character.ILLEGAL_INPUT_ERR_MSG;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,7 +23,8 @@ class CharacterTest {
     @ValueSource(strings = {"1", " ", "$"})
     void characterIsNotNumber(String input) {
         assertThatThrownBy(() -> new Character(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ILLEGAL_INPUT_ERR_MSG);
     }
 
     @ParameterizedTest(name = "입력 문자 {0} 와 정답 문자 {1}를 비교하면 {2}가 결과로 나타난다.")

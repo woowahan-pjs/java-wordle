@@ -1,6 +1,9 @@
 package model;
 
-import static model.Result.*;
+import static model.Characters.OUT_OF_WORD_LENGTH_ERR_MSG;
+import static model.Result.EXIST;
+import static model.Result.MATCH;
+import static model.Result.NON_EXIST;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,17 +19,18 @@ class CharactersTest {
     @Test
     void characterGroupLengthFive() {
         Characters characters = new Characters("abcde");
-        List<Character> result = characters.getCharacters();
+        List<Character> result = characters.convertToList();
 
         assertThat(result).hasSize(5);
     }
 
-    @ParameterizedTest (name = "5글자가 아닌 입력문자 {0}를 입력하면 에외처리")
+    @ParameterizedTest(name = "5글자가 아닌 입력문자 {0}를 입력하면 에외처리")
     @ValueSource(strings = {"abcd", "abcdef"})
     void characterLengthValid(String input) {
         assertThatThrownBy(() -> {
             new Characters(input);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(OUT_OF_WORD_LENGTH_ERR_MSG);
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열을 비교한다.")
@@ -37,7 +41,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(MATCH, MATCH, NON_EXIST, NON_EXIST,
+        assertThat(result.convertToList()).containsExactly(MATCH, MATCH, NON_EXIST, NON_EXIST,
                 MATCH);
     }
 
@@ -49,7 +53,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(MATCH, MATCH, EXIST, NON_EXIST, MATCH);
+        assertThat(result.convertToList()).containsExactly(MATCH, MATCH, EXIST, NON_EXIST, MATCH);
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열이 모두 일치한다.")
@@ -60,7 +64,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(MATCH, MATCH, MATCH, MATCH, MATCH);
+        assertThat(result.convertToList()).containsExactly(MATCH, MATCH, MATCH, MATCH, MATCH);
     }
 
     @DisplayName("입력받은 문자열에 동일한 문자가 존재하고 정답 문자열에는 해당 문자가 한개만 매칭되는 경우")
@@ -71,7 +75,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
+        assertThat(result.convertToList()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
                 MATCH);
     }
 
@@ -83,7 +87,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(NON_EXIST, EXIST, NON_EXIST, NON_EXIST,
+        assertThat(result.convertToList()).containsExactly(NON_EXIST, EXIST, NON_EXIST, NON_EXIST,
                 NON_EXIST);
     }
 
@@ -95,7 +99,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, EXIST,
+        assertThat(result.convertToList()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, EXIST,
                 MATCH);
     }
 
@@ -107,7 +111,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
+        assertThat(result.convertToList()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
                 NON_EXIST);
     }
 
@@ -119,7 +123,7 @@ class CharactersTest {
 
         Results result = input.match(answer);
 
-        assertThat(result.getResults()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
+        assertThat(result.convertToList()).containsExactly(NON_EXIST, NON_EXIST, NON_EXIST, NON_EXIST,
                 MATCH);
     }
 }
