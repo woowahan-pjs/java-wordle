@@ -22,7 +22,7 @@ class TodayAnswerTest {
         Characters result = todayAnswer.choiceAnswer(today);
 
         Results results = result.match(new Characters("weqwr"));
-        assertThat(results.getResults()).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH,
+        assertThat(results.convertToList()).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH,
                 Result.MATCH, Result.MATCH);
     }
 

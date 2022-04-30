@@ -1,7 +1,10 @@
 package model;
 
+import static model.Result.EXIST;
+import static model.Result.MATCH;
+import static model.Result.NON_EXIST;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,20 +13,24 @@ public class Characters {
 
     private static final int WORD_LENGTH = 5;
 
-    private final List<Character> characterList;
+    private final List<Character> characters;
 
     public Characters(String inputString) {
         validate(inputString);
+        this.characters = createCharacters(inputString);
+    }
+
+    private List<Character> createCharacters(String inputString) {
         List<Character> characterList = new ArrayList<>();
         String[] split = inputString.split("");
         for (int i = 0; i < WORD_LENGTH; i++) {
             characterList.add(new Character(split[i], i));
         }
-        this.characterList = characterList;
+        return characterList;
     }
 
-    public List<Character> getCharacters() {
-        return characterList;
+    public List<Character> convertToList() {
+        return characters;
     }
 
     private void validate(String value) {
