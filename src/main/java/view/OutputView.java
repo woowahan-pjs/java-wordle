@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 import java.util.Map;
 import model.Result;
+import model.Results;
 
 public class OutputView {
 
@@ -18,9 +19,13 @@ public class OutputView {
         System.out.println(turn + "/" + BOUNDARY_VALUE);
     }
 
-    public static void output(List<Result> results) {
-        for (Result result : results) {
-            System.out.print(RESULT_MARK.get(result));
+    public static void output(List<Results> resultsList) {
+        System.out.println();
+        for (Results results : resultsList) {
+            for (Result result : results.getResults()) {
+                System.out.print(RESULT_MARK.get(result));
+            }
+            System.out.println();
         }
         System.out.println();
     }

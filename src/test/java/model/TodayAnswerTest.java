@@ -21,7 +21,8 @@ class TodayAnswerTest {
         LocalDate today = LocalDate.of(2021, 6, 29);
         Characters result = todayAnswer.choiceAnswer(today);
 
-        assertThat(result.match(new Characters("weqwr"))).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH,
+        Results results = result.match(new Characters("weqwr"));
+        assertThat(results.getResults()).containsExactly(Result.MATCH, Result.MATCH, Result.MATCH,
                 Result.MATCH, Result.MATCH);
     }
 
