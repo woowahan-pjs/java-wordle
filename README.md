@@ -46,35 +46,26 @@
 | Answer | 정답인 단어 |
 | MatchStatus | 노랑, 초록, 회색 여부  |
 | WordsMatchResult | Words 매치 결과(회, 노, 노, 초, 초) |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
 
 
 ## 페어프로그래밍 히스토리
 
 ### 3회차
 #### 진행 일정 및 목표
-- 일시: 04/24 ??
-- 목표
-  - 기능 목록에 맞게 구현
-  - 리팩토링 포인트
-    - WordsMatchResult의 isCorrect
-    - WordsBucket의 targetDate 이름규칙, private
-    - WordsBucket의 findAnswer 메소드 추상화
-    - Words의 getWordList 방어적 복사
-    - Answer의 matches 로직 최적화
-
+- 일시: 04/28
+- 목표: 도메인이 아닌 게임 자체에 대한 구현
+  - Game
+  - Input, Output
 
 ### 2회차
 #### 진행 일정 및 목표
 - 일시: 04/23 20:00 ~ 13:00
-- 목표
-  - 기능 목록에 맞게 구현
+- 목표: 도메인에 대한 기능 목록 구현
+  - WordsBucket
+  - Answer
+  - MatchStatus
+  - WordsMatchResult
+
 
 #### 진행 결과
 
