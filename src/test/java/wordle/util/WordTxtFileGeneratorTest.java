@@ -1,7 +1,7 @@
 package wordle.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static wordle.util.WordTxtFileGenerator.scanWordListFromWordTxtFile;
+import static wordle.util.WordTxtFileGenerator.generateFromFileName;
 
 import java.io.File;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ public class WordTxtFileGeneratorTest {
     @Test
     public void returnFileInstanceWhenFileIsExistInResourceDirectory() {
         // Arrange
-        final File wordFile = scanWordListFromWordTxtFile("words.txt");
+        final File wordFile = generateFromFileName("words.txt");
 
         // Act
         final boolean fileExist = wordFile.exists();
@@ -30,7 +30,7 @@ public class WordTxtFileGeneratorTest {
     @ValueSource(strings = {"notExist.txt", "AA.bb", "test.img", "ABC.pdf"})
     public void returnEmptyFileInstanceWhenFileIsNotExistInResourceDirectory(String wordTxtFileName) {
         // Arrange
-        final File wordFile = scanWordListFromWordTxtFile(wordTxtFileName);
+        final File wordFile = generateFromFileName(wordTxtFileName);
 
         // Act
         final boolean fileExist = wordFile.exists();
