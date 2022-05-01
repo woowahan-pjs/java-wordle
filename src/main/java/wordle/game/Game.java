@@ -8,22 +8,20 @@ import wordle.domain.WordsMatchResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Game {
+
     private final WordsBucket wordsBucket;
     private final GameView gameView;
-    private final List<WordsMatchResult> wordsMatchResults;
-    private final Round round;
+    private final PlayingInfo playingInfo;
     private Answer answer;
-    private Words inputWords;
-    private boolean isCorrect;
 
     public Game(final String filePath, final GameView gameView) {
-        wordsBucket = new WordsBucket(filePath);
+        this.wordsBucket = new WordsBucket(filePath);
         this.gameView = gameView;
-        wordsMatchResults = new ArrayList<>();
-        round = new Round();
+        this.playingInfo = new PlayingInfo();
     }
 
     public void play() {
@@ -34,22 +32,22 @@ public class Game {
 
     private void init() {
         gameView.initGame();
+        playingInfo.init();
         answer = wordsBucket.findAnswer(LocalDate.now());
     }
 
     private void start() {
         do {
-            round.start();
+            playingInfo.playRound();
             inputWords();
-            isCorrect = isCorrectWords();
-            gameView.wordsMatchResults(wordsMatchResults);
-
-        } while (!round.isFinish() && !isCorrect);
+            playingInfo.updateStatus(isCorrectWords());
+            gameView.wordsMatchResults(playingInfo.getCurrentMatchResults());
+        } while (!playingInfo.isFinish());
     }
 
     private boolean isCorrectWords() {
-        final WordsMatchResult result = answer.matches(inputWords);
-        wordsMatchResults.add(result);
+        final WordsMatchResult result = answer.matches(playingInfo.inputWords);
+        playingInfo.addMatchResults(result);
         return result.isCorrect();
     }
 
@@ -61,8 +59,8 @@ public class Game {
 
     private boolean doInputWordsSuccess() {
         try {
-            this.inputWords = new Words(Console.readLine());
-            return wordsBucket.contains(inputWords);
+            playingInfo.updateCurrentInputWords(new Words(Console.readLine()));
+            return wordsBucket.contains(playingInfo.inputWords);
         } catch (final IllegalArgumentException e) {
             gameView.errors(e);
         }
@@ -70,8 +68,45 @@ public class Game {
     }
 
     private void end() {
-        if (isCorrect) {
-            gameView.round(round);
+        if (playingInfo.isCorrect) {
+            gameView.round(playingInfo.round);
+        }
+    }
+
+    private static class PlayingInfo {
+        private List<WordsMatchResult> wordsMatchResults;
+        private Round round;
+        private Words inputWords;
+        private boolean isCorrect;
+
+        void init() {
+            round = new Round();
+            wordsMatchResults = new ArrayList<>();
+        }
+
+        void playRound() {
+            round.start();
+        }
+
+        void updateStatus(final boolean isCorrect) {
+            this.isCorrect = isCorrect;
+        }
+
+        public boolean isFinish() {
+            return round.isFinish() || isCorrect;
+        }
+
+
+        private List<WordsMatchResult> getCurrentMatchResults() {
+            return Collections.unmodifiableList(wordsMatchResults);
+        }
+
+        private void updateCurrentInputWords(final Words words) {
+            this.inputWords = words;
+        }
+
+        public void addMatchResults(final WordsMatchResult result) {
+            wordsMatchResults.add(result);
         }
     }
 
