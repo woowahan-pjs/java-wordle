@@ -1,20 +1,18 @@
 package wordle.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Word {
 
-	public static final int VALID_WORD_LENGTH = 5;
-	public static final String INVALID_WORD_LENGTH_MESSAGE = "단어는 5글자여야 합니다.";
-	private List<Letter> letters = new ArrayList<>();
+	private static final int VALID_WORD_LENGTH = 5;
+	private static final int NUMBER_OF_LETTER = 5;
+	private static final String INVALID_WORD_LENGTH_MESSAGE = "단어는 5글자여야 합니다.";
+	private Letter[] letters = new Letter[NUMBER_OF_LETTER];
 
 	public Word(String input) {
 		validateInputWordLength(input);
 		createLetters(input);
 	}
 
-	public List<Letter> getLetters() {
+	public Letter[] getLetters() {
 		return letters;
 	}
 
@@ -26,15 +24,51 @@ public class Word {
 
 	private void createLetters(String input) {
 		for (int index = 0; index < input.length(); index++) {
-			letters.add(new Letter(input.charAt(index), index + 1));
+			letters[index] = new Letter(input.charAt(index));
 		}
 	}
 
-	public List<Tile> compareWith(Word userInputWord) {
-		List<Tile> result = new ArrayList<>();
-		for (Letter letter : userInputWord.getLetters()) {
-			result.add(new Tile(letter.compareResult(letters)));
+	public Tiles calculateMatched(Word userInputWord) {
+		TileStatus[] tileStatuses = new TileStatus[NUMBER_OF_LETTER];
+		Letter[] userInputLetters = userInputWord.getLetters();
+
+		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
+			if (letters[index].equals(userInputLetters[index])) {
+				letters[index].setMatched(); // false -> true;
+				tileStatuses[index] = TileStatus.GREEN;
+			}
 		}
-		return result;
+
+		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
+			if (tileStatuses[index] != TileStatus.GREEN) {
+				tileStatuses[index] = compare(userInputLetters[index]);
+			}
+		}
+
+		return new Tiles(tileStatuses);
+	}
+
+	private TileStatus compare(Letter userInput) {
+		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
+			if (letters[index].equals(userInput) && !letters[index].isMatched()) {
+				letters[index].setMatched(); // false -> true;
+				return TileStatus.YELLOW;
+			}
+		}
+		return TileStatus.GRAY;
+	}
+
+	public void clearAllMatched() {
+		for (Letter letter : letters) {
+			letter.setUnmatched();
+		}
+	}
+
+	public String getAnswerWordAsString() {
+		StringBuilder sb = new StringBuilder();
+		for (Letter letter : letters) {
+			sb.append(letter.getAlphabet());
+		}
+		return sb.toString();
 	}
 }
