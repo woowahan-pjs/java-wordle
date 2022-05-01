@@ -86,8 +86,8 @@ spill
     - [x] Letters는 5글자로 이루어져 있다.
 - [ ] 오늘의 정답은 Answer 가 가지고 있다.  (Answer class)
     - [ ] Answer는 제출된 단어를 비교하여 LetterResults를 반환한다.
-- [ ] 정답과 답안에 대한 상태는 LetterResult 이다. (LetterResult enum class)
-    - [ ] 상태는 GREEN / YELLOW / GRAY 를 가지고 있다.
+- [x] 정답과 답안에 대한 상태는 LetterResult 이다. (LetterResult enum class)
+    - [x] 상태는 GREEN / YELLOW / GRAY 를 가지고 있다.
     - [ ] GREEN : 정답 글자와 위치가 같은 경우.
     - [ ] YELLOW : 정답 글자는 맞지만, 위치가 다른 경우.
     - [ ] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
