@@ -1,31 +1,53 @@
 package wordle.model;
 
-import java.util.List;
+import java.util.Objects;
 
 public class Letter {
 
-	public static final int MINIMUM_POSITION = 1;
-	public static final int MAXIMUM_POSITION = 5;
-	public static final String INVALID_ALPHABET_MESSAGE = "유효하지 않은 단어입니다.";
-	public static final String INVALID_POSITION_MESSAGE = "유효하지 않은 위치입니다.";
-
+	private static final String INVALID_ALPHABET_MESSAGE = "유효하지 않은 단어입니다.";
 	private char alphabet;
-	private int position;
+	private boolean matched = false;
 
-	public Letter(char alphabet, int position) {
-		init(alphabet, position);
+	public Letter(char alphabet) {
+		init(alphabet);
 	}
 
-	private void init(char alphabet, int position) {
+	public char getAlphabet() {
+		return alphabet;
+	}
+
+	public void setMatched() {
+		this.matched = true;
+	}
+
+	public void setUnmatched() {
+		this.matched = false;
+	}
+
+	public boolean isMatched() {
+		return this.matched;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Letter letter = (Letter) o;
+		return alphabet == letter.alphabet;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(alphabet);
+	}
+
+	private void init(char alphabet) {
 		isAlphabet(alphabet);
 		this.alphabet = Character.toLowerCase(alphabet);
-		isValidRange(position);
-		this.position = position;
-	}
-
-	// todo
-	public TileStatus compareResult(List<Letter> letters) {
-		return TileStatus.GRAY;
 	}
 
 	private void isAlphabet(char alphabet) {
@@ -36,11 +58,5 @@ public class Letter {
 			return;
 		}
 		throw new IllegalArgumentException(INVALID_ALPHABET_MESSAGE);
-	}
-
-	private void isValidRange(int position) {
-		if (!(MINIMUM_POSITION <= position && position <= MAXIMUM_POSITION)) {
-			throw new IllegalArgumentException(INVALID_POSITION_MESSAGE);
-		}
 	}
 }
