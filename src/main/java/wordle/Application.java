@@ -1,7 +1,10 @@
 package wordle;
 
+import wordle.controller.WordleMachine;
+
 public class Application {
 	public static void main(String[] args) {
-		// TODO: 프로그램 구현
+		WordleMachine wordleMachine = new WordleMachine();
+		wordleMachine.startGame();
 	}
 }
