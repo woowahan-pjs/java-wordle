@@ -25,9 +25,11 @@ public class Answer {
             return MatchStatus.GREY;
         }
 
-        return isGreen(word)
-                ? MatchStatus.GREEN
-                : MatchStatus.YELLOW;
+        if (isGreen(word)) {
+            return MatchStatus.GREEN;
+        }
+
+        return MatchStatus.YELLOW;
     }
 
     private boolean isGreen(final Word word) {

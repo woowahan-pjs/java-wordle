@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WordsBucket {
 
-    public static final LocalDate targetDate = LocalDate.of(2021, 6, 19);
+    private static final LocalDate TARGET_DATE = LocalDate.of(2021, 6, 19);
     private final List<Words> words = new ArrayList<>();
 
     public WordsBucket(final String filePath) {
@@ -31,17 +31,25 @@ public class WordsBucket {
         return words.size();
     }
 
+    public boolean contains(Words words) {
+        return this.words.contains(words);
+    }
+
     public Answer findAnswer(final LocalDate today) {
         final int betweenDays = betweenDays(today);
-        return new Answer(words.get((betweenDays % (words.size()))));
+        return new Answer(findTodayWords(betweenDays));
     }
 
     private int betweenDays(final LocalDate today) {
-        return (int) ChronoUnit.DAYS.between(targetDate, today);
+        return (int) ChronoUnit.DAYS.between(TARGET_DATE, today);
     }
 
-    public boolean contains(Words words) {
-        return this.words.contains(words);
+    private Words findTodayWords(final int betweenDays) {
+        return words.get(findTodayIndex(betweenDays));
+    }
+
+    private int findTodayIndex(final int betweenDays) {
+        return betweenDays % (words.size());
     }
 
 }

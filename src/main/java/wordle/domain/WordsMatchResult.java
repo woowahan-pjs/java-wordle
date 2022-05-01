@@ -4,6 +4,7 @@ import java.util.List;
 
 public class WordsMatchResult {
 
+    private static final List<MatchStatus> GREEN_ONLY = List.of(MatchStatus.GREEN);
     private final List<MatchStatus> matchStatusList;
 
     public List<MatchStatus> getMatchStatusList() {
@@ -15,11 +16,11 @@ public class WordsMatchResult {
     }
 
     public boolean isCorrect() {
-        return !containsGreyOrYellow();
+        return !containsGreenOnly();
     }
 
-    private boolean containsGreyOrYellow() {
-        return matchStatusList.contains(MatchStatus.YELLOW) || matchStatusList.contains(MatchStatus.GREY);
+    private boolean containsGreenOnly() {
+        return GREEN_ONLY.containsAll(matchStatusList);
     }
 
 }

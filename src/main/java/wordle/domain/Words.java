@@ -1,17 +1,20 @@
 package wordle.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Words {
 
+    private static final int WORDS_LENGTH = 5;
     private final List<Word> wordList;
 
     public Words(final String text) {
-        if (text.length() != 5) {
+        if (text.length() != WORDS_LENGTH) {
             throw new IllegalArgumentException("length of the word must be 5");
         }
+
         wordList = new ArrayList<>();
         for (int i = 0; i < text.length(); i++) {
             wordList.add(new Word(text.charAt(i),i));
@@ -23,7 +26,7 @@ public class Words {
     }
 
     public List<Word> getWordList() {
-        return wordList;
+        return Collections.unmodifiableList(wordList);
     }
 
     public boolean contains(final Word word) {
