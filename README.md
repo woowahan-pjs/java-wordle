@@ -42,7 +42,8 @@
 + Game : 게임 객체
 
 ### util
-+ WordsGenerator : 유효 단어 목록 생성기
++ WordPoolGenerator : 유효 단어 목록 생성기
++ WordValidator : 단어 검증기
 
 ### 출력
 
