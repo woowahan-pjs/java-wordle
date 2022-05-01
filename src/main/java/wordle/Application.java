@@ -1,6 +1,8 @@
-package wordle.domain;
+package wordle;
 
-public class Main {
+import wordle.domain.Game;
+
+public class Application {
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
