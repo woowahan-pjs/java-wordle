@@ -1,8 +1,8 @@
 package wordle.game;
 
-import camp.nextstep.edu.missionutils.Console;
 import wordle.domain.Words;
 import wordle.domain.WordsBucket;
+import wordle.domain.WordsMatchResult;
 
 import java.time.LocalDate;
 
@@ -31,15 +31,14 @@ public class Game {
 
     private void start() {
         do {
-            playingInfo.play();
+            startRound();
             inputWords();
-            playingInfo.updateStatus(isCorrectWords());
-            gameView.wordsMatchResults(playingInfo.getCurrentMatchResults());
+            updateMatchesResult(matches());
         } while (!playingInfo.isFinish());
     }
 
-    private boolean isCorrectWords() {
-        return playingInfo.matches();
+    private void startRound() {
+        playingInfo.play();
     }
 
     private void inputWords() {
@@ -50,12 +49,21 @@ public class Game {
 
     private boolean doInputWordsSuccess() {
         try {
-            playingInfo.updateCurrentWords(new Words(Console.readLine()));
-            return wordsBucket.contains(playingInfo.getCurrentWords());
+            final Words words = playingInfo.inputWords();
+            return wordsBucket.contains(words);
         } catch (final IllegalArgumentException e) {
             gameView.errors(e);
         }
         return false;
+    }
+
+    private WordsMatchResult matches() {
+        return playingInfo.matches();
+    }
+
+    private void updateMatchesResult(final WordsMatchResult matchResult) {
+        playingInfo.updateResult(matchResult);
+        gameView.wordsMatchResults(playingInfo.getCurrentMatchResults());
     }
 
     private void end() {

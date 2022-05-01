@@ -1,9 +1,7 @@
 package wordle.game;
 
-import wordle.domain.Answer;
-import wordle.domain.Words;
-import wordle.domain.WordsMatchResult;
-import wordle.domain.WordsMatchResults;
+import camp.nextstep.edu.missionutils.Console;
+import wordle.domain.*;
 
 class PlayingInfo {
 
@@ -23,28 +21,12 @@ class PlayingInfo {
         round.start();
     }
 
-    void updateStatus(final boolean isCorrect) {
-        this.isCorrect = isCorrect;
-    }
-
     boolean isFinish() {
         return round.isFinish() || isCorrect;
     }
 
     WordsMatchResults getCurrentMatchResults() {
         return wordsMatchResults;
-    }
-
-    void addMatchResults(final WordsMatchResult result) {
-        wordsMatchResults.add(result);
-    }
-
-    void updateCurrentWords(final Words words) {
-        this.inputWords = words;
-    }
-
-    Words getCurrentWords() {
-        return inputWords;
     }
 
     Round getCurrentRound() {
@@ -55,9 +37,19 @@ class PlayingInfo {
         return isCorrect;
     }
 
-    boolean matches() {
-        final WordsMatchResult result = answer.matches(inputWords);
-        addMatchResults(result);
-        return result.isCorrect();
+    WordsMatchResult matches() {
+        return answer.matches(inputWords);
+    }
+
+    Words inputWords() {
+        final Words words = new Words(Console.readLine());
+        this.inputWords = words;
+
+        return words;
+    }
+
+    void updateResult(final WordsMatchResult matchResult) {
+        isCorrect = matchResult.isCorrect();
+        wordsMatchResults.add(matchResult);
     }
 }
