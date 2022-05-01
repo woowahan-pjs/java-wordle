@@ -21,15 +21,11 @@ public class Words {
         }
     }
 
-    public int length() {
-        return wordList.size();
-    }
-
-    public List<Word> getWordList() {
+    List<Word> getWordList() {
         return Collections.unmodifiableList(wordList);
     }
 
-    public boolean contains(final Word word) {
+    boolean contains(final Word word) {
         return wordList.contains(word);
     }
 
@@ -44,5 +40,9 @@ public class Words {
     @Override
     public int hashCode() {
         return Objects.hash(wordList);
+    }
+
+    Word get(final int position) {
+        return wordList.get(position);
     }
 }

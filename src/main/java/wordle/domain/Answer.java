@@ -12,15 +12,20 @@ public class Answer {
     }
 
     public WordsMatchResult matches(final Words words) {
-        final List<MatchStatus> matchesList = new ArrayList<>();
-        for (final Word word : words.getWordList()) {
-            matchesList.add(matches(word));
-        }
+        final List<MatchStatus> matchesList = matchWords(words);
 
         return new WordsMatchResult(matchesList);
     }
 
-    private MatchStatus matches(final Word word) {
+    private List<MatchStatus> matchWords(final Words words) {
+        final List<MatchStatus> matchesList = new ArrayList<>();
+        for (final Word word : words.getWordList()) {
+            matchesList.add(matchWord(word));
+        }
+        return matchesList;
+    }
+
+    private MatchStatus matchWord(final Word word) {
         if (notContains(word)) {
             return MatchStatus.GREY;
         }
@@ -33,7 +38,7 @@ public class Answer {
     }
 
     private boolean isGreen(final Word word) {
-        return word.equals(answer.getWordList().get(word.getPosition()));
+        return word.equals(answer.get(word.getPosition()));
     }
 
     private boolean notContains(final Word word) {

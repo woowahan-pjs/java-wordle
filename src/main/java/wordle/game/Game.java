@@ -1,15 +1,9 @@
 package wordle.game;
 
 import camp.nextstep.edu.missionutils.Console;
-import wordle.domain.Answer;
-import wordle.domain.Words;
-import wordle.domain.WordsBucket;
-import wordle.domain.WordsMatchResult;
+import wordle.domain.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Game {
 
@@ -74,14 +68,14 @@ public class Game {
     }
 
     private static class PlayingInfo {
-        private List<WordsMatchResult> wordsMatchResults;
+        private WordsMatchResults wordsMatchResults;
         private Round round;
         private Words inputWords;
         private boolean isCorrect;
 
         void init() {
             round = new Round();
-            wordsMatchResults = new ArrayList<>();
+            wordsMatchResults = new WordsMatchResults();
         }
 
         void playRound() {
@@ -96,9 +90,8 @@ public class Game {
             return round.isFinish() || isCorrect;
         }
 
-
-        private List<WordsMatchResult> getCurrentMatchResults() {
-            return Collections.unmodifiableList(wordsMatchResults);
+        private WordsMatchResults getCurrentMatchResults() {
+            return wordsMatchResults;
         }
 
         private void updateCurrentInputWords(final Words words) {

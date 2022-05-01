@@ -1,6 +1,7 @@
 package wordle.game;
 
 import wordle.domain.WordsMatchResult;
+import wordle.domain.WordsMatchResults;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ public final class GameView {
         System.out.println(round);
     }
 
-    public void wordsMatchResults(final List<WordsMatchResult> wordsMatchResults) {
-        wordsMatchResults.forEach(v -> System.out.println(v.getMatchStatusList()));
+    public void wordsMatchResults(final WordsMatchResults wordsMatchResults) {
+        System.out.println(wordsMatchResults);
     }
 
     public void inputWords() {

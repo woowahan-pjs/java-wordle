@@ -27,10 +27,6 @@ public class WordsBucket {
         }
     }
 
-    public int size() {
-        return words.size();
-    }
-
     public boolean contains(Words words) {
         return this.words.contains(words);
     }

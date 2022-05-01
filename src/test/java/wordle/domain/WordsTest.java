@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.*;
 
 class WordsTest {
 
@@ -13,8 +15,9 @@ class WordsTest {
     @ValueSource(strings = {"abcde", "defgh", "zxcvb"})
     void Words생성성공(final String input) {
         final Words words = new Words(input);
+        final boolean result = Arrays.stream(input.split("")).allMatch(v -> words.contains(new Word(v.charAt(0), 0)));
 
-        assertThat(words.length()).isEqualTo(5);
+        assertThat(result).isTrue();
     }
 
     @ParameterizedTest

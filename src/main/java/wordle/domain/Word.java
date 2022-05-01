@@ -1,13 +1,15 @@
 package wordle.domain;
 
+import org.assertj.core.util.VisibleForTesting;
+
 import java.util.Objects;
 
-public class Word {
+class Word {
 
     private final char value;
     private final Position position;
 
-    public Word(final char value, final int position) {
+    Word(final char value, final int position) {
         if (!Character.isAlphabetic(value)) {
             throw new IllegalArgumentException("Input is not alphabetic: " + value);
         }
@@ -16,11 +18,12 @@ public class Word {
         this.position = new Position(position);
     }
 
-    public char getValue() {
+    @VisibleForTesting
+    char getValue() {
         return value;
     }
 
-    public int getPosition() {
+    int getPosition() {
         return position.value;
     }
 
@@ -35,18 +38,6 @@ public class Word {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public MatchStatus matches(final Word word) {
-        if (this.value != word.value) {
-            return MatchStatus.GREY;
-        }
-
-        if (this.position.equals(word.position)) {
-            return MatchStatus.GREEN;
-        }
-
-        return MatchStatus.YELLOW;
     }
 
     private static class Position {
