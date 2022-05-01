@@ -1,6 +1,7 @@
 package wordle.util;
 
 import wordle.model.WordPool;
+import wordle.view.ConsoleOutput;
 
 public class WordValidator {
 
@@ -10,14 +11,17 @@ public class WordValidator {
 	public static boolean validate(String userInput, WordPool wordPool) {
 		// 글자 수가 5자가 아닌 경우
 		if (!validateWordLength(userInput)) {
+			ConsoleOutput.printInvalidLengthMessage();
 			return false;
 		}
 		// 입력된 단어가 영문자로만 구성되어 있는지
 		if (!validateAlphabet(userInput)) {
+			ConsoleOutput.printInvalidAlphabetMessage();
 			return false;
 		}
 		// 단어 목록에 일치하는 단어가 있는지 없는지
 		if (!validateExistedWord(userInput, wordPool)) {
+			ConsoleOutput.printInvalidWordMessage();
 			return false;
 		}
 		return true;
