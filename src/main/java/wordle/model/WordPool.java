@@ -16,15 +16,17 @@ public class WordPool {
 	}
 
 	public String getTodayAnswerWord() {
-		int period = calculateIndexOfTodayAnswerWord();
-		return words.get(period);
+		return words.get(calculateIndexForTodayAnswerWord());
 	}
 
-	private int calculateIndexOfTodayAnswerWord() {
+	private int calculateIndexForTodayAnswerWord() {
+		return calculatePeriod() % words.size();
+	}
+
+	private int calculatePeriod() {
 		LocalDate now = LocalDate.now();
 		LocalDate past = LocalDate.parse(BASE_DATE, DateTimeFormatter.BASIC_ISO_DATE);
-		int period = (int) past.until(now, ChronoUnit.DAYS) % words.size();
-		return period;
+		return (int) past.until(now, ChronoUnit.DAYS);
 	}
 
 	public boolean contains(String word) {
