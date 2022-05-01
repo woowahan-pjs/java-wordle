@@ -15,41 +15,31 @@
 
 * ConsoleOutput.java
 + [x] 글자 수가 5자가 아닌 경우
-  + [ ] '글자 수는 5글자여야 합니다.' 문구를 출력한다.
-+ [ ] 글자 수가 맞는 경우
+  + [x] '글자 수는 5글자여야 합니다.' 문구를 출력한다.
++ [x] 글자 수가 맞는 경우
   + WordPool 에 있는 단어인 경우
-    + [ ] 정답과 비교한 결과를 출력한다
+    + [x] 정답과 비교한 결과를 출력한다
   + WordPool 에 없는 단어인 경우
-    + [ ] '단어가 목록에 없습니다.' 문구를 출력한다.
-+ [ ] 입력된 단어가 영문자가 아닌 경우
-  + [ ] '영문자만 입력 가능합니다.' 문구를 출력한다.
+    + [x] '단어가 목록에 없습니다.' 문구를 출력한다.
++ [x] 입력된 단어가 영문자가 아닌 경우
+  + [x] '영문자만 입력 가능합니다.' 문구를 출력한다.
 
 * WordPool.java
   + words.txt에 있는 단어를 모두 들고 있는 객체
 
-- TODO
-  - [x] List<String> wordList -> WordPool 객체로 뽑기
-  - [x] 입력된 단어가 WordPool에 존재하는지 비교
-  - [ ] 입력된 단어가 WordPool에 존재한다면 정답과 비교 
-  - [ ] 총 6번의 정상 입력을 받아야 게임이 종료된다. 그전까지는 계속 사용자의 입력을 받는다.
-  - [ ] Word
-    - [ ] Letter
-      - [ ] Alphabet, Position 비교 메서드
-        - return tile Status
-
+* Letter.java
+  + [x] Alphabet, Letter가 저장된 배열의 인덱스를 비교해서 모두 일치하면 GREEN
+  + [x] Alphabet 은 일치하는데 Letter가 저장된 배열의 인덱스가 일치하지 않으면 YELLOW
+  + [x] Alphabet, Letter가 저장된 배열의 인덱스를 비교해서 모두 일치하지 않으며 GRAY
+  
 ### model(domain)
 + Word : 단어 하나(hello)
   + Letter : 단어 1글자(h)
     + Alphabet : 알파벳(h)
-    + position : 위치(1,2,3,4,5)
 + Grid : 입력 결과 리스트(⬜⬜🟨🟩⬜,🟨⬜⬜⬜🟩,🟩🟩⬜🟩🟩,🟩🟩🟩🟩🟩)
-  + tiles : 판별 한 줄(⬜⬜🟨🟩⬜)
-    + tile : 색깔
-    + position : 위치(1,2,3,4,5)
-  + isFinish(): 6번의 정상 입력이 진행되었는지 확인
-+ tileStatus : 판별 결과 enum(초록색, 노란색, 회색)
-+ game : 게임 객체
-+ gameStatus : 게임 결과 enum(진행중, 종료-성공, 종료-실패)
+  + Tiles : 판별 한 줄(⬜⬜🟨🟩⬜)
++ TileStatus : 판별 결과 enum(초록색, 노란색, 회색)
++ Game : 게임 객체
 
 ### util
 + WordsGenerator : 유효 단어 목록 생성기
