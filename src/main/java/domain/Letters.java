@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 public class Letters {
     private final List<Letter> list;
 
+    public List<Letter> getList() {
+        return list;
+    }
+
     private Letters(List<Letter> list) {
         this.list = list;
     }

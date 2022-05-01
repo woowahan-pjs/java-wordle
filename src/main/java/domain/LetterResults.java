@@ -3,13 +3,16 @@ package domain;
 import java.util.List;
 
 public class LetterResults {
-    private List<LetterResult> letterResults;
+    private final List<LetterResult> letterResults;
 
     public List<LetterResult> getList() {
         return letterResults;
     }
 
-    public LetterResults() {
-        this.letterResults = List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN);
+    public LetterResults(List<LetterResult> letterResults) {
+        this.letterResults = letterResults;
+    }
+    public static LetterResults correctAll() {
+        return new LetterResults(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN));
     }
 }

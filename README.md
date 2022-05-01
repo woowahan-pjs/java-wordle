@@ -88,8 +88,8 @@ spill
     - [x] Answer는 제출된 단어를 비교하여 LetterResults를 반환한다.
 - [x] 정답과 답안에 대한 상태는 LetterResult 이다. (LetterResult enum class)
     - [x] 상태는 GREEN / YELLOW / GRAY 를 가지고 있다.
-    - [ ] GREEN : 정답 글자와 위치가 같은 경우.
-    - [ ] YELLOW : 정답 글자는 맞지만, 위치가 다른 경우.
+    - [x] GREEN : 정답 글자와 위치가 같은 경우.
+    - [x] YELLOW : 정답 글자는 맞지만, 위치가 다른 경우.
     - [ ] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
     - [ ] 예외 : 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
 - [x] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
