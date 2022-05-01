@@ -16,7 +16,7 @@ public class WordsMatchResult {
     }
 
     public boolean isCorrect() {
-        return !containsGreenOnly();
+        return containsGreenOnly();
     }
 
     private boolean containsGreenOnly() {

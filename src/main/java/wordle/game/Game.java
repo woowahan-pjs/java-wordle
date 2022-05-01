@@ -32,10 +32,9 @@ public class Game {
         end();
     }
 
-    private void end() {
-        if (isCorrect) {
-            gameView.round(round);
-        }
+    private void init() {
+        gameView.initGame();
+        answer = wordsBucket.findAnswer(LocalDate.now());
     }
 
     private void start() {
@@ -46,11 +45,6 @@ public class Game {
             gameView.wordsMatchResults(wordsMatchResults);
 
         } while (!round.isFinish() && !isCorrect);
-    }
-
-    private void init() {
-        gameView.initGame();
-        answer = wordsBucket.findAnswer(LocalDate.now());
     }
 
     private boolean isCorrectWords() {
@@ -73,6 +67,12 @@ public class Game {
             gameView.errors(e);
         }
         return false;
+    }
+
+    private void end() {
+        if (isCorrect) {
+            gameView.round(round);
+        }
     }
 
     static class Round {
