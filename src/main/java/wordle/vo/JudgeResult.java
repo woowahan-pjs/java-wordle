@@ -1,16 +1,26 @@
 package wordle.vo;
 
-public enum JudgeResult {
-    GOOD(true),
-    BAD(false);
+public class JudgeResult {
+    Color[] result;
 
-    private final boolean endAble;
+    public JudgeResult() {
+        this.result = new Color[5];
+    }
 
-    JudgeResult(boolean endAble) {
-        this.endAble = endAble;
+    public Color[] getResult() {
+        return result;
+    }
+
+    public void setColor(int idx, Color color) {
+        this.result[idx] = color;
     }
 
     public boolean isEndAble() {
-        return endAble;
+        for (int i = 0; i < result.length; ++i) {
+            if (!result[i].equals(Color.GREEN)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
