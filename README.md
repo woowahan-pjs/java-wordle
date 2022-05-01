@@ -85,8 +85,7 @@ spill
     - [x] 여러 개의 Letter는 Letters 이다.
     - [x] Letters는 5글자로 이루어져 있다.
 - [ ] 오늘의 정답은 Answer 가 가지고 있다.  (Answer class)
-    - [ ] Answer의 정답은 Game이 준다?
-    - [ ] Answer는 제출된 단어를 비교 할 수 있다.
+    - [ ] Answer는 제출된 단어를 비교하여 LetterResults를 반환한다.
 - [ ] 정답과 답안에 대한 상태는 LetterResult 이다. (LetterResult enum class)
     - [ ] 상태는 GREEN / YELLOW / GRAY 를 가지고 있다.
     - [ ] GREEN : 정답 글자와 위치가 같은 경우.
@@ -94,7 +93,9 @@ spill
     - [ ] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
     - [ ] 예외 : 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
 - [ ] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
-    - [ ] LetterResults는 6개의 결과만 가지고 있을 수 있다.
+    - [ ] LetterResults는 5개의 결과만 가지고 있을 수 있다.
+- [ ] Game 이 있다.(Game class)
+  - [ ] Game은 6개의 LetterResults 를 가지고 있다.
 - [ ] 정답과 답안은 `words.txt`에 존재하는 단어여야한다.
     - [ ] Words에는 정답과 답안 리스트가 들어가 있다.
 - [ ] 정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다.
