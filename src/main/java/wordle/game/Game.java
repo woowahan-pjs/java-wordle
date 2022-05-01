@@ -62,13 +62,13 @@ public class Game {
     private void inputWords() {
         do {
             gameView.inputWords();
-        } while (doInputWordsSuccess());
+        } while (!doInputWordsSuccess());
     }
 
     private boolean doInputWordsSuccess() {
         try {
             this.inputWords = new Words(Console.readLine());
-            return !wordsBucket.contains(inputWords);
+            return wordsBucket.contains(inputWords);
         } catch (final IllegalArgumentException e) {
             gameView.errors(e);
         }
