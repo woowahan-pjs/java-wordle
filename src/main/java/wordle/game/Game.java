@@ -1,40 +1,56 @@
-package wordle.domain;
+package wordle.game;
 
 import camp.nextstep.edu.missionutils.Console;
+import wordle.domain.Answer;
+import wordle.domain.Words;
+import wordle.domain.WordsBucket;
+import wordle.domain.WordsMatchResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private final Answer answer;
     private final WordsBucket wordsBucket;
+    private final GameView gameView;
     private final List<WordsMatchResult> wordsMatchResults;
     private final Round round;
+    private Answer answer;
     private Words inputWords;
+    private boolean isCorrect;
 
-    public Game() {
-        wordsBucket = new WordsBucket("src/main/resources/words.txt");
-        answer = wordsBucket.findAnswer(LocalDate.now());
+    public Game(final String filePath, final GameView gameView) {
+        wordsBucket = new WordsBucket(filePath);
+        this.gameView = gameView;
         wordsMatchResults = new ArrayList<>();
         round = new Round();
     }
 
     public void play() {
-        System.out.println("WORDLE을 6번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.");
+        init();
+        start();
+        end();
+    }
 
-        boolean isCorrect;
+    private void end() {
+        if (isCorrect) {
+            gameView.round(round);
+        }
+    }
+
+    private void start() {
         do {
             round.start();
             inputWords();
             isCorrect = isCorrectWords();
-            if (isCorrect) {
-                System.out.println(round);
-            }
-            wordsMatchResults.forEach(v -> System.out.println(v.getMatchStatusList()));
+            gameView.wordsMatchResults(wordsMatchResults);
 
         } while (!round.isFinish() && !isCorrect);
+    }
 
+    private void init() {
+        gameView.initGame();
+        answer = wordsBucket.findAnswer(LocalDate.now());
     }
 
     private boolean isCorrectWords() {
@@ -45,7 +61,7 @@ public class Game {
 
     private void inputWords() {
         do {
-            System.out.println("정답을 입력해 주세요.");
+            gameView.inputWords();
         } while (doInputWordsSuccess());
     }
 
@@ -54,12 +70,12 @@ public class Game {
             this.inputWords = new Words(Console.readLine());
             return !wordsBucket.contains(inputWords);
         } catch (final IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            gameView.errors(e);
         }
         return false;
     }
 
-    private static class Round {
+    static class Round {
 
         private static final int LAST_ROUND = 6;
         private int currentRound = 0;
