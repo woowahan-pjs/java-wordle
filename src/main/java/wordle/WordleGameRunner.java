@@ -1,6 +1,7 @@
 package wordle;
 
-import java.io.IOException;
+import java.time.LocalDate;
+import wordle.domain.WordFile;
 import wordle.ui.InputView;
 import wordle.ui.ResultView;
 
@@ -10,7 +11,7 @@ public class WordleGameRunner {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
 
-    public void run() throws IOException {
+    public void run() {
         // 게임 시작
         printGameStart();
 
@@ -18,6 +19,7 @@ public class WordleGameRunner {
         final String givenWord = inputUsersWord();
 
         // words.txt 파일 읽은 후 정답 추출
+        final String targetWord = new WordFile("words.txt").findTargetWord(LocalDate.now());
 
         // 비교
 
