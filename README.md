@@ -79,7 +79,7 @@ spill
 - ? 아직 모름 애매...
 
 - [x] 하나의 글자는 Letter 이다. (Letter class)
-    - [ ] Letter는 영문자이어야 한다. ?
+    - [x] Letter는 영문자이어야 한다.
 - [x] 영어 단어는 Letters 이다. (Letters class)
     - [x] 영단어야만 한다. 
     - [x] 여러 개의 Letter는 Letters 이다.

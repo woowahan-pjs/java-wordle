@@ -7,7 +7,14 @@ public class Letter {
     private final Character letter;
 
     public Letter(Character letter) {
+        if (!validateAlphabet(letter)) {
+            throw new IllegalArgumentException("영문자만 가능합니다.");
+        }
         this.letter = letter;
+    }
+
+    private boolean validateAlphabet(Character letter) {
+        return (letter >= 0x61 && letter <= 0x7A) || (letter >= 0x41 && letter <= 0x5A);
     }
 
     @Override
