@@ -9,16 +9,16 @@ import wordle.view.ConsoleOutput;
 
 public class WordleMachine {
 
-	private static final WordPool WORD_POOL = WordPoolGenerator.generate(WordPoolGenerator.WORDS_TEXT_FILE_PATH);
+	private static final WordPool WORD_POOL = WordPoolGenerator.generate();
 	private final ConsoleInput consoleInput = new ConsoleInput();
 	private final ConsoleOutput consoleOutput = new ConsoleOutput();
 
 	public void startGame() {
 		Game game = new Game(WORD_POOL);
 		consoleOutput.printGameStartMessage();
- 		while (!game.isFinish()) {
+		while (!game.isFinish()) {
 			game.compareWith(readValidUserInput());
-			consoleOutput.printGameResultMessage(game.getResult());
+			consoleOutput.printGameResultMessage(game.getResult(), game.getAnswer());
 		}
 	}
 

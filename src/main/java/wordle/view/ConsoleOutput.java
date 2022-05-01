@@ -23,7 +23,7 @@ public class ConsoleOutput {
 		System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
 	}
 
-	public void printGameResultMessage(Grid gameResult) {
+	public void printGameResultMessage(Grid gameResult, Word answer) {
 		// 정답이 입력되었을 때는 시도횟수 출력
 		if (gameResult.isFinishedInTrying()) {
 			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, gameResult.getTryingCount());
@@ -36,8 +36,7 @@ public class ConsoleOutput {
 
 		// 시도횟수가 다 되었을 때는 정답 출력
 		if (gameResult.isOverTrying()) {
-			Word answerWord = gameResult.getAnswerWord();
-			System.out.format(TODAY_ANSWER_MESSAGE, answerWord.getAnswerWordAsString());
+			System.out.format(TODAY_ANSWER_MESSAGE, answer.getAnswerWordAsString());
 		}
 	}
 
