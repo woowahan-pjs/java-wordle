@@ -8,8 +8,7 @@ import java.util.List;
 
 public class WordPool {
 
-	public static final int DAY_PLUS_OFFSET = 1;
-	public static final String BASE_DATE = "20210619";
+	private static final String BASE_DATE = "20210619";
 	private final List<String> words;
 
 	public WordPool(List<String> words) {
@@ -24,7 +23,7 @@ public class WordPool {
 	private int calculateIndexOfTodayAnswerWord() {
 		LocalDate now = LocalDate.now();
 		LocalDate past = LocalDate.parse(BASE_DATE, DateTimeFormatter.BASIC_ISO_DATE);
-		int period = ((int) past.until(now, ChronoUnit.DAYS) + DAY_PLUS_OFFSET) % words.size();
+		int period = (int) past.until(now, ChronoUnit.DAYS) % words.size();
 		return period;
 	}
 
