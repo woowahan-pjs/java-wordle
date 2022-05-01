@@ -1,7 +1,6 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 public class Answer {
     private final Letters todayAnswer;
@@ -14,31 +13,36 @@ public class Answer {
         if (todayAnswer.equals(userAnswer)) {
             return LetterResults.correctAll();
         }
-        List<Letter> todayAnswerList = todayAnswer.getList();
-        List<Letter> userList = userAnswer.getList();
-        List<LetterResult> letterResults = Arrays.asList(
-                LetterResult.GRAY, LetterResult.GRAY, LetterResult.GRAY, LetterResult.GRAY, LetterResult.GRAY
-        );
-        for (int i = 0; i < userList.size(); i++) {
-            if (todayAnswerList.get(i).equals(userList.get(i))) {
-                letterResults.set(i, LetterResult.GREEN);
-                todayAnswerList.set(i, null);
+
+        LetterResults result = new LetterResults();
+        Map<Letter, Long> countMap = todayAnswer.mapToCount();
+
+        changeGreen(userAnswer, result, countMap);
+        changeYellow(userAnswer, result, countMap);
+
+        return result;
+    }
+
+    private void changeGreen(Letters userAnswer, LetterResults letterResults, Map<Letter, Long> countMap) {
+        for (int i = 0; i < userAnswer.getSize(); i++) {
+            Letter todayLetter = todayAnswer.getLetter(i);
+            Letter userLetter = userAnswer.getLetter(i);
+
+            if (todayLetter.equals(userLetter)) {
+                letterResults.changeGreen(i);
+                countMap.put(userLetter, countMap.get(userLetter) - 1);
             }
         }
-        
-        for (int i = 0; i < userList.size(); i++) {
-            if (letterResults.get(i) != LetterResult.GREEN) {
-                for (int j = 0; j < todayAnswerList.size(); j++) {
-                    if(userList.get(i).equals(todayAnswerList.get(j))) {
-                        letterResults.set(i, LetterResult.YELLOW);
-                        todayAnswerList.set(j, null);
-                    }
-                }
+    }
+
+    private void changeYellow(Letters userAnswer, LetterResults letterResults, Map<Letter, Long> countMap) {
+        for (int i = 0; i < userAnswer.getSize(); i++) {
+            Letter userLetter = userAnswer.getLetter(i);
+
+            if (countMap.get(userLetter) > 0) {
+                letterResults.changeYellow(i);
+                countMap.put(userLetter, countMap.get(userLetter) - 1);
             }
         }
-
-
-
-        return new LetterResults(letterResults);
     }
 }

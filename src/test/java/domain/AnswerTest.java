@@ -82,12 +82,12 @@ public class AnswerTest {
     void compare_final_letter() {
         Letters todayAnswer = Letters.of("hello");
         Answer answer = new Answer(todayAnswer);
-        Letters userAnswer = Letters.of("helll"); // gray/green/green/green/green
+        Letters userAnswer = Letters.of("leell"); // gray/green/green/green/green
 
         assertThat(
                 answer.compare(userAnswer)
                         .getList()
-        ).isEqualTo(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN
+        ).isEqualTo(List.of(LetterResult.YELLOW, LetterResult.GREEN, LetterResult.GRAY
                 , LetterResult.GREEN, LetterResult.GRAY));
     }
 }

@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,20 @@ public class Letters {
 
     public List<Letter> getList() {
         return list;
+    }
+
+    public Letter getLetter(int index) {
+        return list.get(index);
+    }
+
+    public int getSize() {
+        return list.size();
+    }
+
+    public Map<Letter, Long> mapToCount() {
+        return list.stream().collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()
+        ));
     }
 
     private Letters(List<Letter> list) {
