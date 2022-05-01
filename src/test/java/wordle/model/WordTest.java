@@ -16,7 +16,7 @@ class WordTest {
 		Word word = new Word(userInput);
 
 		// when
-		int numberOfLetters = word.getLetters().size();
+		int numberOfLetters = word.getLetters().length;
 
 		// then
 		int VALID_WORD_LENGTH = 5;
