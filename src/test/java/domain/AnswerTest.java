@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,5 +75,19 @@ public class AnswerTest {
                         .getList()
                         .stream().filter(letterResult -> letterResult == LetterResult.GRAY).collect(Collectors.toList())
         ).hasSize(expected);
+    }
+
+    @DisplayName(" 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다")
+    @Test
+    void compare_final_letter() {
+        Letters todayAnswer = Letters.of("hello");
+        Answer answer = new Answer(todayAnswer);
+        Letters userAnswer = Letters.of("helll"); // gray/green/green/green/green
+
+        assertThat(
+                answer.compare(userAnswer)
+                        .getList()
+        ).isEqualTo(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN
+                , LetterResult.GREEN, LetterResult.GRAY));
     }
 }

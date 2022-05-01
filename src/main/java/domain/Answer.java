@@ -22,17 +22,22 @@ public class Answer {
         for (int i = 0; i < userList.size(); i++) {
             if (todayAnswerList.get(i).equals(userList.get(i))) {
                 letterResults.set(i, LetterResult.GREEN);
+                todayAnswerList.set(i, null);
             }
         }
-
-
+        
         for (int i = 0; i < userList.size(); i++) {
             if (letterResults.get(i) != LetterResult.GREEN) {
-                if (todayAnswerList.contains(userList.get(i))){
-                    letterResults.set(i, LetterResult.YELLOW);
+                for (int j = 0; j < todayAnswerList.size(); j++) {
+                    if(userList.get(i).equals(todayAnswerList.get(j))) {
+                        letterResults.set(i, LetterResult.YELLOW);
+                        todayAnswerList.set(j, null);
+                    }
                 }
             }
         }
+
+
 
         return new LetterResults(letterResults);
     }
