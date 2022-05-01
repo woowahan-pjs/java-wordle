@@ -1,7 +1,10 @@
 package wordle.game;
 
 import camp.nextstep.edu.missionutils.Console;
-import wordle.domain.*;
+import wordle.domain.Answer;
+import wordle.domain.Words;
+import wordle.domain.WordsBucket;
+import wordle.domain.WordsMatchResult;
 
 import java.time.LocalDate;
 
@@ -32,7 +35,7 @@ public class Game {
 
     private void start() {
         do {
-            playingInfo.playRound();
+            playingInfo.play();
             inputWords();
             playingInfo.updateStatus(isCorrectWords());
             gameView.wordsMatchResults(playingInfo.getCurrentMatchResults());
@@ -40,7 +43,7 @@ public class Game {
     }
 
     private boolean isCorrectWords() {
-        final WordsMatchResult result = answer.matches(playingInfo.inputWords);
+        final WordsMatchResult result = answer.matches(playingInfo.getCurrentWords());
         playingInfo.addMatchResults(result);
         return result.isCorrect();
     }
@@ -53,8 +56,8 @@ public class Game {
 
     private boolean doInputWordsSuccess() {
         try {
-            playingInfo.updateCurrentInputWords(new Words(Console.readLine()));
-            return wordsBucket.contains(playingInfo.inputWords);
+            playingInfo.updateCurrentWords(new Words(Console.readLine()));
+            return wordsBucket.contains(playingInfo.getCurrentWords());
         } catch (final IllegalArgumentException e) {
             gameView.errors(e);
         }
@@ -62,63 +65,8 @@ public class Game {
     }
 
     private void end() {
-        if (playingInfo.isCorrect) {
-            gameView.round(playingInfo.round);
-        }
-    }
-
-    private static class PlayingInfo {
-        private WordsMatchResults wordsMatchResults;
-        private Round round;
-        private Words inputWords;
-        private boolean isCorrect;
-
-        void init() {
-            round = new Round();
-            wordsMatchResults = new WordsMatchResults();
-        }
-
-        void playRound() {
-            round.start();
-        }
-
-        void updateStatus(final boolean isCorrect) {
-            this.isCorrect = isCorrect;
-        }
-
-        public boolean isFinish() {
-            return round.isFinish() || isCorrect;
-        }
-
-        private WordsMatchResults getCurrentMatchResults() {
-            return wordsMatchResults;
-        }
-
-        private void updateCurrentInputWords(final Words words) {
-            this.inputWords = words;
-        }
-
-        public void addMatchResults(final WordsMatchResult result) {
-            wordsMatchResults.add(result);
-        }
-    }
-
-    static class Round {
-
-        private static final int LAST_ROUND = 6;
-        private int currentRound = 0;
-
-        public boolean isFinish() {
-            return currentRound >= LAST_ROUND;
-        }
-
-        public void start() {
-            currentRound++;
-        }
-
-        @Override
-        public String toString() {
-            return currentRound + "/" + LAST_ROUND;
+        if (playingInfo.isCorrect()) {
+            gameView.round(playingInfo.getCurrentRound());
         }
     }
 
