@@ -1,5 +1,7 @@
 package wordle.model;
 
+import java.util.Arrays;
+
 public class Word {
 
 	private static final int VALID_WORD_LENGTH = 5;
@@ -33,25 +35,30 @@ public class Word {
 		Letter[] userInputLetters = userInputWord.getLetters();
 
 		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
-			if (letters[index].equals(userInputLetters[index])) {
-				letters[index].setMatched(); // false -> true;
-				tileStatuses[index] = TileStatus.GREEN;
-			}
+			tileStatuses[index] = checkGreen(userInputLetters[index], index);
 		}
 
 		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
 			if (tileStatuses[index] != TileStatus.GREEN) {
-				tileStatuses[index] = compare(userInputLetters[index]);
+				tileStatuses[index] = checkYellowOrGray(userInputLetters[index]);
 			}
 		}
 
 		return new Tiles(tileStatuses);
 	}
 
-	private TileStatus compare(Letter userInput) {
+	private TileStatus checkGreen(Letter userInputLetters, int index) {
+		if (letters[index].equals(userInputLetters)) {
+			letters[index].setMatched();
+			return TileStatus.GREEN;
+		}
+		return TileStatus.GRAY;
+	}
+
+	private TileStatus checkYellowOrGray(Letter userInput) {
 		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
 			if (letters[index].equals(userInput) && !letters[index].isMatched()) {
-				letters[index].setMatched(); // false -> true;
+				letters[index].setMatched();
 				return TileStatus.YELLOW;
 			}
 		}
@@ -70,5 +77,22 @@ public class Word {
 			sb.append(letter.getAlphabet());
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Word word = (Word) o;
+		return Arrays.equals(letters, word.letters);
+	}
+
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(letters);
 	}
 }
