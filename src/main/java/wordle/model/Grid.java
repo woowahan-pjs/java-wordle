@@ -9,7 +9,6 @@ public class Grid {
 	// todo GameResult: Grid, ...
 	private static final int MAX_TRYING_COUNT = 6;
 	private List<Tiles> tilesList = new ArrayList<>();
-	private Word answerWord;
 	private boolean isCorrect = false;
 
 	public Grid() {
@@ -29,10 +28,6 @@ public class Grid {
 		return tilesList.size();
 	}
 
-	public Word getAnswerWord() {
-		return answerWord;
-	}
-
 	public boolean isFinishedInTrying() {
 		return isCorrect;
 	}
@@ -41,11 +36,7 @@ public class Grid {
 		return tilesList.size() == MAX_TRYING_COUNT && !isCorrect;
 	}
 
-	public void addAnswerWord(Word answer) {
-		this.answerWord = answer;
-	}
-
-	public void giveAnswer() {
+	public void corrected() {
 		isCorrect = true;
 	}
 }
