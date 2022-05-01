@@ -92,7 +92,7 @@ spill
     - [ ] YELLOW : 정답 글자는 맞지만, 위치가 다른 경우.
     - [ ] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
     - [ ] 예외 : 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
-- [ ] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
+- [x] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
     - [ ] LetterResults는 5개의 결과만 가지고 있을 수 있다.
 - [ ] Game 이 있다.(Game class)
   - [ ] Game은 6개의 LetterResults 를 가지고 있다.
