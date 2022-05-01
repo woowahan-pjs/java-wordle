@@ -1,10 +1,8 @@
 package wordle.game;
 
 import camp.nextstep.edu.missionutils.Console;
-import wordle.domain.Answer;
 import wordle.domain.Words;
 import wordle.domain.WordsBucket;
-import wordle.domain.WordsMatchResult;
 
 import java.time.LocalDate;
 
@@ -13,7 +11,6 @@ public class Game {
     private final WordsBucket wordsBucket;
     private final GameView gameView;
     private final PlayingInfo playingInfo;
-    private Answer answer;
 
     public Game(final String filePath, final GameView gameView) {
         this.wordsBucket = new WordsBucket(filePath);
@@ -29,8 +26,7 @@ public class Game {
 
     private void init() {
         gameView.initGame();
-        playingInfo.init();
-        answer = wordsBucket.findAnswer(LocalDate.now());
+        playingInfo.init(wordsBucket.findAnswer(LocalDate.now()));
     }
 
     private void start() {
@@ -43,9 +39,7 @@ public class Game {
     }
 
     private boolean isCorrectWords() {
-        final WordsMatchResult result = answer.matches(playingInfo.getCurrentWords());
-        playingInfo.addMatchResults(result);
-        return result.isCorrect();
+        return playingInfo.matches();
     }
 
     private void inputWords() {
