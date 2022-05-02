@@ -2,6 +2,7 @@ package wordle;
 
 import java.time.LocalDate;
 import wordle.domain.WordFile;
+import wordle.domain.Wordle;
 import wordle.ui.InputView;
 import wordle.ui.ResultView;
 
@@ -15,15 +16,21 @@ public class WordleGameRunner {
         // 게임 시작
         printGameStart();
 
-        // 입력 받기 > 유효성 검사 (5글자)
-        final String givenWord = inputUsersWord();
-
         // words.txt 파일 읽은 후 정답 추출
         final String targetWord = new WordFile("words.txt").findTargetWord(LocalDate.now());
 
-        // 비교
+        // New Wordle 생성
+        final Wordle wordle = new Wordle(targetWord);
 
-        // 결과 출력
+        // 반복
+        /// 입력 받기 > 유효성 검사 (5글자)
+        do {
+            final String givenWord = inputUsersWord();
+        } while(wordle.isContinue());
+
+        //// 비교
+
+        /// 결과 출력
     }
 
     private void printGameStart() {
