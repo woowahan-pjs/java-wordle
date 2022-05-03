@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class Characters {
 
-    private static final int WORD_LENGTH = 5;
     public static final String OUT_OF_WORD_LENGTH_ERR_MSG = "문자열의 길이가 5자가 아닙니다.(입력된 문자열의 길이는 %d입니다.)";
+    private static final int WORD_LENGTH = 5;
 
     private final List<Character> characters;
 
