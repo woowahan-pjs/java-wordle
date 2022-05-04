@@ -8,6 +8,7 @@ import java.util.List;
 public class Wordle {
     private final List<BingoHistory> histories = new ArrayList<>();
     private final List<String> targetWord = new ArrayList<>();
+    private final String targetWordString;
     private boolean status;
     private int executionCount;
 
@@ -16,6 +17,7 @@ public class Wordle {
         {
             throw new IllegalArgumentException("TargetWord는 필수입니다.");
         }
+        this.targetWordString = targetWord;
         this.targetWord.addAll(Arrays.asList(targetWord.split("")));
         this.status = true;
     }
@@ -25,7 +27,7 @@ public class Wordle {
     }
 
     public void compare(String givenWord) {
-        if (++executionCount == 6) {
+        if (++executionCount == 6 || targetWordString.equals(givenWord)) {
             status = false;
         }
 

@@ -1,5 +1,8 @@
 package wordle.ui;
 
+import java.util.List;
+import wordle.domain.BingoHistory;
+
 public class ResultView {
 
     public void printGameStart() {
@@ -13,5 +16,22 @@ public class ResultView {
 
     public void printRetryInputWord() {
         System.out.println("잘못된 글자 수 입니다. 5글자로 입력해 주세요.");
+    }
+
+    public void printGameResult(List<BingoHistory> history, boolean isContinue) {
+        System.out.println();
+        printFinalResult(history, isContinue);
+        for (BingoHistory bingoHistory : history) {
+            bingoHistory.getHistory().stream().map(x -> x.printFormat).forEach(System.out::print);
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private void printFinalResult(List<BingoHistory> history, boolean isContinue) {
+        if (isContinue == false) {
+            System.out.println(history.size() + "/6");
+            System.out.println();
+        }
     }
 }

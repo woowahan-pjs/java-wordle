@@ -1,6 +1,7 @@
 package wordle;
 
 import java.time.LocalDate;
+import wordle.domain.BingoHistory;
 import wordle.domain.WordFile;
 import wordle.domain.Wordle;
 import wordle.ui.InputView;
@@ -23,14 +24,16 @@ public class WordleGameRunner {
         final Wordle wordle = new Wordle(targetWord);
 
         // 반복
-        /// 입력 받기 > 유효성 검사 (5글자)
         do {
+            /// 입력 받기 > 유효성 검사 (5글자)
             final String givenWord = inputUsersWord();
-        } while(wordle.isContinue());
 
-        //// 비교
+            /// 비교
+            wordle.compare(givenWord);
 
-        /// 결과 출력
+            /// 결과 출력
+            resultView.printGameResult(wordle.getHistory(), wordle.isContinue());
+        } while (wordle.isContinue());
     }
 
     private void printGameStart() {
