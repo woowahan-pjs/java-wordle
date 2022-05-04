@@ -11,7 +11,7 @@ public class Tile {
             throw new IllegalArgumentException(value + "는 알파벳이 아님");
         }
 
-        this.value = value;
+        this.value = Character.toLowerCase(value);
     }
 
     public char getValue() {
