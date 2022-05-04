@@ -28,8 +28,8 @@
     - [x] 타일끼리 비교할 수 있다.
 
 - Tiles
-  - [ ] 5개의 Tile로 구성
-  - [ ] 5개가의 Tile이 아닌경우 IllegalArgumentException을 던짐
+  - [x] 5개의 Tile로 구성
+  - [x] 5개의 Tile이 아닌경우 IllegalArgumentException을 던짐
 
 - WordBucket
   - [ ] words.txt 파일을 읽어 Tiles 들을 읽어온다.
