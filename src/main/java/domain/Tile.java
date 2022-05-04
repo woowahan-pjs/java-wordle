@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Tile {
@@ -16,5 +17,18 @@ public class Tile {
 
     public char getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return getValue() == tile.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
     }
 }

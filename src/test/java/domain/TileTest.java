@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,6 +32,21 @@ class TileTest {
         Tile tile = new Tile(upper);
 
         assertThat(tile.getValue()).isEqualTo(lower);
+    }
+
+    @Test
+    void 두_Tile이_일치하면_참(){
+        Tile tile = new Tile('a');
+        Tile anotherTile = new Tile('a');
+
+        assertThat(tile).isEqualTo(anotherTile);
+    }
+    @Test
+    void 두_Tile이_다르면_거짓(){
+        Tile tile = new Tile('a');
+        Tile anotherTile = new Tile('b');
+
+        assertThat(tile).isNotEqualTo(anotherTile);
     }
 
 }

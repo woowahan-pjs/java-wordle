@@ -25,9 +25,10 @@
   - [x] 하나의 문자가 들어간다.
     - [x] 알파벳만 입력할 수 있으며 알파벳이 아닌 경우 IllegalArgumentException을 던짐 
     - [x] 대문자를 입력받으면 소문자로 변경한다.
+    - [x] 타일끼리 비교할 수 있다.
 
 - Tiles
-  - [ ] 5개의 Tile 로 구성
+  - [ ] 5개의 Tile로 구성
   - [ ] 5개가의 Tile이 아닌경우 IllegalArgumentException을 던짐
 
 - WordBucket
