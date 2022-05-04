@@ -23,8 +23,8 @@
 # 기능 목록 정의
 - Tile
   - [x] 하나의 문자가 들어간다.
-  - [ ] 모든 알파벳을 소문자로 변경
-  - [ ] 알파벳이 아닌 입력이 들어오면 IllegalArgumentException을 던짐
+    - [x] 알파벳만 입력할 수 있으며 알파벳이 아닌 경우 IllegalArgumentException을 던짐 
+    - [ ] 대문자를 입력받으면 소문자로 변경한다.
 
 - Tiles
   - [ ] 5개의 Tile 로 구성
