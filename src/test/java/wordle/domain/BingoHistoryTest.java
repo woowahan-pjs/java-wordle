@@ -1,44 +1,87 @@
 package wordle.domain;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static wordle.domain.BingoStatus.CONTAIN;
-
-import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static wordle.domain.BingoStatus.MATCH;
+import static wordle.domain.BingoStatus.NOTHING;
 
 @DisplayName("정답 여부 기록을 담당하는 `BingoHistory` 객체 태스트")
 class BingoHistoryTest {
 
-    @DisplayName("`BingoHistory` 객체에 정답 여부 기록을 최대 5번까지 추가 가능")
-    @Test
-    void canAddBingoHistoryWhenNumberOfHistoryAddIsLessThanFive() {
+    @DisplayName("정답 여부 리스트가 주어지면 `BingoHistory` 객체 생성 성공")
+    @ParameterizedTest
+    @MethodSource("bingoHistoryList")
+    void createBingoHistoryIsSuccessGivenBingoStatusList(List<BingoStatus> bingoHistoryList) {
         // Arrange
-        final BingoHistory history = new BingoHistory();
-
         // Act
-        for (int i = 0; i < 5; i++) {
-            history.add(CONTAIN);
-        }
+        final BingoHistory history = new BingoHistory(bingoHistoryList);
 
         // Assert
-        assertThat(history.getHistory()).containsExactlyElementsOf(
-                List.of(CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN));
+        assertThat(history.getHistory()).containsExactlyElementsOf(bingoHistoryList);
     }
 
-    @DisplayName("`BingoHistory` 객체에 정답 여부 기록을 5번이상 추가하는 경우 예외 발생")
+    @DisplayName("주어진 정답 여부 리스트가 변경되어도 `BingoHistory` 객체 내 정답 여부 리스트는 초기 상태 유지")
     @Test
-    void canNotAddBingoHistoryWhenNumberOfHistoryAddIsEqualsToFiveOrGreaterThanFive() {
+    void BingoHistoryIsImmutableEvenIfGivenBingoStatusListIsChanged() {
         // Arrange
-        final BingoHistory history = new BingoHistory();
+        final List<BingoStatus> mutableBingoHistory = new ArrayList<>();
+        mutableBingoHistory.add(CONTAIN);
+        mutableBingoHistory.add(CONTAIN);
+        mutableBingoHistory.add(CONTAIN);
+        mutableBingoHistory.add(CONTAIN);
+        mutableBingoHistory.add(CONTAIN);
+
+        final BingoHistory history = new BingoHistory(mutableBingoHistory);
+        final List<BingoStatus> originHistory = history.getHistory();
+
+        // Act
+        mutableBingoHistory.set(0, NOTHING);
+        mutableBingoHistory.set(1, NOTHING);
+        mutableBingoHistory.set(2, NOTHING);
+        mutableBingoHistory.set(3, NOTHING);
+        mutableBingoHistory.set(4, NOTHING);
+
+        // Assert
+        assertThat(history.getHistory()).containsExactlyElementsOf(originHistory);
+    }
+
+    @DisplayName("`BingoHistory` 객체가 반환하는 정답 여부 리스트는 변경 불가")
+    @Test
+    void throwExceptionIfYouTryToChangedTheReturnBingoStatusList() {
+        // Arrange
+        final List<BingoStatus> bingoHistory = new ArrayList<>();
+        bingoHistory.add(CONTAIN);
+        bingoHistory.add(CONTAIN);
+        bingoHistory.add(CONTAIN);
+        bingoHistory.add(CONTAIN);
+        bingoHistory.add(CONTAIN);
 
         // Act
         // Assert
         assertThatThrownBy(() -> {
-            for (int i = 0; i < 6; i++) {
-                history.add(CONTAIN);
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
+            final List<BingoStatus> bingoStatusList = new BingoHistory(bingoHistory).getHistory();
+            bingoStatusList.set(0, NOTHING);
+        }).isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    private static Stream<Arguments> bingoHistoryList() {
+        return Stream.of(
+            Arguments.of(List.of(MATCH, MATCH, MATCH, MATCH, MATCH)),
+            Arguments.of(List.of(CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN)),
+            Arguments.of(List.of(MATCH, CONTAIN, MATCH, NOTHING, MATCH)),
+            Arguments.of(List.of(CONTAIN, NOTHING, MATCH, NOTHING, CONTAIN)),
+            Arguments.of(List.of(NOTHING, NOTHING, MATCH, MATCH, CONTAIN))
+        );
     }
 }
