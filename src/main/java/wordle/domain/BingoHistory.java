@@ -5,13 +5,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class BingoHistory {
-    private final List<BingoStatus> bingoHistories;
+    private final List<BingoStatus> statuses;
 
-    public BingoHistory(List<BingoStatus> bingoHistories) {
-        this.bingoHistories = new ArrayList<>(bingoHistories);
+    public BingoHistory(List<BingoStatus> statuses) {
+        this.statuses = new ArrayList<>(statuses);
+    }
+
+    public boolean isAllMatch() {
+        for (BingoStatus bs : statuses) {
+            if (bs.isMatch()) {
+                continue;
+            }
+            return false;
+        }
+
+        return true;
     }
 
     public List<BingoStatus> getHistory() {
-        return Collections.unmodifiableList(bingoHistories);
+        return Collections.unmodifiableList(statuses);
     }
 }
