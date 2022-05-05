@@ -93,9 +93,9 @@ spill
     - [x] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
     - [x] 예외 : 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
 - [x] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
-- [ ] Game 이 있다.(Game class)
-  - [ ] Game은 진행 상태를 가지고 있다.
-  - [ ] Game은 GameResult를 가지고 있는다.
+- [x] Game 이 있다.(Game class)
+  - [x] Game은 진행 상태를 가지고 있다.
+  - [x] Game은 GameResult를 가지고 있는다.
 - [x] WordPool 이 있다.
   - [x] WordPool에서는 todayWords를 가지고 올 수 있다.
   - [x] WordPool은 `words.txt`에 대한 데이터를 가지고 있다.

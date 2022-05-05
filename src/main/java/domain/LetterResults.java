@@ -4,10 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LetterResults {
+    private static final List<LetterResult> ALL_GREEN_LIST = List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN);
     private final List<LetterResult> letterResults;
 
     public List<LetterResult> getList() {
         return letterResults;
+    }
+
+    public int size() {
+        return letterResults.size();
     }
 
     public void changeGreen(int index) {
@@ -16,6 +21,10 @@ public class LetterResults {
 
     public void changeYellow(int index) {
         letterResults.set(index, LetterResult.YELLOW);
+    }
+
+    public boolean isAllGreen() {
+        return letterResults.equals(ALL_GREEN_LIST);
     }
 
     public LetterResults() {
@@ -29,6 +38,6 @@ public class LetterResults {
     }
 
     public static LetterResults correctAll() {
-        return new LetterResults(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN));
+        return new LetterResults(ALL_GREEN_LIST);
     }
 }
