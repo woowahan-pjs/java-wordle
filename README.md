@@ -38,7 +38,16 @@
 
 - Answer
   - [ ] 사용자의 입력과 정답을 비교하여 결과를 반환한다.
+  - [ ] 정답의 tile과 입력의 tile이 위치와 문자가 모두 같으면 Green
+  - [ ] 정답에는 존재하는 tile이지만 위치가 다르면 Yellow
+  - [ ] 정답에 존재하지 않는 tile이면 Grey
 
+- MatchStatus
+  - [ ] Green, Yello, Grey를 갖는다
+
+- MatchResult
+  - [ ] 매치 결과를 갖는다.
+  
 
 #### 실행 결과 예시
 
