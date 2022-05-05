@@ -3,6 +3,8 @@ package domain;
 import java.util.Map;
 
 public class Answer {
+    private static final Long DEFAULT_COUNT = 0L;
+
     private final Letters todayAnswer;
 
     public Answer(Letters todayAnswer) {
@@ -39,7 +41,7 @@ public class Answer {
         for (int i = 0; i < userAnswer.getSize(); i++) {
             Letter userLetter = userAnswer.getLetter(i);
 
-            if (countMap.get(userLetter) > 0) {
+            if (countMap.getOrDefault(userLetter,DEFAULT_COUNT) > 0) {
                 letterResults.changeYellow(i);
                 countMap.put(userLetter, countMap.get(userLetter) - 1);
             }
