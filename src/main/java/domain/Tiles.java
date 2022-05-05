@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Tiles {
     private final List<Tile> tiles;
@@ -18,5 +19,25 @@ public class Tiles {
 
     public List<Tile> getTiles() {
         return tiles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tiles tiles1 = (Tiles) o;
+        return Objects.equals(getTiles(), tiles1.getTiles());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTiles());
+    }
+
+    @Override
+    public String toString() {
+        return "Tiles{" +
+                "tiles=" + tiles +
+                '}';
     }
 }
