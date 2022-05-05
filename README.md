@@ -43,10 +43,10 @@
   - [ ] 정답에 존재하지 않는 tile이면 Grey
 
 - MatchStatus
-  - [ ] Green, Yello, Grey를 갖는다
+  - [x] Green, Yello, Grey를 갖는다
 
 - MatchResult
-  - [ ] 매치 결과를 갖는다.
+  - [x] 매치 결과를 갖는다.
   
 
 #### 실행 결과 예시
