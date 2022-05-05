@@ -105,5 +105,6 @@ spill
 
 ---
 ## 뷰에 대한 요구 사항
-
+- [x] InputView 구현
+- [x] OutputView 구현
 ---
