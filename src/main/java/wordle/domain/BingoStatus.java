@@ -10,4 +10,8 @@ public enum BingoStatus {
     BingoStatus(String printFormat) {
         this.printFormat = printFormat;
     }
+
+    public Boolean isMatch() {
+        return this == MATCH;
+    }
 }
