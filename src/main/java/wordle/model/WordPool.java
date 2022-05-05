@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
-public class WordPool {
+public class WordPool implements Words {
 
 	private static final String BASE_DATE = "20210619";
 	private final List<String> words;
