@@ -13,4 +13,11 @@ public class MatchResult {
     public boolean isCorrect() {
         return !(matchStatusList.contains(MatchStatus.YELLOW) || matchStatusList.contains(MatchStatus.GREY));
     }
+
+    @Override
+    public String toString() {
+        return "MatchResult{" +
+                "matchStatusList=" + matchStatusList +
+                '}';
+    }
 }

@@ -31,6 +31,6 @@ class TilesBucketTest {
         Answer answer = tilesBucket.getAnswer(today);
 
         assertThat(answer).isNotNull();
-        assertThat(answer.matches(new Tiles("story"))).isTrue();
+        assertThat(answer.matches(new Tiles("story")).isCorrect()).isTrue();
     }
 }

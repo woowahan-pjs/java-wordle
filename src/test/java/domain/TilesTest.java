@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -22,6 +23,22 @@ public class TilesTest {
         assertThatThrownBy(() -> new Tiles(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Tiles는 5개의 Tile로 구성되어야 한다.");
+    }
+
+    @Test
+    void 타일을_가지고있으면_참() {
+        Tiles story = new Tiles("story");
+        Tile o = new Tile('o', 0);
+
+        assertThat(story.contains(o)).isTrue();
+    }
+
+    @Test
+    void 타일을_가지고있지않으면_거짓() {
+        Tiles story = new Tiles("story");
+        Tile c = new Tile('c', 0);
+
+        assertThat(story.contains(c)).isFalse();
     }
 
 }

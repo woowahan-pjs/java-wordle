@@ -37,10 +37,10 @@
   - [x] ((현재 날짜 - 2021년 6월 19일) % 배열의 크기)번째 단어를 Answer 로 선정한다.
 
 - Answer
-  - [ ] 사용자의 입력과 정답을 비교하여 결과를 반환한다.
-  - [ ] 정답의 tile과 입력의 tile이 위치와 문자가 모두 같으면 Green
-  - [ ] 정답에는 존재하는 tile이지만 위치가 다르면 Yellow
-  - [ ] 정답에 존재하지 않는 tile이면 Grey
+  - [x] 사용자의 입력과 정답을 비교하여 결과를 반환한다.
+  - [x] 정답의 tile과 입력의 tile이 위치와 문자가 모두 같으면 Green
+  - [x] 정답에는 존재하는 tile이지만 위치가 다르면 Yellow
+  - [x] 정답에 존재하지 않는 tile이면 Grey
 
 - MatchStatus
   - [x] Green, Yello, Grey를 갖는다

@@ -12,9 +12,13 @@ public class Tiles {
             throw new IllegalArgumentException("Tiles는 5개의 Tile로 구성되어야 한다.");
         }
         tiles = new ArrayList<>();
-        for (char text : input.toCharArray()) {
-            tiles.add(new Tile(text));
+        for (int i = 0; i < input.length(); i++) {
+            tiles.add(new Tile(input.charAt(i), i));
         }
+    }
+
+    public boolean contains(Tile tile){
+        return tiles.contains(tile);
     }
 
     public List<Tile> getTiles() {
