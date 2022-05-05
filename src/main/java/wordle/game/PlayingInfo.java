@@ -1,15 +1,23 @@
 package wordle.game;
 
-import camp.nextstep.edu.missionutils.Console;
-import wordle.domain.*;
+import wordle.domain.Answer;
+import wordle.domain.Words;
+import wordle.domain.WordsMatchResult;
+import wordle.domain.WordsMatchResults;
+import wordle.player.Player;
 
 class PlayingInfo {
 
+    private final Player player;
     private WordsMatchResults wordsMatchResults;
     private Answer answer;
     private Round round;
     private Words inputWords;
     private boolean isCorrect;
+
+    public PlayingInfo(final Player player) {
+        this.player = player;
+    }
 
     void init(final Answer answer) {
         round = new Round();
@@ -42,10 +50,8 @@ class PlayingInfo {
     }
 
     Words inputWords() {
-        final Words words = new Words(Console.readLine());
-        this.inputWords = words;
-
-        return words;
+        this.inputWords = player.inputWords();
+        return inputWords;
     }
 
     void updateResult(final WordsMatchResult matchResult) {

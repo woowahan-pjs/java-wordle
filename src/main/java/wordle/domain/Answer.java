@@ -30,14 +30,14 @@ public class Answer {
             return MatchStatus.GREY;
         }
 
-        if (isGreen(word)) {
+        if (isSameWordInPosition(word)) {
             return MatchStatus.GREEN;
         }
 
         return MatchStatus.YELLOW;
     }
 
-    private boolean isGreen(final Word word) {
+    private boolean isSameWordInPosition(final Word word) {
         return word.equals(answer.get(word.getPosition()));
     }
 

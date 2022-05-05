@@ -3,6 +3,7 @@ package wordle.game;
 import wordle.domain.Words;
 import wordle.domain.WordsBucket;
 import wordle.domain.WordsMatchResult;
+import wordle.player.Player;
 
 import java.time.LocalDate;
 
@@ -12,10 +13,10 @@ public class Game {
     private final GameView gameView;
     private final PlayingInfo playingInfo;
 
-    public Game(final String filePath, final GameView gameView) {
+    public Game(final String filePath, final GameView gameView, final Player player) {
         this.wordsBucket = new WordsBucket(filePath);
         this.gameView = gameView;
-        this.playingInfo = new PlayingInfo();
+        this.playingInfo = new PlayingInfo(player);
     }
 
     public void play() {
