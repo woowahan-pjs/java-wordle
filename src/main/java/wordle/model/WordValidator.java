@@ -1,4 +1,4 @@
-package wordle.util;
+package wordle.model;
 
 import wordle.model.WordPool;
 import wordle.view.ConsoleOutput;

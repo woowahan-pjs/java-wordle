@@ -1,4 +1,4 @@
-package wordle.util;
+package wordle.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import wordle.model.WordPool;
+import wordle.model.WordPoolGenerator;
 
 class WordPoolGeneratorTest {
 
