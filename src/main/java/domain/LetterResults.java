@@ -33,7 +33,7 @@ public class LetterResults {
         );
     }
 
-    public LetterResults(List<LetterResult> letterResults) {
+    public LetterResults(final List<LetterResult> letterResults) {
         this.letterResults = letterResults;
     }
 

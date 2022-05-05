@@ -6,7 +6,7 @@ public class Game {
     private final GameResult gameResult;
     private GameStatus gameStatus = GameStatus.PROGRESS;
 
-    public Game(Words words) {
+    public Game(final Words words) {
         this.answer = new Answer(words.getTodayWords());
         this.words = words;
         this.gameResult = new GameResult();
@@ -20,10 +20,10 @@ public class Game {
         return gameStatus == GameStatus.PROGRESS;
     }
 
-    public GameStatus playGame(String word) {
-        Letters letters = Letters.of(word);
+    public GameStatus playGame(final String word) {
+        final Letters letters = Letters.of(word);
         words.isContains(letters);
-        LetterResults letterResults = answer.compare(letters);
+        final LetterResults letterResults = answer.compare(letters);
         gameResult.addResult(letterResults);
         changeGameStatus();
         return gameStatus;
@@ -39,7 +39,7 @@ public class Game {
         }
     }
 
-    public static Game start(Words words) {
+    public static Game start(final Words words) {
         return new Game(words);
     }
 

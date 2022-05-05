@@ -8,6 +8,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Letters {
+    private static final String VALIDATE_ALPHABET = "영단어만 가능합니다.";
+    private static final String ALPHABET_REGEX = "^[a-zA-Z]*$";
+    private static final String VALIDATE_WORDS_SIZE = "word의 크기는 5글자여야만 합니다.";
+    private static final int MAXIMUM_WORD_SIZE = 5;
     private final List<Letter> list;
 
     public Letter getLetter(int index) {
@@ -39,14 +43,14 @@ public class Letters {
     }
 
     private static void validateAlphabet(String word) {
-        if (!Pattern.matches("^[a-zA-Z]*$", word)) {
-            throw new IllegalArgumentException("영단어만 가능합니다.");
+        if (!Pattern.matches(ALPHABET_REGEX, word)) {
+            throw new IllegalArgumentException(VALIDATE_ALPHABET);
         }
     }
 
     private static void validateLength(String word) {
-        if (word.length() > 5) {
-            throw new IllegalArgumentException("word의 크기는 5글자여야만 합니다.");
+        if (word.length() > MAXIMUM_WORD_SIZE) {
+            throw new IllegalArgumentException(VALIDATE_WORDS_SIZE);
         }
     }
 

@@ -3,12 +3,12 @@ package domain;
 import java.util.Objects;
 
 public class Letter {
-
+    private static final String VALIDATE_ALPHABET = "영문자만 가능합니다.";
     private final Character letter;
 
-    public Letter(Character letter) {
+    public Letter(final Character letter) {
         if (!validateAlphabet(letter)) {
-            throw new IllegalArgumentException("영문자만 가능합니다.");
+            throw new IllegalArgumentException(VALIDATE_ALPHABET);
         }
         this.letter = letter;
     }
