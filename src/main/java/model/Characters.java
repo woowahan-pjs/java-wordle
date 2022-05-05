@@ -1,13 +1,7 @@
 package model;
 
-import static model.Result.EXIST;
-import static model.Result.MATCH;
-import static model.Result.NON_EXIST;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Characters {
 
@@ -36,38 +30,19 @@ public class Characters {
 
     private void validate(String value) {
         if (value.length() != WORD_LENGTH) {
-            throw new IllegalArgumentException(String.format(OUT_OF_WORD_LENGTH_ERR_MSG,value.length()));
+            throw new IllegalArgumentException(String.format(OUT_OF_WORD_LENGTH_ERR_MSG, value.length()));
         }
     }
 
     public Results match(Characters answer) {
-        Map<Character, Character> check = new HashMap<>();
+        ResultMatcher matcher = new ResultMatcher();
 
-        List<Result> list = new ArrayList<>();
         for (Character input : characters) {
-            inputMatchAnswer(input, answer, check);
-            list.add(NON_EXIST);
+            matcher.match(input, answer);
         }
 
-        for (Character ans : answer.characters) {
-            if (check.containsKey(ans)) {
-                Character input = check.get(ans);
-                list.set(input.getPosition(), input.isSame(ans));
-            }
-        }
-
-        return new Results(list);
+        return matcher.makeResults(answer);
     }
 
-    private void inputMatchAnswer(Character input, Characters answer, Map<Character, Character> check) {
-        for (Character ans : answer.characters) {
-            if (input.isSame(ans) == MATCH) {
-                check.put(ans, input);
-                return;
-            }
-            if (input.isSame(ans) == EXIST && !check.containsKey(ans)) {
-                check.put(ans, input);
-            }
-        }
-    }
+
 }
