@@ -1,5 +1,7 @@
 package wordle.view;
 
+import wordle.model.GameResult;
+import wordle.model.GameStatus;
 import wordle.model.Grid;
 import wordle.model.TileStatus;
 import wordle.model.Tiles;
@@ -23,7 +25,7 @@ public class ConsoleOutput {
 		System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
 	}
 
-	public void printGameResultMessage(Grid gameResult, Word answer) {
+	public void printGameResultMessage(GameResult gameResult, Word answer) {
 		// 정답이 입력되었을 때는 시도횟수 출력
 		if (gameResult.isFinishedInTrying()) {
 			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, gameResult.getTryingCount());
