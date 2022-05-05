@@ -15,16 +15,16 @@ public class WordPoolGenerator {
 	private static final String NO_SUCH_FILE_EXCEPTION_MESSAGE = "존재하지 않는 파일입니다.";
 	private static final String NOT_EXISTED_WORD_IN_FILE_MESSAGE = "파일에 단어가 존재하지 않습니다.";
 
-	public static WordPool generate() {
+	public static List<String> generate() {
 		return generate(DEFAULT_WORDS_TEXT_FILE_PATH);
 	}
 
-	public static WordPool generate(String path) {
+	public static List<String> generate(String path) {
 		List<String> words;
 		words = readWordsFromFile(path);
 		words = filterWordAsFiveLetters(words);
 		validateWordsSize(words);
-		return new WordPool(words);
+		return words;
 	}
 
 	private static List<String> filterWordAsFiveLetters(List<String> words) {
