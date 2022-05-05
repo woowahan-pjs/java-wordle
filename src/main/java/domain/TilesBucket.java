@@ -35,4 +35,8 @@ public class TilesBucket {
         int betweenDays = (int) ChronoUnit.DAYS.between(WORDLE_BIRTHDAY, today);
         return new Answer(tiles.get((betweenDays % tiles.size())));
     }
+
+    public boolean contains(Tiles tiles){
+        return this.tiles.contains(tiles);
+    }
 }

@@ -13,4 +13,8 @@ public class MatchResults {
     public List<MatchResult> getMatchResults() {
         return matchResults;
     }
+    public void print(){
+        matchResults
+                .forEach(v -> System.out.println(v.getMatchStatusList()));
+    }
 }

@@ -14,6 +14,10 @@ public class MatchResult {
         return !(matchStatusList.contains(MatchStatus.YELLOW) || matchStatusList.contains(MatchStatus.GREY));
     }
 
+    public List<MatchStatus> getMatchStatusList() {
+        return matchStatusList;
+    }
+
     @Override
     public String toString() {
         return "MatchResult{" +

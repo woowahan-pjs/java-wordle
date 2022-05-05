@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Answer {
 
@@ -42,8 +43,8 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" +
-                "tiles=" + tiles +
-                '}';
+        return "" + tiles.getTiles().stream()
+                .map(Tile::getValue)
+                .collect(Collectors.toList());
     }
 }
