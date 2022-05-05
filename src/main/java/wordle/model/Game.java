@@ -2,58 +2,46 @@ package wordle.model;
 
 public class Game {
 
-	private static final int MAX_TRYING_COUNT = 6;
-	private int tryingCount;
-	private boolean isFinish = false;
 	private Word answer;
-	private Grid grid = new Grid();
+	private final GameResult gameResult = new GameResult();
 
-	public Game(WordPool wordList) {
+	public Game(Words wordList) {
 		init(wordList);
-	}
-
-	private void init(WordPool wordList) {
-		answer = new Word(wordList.getTodayAnswerWord());
-	}
-
-	public boolean isFinish() {
-		return isFinish;
 	}
 
 	public void compareWith(String userInput) {
 		Word userInputWord = new Word(userInput);
-		grid.addTiles(answer.calculateMatched(userInputWord));
-		plusTryingCount();
+		gameResult.addTiles(answer.calculateMatched(userInputWord));
 		answerCheck(userInputWord);
 	}
 
 	public void answerCheck(Word userInputWord) {
 		if (answer.equals(userInputWord)) {
-			grid.corrected();
-			setFinish();
+			gameResult.changeResult(GameStatus.WIN);
 			return;
 		}
 
-		if (tryingCount == MAX_TRYING_COUNT) {
-			setFinish();
+		if (gameResult.isMaxCount()) {
+			gameResult.changeResult(GameStatus.LOSE);
 			return;
 		}
 		answer.clearAllMatched();
 	}
 
-	private void setFinish() {
-		this.isFinish = true;
-	}
-
-	private void plusTryingCount() {
-		tryingCount++;
-	}
-
-	public Grid getResult() {
-		return grid;
+	public GameResult getResult() {
+		return gameResult;
 	}
 
 	public Word getAnswer() {
 		return answer;
 	}
+
+	public GameStatus getGameStatus() {
+		return gameResult.getGameStatus();
+	}
+
+	private void init(Words wordList) {
+		answer = new Word(wordList.getTodayAnswerWord());
+	}
+
 }
