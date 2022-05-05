@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BingoHistory {
+public class BingoRecord {
     private final List<BingoStatus> statuses;
 
-    public BingoHistory(List<BingoStatus> statuses) {
+    public BingoRecord(List<BingoStatus> statuses) {
         this.statuses = new ArrayList<>(statuses);
     }
 
@@ -22,7 +22,7 @@ public class BingoHistory {
         return true;
     }
 
-    public List<BingoStatus> getHistory() {
+    public List<BingoStatus> getRecord() {
         return Collections.unmodifiableList(statuses);
     }
 }

@@ -16,24 +16,24 @@ import static wordle.domain.BingoStatus.CONTAIN;
 import static wordle.domain.BingoStatus.MATCH;
 import static wordle.domain.BingoStatus.NOTHING;
 
-@DisplayName("정답 여부 기록을 담당하는 `BingoHistory` 객체 태스트")
-class BingoHistoryTest {
+@DisplayName("정답 여부 기록을 담당하는 `BingoRecord` 객체 태스트")
+class BingoRecordTest {
 
-    @DisplayName("정답 여부 리스트가 주어지면 `BingoHistory` 객체 생성 성공")
+    @DisplayName("정답 여부 리스트가 주어지면 `BingoRecord` 객체 생성 성공")
     @ParameterizedTest
     @MethodSource("bingoStatuses")
-    void createBingoHistoryIsSuccessGivenBingoStatuses(List<BingoStatus> bingoStatuses) {
+    void createBingoRecordIsSuccessGivenBingoStatuses(List<BingoStatus> bingoStatuses) {
         // Arrange
         // Act
-        final BingoHistory history = new BingoHistory(bingoStatuses);
+        final BingoRecord record = new BingoRecord(bingoStatuses);
 
         // Assert
-        assertThat(history.getHistory()).containsExactlyElementsOf(bingoStatuses);
+        assertThat(record.getRecord()).containsExactlyElementsOf(bingoStatuses);
     }
 
-    @DisplayName("주어진 정답 여부 리스트가 변경되어도 `BingoHistory` 객체 내 정답 여부 리스트는 초기 상태 유지")
+    @DisplayName("주어진 정답 여부 리스트가 변경되어도 `BingoRecord` 객체 내 정답 여부 리스트는 초기 상태 유지")
     @Test
-    void BingoHistoryIsImmutableEvenIfGivenBingoStatusesAreChanged() {
+    void bingoRecordIsImmutableEvenIfGivenBingoStatusesAreChanged() {
         // Arrange
         final List<BingoStatus> mutableBingoStatuses = new ArrayList<>();
         mutableBingoStatuses.add(CONTAIN);
@@ -42,8 +42,8 @@ class BingoHistoryTest {
         mutableBingoStatuses.add(CONTAIN);
         mutableBingoStatuses.add(CONTAIN);
 
-        final BingoHistory history = new BingoHistory(mutableBingoStatuses);
-        final List<BingoStatus> originHistory = history.getHistory();
+        final BingoRecord record = new BingoRecord(mutableBingoStatuses);
+        final List<BingoStatus> originRecord = record.getRecord();
 
         // Act
         mutableBingoStatuses.set(0, NOTHING);
@@ -53,25 +53,25 @@ class BingoHistoryTest {
         mutableBingoStatuses.set(4, NOTHING);
 
         // Assert
-        assertThat(history.getHistory()).containsExactlyElementsOf(originHistory);
+        assertThat(record.getRecord()).containsExactlyElementsOf(originRecord);
     }
 
-    @DisplayName("`BingoHistory` 객체가 반환하는 정답 여부 리스트는 변경 불가")
+    @DisplayName("`BingoRecord` 객체가 반환하는 정답 여부 리스트는 변경 불가")
     @Test
     void throwExceptionIfYouTryToChangedTheReturnBingoStatuses() {
         // Arrange
-        final List<BingoStatus> bingoHistory = new ArrayList<>();
-        bingoHistory.add(CONTAIN);
-        bingoHistory.add(CONTAIN);
-        bingoHistory.add(CONTAIN);
-        bingoHistory.add(CONTAIN);
-        bingoHistory.add(CONTAIN);
+        final List<BingoStatus> originBingoStatuses = new ArrayList<>();
+        originBingoStatuses.add(CONTAIN);
+        originBingoStatuses.add(CONTAIN);
+        originBingoStatuses.add(CONTAIN);
+        originBingoStatuses.add(CONTAIN);
+        originBingoStatuses.add(CONTAIN);
 
         // Act
         // Assert
         assertThatThrownBy(() -> {
-            final List<BingoStatus> bingoStatuses = new BingoHistory(bingoHistory).getHistory();
-            bingoStatuses.set(0, NOTHING);
+            final List<BingoStatus> recordedBingoStatuses = new BingoRecord(originBingoStatuses).getRecord();
+            recordedBingoStatuses.set(0, NOTHING);
         }).isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -79,10 +79,10 @@ class BingoHistoryTest {
     @Test
     void returnTrueWhenWordIsExactlyMatchStatus() {
         // Arrange
-        final BingoHistory allMatchHistory = new BingoHistory(List.of(MATCH, MATCH, MATCH, MATCH, MATCH));
+        final BingoRecord allMatchStatusRecord = new BingoRecord(List.of(MATCH, MATCH, MATCH, MATCH, MATCH));
 
         // Act
-        final boolean resultAllMatchStatus = allMatchHistory.isAllMatch();
+        final boolean resultAllMatchStatus = allMatchStatusRecord.isAllMatch();
 
         // Assert
         assertThat(resultAllMatchStatus).isTrue();
@@ -93,10 +93,10 @@ class BingoHistoryTest {
     @MethodSource("isNotAllMatchStatuses")
     void returnFalseWhenWordIsNotExactlyMatchStatus(List<BingoStatus> isNotAllMatchStatuses) {
         // Arrange
-        final BingoHistory isNotAllMatchHistory = new BingoHistory(isNotAllMatchStatuses);
+        final BingoRecord isNotAllMatchStatusRecord = new BingoRecord(isNotAllMatchStatuses);
 
         // Act
-        final boolean resultAllMatchStatus = isNotAllMatchHistory.isAllMatch();
+        final boolean resultAllMatchStatus = isNotAllMatchStatusRecord.isAllMatch();
 
         // Assert
         assertThat(resultAllMatchStatus).isFalse();
