@@ -6,9 +6,9 @@ import static model.Result.NON_EXIST;
 
 public class Character implements Comparable<Character> {
 
-    private static final String INPUT_RANGE = "[a-zA-Z]";
     private static final int POSITION_INIT = 0;
     private static final int MATCH_VALUE = 0;
+    private static final String INPUT_RANGE = "[a-zA-Z]";
     public static final String ILLEGAL_INPUT_ERR_MSG = "영어만 입력이 가능합니다.";
 
     private final int position;

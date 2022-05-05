@@ -13,7 +13,6 @@ import view.OutputView;
 
 public class WordleGame {
 
-    private static final int TURN_INIT = 0;
     private final Turn turn;
     private final TodayAnswer todayAnswer;
 
@@ -26,15 +25,15 @@ public class WordleGame {
         InputView.start();
         Characters answer = todayAnswer.choiceAnswer(LocalDate.now());
         List<Results> resultsList = new ArrayList<>();
-        int currentTurn = getCurrentTurn(answer, resultsList, TURN_INIT);
+        int currentTurn = getCurrentTurn(answer, resultsList);
         OutputView.turnOutput(currentTurn, resultsList);
     }
 
-    private int getCurrentTurn(Characters answer, List<Results> resultsList, int currentTurn) {
+    private int getCurrentTurn(Characters answer, List<Results> resultsList) {
+        int currentTurn = 0;
         while (!turn.isGameOver()) {
             currentTurn = turn.increase();
-            String input = InputView.input();
-            Characters inputCharacters = new Characters(input);
+            Characters inputCharacters = new Characters(InputView.input());
             Results match = inputCharacters.match(answer);
             resultsList.add(match);
             if (match.isMatch() || turn.isGameOver()) {

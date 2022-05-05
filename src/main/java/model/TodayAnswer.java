@@ -5,11 +5,12 @@ import java.util.List;
 
 public class TodayAnswer {
 
-    private static final LocalDate referenceDate = LocalDate.of(2021, 6, 19);
+    private final LocalDate referenceDate;
     private final List<Characters> todayAnswer;
 
     public TodayAnswer(List<Characters> characters) {
         todayAnswer = characters;
+        referenceDate = LocalDate.of(2021, 6, 19);
     }
 
     public Characters choiceAnswer(LocalDate date) {

@@ -27,10 +27,8 @@ class CharactersTest {
     @ParameterizedTest(name = "5글자가 아닌 입력문자 {0}를 입력하면 에외처리")
     @ValueSource(strings = {"abcd", "abcdef"})
     void characterLengthValid(String input) {
-        assertThatThrownBy(() -> {
-            new Characters(input);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(OUT_OF_WORD_LENGTH_ERR_MSG);
+        assertThatThrownBy(() -> new Characters(input)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(String.format(OUT_OF_WORD_LENGTH_ERR_MSG,input.length()));
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열을 비교한다.")
