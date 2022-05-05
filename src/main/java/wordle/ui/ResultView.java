@@ -4,6 +4,7 @@ import java.util.List;
 import wordle.domain.BingoHistory;
 
 public class ResultView {
+    private static final int MAX_TRY_COUNT = 6;
 
     public void printGameStart() {
         System.out.println("WORDLE을 6번 만에 맞춰 보세요.");
@@ -30,7 +31,7 @@ public class ResultView {
 
     private void printFinalResult(List<BingoHistory> history, boolean isContinue) {
         if (isContinue == false) {
-            System.out.println(history.size() + "/6");
+            System.out.println(history.size() + "/" + MAX_TRY_COUNT);
             System.out.println();
         }
     }

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Wordle {
+    private static final int MAX_TRY_COUNT = 6;
     private final List<BingoHistory> histories = new ArrayList<>();
     private final List<String> targetWord = new ArrayList<>();
     private final String targetWordString;
@@ -13,8 +14,7 @@ public class Wordle {
     private int executionCount;
 
     public Wordle(String targetWord) {
-        if (targetWord == null || targetWord.isBlank())
-        {
+        if (targetWord == null || targetWord.isBlank()) {
             throw new IllegalArgumentException("TargetWord는 필수입니다.");
         }
         this.targetWordString = targetWord;
@@ -27,7 +27,7 @@ public class Wordle {
     }
 
     public void compare(String givenWord) {
-        if (++executionCount == 6 || targetWordString.equals(givenWord)) {
+        if (++executionCount == MAX_TRY_COUNT || targetWordString.equals(givenWord)) {
             status = false;
         }
 
@@ -41,7 +41,8 @@ public class Wordle {
                 bingoStatus = BingoStatus.MATCH;
             }
 
-            if (targetWord.contains(convertedGivenWord.get(i)) && !targetWord.get(i).equals(convertedGivenWord.get(i))) {
+            if (targetWord.contains(convertedGivenWord.get(i)) && !targetWord.get(i)
+                    .equals(convertedGivenWord.get(i))) {
                 bingoStatus = BingoStatus.CONTAIN;
             }
             history.add(bingoStatus);
