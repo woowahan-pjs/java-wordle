@@ -17,7 +17,7 @@ class WordPoolGeneratorTest {
 	@DisplayName("기본 파일 경로로부터 단어 목록이 생성된다")
 	void wordsGenerateWithInternalDefaultFilePath() {
 		// given & when
-		WordPool wordList = WordPoolGenerator.generate();
+		WordPool wordList = new WordPool(WordPoolGenerator.generate());
 		int wordListSize = wordList.size();
 
 		// then
@@ -28,7 +28,7 @@ class WordPoolGeneratorTest {
 	@DisplayName("외부 파일 경로로부터 단어 목록이 생성된다")
 	void wordsGenerateWithExternalFilePath() {
 		// given & when
-		WordPool wordList = WordPoolGenerator.generate(VALID_WORDS_TEXT_FILE_PATH);
+		WordPool wordList = new WordPool(WordPoolGenerator.generate(VALID_WORDS_TEXT_FILE_PATH));
 		int wordListSize = wordList.size();
 
 		// then
