@@ -10,6 +10,10 @@ public class TilesBucket {
     List<Tiles> tiles = new ArrayList<>();
 
     public TilesBucket(String wordsPath) {
+        if (!Files.exists(Path.of(wordsPath))) {
+            throw new IllegalArgumentException("words.txt를 찾을 수 없습니다.");
+        }
+
         try {
             List<String> words = Files.readAllLines(Path.of(wordsPath));
             for (String word : words) {
