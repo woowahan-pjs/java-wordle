@@ -38,8 +38,7 @@ public class Answer {
     private void changeYellow(Letters userAnswer, LetterResults letterResults, Map<Letter, Long> countMap) {
         for (int i = 0; i < userAnswer.getSize(); i++) {
             Letter userLetter = userAnswer.getLetter(i);
-
-            if (countMap.get(userLetter) > 0) {
+            if (countMap.getOrDefault(userLetter, 0L) > 0) {
                 letterResults.changeYellow(i);
                 countMap.put(userLetter, countMap.get(userLetter) - 1);
             }

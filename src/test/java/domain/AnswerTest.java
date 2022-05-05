@@ -3,10 +3,13 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -78,16 +81,26 @@ public class AnswerTest {
     }
 
     @DisplayName(" 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다")
-    @Test
-    void compare_final_letter() {
+    @ParameterizedTest
+    @MethodSource("provideCompareFinalLetter")
+    void compare_final_letter(String input, List<LetterResult> expect) {
         Letters todayAnswer = Letters.of("hello");
         Answer answer = new Answer(todayAnswer);
-        Letters userAnswer = Letters.of("leell"); // gray/green/green/green/green
+        Letters userAnswer = Letters.of(input);
 
-        assertThat(
-                answer.compare(userAnswer)
-                        .getList()
-        ).isEqualTo(List.of(LetterResult.YELLOW, LetterResult.GREEN, LetterResult.GRAY
-                , LetterResult.GREEN, LetterResult.GRAY));
+        assertThat(answer.compare(userAnswer).getList()).isEqualTo(expect);
+    }
+
+    private static Stream<Arguments> provideCompareFinalLetter() { // argument source method
+        return Stream.of(
+                Arguments.of(
+                        "helll",
+                        List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GRAY)),
+                Arguments.of(
+                        "heool",
+                        List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.YELLOW, LetterResult.GRAY, LetterResult.YELLOW)),
+                Arguments.of(
+                        "heooo",
+                        List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GRAY, LetterResult.GRAY, LetterResult.GREEN)));
     }
 }
