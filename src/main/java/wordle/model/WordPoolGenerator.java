@@ -19,24 +19,31 @@ public class WordPoolGenerator {
 	}
 
 	public static WordPool generateFromFile(String path) {
-		List<String> words;
-		words = readWordsFromFile(path);
-		words = filterWordAsFiveLetters(words);
+		List<String> words = readWordsFromFile(path);
 		validateWordsSize(words);
 		return new WordPool(words);
 	}
 
-	private static List<String> filterWordAsFiveLetters(List<String> words) {
-		return words.stream().filter(word -> word.length() == VALID_WORD_LENGTH)
-			.collect(Collectors.toList());
-	}
-
 	private static List<String> readWordsFromFile(String path) {
 		try {
-			return Files.readAllLines(Paths.get(path));
+			return Files.lines(Paths.get(path))
+				.filter(WordPoolGenerator::isValidWord)
+				.collect(Collectors.toList());
 		} catch (IOException e) {
 			throw new IllegalArgumentException(NO_SUCH_FILE_MESSAGE);
 		}
+	}
+
+	private static boolean isValidWord(String word) {
+		// 단어가 5글자인지
+		if (word.length() == VALID_WORD_LENGTH) {
+			return true;
+		}
+		// 단어가 영문자로만 구성되어 있는지
+		if (WordValidator.hasEnglishLetterOnly(word)) {
+			return true;
+		}
+		return false;
 	}
 
 	private static void validateWordsSize(List<String> words) {

@@ -46,17 +46,7 @@ public class Letter {
 	}
 
 	private void init(char alphabet) {
-		isAlphabet(alphabet);
+		WordValidator.isAlphabet(alphabet);
 		this.alphabet = Character.toLowerCase(alphabet);
-	}
-
-	private void isAlphabet(char alphabet) {
-		if (alphabet >= 'a' && alphabet <= 'z') {
-			return;
-		}
-		if (alphabet >= 'A' && alphabet <= 'Z') {
-			return;
-		}
-		throw new IllegalArgumentException(INVALID_ALPHABET_MESSAGE);
 	}
 }
