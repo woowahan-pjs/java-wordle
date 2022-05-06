@@ -1,51 +1,76 @@
 package wordle;
 
-import java.time.LocalDate;
+import wordle.domain.Word;
 import wordle.domain.WordFile;
+import wordle.domain.WordleGame;
 import wordle.ui.InputView;
 import wordle.ui.ResultView;
 
-public class WordleGameRunner {
-    private static final int VALID_WORD_LENGTH = 5;
+import java.time.LocalDate;
 
-    private final InputView inputView = new InputView();
-    private final ResultView resultView = new ResultView();
+public class WordleGameRunner {
+    private final int limitTryToBingo;
+    private final InputView inputView;
+    private final ResultView resultView;
+    private final WordleGame wordleGame;
+
+    public WordleGameRunner(InputView inputView, ResultView resultView, int limitTryToBingo) {
+        this.inputView = inputView;
+        this.resultView = resultView;
+        this.limitTryToBingo = limitTryToBingo;
+        this.wordleGame = new WordleGame(new Word(scanGoalWord()));
+    }
+
+    private String scanGoalWord() {
+        return new WordFile("words.txt").findTargetWord(LocalDate.now());
+    }
 
     public void run() {
-        // 게임 시작
         printGameStart();
 
-        // 입력 받기 > 유효성 검사 (5글자)
-        final String givenWord = inputUsersWord();
-
-        // words.txt 파일 읽은 후 정답 추출
-        final String targetWord = new WordFile("words.txt").findTargetWord(LocalDate.now());
-
-        // 비교
-
-        // 결과 출력
+        compareToMatch(wordleGame);
     }
 
     private void printGameStart() {
         resultView.printGameStart();
     }
 
-    private String inputUsersWord() {
-        resultView.printInputWord();
+    private void compareToMatch(WordleGame wordleGame) {
+        for (int i = 1; i <= limitTryToBingo; i++) {
+            final Word usersWord = inputUsersWord();
 
+            wordleGame.compareToMatch(usersWord);
+
+            printBingoRecords(i);
+
+            if (wordleGame.isAllMatch()) {
+                break;
+            }
+        }
+    }
+
+    private Word inputUsersWord() {
         do {
-            final String givenWord = inputView.inputUsersWord();
+            resultView.printInputWord();
 
-            if (validateLength(givenWord)) {
-                return givenWord;
+            try {
+                final String givenWord = inputView.inputUsersWord();
+                resultView.printEmptyLine();
+
+                return new Word(givenWord);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             resultView.printRetryInputWord();
-            resultView.printInputWord();
         } while (true);
     }
 
-    private boolean validateLength(String word) {
-        return word.length() == VALID_WORD_LENGTH;
+    private void printBingoRecords(int turn) {
+        if (wordleGame.isAllMatch()) {
+            resultView.printTurnAndLimitTryToBingo(turn, limitTryToBingo);
+        }
+
+        resultView.printBingoRecords(wordleGame.getBingoRecords());
     }
 }

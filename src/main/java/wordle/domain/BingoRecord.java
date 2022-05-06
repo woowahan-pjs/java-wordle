@@ -3,6 +3,7 @@ package wordle.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,5 +39,22 @@ public class BingoRecord {
 
     public List<BingoStatus> getRecord() {
         return Collections.unmodifiableList(statuses);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BingoRecord that = (BingoRecord) o;
+        return isAllMatch() == that.isAllMatch() && Objects.equals(statuses, that.statuses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(statuses, isAllMatch());
     }
 }

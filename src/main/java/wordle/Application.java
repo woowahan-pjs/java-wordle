@@ -1,11 +1,14 @@
 package wordle;
 
-import java.io.IOException;
+import wordle.ui.InputView;
+import wordle.ui.ResultView;
 
 public class Application {
+    private static final int LIMIT_TRY_TO_BINGO = 6;
 
-    public static void main(String[] args) throws IOException {
-        final WordleGameRunner wordleGameRunner = new WordleGameRunner();
+    public static void main(String[] args) {
+        final WordleGameRunner wordleGameRunner =
+            new WordleGameRunner(new InputView(), new ResultView(), LIMIT_TRY_TO_BINGO);
 
         wordleGameRunner.run();
     }
