@@ -1,7 +1,7 @@
 package wordle.view;
 
-import wordle.model.ExceptionMessage;
 import wordle.model.GameAction;
+import wordle.model.GameEndTurnAction;
 import wordle.model.Grid;
 import wordle.model.TileStatus;
 import wordle.model.Tiles;
@@ -19,45 +19,44 @@ public class ConsoleOutput {
 
 	public static void printGameAction(GameAction gameAction) {
 		if (gameAction.isStart()) {
-			System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
+			printStartAction();
 			return;
+		}
+		if (gameAction.isEndTurn()) {
+			printEndTurnAction(gameAction);
+			return;
+		}
+	}
+
+	private static void printStartAction() {
+		System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
+	}
+
+	private static void printEndTurnAction(GameAction gameAction) {
+		GameEndTurnAction endTurn = (GameEndTurnAction) gameAction;
+		Grid grid = endTurn.getGrid();
+		Word answer = endTurn.getAnswer();
+
+//		// 정답이 입력되었을 때는 시도횟수 출력
+		if (grid.isFinishedInTrying()) {
+			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, grid.getTryingCount());
+		}
+
+		for (Tiles tile : grid.getTilesList()) {
+			printGameResult(tile);
+		}
+		System.out.println();
+
+//		// 시도횟수가 다 되었을 때는 정답 출력
+		if (grid.isOverTrying()) {
+			System.out.format(TODAY_ANSWER_MESSAGE, answer.getAnswerWordAsString());
 		}
 	}
 
 	public static void printGameException(String exceptionMessage) {
 		System.out.println(exceptionMessage);
 	}
-
-	public void printGameResultMessage(Grid gameResult, Word answer) {
-		// 정답이 입력되었을 때는 시도횟수 출력
-		if (gameResult.isFinishedInTrying()) {
-			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, gameResult.getTryingCount());
-		}
-
-		for (Tiles tile : gameResult.getTilesList()) {
-			printGameResult(tile);
-		}
-		System.out.println();
-
-		// 시도횟수가 다 되었을 때는 정답 출력
-		if (gameResult.isOverTrying()) {
-			System.out.format(TODAY_ANSWER_MESSAGE, answer.getAnswerWordAsString());
-		}
-	}
-
-	public static void printInvalidLengthMessage() {
-		System.out.println(ExceptionMessage.INVALID_LENGTH_MESSAGE);
-	}
-
-	public static void printInvalidAlphabetMessage() {
-		System.out.println(ExceptionMessage.INVALID_ALPHABET_MESSAGE);
-	}
-
-	public static void printInvalidWordMessage() {
-		System.out.println(ExceptionMessage.INVALID_WORD_MESSAGE);
-	}
-
-	private void printGameResult(Tiles tile) {
+	private static void printGameResult(Tiles tile) {
 		for (TileStatus tileStatus : tile.getStatus()) {
 			System.out.print(tileStatus.getUnicode());
 		}

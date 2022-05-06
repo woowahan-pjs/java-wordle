@@ -53,11 +53,7 @@ public class Game {
 		tryingCount++;
 	}
 
-	public Grid getResult() {
-		return grid;
-	}
-
-	public Word getAnswer() {
-		return answer;
+	public GameAction endTurn() {
+		return new GameEndTurnAction(grid, answer);
 	}
 }

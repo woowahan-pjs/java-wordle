@@ -20,7 +20,7 @@ public class WordleMachine {
 		while (!game.isFinish()) {
 			try {
 				game.compareWith(readValidUserInput());
-				consoleOutput.printGameResultMessage(game.getResult(), game.getAnswer());
+				ConsoleOutput.printGameAction(game.endTurn());
 			} catch (Exception e) {
 				ConsoleOutput.printGameException(e.getMessage());
 			}

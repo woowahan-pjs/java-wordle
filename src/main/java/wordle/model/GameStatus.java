@@ -1,6 +1,5 @@
 package wordle.model;
 
 public enum GameStatus {
-
-	START, RESULT
+	START, END_TURN;
 }

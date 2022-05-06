@@ -12,11 +12,7 @@ public abstract class GameAction {
 		return gameStatus == GameStatus.START;
 	}
 
-	;
-
-	public boolean isResult() {
-		return gameStatus == GameStatus.RESULT;
+	public boolean isEndTurn() {
+		return gameStatus == GameStatus.END_TURN;
 	}
-
-	;
 }
