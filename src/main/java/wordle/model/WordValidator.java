@@ -1,7 +1,5 @@
 package wordle.model;
 
-import wordle.view.ConsoleOutput;
-
 public class WordValidator {
 
 	private static final int WORD_LENGTH = 5;
@@ -9,16 +7,13 @@ public class WordValidator {
 
 	public static boolean validate(String userInput, WordPool wordPool) {
 		if (!isFiveLetterWord(userInput)) {
-			ConsoleOutput.printInvalidLengthMessage();
-			return false;
+			throw new IllegalArgumentException(ExceptionMessage.INVALID_LENGTH_MESSAGE);
 		}
 		if (!hasEnglishLetterOnly(userInput)) {
-			ConsoleOutput.printInvalidAlphabetMessage();
-			return false;
+			throw new IllegalArgumentException(ExceptionMessage.INVALID_ALPHABET_MESSAGE);
 		}
 		if (!existedWord(wordPool, userInput)) {
-			ConsoleOutput.printInvalidWordMessage();
-			return false;
+			throw new IllegalArgumentException(ExceptionMessage.INVALID_WORD_MESSAGE);
 		}
 		return true;
 	}
