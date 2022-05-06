@@ -1,14 +1,14 @@
 package wordle.model;
 
-public class Tiles {
+public class TileLine {
 
 	private TileStatus[] status;
 
-	public Tiles(TileStatus[] status) {
+	public TileLine(TileStatus[] status) {
 		this.status = status;
 	}
 
-	public TileStatus[] getStatus() {
+	public TileStatus[] getAllStatus() {
 		return status;
 	}
 }
