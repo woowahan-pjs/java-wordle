@@ -6,12 +6,14 @@ import java.util.List;
 
 public class BingoRecord {
     private final List<BingoStatus> statuses;
+    private final boolean isAllMatch;
 
     public BingoRecord(List<BingoStatus> statuses) {
         this.statuses = new ArrayList<>(statuses);
+        this.isAllMatch = isAllMatch(statuses);
     }
 
-    public boolean isAllMatch() {
+    private boolean isAllMatch(List<BingoStatus> statuses) {
         for (BingoStatus bs : statuses) {
             if (bs.isMatch()) {
                 continue;
@@ -20,6 +22,10 @@ public class BingoRecord {
         }
 
         return true;
+    }
+
+    public boolean isAllMatch() {
+        return isAllMatch;
     }
 
     public List<BingoStatus> getRecord() {
