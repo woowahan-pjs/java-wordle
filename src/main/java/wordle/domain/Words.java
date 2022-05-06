@@ -11,7 +11,7 @@ public class Words {
     private final List<Word> wordList;
 
     public Words(final String text) {
-        if (text.length() != WORDS_LENGTH) {
+        if (!isValid(text)) {
             throw new IllegalArgumentException("length of the word must be 5");
         }
 
@@ -19,6 +19,10 @@ public class Words {
         for (int i = 0; i < text.length(); i++) {
             wordList.add(new Word(text.charAt(i),i));
         }
+    }
+
+    private boolean isValid(final String text) {
+        return text != null && text.length() == WORDS_LENGTH;
     }
 
     List<Word> getWordList() {

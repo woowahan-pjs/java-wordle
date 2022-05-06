@@ -28,6 +28,12 @@ class WordsTest {
     }
 
     @Test
+    void Words생성실패_Null() {
+        assertThatThrownBy(() -> new Words(null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void contain_가지고있음() {
         final Word word = new Word('a', 1);
         final Words words = new Words("happy");
