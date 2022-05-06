@@ -15,14 +15,14 @@ public class WordleMachine {
 
 	public void startGame() {
 		Game game = new Game(WORD_POOL);
-		consoleOutput.printGameStartMessage();
+		ConsoleOutput.printGameAction(game.start());
 
 		while (!game.isFinish()) {
 			try {
 				game.compareWith(readValidUserInput());
 				consoleOutput.printGameResultMessage(game.getResult(), game.getAnswer());
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				ConsoleOutput.printGameException(e.getMessage());
 			}
 		}
 	}

@@ -12,6 +12,10 @@ public class Game {
 		init(wordList);
 	}
 
+	public GameAction start() {
+		return new GameStartAction();
+	}
+
 	private void init(WordPool wordList) {
 		answer = new Word(wordList.getTodayAnswerWord());
 	}

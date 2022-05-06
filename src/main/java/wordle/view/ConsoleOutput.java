@@ -1,6 +1,7 @@
 package wordle.view;
 
 import wordle.model.ExceptionMessage;
+import wordle.model.GameAction;
 import wordle.model.Grid;
 import wordle.model.TileStatus;
 import wordle.model.Tiles;
@@ -16,10 +17,15 @@ public class ConsoleOutput {
 	private static final String TODAY_ANSWER_MESSAGE = "오늘의 정답 단어는 %s 입니다.";
 	private static final String TRYING_COUNT_MESSAGE_FORMAT = NEW_LINE + "%d" + DIVIDER + MAX_TRYING_COUNT + NEW_LINE;
 
+	public static void printGameAction(GameAction gameAction) {
+		if (gameAction.isStart()) {
+			System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
+			return;
+		}
+	}
 
-
-	public void printGameStartMessage() {
-		System.out.format(GAME_START_MESSAGE_FORMAT, MAX_TRYING_COUNT);
+	public static void printGameException(String exceptionMessage) {
+		System.out.println(exceptionMessage);
 	}
 
 	public void printGameResultMessage(Grid gameResult, Word answer) {
