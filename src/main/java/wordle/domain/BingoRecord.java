@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class BingoRecord {
     private final List<BingoStatus> statuses;
     private final boolean isAllMatch;
@@ -26,6 +28,12 @@ public class BingoRecord {
 
     public boolean isAllMatch() {
         return isAllMatch;
+    }
+
+    public List<String> toPrintFormat() {
+        return statuses.stream()
+            .map(status -> status.printFormat)
+            .collect(toList());
     }
 
     public List<BingoStatus> getRecord() {
