@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class LetterResults {
     private final List<LetterResult> letterResults;
@@ -33,7 +34,20 @@ public class LetterResults {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LetterResults that = (LetterResults) o;
+        return Objects.equals(letterResults, that.letterResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(letterResults);
+    }
+
+    @Override
     public String toString() {
-        return "letterResults = " + letterResults;
+        return letterResults.toString();
     }
 }
