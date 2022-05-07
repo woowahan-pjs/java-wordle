@@ -22,6 +22,12 @@ public class LetterRepositoryImpl implements LetterRepository {
         return letters.get(key);
     }
 
+    @Override
+    public boolean isContains(Letters userAnswer) {
+        List<Letters> letters = findAll();
+        return letters.contains(userAnswer);
+    }
+
     private List<Letters> findAll() {
         URL resource = LetterRepositoryImpl.class.getClassLoader().getResource(FILE_NAME);
         Path path = new File(resource.getPath()).toPath();
