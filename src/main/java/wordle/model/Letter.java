@@ -8,7 +8,8 @@ public class Letter {
 	private boolean matched = false;
 
 	public Letter(char alphabet) {
-		init(alphabet);
+		validate(alphabet);
+		this.alphabet = Character.toLowerCase(alphabet);
 	}
 
 	public char getAlphabet() {
@@ -44,8 +45,9 @@ public class Letter {
 		return Objects.hash(alphabet);
 	}
 
-	private void init(char alphabet) {
-		WordValidator.isAlphabet(alphabet);
-		this.alphabet = Character.toLowerCase(alphabet);
+	private void validate(char alphabet) {
+		if (!WordValidator.isAlphabet(alphabet)) {
+			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
+		}
 	}
 }
