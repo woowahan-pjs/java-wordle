@@ -1,6 +1,6 @@
 package wordle.game;
 
-import wordle.domain.WordsMatchResults;
+import wordle.domain.MatchResults;
 
 public final class GameView {
 
@@ -12,8 +12,8 @@ public final class GameView {
         System.out.println(round);
     }
 
-    public void wordsMatchResults(final WordsMatchResults wordsMatchResults) {
-        System.out.println(wordsMatchResults);
+    public void wordsMatchResults(final MatchResults matchResults) {
+        System.out.println(matchResults);
     }
 
     public void inputWords() {

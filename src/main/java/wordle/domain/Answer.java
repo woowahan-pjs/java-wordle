@@ -11,10 +11,10 @@ public class Answer {
         this.answer = words;
     }
 
-    public WordsMatchResult matches(final Words words) {
+    public MatchResult matches(final Words words) {
         final List<MatchStatus> matchesList = matchWords(words);
 
-        return new WordsMatchResult(matchesList);
+        return new MatchResult(matchesList);
     }
 
     private List<MatchStatus> matchWords(final Words words) {

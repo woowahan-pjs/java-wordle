@@ -3,22 +3,22 @@ package wordle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordsMatchResults {
+public class MatchResults {
 
-    private final List<WordsMatchResult> matchResultList;
+    private final List<MatchResult> matchResultList;
 
-    public WordsMatchResults() {
+    public MatchResults() {
         this.matchResultList = new ArrayList<>();
     }
 
-    public void add(final WordsMatchResult result) {
+    public void add(final MatchResult result) {
         matchResultList.add(result);
     }
 
     @Override
     public String toString() {
         final StringBuilder stringBuilder = new StringBuilder();
-        for (final WordsMatchResult result : matchResultList) {
+        for (final MatchResult result : matchResultList) {
             stringBuilder.append(result).append("\n");
         }
         return stringBuilder.toString();

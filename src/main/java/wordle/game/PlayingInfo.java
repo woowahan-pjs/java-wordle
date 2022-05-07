@@ -2,14 +2,14 @@ package wordle.game;
 
 import wordle.domain.Answer;
 import wordle.domain.Words;
-import wordle.domain.WordsMatchResult;
-import wordle.domain.WordsMatchResults;
+import wordle.domain.MatchResult;
+import wordle.domain.MatchResults;
 import wordle.player.Player;
 
 class PlayingInfo {
 
     private final Player player;
-    private WordsMatchResults wordsMatchResults;
+    private MatchResults matchResults;
     private Answer answer;
     private Round round;
     private Words inputWords;
@@ -21,7 +21,7 @@ class PlayingInfo {
 
     void init(final Answer answer) {
         round = new Round();
-        wordsMatchResults = new WordsMatchResults();
+        matchResults = new MatchResults();
         this.answer = answer;
     }
 
@@ -33,8 +33,8 @@ class PlayingInfo {
         return round.isFinish() || isCorrect;
     }
 
-    WordsMatchResults getCurrentMatchResults() {
-        return wordsMatchResults;
+    MatchResults getCurrentMatchResults() {
+        return matchResults;
     }
 
     Round getCurrentRound() {
@@ -45,7 +45,7 @@ class PlayingInfo {
         return isCorrect;
     }
 
-    WordsMatchResult matches() {
+    MatchResult matches() {
         return answer.matches(inputWords);
     }
 
@@ -54,8 +54,8 @@ class PlayingInfo {
         return inputWords;
     }
 
-    void updateResult(final WordsMatchResult matchResult) {
+    void updateResult(final MatchResult matchResult) {
         isCorrect = matchResult.isCorrect();
-        wordsMatchResults.add(matchResult);
+        matchResults.add(matchResult);
     }
 }

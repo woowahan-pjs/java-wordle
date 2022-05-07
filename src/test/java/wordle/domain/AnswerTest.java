@@ -12,7 +12,7 @@ class AnswerTest {
         final Answer answer = new Answer(new Words(input));
         final Words words = new Words(input);
 
-        final WordsMatchResult matches = answer.matches(words);
+        final MatchResult matches = answer.matches(words);
         assertThat(matches.isCorrect()).isTrue();
     }
 
@@ -21,7 +21,7 @@ class AnswerTest {
         final Answer answer = new Answer(new Words("shown"));
         final Words words = new Words("happy");
 
-        final WordsMatchResult matches = answer.matches(words);
+        final MatchResult matches = answer.matches(words);
         assertThat(matches.isCorrect()).isFalse();
         assertThat(matches.getMatchStatusList().contains(MatchStatus.GREEN)).isFalse();
         assertThat(matches.getMatchStatusList().contains(MatchStatus.YELLOW)).isTrue();
@@ -34,7 +34,7 @@ class AnswerTest {
         final Answer answer = new Answer(new Words(input));
         final Words words = new Words("hasdf");
 
-        final WordsMatchResult matches = answer.matches(words);
+        final MatchResult matches = answer.matches(words);
         assertThat(matches.isCorrect()).isFalse();
     }
 

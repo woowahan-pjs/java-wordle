@@ -10,22 +10,22 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WordsMatchResultTest {
+class MatchResultTest {
 
     @Test
     void isCorrect가_True() {
         final List<MatchStatus> matchStatusList = List.of(MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN, MatchStatus.GREEN);
-        final WordsMatchResult wordsMatchResult = new WordsMatchResult(matchStatusList);
+        final MatchResult matchResult = new MatchResult(matchStatusList);
 
-        assertThat(wordsMatchResult.isCorrect()).isTrue();
+        assertThat(matchResult.isCorrect()).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource("matchStatusListParam")
     void isCorrect가_False(final List<MatchStatus> matchStatusList) {
-        final WordsMatchResult wordsMatchResult = new WordsMatchResult(matchStatusList);
+        final MatchResult matchResult = new MatchResult(matchStatusList);
 
-        assertThat(wordsMatchResult.isCorrect()).isFalse();
+        assertThat(matchResult.isCorrect()).isFalse();
     }
 
     private static Stream<Arguments> matchStatusListParam() {

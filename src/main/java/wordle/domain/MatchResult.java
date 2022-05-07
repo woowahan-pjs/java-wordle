@@ -4,12 +4,12 @@ import org.assertj.core.util.VisibleForTesting;
 
 import java.util.List;
 
-public class WordsMatchResult {
+public class MatchResult {
 
     private static final List<MatchStatus> GREEN_ONLY = List.of(MatchStatus.GREEN);
     private final List<MatchStatus> matchStatusList;
 
-    WordsMatchResult(final List<MatchStatus> matchesList) {
+    MatchResult(final List<MatchStatus> matchesList) {
         this.matchStatusList = matchesList;
     }
 

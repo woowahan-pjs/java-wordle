@@ -2,7 +2,7 @@ package wordle.game;
 
 import wordle.domain.Words;
 import wordle.domain.WordsBucket;
-import wordle.domain.WordsMatchResult;
+import wordle.domain.MatchResult;
 import wordle.player.Player;
 
 import java.time.LocalDate;
@@ -58,11 +58,11 @@ public class Game {
         return false;
     }
 
-    private WordsMatchResult matches() {
+    private MatchResult matches() {
         return playingInfo.matches();
     }
 
-    private void updateMatchesResult(final WordsMatchResult matchResult) {
+    private void updateMatchesResult(final MatchResult matchResult) {
         playingInfo.updateResult(matchResult);
         gameView.wordsMatchResults(playingInfo.getCurrentMatchResults());
     }
