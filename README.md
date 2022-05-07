@@ -103,5 +103,6 @@ spill
   - [x] 정답과 답안은 `words.txt`에 존재하는 단어여야한다.
 ---
 ## 뷰에 대한 요구 사항
-
+- [x] InputView 구현
+- [x] OutputView 구현
 ---
