@@ -31,4 +31,9 @@ public class LetterResults {
     public static LetterResults correctAll() {
         return new LetterResults(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN));
     }
+
+    @Override
+    public String toString() {
+        return "letterResults = " + letterResults;
+    }
 }
