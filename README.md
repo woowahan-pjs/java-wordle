@@ -17,14 +17,10 @@
   - [x] 사용자가 제출한 Words와 비교하여 WordsMatchResult를 반환한다.
 - MatchStatus
   - [x] Green, Yellow, Grey 색만을 갖는다.
-- WordsMatchResult
+- MatchResult
   - [x] 정답을 맞췄는지 확인한다.
-- Game
-  - [x] 입력이 잘못된 경우 IllegalArgumentException 에러를 던진다.
-  - [x] 입력한 단어가 words.txt에 없는 경우 다시 입력받는다.
-  - [x] 사용자의 매 입력마다 WordsMatchResult를 보여준다.
-  - [x] 게임은 6라운드까지 진행한다.
-
+- MatchResults
+  - [x] 여러 개의 MatchResult를 관리한다.
 
 ### 프로그래밍 목표
 - TDD로 개발할 것
@@ -45,7 +41,8 @@
 | WordsBucket | 단어 모음집 |
 | Answer | 정답인 단어 |
 | MatchStatus | 노랑, 초록, 회색 여부  |
-| WordsMatchResult | Words 매치 결과(회, 노, 노, 초, 초) |
+| MatchResult | Words 매치 결과(회, 노, 노, 초, 초) |
+| MatchResults | MatchResults에 대한 집합 |
 
 
 ## 페어프로그래밍 히스토리
