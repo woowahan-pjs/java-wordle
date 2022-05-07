@@ -4,9 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wordle.impl.JudgementImpl;
-import wordle.vo.Color;
-import wordle.vo.JudgeResult;
+import wordle.domain.design.Judgement;
+import wordle.domain.impl.JudgementImpl;
+import wordle.domain.vo.Color;
+import wordle.domain.vo.JudgeResult;
 
 class JudgementTest {
     private Judgement judgement = new JudgementImpl();

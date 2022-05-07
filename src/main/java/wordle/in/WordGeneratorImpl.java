@@ -1,10 +1,10 @@
-package wordle.impl;
+package wordle.in;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import wordle.design.WordGenerator;
+import wordle.domain.design.WordGenerator;
 
 public class WordGeneratorImpl implements WordGenerator {
 
@@ -26,8 +26,7 @@ public class WordGeneratorImpl implements WordGenerator {
         LocalDate now = LocalDate.now();
         LocalDate referenceDay = LocalDate.parse(REFERENCE_DATE, DateTimeFormatter.ISO_LOCAL_DATE);
         Duration diff = Duration.between(now.atStartOfDay(), referenceDay.atStartOfDay());
-        long diffDays = diff.toDays();
-
+        long diffDays = Math.abs(diff.toDays());
         return (int) (diffDays % WORDS.size());
     }
 }

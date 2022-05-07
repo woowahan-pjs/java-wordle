@@ -1,4 +1,4 @@
-package wordle.vo;
+package wordle.domain.vo;
 
 public enum Color {
     GREEN,

@@ -1,12 +1,18 @@
-package wordle.impl;
+package wordle.in;
 
 import java.util.Scanner;
-import wordle.design.UserInput;
-import wordle.vo.UserWord;
+import wordle.domain.design.UserInput;
+import wordle.domain.vo.UserWord;
 
 public class UserInputImpl implements UserInput {
 
     private static final String INSTRUCTION = "정답을 입력해주세요.";
+
+    private final Scanner sc;
+
+    public UserInputImpl() {
+        this.sc = new Scanner(System.in);
+    }
 
     @Override
     public UserWord execute() {
@@ -20,14 +26,17 @@ public class UserInputImpl implements UserInput {
     }
 
     private UserWord input() {
+        String userInput = sc.nextLine();
         try {
-            Scanner sc = new Scanner(System.in);
-            String userInput = sc.next();
-            sc.close();
             return UserWord.of(userInput);
-        } catch(Exception e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            throw e;
+            
         }
+    }
+
+    @Override
+    public void end() {
+        sc.close();
     }
 }

@@ -1,8 +1,8 @@
-package wordle.impl;
+package wordle.domain.impl;
 
-import wordle.design.Judgement;
-import wordle.vo.Color;
-import wordle.vo.JudgeResult;
+import wordle.domain.design.Judgement;
+import wordle.domain.vo.Color;
+import wordle.domain.vo.JudgeResult;
 
 /**
  * 판별 결과는 흰색의 타일이 세 가지 색(초록색/노란색/회색) 중 하나로 바뀌면서 표현된다. 맞는 글자는 초록색, 위치가 틀리면 노란색, 없으면 회색 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면
