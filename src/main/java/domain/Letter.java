@@ -29,4 +29,9 @@ public class Letter {
     public int hashCode() {
         return Objects.hash(letter);
     }
+
+    @Override
+    public String toString() {
+        return letter.toString();
+    }
 }

@@ -66,4 +66,15 @@ public class Letters {
     public int hashCode() {
         return Objects.hash(list);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Letters = ");
+        for (Letter letter : list){
+            stringBuilder.append(letter.toString());
+        }
+        stringBuilder.append("\n");
+        return stringBuilder.toString();
+    }
 }
