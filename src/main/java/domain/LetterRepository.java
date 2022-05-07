@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public interface LetterRepository {
-    List<Letters> findAll();
+    Letters getTodayAnswer(LocalDate localDate);
 }
