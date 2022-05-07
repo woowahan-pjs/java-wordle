@@ -3,10 +3,11 @@ package wordle.model;
 public class Game {
 
 	private static final int MAX_TRYING_COUNT = 6;
-	private int tryingCount;
 	private boolean isFinish = false;
+	private int tryingCount;
 	private Word answer;
-	private Grid grid = new Grid();
+	private TileGrid tileGrid = new TileGrid();
+	private Turn turn;
 
 	public Game(WordPool wordList) {
 		init(wordList);
@@ -18,6 +19,7 @@ public class Game {
 
 	private void init(WordPool wordList) {
 		answer = new Word(wordList.getTodayAnswerWord());
+		turn = new Turn(tileGrid);
 	}
 
 	public boolean isFinish() {
@@ -26,14 +28,14 @@ public class Game {
 
 	public void compareWith(String userInput) {
 		Word userInputWord = new Word(userInput);
-		grid.addTiles(answer.calculateMatched(userInputWord));
+		tileGrid.addTileLine(answer.calculateMatched(userInputWord));
 		plusTryingCount();
 		answerCheck(userInputWord);
 	}
 
 	public void answerCheck(Word userInputWord) {
 		if (answer.equals(userInputWord)) {
-			grid.corrected();
+			turn.corrected();
 			setFinish();
 			return;
 		}
@@ -54,6 +56,6 @@ public class Game {
 	}
 
 	public GameAction endTurn() {
-		return new GameEndTurnAction(grid, answer);
+		return new GameEndTurnAction(turn, answer);
 	}
 }

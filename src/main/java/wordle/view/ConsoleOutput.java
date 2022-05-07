@@ -2,9 +2,9 @@ package wordle.view;
 
 import wordle.model.GameAction;
 import wordle.model.GameEndTurnAction;
-import wordle.model.Grid;
+import wordle.model.TileLine;
 import wordle.model.TileStatus;
-import wordle.model.Tiles;
+import wordle.model.Turn;
 import wordle.model.Word;
 
 public class ConsoleOutput {
@@ -34,21 +34,19 @@ public class ConsoleOutput {
 
 	private static void printEndTurnAction(GameAction gameAction) {
 		GameEndTurnAction endTurn = (GameEndTurnAction) gameAction;
-		Grid grid = endTurn.getGrid();
+		Turn turn = endTurn.getTurn();
 		Word answer = endTurn.getAnswer();
 
-//		// 정답이 입력되었을 때는 시도횟수 출력
-		if (grid.isFinishedInTrying()) {
-			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, grid.getTryingCount());
+		if (turn.isCorrectedInTrying()) {
+			System.out.format(TRYING_COUNT_MESSAGE_FORMAT, turn.getTryingCount());
 		}
 
-		for (Tiles tile : grid.getTilesList()) {
-			printGameResult(tile);
+		for (TileLine tileLine : turn.getTileLines()) {
+			printTileLine(tileLine);
 		}
-		System.out.println();
 
-//		// 시도횟수가 다 되었을 때는 정답 출력
-		if (grid.isOverTrying()) {
+		if (turn.isOver()) {
+			System.out.println();
 			System.out.format(TODAY_ANSWER_MESSAGE, answer.getAnswerWordAsString());
 		}
 	}
@@ -56,10 +54,14 @@ public class ConsoleOutput {
 	public static void printGameException(String exceptionMessage) {
 		System.out.println(exceptionMessage);
 	}
-	private static void printGameResult(Tiles tile) {
-		for (TileStatus tileStatus : tile.getStatus()) {
-			System.out.print(tileStatus.getUnicode());
+
+	private static void printTileLine(TileLine tileLine) {
+		StringBuilder sb = new StringBuilder();
+
+		TileStatus[] allStatus = tileLine.getAllStatus();
+		for (TileStatus status : allStatus) {
+			sb.append(status.toUnicode());
 		}
-		System.out.println();
+		System.out.println(sb);
 	}
 }

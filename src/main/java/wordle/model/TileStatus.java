@@ -10,7 +10,7 @@ public enum TileStatus {
 		this.unicode = unicode;
 	}
 
-	public String getUnicode() {
+	public String toUnicode() {
 		return this.unicode;
 	}
 }

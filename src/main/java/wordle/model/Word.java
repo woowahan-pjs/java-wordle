@@ -30,7 +30,7 @@ public class Word {
 		}
 	}
 
-	public Tiles calculateMatched(Word userInputWord) {
+	public TileLine calculateMatched(Word userInputWord) {
 		TileStatus[] tileStatuses = new TileStatus[NUMBER_OF_LETTER];
 		Letter[] userInputLetters = userInputWord.getLetters();
 
@@ -44,7 +44,7 @@ public class Word {
 			}
 		}
 
-		return new Tiles(tileStatuses);
+		return new TileLine(tileStatuses);
 	}
 
 	private TileStatus checkGreen(Letter userInputLetters, int index) {
