@@ -6,7 +6,6 @@ public class Word {
 
 	private static final int VALID_WORD_LENGTH = 5;
 	private static final int NUMBER_OF_LETTER = 5;
-	private static final String INVALID_WORD_LENGTH_MESSAGE = "단어는 5글자여야 합니다.";
 	private Letter[] letters = new Letter[NUMBER_OF_LETTER];
 
 	public Word(String input) {
@@ -20,7 +19,7 @@ public class Word {
 
 	private void validateInputWordLength(String input) {
 		if (input.length() != VALID_WORD_LENGTH) {
-			throw new IllegalArgumentException(INVALID_WORD_LENGTH_MESSAGE);
+			throw new IllegalArgumentException(GameMessage.INVALID_WORD_LENGTH_MESSAGE);
 		}
 	}
 

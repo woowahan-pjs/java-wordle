@@ -34,13 +34,6 @@ public class Game {
 		return isFinish;
 	}
 
-	public void compareWith(String userInput) {
-		Word userInputWord = new Word(userInput);
-		tileGrid.addTileLine(answer.calculateMatched(userInputWord));
-		plusTryingCount();
-		answerCheck(userInputWord);
-	}
-
 	public void answerCheck(Word userInputWord) {
 		if (answer.equals(userInputWord)) {
 			turn.corrected();

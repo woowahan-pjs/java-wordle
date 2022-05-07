@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Letter {
 
-	private static final String INVALID_ALPHABET_MESSAGE = "유효하지 않은 단어입니다.";
 	private char alphabet;
 	private boolean matched = false;
 
