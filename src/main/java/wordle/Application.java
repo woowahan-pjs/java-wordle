@@ -2,7 +2,7 @@ package wordle;
 
 
 import wordle.game.base.Game;
-import wordle.game.wordle.Wordle;
+import wordle.game.wordle.WordleGame;
 
 public class Application {
 
@@ -15,7 +15,7 @@ public class Application {
     }
 
     private static Game wordle() {
-        return new Wordle("src/main/resources/words.txt");
+        return new WordleGame("src/main/resources/words.txt");
     }
 
 }

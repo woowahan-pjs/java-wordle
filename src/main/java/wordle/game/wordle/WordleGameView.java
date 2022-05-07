@@ -2,7 +2,7 @@ package wordle.game.wordle;
 
 import wordle.domain.MatchResults;
 
-final class WordleView {
+final class WordleGameView {
 
     void initGame() {
         System.out.println("WORDLE을 6번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.");

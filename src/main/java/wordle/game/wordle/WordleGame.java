@@ -5,23 +5,23 @@ import wordle.game.base.Game;
 
 import java.time.LocalDate;
 
-public class Wordle extends Game {
+public class WordleGame extends Game {
 
     private final WordsBucket wordsBucket;
     private final Player player;
-    private final WordleView wordleView;
+    private final WordleGameView gameView;
     private final PlayingInfo playingInfo;
 
-    public Wordle(final String filePath) {
+    public WordleGame(final String filePath) {
         this.wordsBucket = new WordsBucket(filePath);
         this.playingInfo = new PlayingInfo(wordsBucket.findAnswer(LocalDate.now()));
-        this.wordleView = new WordleView();
+        this.gameView = new WordleGameView();
         this.player = new Player();
     }
 
     @Override
     protected void init() {
-        wordleView.initGame();
+        gameView.initGame();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Wordle extends Game {
 
     private void inputWords() {
         do {
-            wordleView.inputWords();
+            gameView.inputWords();
         } while (!doInputWordsSuccess());
     }
 
@@ -48,7 +48,7 @@ public class Wordle extends Game {
             this.playingInfo.words = player.inputWords();
             return wordsBucket.contains(playingInfo.words);
         } catch (final IllegalArgumentException e) {
-            wordleView.errors(e);
+            gameView.errors(e);
         }
         return false;
     }
@@ -59,13 +59,13 @@ public class Wordle extends Game {
 
     private void updateMatchesResult(final MatchResult matchResult) {
         playingInfo.updateResult(matchResult);
-        wordleView.wordsMatchResults(playingInfo.matchResults);
+        gameView.wordsMatchResults(playingInfo.matchResults);
     }
 
     @Override
     protected void complete() {
         if (playingInfo.isCorrect()) {
-            wordleView.round(playingInfo.round);
+            gameView.round(playingInfo.round);
         }
     }
 
