@@ -5,7 +5,7 @@ import wordle.domain.Words;
 
 class Player {
 
-    public Words inputWords() {
+    Words inputWords() {
         return new Words(Console.readLine());
     }
 
