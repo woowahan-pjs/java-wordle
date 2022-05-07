@@ -17,6 +17,14 @@ public class Game {
 		return new GameStartAction();
 	}
 
+	public GameAction progressTurn(String userInputString) {
+		Word userInputWord = new Word(userInputString);
+		tileGrid.addTileLine(answer.calculateMatched(userInputWord));
+		plusTryingCount();
+		answerCheck(userInputWord);
+		return creatEndTurn();
+	}
+
 	private void init(WordPool wordList) {
 		answer = new Word(wordList.getTodayAnswerWord());
 		turn = new Turn(tileGrid);
@@ -55,7 +63,7 @@ public class Game {
 		tryingCount++;
 	}
 
-	public GameAction endTurn() {
+	private GameAction creatEndTurn() {
 		return new GameEndTurnAction(turn, answer);
 	}
 }

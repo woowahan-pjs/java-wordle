@@ -10,8 +10,6 @@ import wordle.view.ConsoleOutput;
 public class WordleMachine {
 
 	private static final WordPool WORD_POOL = WordPoolGenerator.generateFromDefaultFile();
-	private final ConsoleInput consoleInput = new ConsoleInput();
-	private final ConsoleOutput consoleOutput = new ConsoleOutput();
 
 	public void startGame() {
 		Game game = new Game(WORD_POOL);
@@ -19,10 +17,9 @@ public class WordleMachine {
 
 		while (!game.isFinish()) {
 			try {
-				game.compareWith(readValidUserInput());
-				ConsoleOutput.printGameAction(game.endTurn());
+				ConsoleOutput.printGameAction(game.progressTurn(readValidUserInput()));
 			} catch (Exception e) {
-				ConsoleOutput.printGameException(e.getMessage());
+				ConsoleOutput.printGameMessage(e.getMessage());
 			}
 		}
 	}
@@ -31,7 +28,7 @@ public class WordleMachine {
 		String userInputWord = "";
 
 		do {
-			userInputWord = consoleInput.readUserInput();
+			userInputWord = ConsoleInput.readUserInput();
 		} while (!WordValidator.validate(userInputWord, WORD_POOL));
 
 		return userInputWord;

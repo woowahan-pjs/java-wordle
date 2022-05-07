@@ -51,8 +51,8 @@ public class ConsoleOutput {
 		}
 	}
 
-	public static void printGameException(String exceptionMessage) {
-		System.out.println(exceptionMessage);
+	public static void printGameMessage(String gameMessage) {
+		System.out.println(gameMessage);
 	}
 
 	private static void printTileLine(TileLine tileLine) {
