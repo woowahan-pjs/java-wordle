@@ -7,13 +7,13 @@ public class WordValidator {
 
 	public static boolean validate(String userInput, WordPool wordPool) {
 		if (!isFiveLetterWord(userInput)) {
-			throw new IllegalArgumentException(GameMessage.INVALID_WORD_LENGTH_MESSAGE);
+			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
 		}
 		if (!hasEnglishLetterOnly(userInput)) {
-			throw new IllegalArgumentException(GameMessage.INVALID_ENGLISH_ALPHABET_MESSAGE);
+			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
 		}
 		if (!existedWord(wordPool, userInput)) {
-			throw new IllegalArgumentException(GameMessage.INVALID_WORD_MESSAGE);
+			throw new IllegalArgumentException(Message.INVALID_WORD_MESSAGE);
 		}
 		return true;
 	}

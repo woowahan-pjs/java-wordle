@@ -19,7 +19,7 @@ public class Word {
 
 	private void validateInputWordLength(String input) {
 		if (input.length() != VALID_WORD_LENGTH) {
-			throw new IllegalArgumentException(GameMessage.INVALID_WORD_LENGTH_MESSAGE);
+			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
 		}
 	}
 
