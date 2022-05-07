@@ -17,19 +17,12 @@ public class Word {
 		return letters;
 	}
 
-	private void validateInputWordLength(String input) {
-		if (input.length() != VALID_WORD_LENGTH) {
-			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
-		}
-	}
-
-	private void createLetters(String input) {
-		for (int index = 0; index < input.length(); index++) {
-			letters[index] = new Letter(input.charAt(index));
-		}
-	}
-
-	public TileLine calculateMatched(Word userInputWord) {
+	/**
+	 * 각 Word 내 Letter의 값과 순서를 비교하여 5개의 타일로 구성된 결과를 반환한다
+	 * @param userInputWord
+	 * @return
+	 */
+	public TileLine match(Word userInputWord) {
 		TileStatus[] tileStatuses = new TileStatus[NUMBER_OF_LETTER];
 		Letter[] userInputLetters = userInputWord.getLetters();
 
@@ -44,24 +37,6 @@ public class Word {
 		}
 
 		return new TileLine(tileStatuses);
-	}
-
-	private TileStatus checkGreen(Letter userInputLetters, int index) {
-		if (letters[index].equals(userInputLetters)) {
-			letters[index].setMatched();
-			return TileStatus.GREEN;
-		}
-		return TileStatus.GRAY;
-	}
-
-	private TileStatus checkYellowOrGray(Letter userInput) {
-		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
-			if (letters[index].equals(userInput) && !letters[index].isMatched()) {
-				letters[index].setMatched();
-				return TileStatus.YELLOW;
-			}
-		}
-		return TileStatus.GRAY;
 	}
 
 	public void clearAllMatched() {
@@ -93,5 +68,35 @@ public class Word {
 	@Override
 	public int hashCode() {
 		return Arrays.hashCode(letters);
+	}
+
+	private void validateInputWordLength(String input) {
+		if (input.length() != VALID_WORD_LENGTH) {
+			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
+		}
+	}
+
+	private void createLetters(String input) {
+		for (int index = 0; index < input.length(); index++) {
+			letters[index] = new Letter(input.charAt(index));
+		}
+	}
+
+	private TileStatus checkGreen(Letter userInputLetters, int index) {
+		if (letters[index].equals(userInputLetters)) {
+			letters[index].setMatched();
+			return TileStatus.GREEN;
+		}
+		return TileStatus.GRAY;
+	}
+
+	private TileStatus checkYellowOrGray(Letter userInput) {
+		for (int index = 0; index < VALID_WORD_LENGTH; index++) {
+			if (letters[index].equals(userInput) && !letters[index].isMatched()) {
+				letters[index].setMatched();
+				return TileStatus.YELLOW;
+			}
+		}
+		return TileStatus.GRAY;
 	}
 }
