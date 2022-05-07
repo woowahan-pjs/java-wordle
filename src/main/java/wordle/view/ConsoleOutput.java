@@ -58,7 +58,7 @@ public class ConsoleOutput {
 	private static void printTileLine(TileLine tileLine) {
 		StringBuilder sb = new StringBuilder();
 
-		TileStatus[] allStatus = tileLine.getAllStatus();
+		TileStatus[] allStatus = tileLine.getTileStatuses();
 		for (TileStatus status : allStatus) {
 			sb.append(status.toUnicode());
 		}

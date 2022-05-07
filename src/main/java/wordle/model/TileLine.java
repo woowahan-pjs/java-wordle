@@ -6,11 +6,11 @@ public class TileLine {
 
 	private static final int SIZE_OF_STATUSES = 5;
 	private static final String WRONG_LENGTH_MESSAGE = "단어 매칭 결과 값은 5개여야 합니다";
-	private TileStatus[] statuses;
+	private TileStatus[] tileStatuses;
 
 	public TileLine(TileStatus[] tileStatuses) {
 		validate(tileStatuses);
-		this.statuses = tileStatuses;
+		this.tileStatuses = tileStatuses;
 	}
 
 	private void validate(TileStatus[] tileStatuses) {
@@ -30,7 +30,7 @@ public class TileLine {
 		}
 	}
 
-	public TileStatus[] getAllStatus() {
-		return statuses;
+	public TileStatus[] getTileStatuses() {
+		return tileStatuses;
 	}
 }

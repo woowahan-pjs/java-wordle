@@ -19,7 +19,7 @@ public class Game {
 
 	public GameAction progressTurn(String userInputString) {
 		Word userInputWord = new Word(userInputString);
-		tileGrid.addTileLine(answer.calculateMatched(userInputWord));
+		tileGrid.addTileLine(answer.match(userInputWord));
 		plusTryingCount();
 		answerCheck(userInputWord);
 		return creatEndTurn();
