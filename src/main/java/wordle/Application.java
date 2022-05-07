@@ -1,7 +1,7 @@
 package wordle;
 
 
-import wordle.game.base.Game;
+import wordle.game.base.Playable;
 import wordle.game.wordle.WordleGame;
 
 public class Application {
@@ -10,11 +10,11 @@ public class Application {
         start(wordle());
     }
 
-    private static void start(final Game game) {
+    private static void start(final Playable game) {
         game.play();
     }
 
-    private static Game wordle() {
+    private static Playable wordle() {
         return new WordleGame("src/main/resources/words.txt");
     }
 
