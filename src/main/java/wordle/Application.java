@@ -1,15 +1,21 @@
 package wordle;
 
-import wordle.game.Game;
-import wordle.game.GameView;
-import wordle.player.Player;
+
+import wordle.game.base.Game;
+import wordle.game.wordle.Wordle;
 
 public class Application {
 
     public static void main(String[] args) {
-        final String filePath = "src/main/resources/words.txt";
-        final Game game = new Game(filePath, new GameView(), new Player());
+        start(wordle());
+    }
+
+    private static void start(final Game game) {
         game.play();
+    }
+
+    private static Game wordle() {
+        return new Wordle("src/main/resources/words.txt");
     }
 
 }

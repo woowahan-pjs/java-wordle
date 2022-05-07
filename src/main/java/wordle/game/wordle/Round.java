@@ -1,4 +1,4 @@
-package wordle.game;
+package wordle.game.wordle;
 
 class Round {
 

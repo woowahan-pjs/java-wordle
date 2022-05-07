@@ -1,9 +1,9 @@
-package wordle.player;
+package wordle.game.wordle;
 
 import camp.nextstep.edu.missionutils.Console;
 import wordle.domain.Words;
 
-public class Player {
+class Player {
 
     public Words inputWords() {
         return new Words(Console.readLine());

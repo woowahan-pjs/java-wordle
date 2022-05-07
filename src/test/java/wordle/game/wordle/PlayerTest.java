@@ -1,4 +1,4 @@
-package wordle.player;
+package wordle.game.wordle;
 
 import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.AfterEach;
