@@ -46,7 +46,7 @@ public class Letter {
 	}
 
 	private void validate(char alphabet) {
-		if (!WordValidator.isAlphabet(alphabet)) {
+		if (!WordValidator.isEnglishAlphabet(alphabet)) {
 			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
 		}
 	}

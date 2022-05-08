@@ -29,7 +29,7 @@ public class WordleMachine {
 
 		do {
 			userInputWord = ConsoleInput.readUserInput();
-		} while (!WordValidator.validate(userInputWord, WORD_POOL));
+		} while (!WordValidator.isValid(userInputWord, WORD_POOL));
 
 		return userInputWord;
 	}

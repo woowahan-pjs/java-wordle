@@ -5,11 +5,15 @@ public class WordValidator {
 	private static final int WORD_LENGTH = 5;
 	private static final String WORD_PATTERN = "^[A-Za-z]+$";
 
-	public static boolean validate(String userInput, WordPool wordPool) {
+	public static boolean isValid(String userInput, WordPool wordPool) {
 		validateFiveLetterWord(userInput);
 		validateEnglishLetterOnly(userInput);
 		validateExistedWord(wordPool, userInput);
 		return true;
+	}
+
+	public static boolean isEnglishAlphabet(char character) {
+		return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
 	}
 
 	public static void validateEnglishLetterOnly(String word) {
@@ -28,9 +32,5 @@ public class WordValidator {
 		if (!wordPool.contains(word)) {
 			throw new IllegalArgumentException(Message.INVALID_WORD_MESSAGE);
 		}
-	}
-
-	public static boolean isAlphabet(char character) {
-		return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
 	}
 }
