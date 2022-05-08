@@ -9,8 +9,8 @@ public class Game {
 	private TileGrid tileGrid = new TileGrid();
 	private Turn turn;
 
-	public Game(WordPool wordList) {
-		init(wordList);
+	public Game(WordPool wordPool) {
+		init(wordPool);
 	}
 
 	public GameAction start() {
@@ -20,8 +20,8 @@ public class Game {
 	public GameAction progressTurn(String userInputString) {
 		Word userInputWord = new Word(userInputString);
 		tileGrid.addTileLine(answer.match(userInputWord));
-		plusTryingCount();
 		answerCheck(userInputWord);
+		plusTryingCount();
 		return creatEndTurn();
 	}
 
@@ -40,11 +40,6 @@ public class Game {
 			setFinish();
 			return;
 		}
-
-		if (tryingCount == MAX_TRYING_COUNT) {
-			setFinish();
-			return;
-		}
 		answer.clearAllMatched();
 	}
 
@@ -54,6 +49,11 @@ public class Game {
 
 	private void plusTryingCount() {
 		tryingCount++;
+
+		if (tryingCount == MAX_TRYING_COUNT) {
+			setFinish();
+			return;
+		}
 	}
 
 	private GameAction creatEndTurn() {
