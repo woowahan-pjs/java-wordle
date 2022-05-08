@@ -20,7 +20,7 @@ public class WordPoolGenerator {
 	public static WordPool generateFromFile(String path) {
 		List<String> words = readWordsFromFile(path);
 		validateWordsSize(words);
-		return new WordPool(words);
+		return new WordPoolImpl(words);
 	}
 
 	private static List<String> readWordsFromFile(String path) {
