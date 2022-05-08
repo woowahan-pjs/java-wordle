@@ -2,11 +2,10 @@ package wordle.in;
 
 import java.util.Scanner;
 import wordle.domain.design.UserInput;
+import wordle.domain.exception.WrongUserWordException;
 import wordle.domain.vo.UserWord;
 
 public class UserInputImpl implements UserInput {
-
-    private static final String INSTRUCTION = "정답을 입력해주세요.";
 
     private final Scanner sc;
 
@@ -15,24 +14,9 @@ public class UserInputImpl implements UserInput {
     }
 
     @Override
-    public UserWord execute() {
-        instructor();
-        UserWord result = input();
-        return result;
-    }
-
-    private void instructor() {
-        System.out.println(INSTRUCTION);
-    }
-
-    private UserWord input() {
+    public UserWord execute() throws WrongUserWordException {
         String userInput = sc.nextLine();
-        try {
-            return UserWord.of(userInput);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            
-        }
+        return UserWord.of(userInput);
     }
 
     @Override
