@@ -6,8 +6,9 @@ import wordle.domain.design.Judgement;
 import wordle.domain.design.MessagePrinter;
 import wordle.domain.design.UserInput;
 import wordle.domain.design.WordGenerator;
-import wordle.domain.impl.GameManagerImpl;
-import wordle.domain.impl.JudgementImpl;
+import wordle.domain.model.GameManagerImpl;
+import wordle.domain.model.JudgementImpl;
+import wordle.domain.usecase.GameInput;
 import wordle.in.UserInputImpl;
 import wordle.in.WordGeneratorImpl;
 import wordle.out.JudgeResultPrinterImpl;
@@ -26,7 +27,9 @@ public class WordleApplication {
         Judgement judgement = new JudgementImpl();
         JudgeResultPrinter judgeResultPrinter = new JudgeResultPrinterImpl();
         MessagePrinter messagePrinter = new MessagePrinterImpl();
-        GameManager gameManager = new GameManagerImpl(userInput, wordGenerator, judgement, judgeResultPrinter,
+
+        GameInput gameInput = new GameInput(messagePrinter, userInput);
+        GameManager gameManager = new GameManagerImpl(gameInput, wordGenerator, judgement, judgeResultPrinter,
                 messagePrinter);
         return gameManager;
     }
