@@ -1,4 +1,4 @@
-package wordle.domain.model;
+package wordle.domain.usecase;
 
 
 import wordle.domain.design.GameManager;
