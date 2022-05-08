@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class GameTest {
 
+	private static final ManipulatedWordPool manipulatedWordPool = new ManipulatedWordPool();
+
 	@Test
 	@DisplayName("시도 횟수 내 정답을 맞추면 게임은 종료된다")
 	void Game_is_over_with_correcting_answer_in_trying_count() {
@@ -22,7 +24,6 @@ class GameTest {
 	@Test
 	@DisplayName("시도 횟수 내 정답을 맞추지 못하면 게임은 종료된다")
 	void Game_is_over_with_over_trying_count() {
-		WordPool manipulatedWordPool = new ManipulatedWordPool();
 		Game game = new Game(manipulatedWordPool);
 		String wrongAnswerWord = "alone";
 		int MAXIMUM_TRYING_COUNT = 6;
@@ -32,6 +33,16 @@ class GameTest {
 		}
 
 		assertThat(game.isFinish()).isTrue();
+	}
+
+	@Test
+	@DisplayName("게임을 시작하면 게임 시작 액션이 반환된다")
+	void Game_start_returns_game_start_action() {
+		Game game = new Game(manipulatedWordPool);
+
+		GameAction gameAction = game.start();
+
+		assertThat(gameAction).isInstanceOf(GameStartAction.class);
 	}
 
 	/**
