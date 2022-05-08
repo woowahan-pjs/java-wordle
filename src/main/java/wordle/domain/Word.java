@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 class Word {
 
-    private static final Pattern pattern = Pattern.compile("^[A-Za-z]+$");
+    private static final Pattern pattern = Pattern.compile("[A-Za-z]");
     private final char value;
     private final Position position;
 
