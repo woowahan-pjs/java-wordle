@@ -1,4 +1,4 @@
-package wordle.in;
+package wordle.input;
 
 import java.util.Scanner;
 import wordle.domain.design.UserInput;

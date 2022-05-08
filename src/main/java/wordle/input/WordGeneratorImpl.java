@@ -1,4 +1,4 @@
-package wordle.in;
+package wordle.input;
 
 import java.time.Duration;
 import java.time.LocalDate;

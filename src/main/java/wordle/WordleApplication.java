@@ -9,10 +9,10 @@ import wordle.domain.design.WordGenerator;
 import wordle.domain.model.GameManagerImpl;
 import wordle.domain.model.JudgementImpl;
 import wordle.domain.usecase.GameInput;
-import wordle.in.UserInputImpl;
-import wordle.in.WordGeneratorImpl;
-import wordle.out.JudgeResultPrinterImpl;
-import wordle.out.MessagePrinterImpl;
+import wordle.input.UserInputImpl;
+import wordle.input.WordGeneratorImpl;
+import wordle.output.JudgeResultPrinterImpl;
+import wordle.output.MessagePrinterImpl;
 
 public class WordleApplication {
 
