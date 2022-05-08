@@ -6,28 +6,28 @@ public class WordValidator {
 	private static final String WORD_PATTERN = "^[A-Za-z]+$";
 
 	public static boolean validate(String userInput, WordPool wordPool) {
-		if (!isFiveLetterWord(userInput)) {
-			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
-		}
-		if (!hasEnglishLetterOnly(userInput)) {
-			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
-		}
-		if (!existedWord(wordPool, userInput)) {
-			throw new IllegalArgumentException(Message.INVALID_WORD_MESSAGE);
-		}
+		validateFiveLetterWord(userInput);
+		validateEnglishLetterOnly(userInput);
+		validateExistedWord(wordPool, userInput);
 		return true;
 	}
 
-	public static boolean hasEnglishLetterOnly(String userInput) {
-		return userInput.matches(WORD_PATTERN);
+	public static void validateEnglishLetterOnly(String word) {
+		if (!word.matches(WORD_PATTERN)) {
+			throw new IllegalArgumentException(Message.INVALID_WORD_LENGTH_MESSAGE);
+		}
 	}
 
-	private static boolean isFiveLetterWord(String userInput) {
-		return userInput.length() == WORD_LENGTH;
+	public static void validateFiveLetterWord(String word) {
+		if (word.length() != WORD_LENGTH) {
+			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
+		}
 	}
 
-	private static boolean existedWord(WordPool wordPool, String userInput) {
-		return wordPool.contains(userInput);
+	private static void validateExistedWord(WordPool wordPool, String word) {
+		if (!wordPool.contains(word)) {
+			throw new IllegalArgumentException(Message.INVALID_WORD_MESSAGE);
+		}
 	}
 
 	public static boolean isAlphabet(char character) {
