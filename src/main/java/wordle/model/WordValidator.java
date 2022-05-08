@@ -12,8 +12,10 @@ public class WordValidator {
 		return true;
 	}
 
-	public static boolean isEnglishAlphabet(char character) {
-		return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
+	public static void validateEnglishAlphabet(char character) {
+		if (!((character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z'))) {
+			throw new IllegalArgumentException(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
+		}
 	}
 
 	public static void validateEnglishLetterOnly(String word) {

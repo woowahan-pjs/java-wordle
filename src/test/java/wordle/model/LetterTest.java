@@ -11,7 +11,7 @@ class LetterTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"ㅁ", "&"})
-	@DisplayName("영문자가 아닌 문자는 Letter 생성시 유효하지 않다")
+	@DisplayName("영문자가 아닌 문자로 Letter 를 생성할 수 없다")
 	void Letter_with_non_english_letter_is_invalid(char alphabet) {
 		assertThatIllegalArgumentException()
 			.isThrownBy(() -> new Letter(alphabet))
@@ -20,7 +20,7 @@ class LetterTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"A", "B"})
-	@DisplayName("Letter는 영어 소문자만 가진다")
+	@DisplayName("Letter 는 영어 소문자만 가진다")
 	void Letter_has_only_lower_case(String alphabet) {
 		Letter letter = new Letter(alphabet.toCharArray()[0]);
 		char alphabetLowerCase = alphabet.toLowerCase().toCharArray()[0];

@@ -1,6 +1,5 @@
 package wordle.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +14,9 @@ class WordValidatorTest {
 	@ValueSource(chars = {'0', '!', 'ㅁ', 'な', '圓'})
 	@DisplayName("영문자가 아닌 문자는 유효하지 않다")
 	void Non_english_alphabet_is_invalid(char character) {
-		assertThat(WordValidator.isEnglishAlphabet(character)).isFalse();
-	}
-
-	@ParameterizedTest
-	@ValueSource(chars = {'a', 'b', 'c', 'd', 'e'})
-	@DisplayName("영문자만 유효하다")
-	void Only_english_alphabet_is_valid(char character) {
-		assertThat(WordValidator.isEnglishAlphabet(character)).isTrue();
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> WordValidator.validateEnglishAlphabet(character))
+			.withMessage(Message.INVALID_ENGLISH_ALPHABET_MESSAGE);
 	}
 
 	@ParameterizedTest()
