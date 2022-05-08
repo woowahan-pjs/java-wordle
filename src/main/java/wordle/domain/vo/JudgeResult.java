@@ -1,10 +1,12 @@
 package wordle.domain.vo;
 
+import java.util.Arrays;
+
 public class JudgeResult {
     Color[] result;
 
-    public JudgeResult() {
-        this.result = new Color[5];
+    public JudgeResult(int size) {
+        this.result = new Color[size];
     }
 
     public Color[] getResult() {
@@ -15,12 +17,18 @@ public class JudgeResult {
         this.result[idx] = color;
     }
 
-    public boolean isEndAble() {
-        for (int i = 0; i < result.length; ++i) {
-            if (!result[i].equals(Color.GREEN)) {
-                return false;
-            }
-        }
-        return true;
+    private boolean isEndAble() {
+        return Arrays.stream(result).allMatch(i -> i.equals(Color.GREEN));
+    }
+
+    public boolean continueGame() {
+        return !isEndAble();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(result).forEach(it -> sb.append(it.getBox()));
+        return sb.toString();
     }
 }

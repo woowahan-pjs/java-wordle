@@ -5,9 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import wordle.domain.design.Judgement;
-import wordle.domain.impl.JudgementImpl;
+import wordle.domain.model.JudgementImpl;
 import wordle.domain.vo.Color;
 import wordle.domain.vo.JudgeResult;
+import wordle.domain.vo.UserWord;
 
 class JudgementTest {
     private Judgement judgement = new JudgementImpl();
@@ -17,7 +18,7 @@ class JudgementTest {
     public void test1() {
         // given
         String ans = "apple";
-        String input = "apple";
+        UserWord input = UserWord.of("apple");
 
         // when
         JudgeResult result = judgement.execute(ans, input);
@@ -36,7 +37,7 @@ class JudgementTest {
     public void test2() {
         // given
         String ans = "apple";
-        String input = "affxk";
+        UserWord input = UserWord.of("affxk");
 
         // when
         JudgeResult result = judgement.execute(ans, input);
@@ -55,7 +56,7 @@ class JudgementTest {
     public void test3() {
         // given
         String ans = "apple";
-        String input = "bcckf";
+        UserWord input = UserWord.of("bcckf");
 
         // when
         JudgeResult result = judgement.execute(ans, input);
@@ -74,7 +75,7 @@ class JudgementTest {
     public void test4() {
         // given
         String ans = "apple";
-        String input = "palep";
+        UserWord input = UserWord.of("palep");
 
         // when
         JudgeResult result = judgement.execute(ans, input);
