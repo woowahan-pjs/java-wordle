@@ -14,24 +14,16 @@ class WordPoolGeneratorTest {
 	private static final String NOT_EXISTED_WORD_IN_FILE_MESSAGE = "파일에 단어가 존재하지 않습니다.";
 	private static final String NO_SUCH_FILE_MESSAGE = "존재하지 않는 파일입니다.";
 
-
-
 	@Test
 	@DisplayName("기본 파일로부터 단어 목록이 생성된다")
 	void words_are_generated_from_default_file() {
-		WordPool wordPool = WordPoolGenerator.generateFromDefaultFile();
-		int wordPoolSize = wordPool.size();
-
-		assertThat(wordPoolSize).isPositive();
+		assertThat(WordPoolGenerator.generateFromDefaultFile()).isNotNull();
 	}
 
 	@Test
 	@DisplayName("지정한 파일로부터 단어 목록이 생성된다")
 	void words_are_generated_from_file() {
-		WordPool wordPool = WordPoolGenerator.generateFromFile(VALID_WORDS_TEXT_FILE_PATH);
-		int wordPoolSize = wordPool.size();
-
-		assertThat(wordPoolSize).isPositive();
+		assertThat(WordPoolGenerator.generateFromFile(VALID_WORDS_TEXT_FILE_PATH)).isNotNull();
 	}
 
 	@Test
