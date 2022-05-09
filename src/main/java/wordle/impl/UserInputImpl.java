@@ -6,28 +6,31 @@ import wordle.vo.UserWord;
 
 public class UserInputImpl implements UserInput {
 
-    private static final String INSTRUCTION = "정답을 입력해주세요.";
+  private static final String INSTRUCTION = "정답을 입력해주세요.";
+  private Scanner sc;
 
-    @Override
-    public UserWord execute() {
-        instructor();
-        UserWord result = input();
-        return result;
-    }
+  public UserInputImpl() {
+    this.sc = new Scanner(System.in);
+  }
 
-    private void instructor() {
-        System.out.println(INSTRUCTION);
-    }
+  @Override
+  public UserWord execute() {
+    instructor();
+    UserWord result = input();
+    return result;
+  }
 
-    private UserWord input() {
-        try {
-            Scanner sc = new Scanner(System.in);
-            String userInput = sc.next();
-            sc.close();
-            return UserWord.of(userInput);
-        } catch(Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
+  private void instructor() {
+    System.out.println(INSTRUCTION);
+  }
+
+  private UserWord input() {
+    try {
+      String userInput = sc.next();
+      return UserWord.of(userInput);
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw e;
     }
+  }
 }
