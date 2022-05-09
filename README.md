@@ -20,7 +20,34 @@
 - 정답과 답안은 `words.txt`에 존재하는 단어여야 한다.
 - 정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다.
 
-### 입출력 요구 사항
+# 기능 목록 정의
+- Tile
+  - [x] 하나의 문자가 들어간다.
+    - [x] 알파벳만 입력할 수 있으며 알파벳이 아닌 경우 IllegalArgumentException을 던짐 
+    - [x] 대문자를 입력받으면 소문자로 변경한다.
+    - [x] 타일끼리 비교할 수 있다.
+
+- Tiles
+  - [x] 5개의 Tile로 구성
+  - [x] 5개의 Tile이 아닌경우 IllegalArgumentException을 던짐
+
+- TilesBucket
+  - [x] words.txt 파일을 읽어 Tiles들을 생성한다.
+  - [x] 읽을 파일이 없는 경우 IllegalArgumentException을 던진다
+  - [x] ((현재 날짜 - 2021년 6월 19일) % 배열의 크기)번째 단어를 Answer 로 선정한다.
+
+- Answer
+  - [x] 사용자의 입력과 정답을 비교하여 결과를 반환한다.
+  - [x] 정답의 tile과 입력의 tile이 위치와 문자가 모두 같으면 Green
+  - [x] 정답에는 존재하는 tile이지만 위치가 다르면 Yellow
+  - [x] 정답에 존재하지 않는 tile이면 Grey
+
+- MatchStatus
+  - [x] Green, Yello, Grey를 갖는다
+
+- MatchResult
+  - [x] 매치 결과를 갖는다.
+  
 
 #### 실행 결과 예시
 
