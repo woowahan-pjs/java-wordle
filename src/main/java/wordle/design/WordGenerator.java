@@ -1,5 +1,6 @@
 package wordle.design;
 
 public interface WordGenerator {
-    public String execute();
+
+  String execute();
 }
