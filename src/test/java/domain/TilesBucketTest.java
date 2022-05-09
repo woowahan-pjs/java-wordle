@@ -12,7 +12,7 @@ class TilesBucketTest {
 
     @Test
     void words텍스트파일에서_tiles들을_생성한다() {
-        TilesBucket tilesBucket = new TilesBucket(WORDS_PATH);
+        Bucket tilesBucket = new StubBucket(WORDS_PATH);
 
         assertThat(tilesBucket.getTiles()).isNotEmpty();
     }
@@ -26,11 +26,12 @@ class TilesBucketTest {
 
     @Test
     void 규칙에의해_정답을_선정한다() {
-        TilesBucket tilesBucket = new TilesBucket(WORDS_PATH);
-        LocalDate today = LocalDate.of(2022, 5, 5);
-        Answer answer = tilesBucket.getAnswer(today);
+        String todayAnswer = "story";
+
+        Bucket bucket = new StubBucket(WORDS_PATH);
+        Answer answer = bucket.getAnswer(LocalDate.now());
 
         assertThat(answer).isNotNull();
-        assertThat(answer.matches(new Tiles("story")).isCorrect()).isTrue();
+        assertThat(answer.matches(new Tiles(todayAnswer)).isCorrect()).isTrue();
     }
 }

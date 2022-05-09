@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TilesBucket {
+public class TilesBucket implements Bucket {
     private static final LocalDate WORDLE_BIRTHDAY = LocalDate.of(2021, 6, 19);
     List<Tiles> tiles = new ArrayList<>();
 
@@ -31,12 +31,14 @@ public class TilesBucket {
         return tiles;
     }
 
+    @Override
     public Answer getAnswer(LocalDate today) {
         int betweenDays = (int) ChronoUnit.DAYS.between(WORDLE_BIRTHDAY, today);
         return new Answer(tiles.get((betweenDays % tiles.size())));
     }
 
-    public boolean contains(Tiles tiles){
+    @Override
+    public boolean contains(Tiles tiles) {
         return this.tiles.contains(tiles);
     }
 }
