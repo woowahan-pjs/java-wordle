@@ -49,7 +49,9 @@ public class Letters {
     }
 
     private static void validateLength(String word) {
-        if (word.length() > 5) {
+private static final int LETTERS_LENGTH = 5;
+
+if (word.length() > LETTERS_LENGTH) {
             throw new IllegalArgumentException("word의 크기는 5글자여야만 합니다.");
         }
     }
