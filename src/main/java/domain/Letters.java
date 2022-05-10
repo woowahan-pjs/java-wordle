@@ -10,6 +10,20 @@ import java.util.stream.Collectors;
 public class Letters {
     private final List<Letter> list;
 
+    public static Letters of(String word) {
+        validateLength(word);
+        validateAlphabet(word);
+        return new Letters(
+                word.chars()
+                        .mapToObj(letter -> new Letter((char) letter))
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private Letters(List<Letter> list) {
+        this.list = list;
+    }
+
     public List<Letter> getList() {
         return list;
     }
@@ -26,20 +40,6 @@ public class Letters {
         return list.stream().collect(Collectors.groupingBy(
                 Function.identity(), Collectors.counting()
         ));
-    }
-
-    private Letters(List<Letter> list) {
-        this.list = list;
-    }
-
-    public static Letters of(String word) {
-        validateLength(word);
-        validateAlphabet(word);
-        return new Letters(
-                word.chars()
-                        .mapToObj(letter -> new Letter((char) letter))
-                        .collect(Collectors.toList())
-        );
     }
 
     private static void validateAlphabet(String word) {
