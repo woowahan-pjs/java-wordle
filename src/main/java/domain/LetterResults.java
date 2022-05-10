@@ -29,8 +29,10 @@ public class LetterResults {
         this.letterResults = letterResults;
     }
 
+private static final List<LetterResult> CORRECT_ALL = List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN);
+
     public static LetterResults correctAll() {
-        return new LetterResults(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN));
+        return CORRECT_ALL;
     }
 
     @Override
