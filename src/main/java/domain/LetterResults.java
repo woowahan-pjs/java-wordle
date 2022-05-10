@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class LetterResults {
+    private static final LetterResults CORRECT_ALL = new LetterResults(List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN));
+
     private final List<LetterResult> letterResults;
 
     public List<LetterResult> getList() {
@@ -28,8 +30,6 @@ public class LetterResults {
     public LetterResults(List<LetterResult> letterResults) {
         this.letterResults = letterResults;
     }
-
-private static final List<LetterResult> CORRECT_ALL = List.of(LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN, LetterResult.GREEN);
 
     public static LetterResults correctAll() {
         return CORRECT_ALL;
