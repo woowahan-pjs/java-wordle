@@ -11,6 +11,7 @@ import java.util.List;
 public class Game {
     private static final int MAX_TRY_COUNT = 6;
 
+    private Letters userAnswer;
     private final List<LetterResults> letterResults;
     private final LetterRepository letterRepository;
     private final Answer answer;
@@ -25,24 +26,30 @@ public class Game {
 
     public void start() {
         do {
+            inputWord();
             play();
         }while(isPlayable());
         quit();
     }
 
-    private void play() {
-        InputView.guide();
-        Letters userAnswer = Letters.of(Console.readLine());
-        validatePresence(userAnswer);
-        letterResults.add(answer.compare(userAnswer));
-        OutputView.result(letterResults);
+    private void inputWord() {
+        do {
+            InputView.guide();
+            userAnswer = Letters.of(Console.readLine());
+        } while (!isPresence());
     }
 
-    private void validatePresence(Letters userAnswer) {
+    private boolean isPresence() {
         if (!letterRepository.isContains(userAnswer)){
             OutputView.notExist();
-            play();
+            return false;
         }
+        return true;
+    }
+
+    private void play() {
+        letterResults.add(answer.compare(userAnswer));
+        OutputView.result(letterResults);
     }
 
     private boolean isPlayable() {
