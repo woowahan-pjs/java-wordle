@@ -50,6 +50,6 @@ public class Game {
     }
 
     private void quit() {
-        OutputView.quit();
+        OutputView.quit(count);
     }
 }
