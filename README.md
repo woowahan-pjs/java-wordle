@@ -6,8 +6,6 @@
 - 세 개의 요구 사항을 만족하기 위해 노력한다. 특히 기능을 구현하기 전에 기능 목록을 만들고, 기능 단위로 커밋 하는 방식으로 진행한다.
 - 기능 요구 사항에 기재되지 않은 내용은 스스로 판단하여 구현한다.
 
----
-
 ## 🚀 기능 요구 사항
 
 선풍적인 인기를 끌었던 영어 단어 맞추기 게임이다.
@@ -73,3 +71,39 @@ spill
 - else 예약어를 쓰지 않는다.
     - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
     - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
+
+
+---
+## 워들 도메인에 대한 요구 사항
+- . 일단 확정
+- ? 아직 모름 애매...
+
+- [x] 하나의 글자는 Letter 이다. (Letter class)
+    - [x] Letter는 영문자이어야 한다.
+- [x] 영어 단어는 Letters 이다. (Letters class)
+    - [x] 영단어야만 한다. 
+    - [x] 여러 개의 Letter는 Letters 이다.
+    - [x] Letters는 5글자로 이루어져 있다.
+- [x] 오늘의 정답은 Answer 가 가지고 있다.  (Answer class)
+    - [x] Answer는 제출된 단어를 비교하여 LetterResults를 반환한다.
+- [x] 정답과 답안에 대한 상태는 LetterResult 이다. (LetterResult enum class)
+    - [x] 상태는 GREEN / YELLOW / GRAY 를 가지고 있다.
+    - [x] GREEN : 정답 글자와 위치가 같은 경우.
+    - [x] YELLOW : 정답 글자는 맞지만, 위치가 다른 경우.
+    - [x] GRAY : 정답 글자도 안맞고, 위치도 다른 경우.
+    - [x] 예외 : 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
+- [x] 정답과 답안을 비교한 결과는 LetterResults가 가지고 있다. (LetterResults class)
+    - [x] LetterResults는 5개의 결과만 가지고 있을 수 있다.
+- [x] Game 이 있다.(Game class)
+  - [x] Game은 6개의 LetterResults 를 가지고 있다.
+- [x] LetterRepository는 `words.txt`에 존재하는 단어를 불러온다.
+  - [x] 모든 단어를 불러올 수 있다.
+  - [x] 정답(오늘의 단어)을 불러올 수 있다.
+  - [x] 정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다.
+  - [x] 정답과 답안은 `words.txt`에 존재하는 단어여야한다.
+  - [x] `words.txt`에 존재하는지 확인할 수 있다.
+---
+## 뷰에 대한 요구 사항
+- [x] InputView 구현
+- [x] OutputView 구현
+---
