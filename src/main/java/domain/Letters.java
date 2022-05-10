@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Letters {
+    private static final int LETTERS_LENGTH = 5;
+
     private final List<Letter> list;
 
     public static Letters of(String word) {
@@ -49,9 +51,7 @@ public class Letters {
     }
 
     private static void validateLength(String word) {
-private static final int LETTERS_LENGTH = 5;
-
-if (word.length() > LETTERS_LENGTH) {
+        if (word.length() > LETTERS_LENGTH) {
             throw new IllegalArgumentException("word의 크기는 5글자여야만 합니다.");
         }
     }
