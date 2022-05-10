@@ -15,6 +15,7 @@ public class LetterRepositoryImpl implements LetterRepository {
     private static final String PATH = "src/main/resources/words.txt";
     private static final LocalDate criteriaDate = LocalDate.of(2021, 6, 19);
 
+    @Override
     public Letters getTodayAnswer(LocalDate today) {
         List<Letters> letters = findAll();
         int key = (int) ((today.toEpochDay() - criteriaDate.toEpochDay()) % letters.size());
