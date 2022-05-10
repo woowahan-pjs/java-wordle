@@ -9,9 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LetterTest {
-@ParameterizedTest
-@ValueSource(chars = {'a', 'z', 'A', 'Z'})
-
+    @ParameterizedTest
+    @ValueSource(chars = {'a', 'z', 'A', 'Z'})
     void construct() {
         Letter letter = new Letter('a');
         assertThat(letter).isEqualTo(new Letter('a'));
@@ -25,5 +24,4 @@ public class LetterTest {
                 () -> new Letter(letter)
         );
     }
-
 }
