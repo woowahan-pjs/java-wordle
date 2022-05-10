@@ -21,10 +21,9 @@ public class Game {
         this.letterRepository = letterRepository;
         this.answer = new Answer(letterRepository.getTodayAnswer(LocalDate.now()));
         this.count = 0;
-        start();
     }
 
-    private void start() {
+    public void start() {
         do {
             play();
         }while(isPlayable());
