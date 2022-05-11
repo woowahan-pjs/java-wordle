@@ -18,6 +18,7 @@ import static wordle.domain.BingoStatus.NOTHING;
 
 @DisplayName("정답 여부 기록을 담당하는 `BingoRecord` 객체 태스트")
 class BingoRecordTest {
+    private final List<BingoStatus> allContainStatuses = List.of(CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN);
 
     @DisplayName("정답 여부 리스트가 주어지면 `BingoRecord` 객체 생성 성공")
     @ParameterizedTest
@@ -35,12 +36,7 @@ class BingoRecordTest {
     @Test
     void bingoRecordIsImmutableEvenIfGivenBingoStatusesAreChanged() {
         // Arrange
-        final List<BingoStatus> mutableBingoStatuses = new ArrayList<>();
-        mutableBingoStatuses.add(CONTAIN);
-        mutableBingoStatuses.add(CONTAIN);
-        mutableBingoStatuses.add(CONTAIN);
-        mutableBingoStatuses.add(CONTAIN);
-        mutableBingoStatuses.add(CONTAIN);
+        final List<BingoStatus> mutableBingoStatuses = new ArrayList<>(allContainStatuses);
 
         final BingoRecord record = new BingoRecord(mutableBingoStatuses);
         final List<BingoStatus> originRecord = record.getRecord();
@@ -60,12 +56,7 @@ class BingoRecordTest {
     @Test
     void throwExceptionIfYouTryToChangedTheReturnBingoStatuses() {
         // Arrange
-        final List<BingoStatus> originBingoStatuses = new ArrayList<>();
-        originBingoStatuses.add(CONTAIN);
-        originBingoStatuses.add(CONTAIN);
-        originBingoStatuses.add(CONTAIN);
-        originBingoStatuses.add(CONTAIN);
-        originBingoStatuses.add(CONTAIN);
+        final List<BingoStatus> originBingoStatuses = allContainStatuses;
 
         // Act
         // Assert
