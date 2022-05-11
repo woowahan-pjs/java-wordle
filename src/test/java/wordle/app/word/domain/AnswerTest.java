@@ -1,6 +1,8 @@
 package wordle.app.word.domain;
 
 import org.junit.jupiter.api.Test;
+import wordle.app.match.domain.MatchResult;
+import wordle.app.match.domain.MatchStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

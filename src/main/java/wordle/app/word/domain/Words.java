@@ -25,7 +25,7 @@ public class Words {
         return text != null && text.length() == WORDS_LENGTH;
     }
 
-    List<Word> getWordList() {
+    public List<Word> getWordList() {
         return Collections.unmodifiableList(wordList);
     }
 

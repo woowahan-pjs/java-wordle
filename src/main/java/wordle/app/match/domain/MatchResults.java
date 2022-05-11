@@ -1,4 +1,4 @@
-package wordle.app.word.domain;
+package wordle.app.match.domain;
 
 import java.util.ArrayList;
 import java.util.List;

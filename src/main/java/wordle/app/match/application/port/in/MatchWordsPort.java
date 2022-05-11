@@ -1,7 +1,7 @@
-package wordle.app.word.application.port;
+package wordle.app.match.application.port.in;
 
 import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.MatchResult;
+import wordle.app.match.domain.MatchResult;
 import wordle.app.word.domain.Words;
 
 public interface MatchWordsPort {

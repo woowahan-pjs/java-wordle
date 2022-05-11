@@ -3,11 +3,10 @@ package wordle.app.word.application.service;
 import camp.nextstep.edu.missionutils.Console;
 import wordle.app.word.application.port.InputWordsPort;
 import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.MatchResult;
+import wordle.app.match.domain.MatchResult;
 import wordle.app.word.domain.Words;
-import wordle.app.word.application.port.MatchWordsPort;
 
-public class WordsService implements InputWordsPort, MatchWordsPort {
+public class WordsService implements InputWordsPort {
 
     @Override
     public Words inputWords() {
@@ -28,11 +27,6 @@ public class WordsService implements InputWordsPort, MatchWordsPort {
         }
 
         return words;
-    }
-
-    @Override
-    public MatchResult matches(final Answer answer, final Words words) {
-        return answer.matches(words);
     }
 
 }

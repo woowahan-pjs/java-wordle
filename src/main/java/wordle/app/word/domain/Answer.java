@@ -1,5 +1,8 @@
 package wordle.app.word.domain;
 
+import wordle.app.match.domain.MatchResult;
+import wordle.app.match.domain.MatchStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 

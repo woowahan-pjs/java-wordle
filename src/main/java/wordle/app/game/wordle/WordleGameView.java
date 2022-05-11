@@ -1,6 +1,6 @@
 package wordle.app.game.wordle;
 
-import wordle.app.word.domain.MatchResults;
+import wordle.app.match.domain.MatchResults;
 
 final class WordleGameView {
 

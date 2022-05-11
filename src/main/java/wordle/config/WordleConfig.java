@@ -8,8 +8,9 @@ import wordle.app.bucket.domain.FileWordsBucket;
 import wordle.app.bucket.domain.WordsBucket;
 import wordle.app.game.base.Playable;
 import wordle.app.game.wordle.WordleGame;
+import wordle.app.match.application.service.MatchService;
 import wordle.app.word.adapter.InputWordsAdapter;
-import wordle.app.word.adapter.MatchWordsAdapter;
+import wordle.app.match.adapter.MatchWordsAdapter;
 import wordle.app.word.application.service.WordsService;
 
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ public class WordleConfig {
         final WordsBucket wordsBucket = new FileWordsBucket("src/main/resources/words.txt", LocalDate.of(2021, 6, 19));
         final WordsBucketService wordsBucketService = wordsBucketService(wordsBucket);
         final WordsService wordsService = wordsService();
-        return new WordleGame(containWordsAdapter(wordsBucketService), findAnswerAdapter(wordsBucketService), inputWordsAdapter(wordsService), matchWordsAdapter(wordsService));
+        return new WordleGame(containWordsAdapter(wordsBucketService), findAnswerAdapter(wordsBucketService), inputWordsAdapter(wordsService), matchWordsAdapter(matchService()));
     }
 
     private WordsBucketService wordsBucketService(final WordsBucket wordsBucket) {
@@ -43,8 +44,12 @@ public class WordleConfig {
         return new InputWordsAdapter(wordsService);
     }
 
-    private MatchWordsAdapter matchWordsAdapter(final WordsService wordsService) {
-        return new MatchWordsAdapter(wordsService);
+    private MatchService matchService() {
+        return new MatchService();
+    }
+
+    private MatchWordsAdapter matchWordsAdapter(final MatchService matchService) {
+        return new MatchWordsAdapter(matchService);
     }
 
 }

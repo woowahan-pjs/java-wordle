@@ -1,7 +1,7 @@
-package wordle.app.word.adapter;
+package wordle.app.match.adapter;
 
-import wordle.app.word.application.port.MatchWordsPort;
-import wordle.app.word.domain.MatchResult;
+import wordle.app.match.application.port.in.MatchWordsPort;
+import wordle.app.match.domain.MatchResult;
 
 public class MatchWordsAdapter {
 

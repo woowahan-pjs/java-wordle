@@ -1,4 +1,4 @@
-package wordle.app.word.domain;
+package wordle.app.match.domain;
 
 import org.assertj.core.util.VisibleForTesting;
 
@@ -9,7 +9,7 @@ public class MatchResult {
     private static final List<MatchStatus> GREEN_ONLY = List.of(MatchStatus.GREEN);
     private final List<MatchStatus> matchStatusList;
 
-    MatchResult(final List<MatchStatus> matchesList) {
+    public MatchResult(final List<MatchStatus> matchesList) {
         this.matchStatusList = matchesList;
     }
 
@@ -22,7 +22,7 @@ public class MatchResult {
     }
 
     @VisibleForTesting
-    List<MatchStatus> getMatchStatusList() {
+    public List<MatchStatus> getMatchStatusList() {
         return matchStatusList;
     }
 

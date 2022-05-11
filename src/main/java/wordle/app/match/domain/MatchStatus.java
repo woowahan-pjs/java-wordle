@@ -1,6 +1,6 @@
-package wordle.app.word.domain;
+package wordle.app.match.domain;
 
-enum MatchStatus {
+public enum MatchStatus {
     GREEN("🟩"),
     YELLOW("🟨"),
     GREY("⬜"),

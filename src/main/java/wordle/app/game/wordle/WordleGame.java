@@ -4,13 +4,13 @@ import wordle.app.bucket.adapter.ContainWordsAdapter;
 import wordle.app.bucket.adapter.ContainWordsRequest;
 import wordle.app.game.base.Game;
 import wordle.app.word.adapter.InputWordsAdapter;
-import wordle.app.word.adapter.MatchWordsRequest;
+import wordle.app.match.adapter.MatchWordsRequest;
 import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.MatchResult;
+import wordle.app.match.domain.MatchResult;
 import wordle.app.word.domain.Words;
 import wordle.app.bucket.adapter.FindAnswerAdapter;
-import wordle.app.word.adapter.MatchWordsAdapter;
-import wordle.app.word.domain.MatchResults;
+import wordle.app.match.adapter.MatchWordsAdapter;
+import wordle.app.match.domain.MatchResults;
 
 public class WordleGame extends Game {
 
