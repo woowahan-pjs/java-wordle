@@ -8,6 +8,11 @@ public class OutputView {
 
     private static final int BOUNDARY_VALUE = 6;
     private static final String SEPARATOR = "/";
+
+    private OutputView() {
+        throw new AssertionError();
+    }
+
     public static void turnOutput(int turn, List<Results> resultsList) {
         System.out.println();
         System.out.println(turn + SEPARATOR + BOUNDARY_VALUE);

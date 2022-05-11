@@ -29,7 +29,8 @@ class CharactersTest {
     void characterLengthValid(String input) {
         assertThatThrownBy(() -> {
             new Characters(input);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(String.format(OUT_OF_WORD_LENGTH_ERR_MSG, input.length()));
     }
 
     @DisplayName("입력 받은 문자열과 정답 문자열을 비교한다.")
