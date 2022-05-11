@@ -1,21 +1,18 @@
 package wordle;
 
 
-import wordle.game.base.Playable;
-import wordle.game.wordle.WordleGame;
+import wordle.app.game.base.Playable;
+import wordle.config.WordleConfig;
 
 public class Application {
 
-    public static void main(String[] args) {
-        start(wordle());
+    public static void main(final String[] args) {
+        final Playable wordle = wordleConfig().wordle();
+        wordle.play();
     }
 
-    private static void start(final Playable game) {
-        game.play();
-    }
-
-    private static Playable wordle() {
-        return new WordleGame("src/main/resources/words.txt");
+    private static WordleConfig wordleConfig() {
+        return new WordleConfig();
     }
 
 }
