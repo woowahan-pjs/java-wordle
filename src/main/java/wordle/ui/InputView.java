@@ -6,7 +6,7 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
     public String inputUsersWord() {
-        return scanner.next()
+        return scanner.nextLine()
             .replace(" ", "")
             .trim();
     }
