@@ -1,7 +1,6 @@
 package wordle.app.bucket.adapter;
 
 import wordle.app.bucket.application.port.in.ContainWordsPort;
-import wordle.app.word.domain.Words;
 
 public class ContainWordsAdapter {
 
@@ -11,8 +10,12 @@ public class ContainWordsAdapter {
         this.containWordsPort = containWordsPort;
     }
 
-    public boolean contains(final Words words) {
-        return containWordsPort.contains(words);
+    public boolean contains(final ContainWordsRequest request) {
+        if (request != null) {
+            return containWordsPort.contains(request.getWords());
+        }
+
+        throw new IllegalArgumentException("ContainWordsRequest is null");
     }
 
 }

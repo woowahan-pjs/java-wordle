@@ -1,9 +1,7 @@
 package wordle.app.word.adapter;
 
-import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.MatchResult;
-import wordle.app.word.domain.Words;
 import wordle.app.word.application.port.MatchWordsPort;
+import wordle.app.word.domain.MatchResult;
 
 public class MatchWordsAdapter {
 
@@ -13,8 +11,12 @@ public class MatchWordsAdapter {
         this.matchWordsPort = matchWordsPort;
     }
 
-    public MatchResult matches(final Answer answer, final Words words) {
-        return matchWordsPort.matches(answer, words);
+    public MatchResult matches(final MatchWordsRequest request) {
+        if (request != null) {
+            return matchWordsPort.matches(request.getAnswer(), request.getWords());
+        }
+
+        throw new IllegalArgumentException("MatchWordsRequest is null");
     }
 
 }

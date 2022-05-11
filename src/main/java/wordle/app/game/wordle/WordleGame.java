@@ -1,8 +1,10 @@
 package wordle.app.game.wordle;
 
 import wordle.app.bucket.adapter.ContainWordsAdapter;
+import wordle.app.bucket.adapter.ContainWordsRequest;
 import wordle.app.game.base.Game;
 import wordle.app.word.adapter.InputWordsAdapter;
+import wordle.app.word.adapter.MatchWordsRequest;
 import wordle.app.word.domain.Answer;
 import wordle.app.word.domain.MatchResult;
 import wordle.app.word.domain.Words;
@@ -54,13 +56,13 @@ public class WordleGame extends Game {
         Words words;
         do {
             words = inputWordsAdapter.inputWords();
-        } while (!containWordsAdapter.contains(words));
+        } while (!containWordsAdapter.contains(new ContainWordsRequest(words)));
 
         return words;
     }
 
     private MatchResult matches(final Words inputWords) {
-        return matchWordsAdapter.matches(playingInfo.answer, inputWords);
+        return matchWordsAdapter.matches(new MatchWordsRequest(playingInfo.answer, inputWords));
     }
 
     private void updateMatchesResult(final MatchResult matchResult) {
