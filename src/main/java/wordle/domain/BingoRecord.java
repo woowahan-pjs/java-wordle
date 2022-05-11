@@ -17,11 +17,10 @@ public class BingoRecord {
     }
 
     private boolean isAllMatch(List<BingoStatus> statuses) {
-        for (BingoStatus bs : statuses) {
-            if (bs.isMatch()) {
-                continue;
+        for (BingoStatus bingoStatus : statuses) {
+            if (bingoStatus.isNotMatch()) {
+                return false;
             }
-            return false;
         }
 
         return true;
