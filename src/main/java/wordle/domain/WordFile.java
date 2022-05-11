@@ -13,11 +13,7 @@ public class WordFile {
     private final List<String> wordList = new ArrayList<>();
 
     public WordFile(String fileName) {
-        final File wordFile = new File(FILE_PATH + fileName);
-
-        if (!wordFile.exists()) {
-            throw new IllegalArgumentException("올바른 파일이 필요합니다.");
-        }
+        final File wordFile = assertExist(new File(FILE_PATH + fileName));
 
         try(final Scanner scanner = new Scanner(wordFile)) {
 
@@ -27,6 +23,14 @@ public class WordFile {
         } catch (Exception e) {
             throw new RuntimeException("파일 스캐너 생성 시 에러가 발생했습니다.");
         }
+    }
+
+    private File assertExist(File file) {
+        if (!file.exists()) {
+            throw new IllegalArgumentException("올바른 파일이 필요합니다.");
+        }
+
+        return file;
     }
 
     public String findTargetWord(LocalDate targetDate) {
