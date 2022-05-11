@@ -17,10 +17,8 @@ public class InputView {
         System.out.println(START_MESSAGE);
     }
 
-    public static String input() {
+    public static String input () {
         System.out.println(TURN_MESSAGE);
         return SCANNER.nextLine();
     }
-
-
 }
