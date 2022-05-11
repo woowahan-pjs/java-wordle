@@ -15,32 +15,39 @@ public class WordleGame {
 
     private final Turn turn;
     private final TodayAnswer todayAnswer;
+    private final List<Results> resultsList;
 
     public WordleGame() {
         this.turn = new Turn();
         this.todayAnswer = new TodayAnswer(AnswerGroupProvider.provide());
+        this.resultsList = new ArrayList<>();
     }
 
     public void play() {
         InputView.start();
         Characters answer = todayAnswer.choiceAnswer(LocalDate.now());
-        List<Results> resultsList = new ArrayList<>();
-        int currentTurn = getCurrentTurn(answer, resultsList);
-        OutputView.turnOutput(currentTurn, resultsList);
-    }
-
-    private int getCurrentTurn(Characters answer, List<Results> resultsList) {
-        int currentTurn = 0;
-        while (!turn.isGameOver()) {
-            currentTurn = turn.increase();
-            Characters inputCharacters = new Characters(InputView.input());
-            Results match = inputCharacters.match(answer);
+        do {
+            Characters input = inputCharacters();
+            Results match = match(answer,input);
             resultsList.add(match);
-            if (match.isMatch() || turn.isGameOver()) {
+            if (isGameOver(match)) {
                 break;
             }
             OutputView.output(resultsList);
-        }
-        return currentTurn;
+        }while(true);
+        OutputView.turnOutput(turn.getTurn(), resultsList);
+    }
+
+    private boolean isGameOver(Results match) {
+        return match.isMatch() || turn.isGameOver();
+    }
+
+    private Characters inputCharacters() {
+        return new Characters(InputView.input());
+    }
+
+    private Results match(Characters answer, Characters input) {
+        turn.increase();
+        return input.match(answer);
     }
 }

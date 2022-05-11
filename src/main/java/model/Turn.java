@@ -17,22 +17,18 @@ public class Turn {
         this.turn = turn;
     }
 
-    public int increase() {
-        validateIncrease();
-        return turn += INCREASE_VALUE;
-    }
-
-    private void validateIncrease() {
-        if (turn + INCREASE_VALUE > BOUNDARY_VALUE) {
+    public void increase() {
+        if (isGameOver()) {
             throw new IllegalStateException(TURN_BOUNDARY_OVER_ERR_MSG);
         }
+        turn += INCREASE_VALUE;
     }
 
     public boolean isGameOver() {
-        if (turn == BOUNDARY_VALUE) {
-            return true;
-        }
+        return turn == BOUNDARY_VALUE;
+    }
 
-        return false;
+    public int getTurn() {
+        return turn;
     }
 }

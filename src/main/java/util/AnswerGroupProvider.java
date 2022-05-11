@@ -1,10 +1,9 @@
 package util;
 
 import exception.AnswerGroupNotFoundException;
-import exception.InvalidPathReferenceException;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,20 +13,17 @@ import model.Characters;
 public class AnswerGroupProvider {
 
     private static final String FILE_NAME = "words.txt";
+    private static final String FILE_PATH = "./src/main/resources/";
 
     public static List<Characters> provide() {
         List<Characters> answerGroup;
-
-        URL resource = AnswerGroupProvider.class.getClassLoader().getResource(FILE_NAME);
-        if(resource == null){
-            throw new InvalidPathReferenceException("잘못된 경로 입니다.");
-        }
-        try (Stream<String> lines = Files.lines(Paths.get(resource.getPath()))) {
+        Path path = Paths.get(FILE_PATH + FILE_NAME);
+        try (Stream<String> lines = Files.lines(path)) {
             answerGroup = lines
                     .map(Characters::new)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new AnswerGroupNotFoundException(resource.getPath() + "경로의 " + FILE_NAME + "을 찾지 못하였습니다.");
+            throw new AnswerGroupNotFoundException(FILE_PATH + FILE_NAME + "의 파일을 찾지 못했습니다.");
         }
 
         return answerGroup;

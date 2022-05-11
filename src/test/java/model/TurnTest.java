@@ -15,9 +15,9 @@ class TurnTest {
     void increaseTurn() {
         Turn turn = new Turn();
 
-        int result = turn.increase();
+        turn.increase();
 
-        assertThat(result).isEqualTo(1);
+        assertThat(turn.getTurn()).isEqualTo(1);
     }
 
     @DisplayName("턴이 6회 초과 증가시 예외발생")
@@ -25,7 +25,7 @@ class TurnTest {
     void TurnException() {
         Turn turn = new Turn(6);
 
-        assertThatThrownBy(() -> turn.increase())
+        assertThatThrownBy(turn::increase)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("6번까지 입력 가능합니다.");
     }

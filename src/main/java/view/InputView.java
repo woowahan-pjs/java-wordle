@@ -17,6 +17,4 @@ public class InputView {
         System.out.println(TURN_MESSAGE);
         return scanner.nextLine();
     }
-
-
 }
