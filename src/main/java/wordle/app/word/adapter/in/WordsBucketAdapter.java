@@ -1,6 +1,6 @@
-package wordle.app.word.adapter;
+package wordle.app.word.adapter.in;
 
-import wordle.app.word.application.port.ContainWordsPort;
+import wordle.app.word.application.port.in.ContainWordsPort;
 
 public class WordsBucketAdapter {
 

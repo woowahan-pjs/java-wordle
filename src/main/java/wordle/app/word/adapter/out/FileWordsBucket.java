@@ -1,4 +1,8 @@
-package wordle.app.word.domain;
+package wordle.app.word.adapter.out;
+
+import wordle.app.word.application.port.out.WordsBucketPort;
+import wordle.app.word.domain.Answer;
+import wordle.app.word.domain.Words;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FileWordsBucket implements WordsBucket {
+public class FileWordsBucket implements WordsBucketPort {
 
     private final List<Words> words = new ArrayList<>();
     private final LocalDate answerDate;

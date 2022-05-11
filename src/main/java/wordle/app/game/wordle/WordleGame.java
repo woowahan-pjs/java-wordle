@@ -1,14 +1,14 @@
 package wordle.app.game.wordle;
 
-import wordle.app.word.adapter.WordsBucketAdapter;
-import wordle.app.word.adapter.ContainWordsRequest;
+import wordle.app.word.adapter.in.WordsBucketAdapter;
+import wordle.app.word.adapter.in.ContainWordsRequest;
 import wordle.app.game.base.Game;
-import wordle.app.word.adapter.InputWordsAdapter;
+import wordle.app.word.adapter.in.InputWordsAdapter;
 import wordle.app.match.adapter.MatchWordsRequest;
 import wordle.app.word.domain.Answer;
 import wordle.app.match.domain.MatchResult;
 import wordle.app.word.domain.Words;
-import wordle.app.word.adapter.FindAnswerAdapter;
+import wordle.app.word.adapter.in.FindAnswerAdapter;
 import wordle.app.match.adapter.MatchWordsAdapter;
 import wordle.app.match.domain.MatchResults;
 

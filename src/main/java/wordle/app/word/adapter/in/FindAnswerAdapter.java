@@ -1,6 +1,6 @@
-package wordle.app.word.adapter;
+package wordle.app.word.adapter.in;
 
-import wordle.app.word.application.port.FindAnswerPort;
+import wordle.app.word.application.port.in.FindAnswerPort;
 import wordle.app.word.domain.Answer;
 
 public class FindAnswerAdapter {

@@ -1,10 +1,10 @@
 package wordle.app.word.application.service;
 
 import camp.nextstep.edu.missionutils.Console;
-import wordle.app.word.domain.WordsBucket;
-import wordle.app.word.application.port.ContainWordsPort;
-import wordle.app.word.application.port.FindAnswerPort;
-import wordle.app.word.application.port.InputWordsPort;
+import wordle.app.word.application.port.out.WordsBucketPort;
+import wordle.app.word.application.port.in.ContainWordsPort;
+import wordle.app.word.application.port.in.FindAnswerPort;
+import wordle.app.word.application.port.in.InputWordsPort;
 import wordle.app.word.domain.Answer;
 import wordle.app.word.domain.Words;
 
@@ -12,9 +12,9 @@ import java.time.LocalDate;
 
 public class WordsService implements ContainWordsPort, FindAnswerPort, InputWordsPort {
 
-    private final WordsBucket wordsBucket;
+    private final WordsBucketPort wordsBucket;
 
-    public WordsService(final WordsBucket wordsBucket) {
+    public WordsService(final WordsBucketPort wordsBucket) {
         this.wordsBucket = wordsBucket;
     }
 

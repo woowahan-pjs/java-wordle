@@ -1,4 +1,4 @@
-package wordle.app.word.application.port;
+package wordle.app.word.application.port.in;
 
 import wordle.app.word.domain.Words;
 

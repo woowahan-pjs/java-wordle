@@ -1,8 +1,8 @@
-package wordle.app.word.domain;
+package wordle.app.word.adapter.out;
 
 import org.junit.jupiter.api.Test;
+import wordle.app.word.adapter.out.FileWordsBucket;
 import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.FileWordsBucket;
 import wordle.app.word.domain.Words;
 
 import java.time.LocalDate;

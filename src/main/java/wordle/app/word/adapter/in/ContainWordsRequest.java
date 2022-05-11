@@ -1,4 +1,4 @@
-package wordle.app.word.adapter;
+package wordle.app.word.adapter.in;
 
 import wordle.app.word.domain.Words;
 

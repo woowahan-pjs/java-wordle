@@ -5,7 +5,7 @@ import org.assertj.core.util.VisibleForTesting;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class Word {
+class Word {
 
     private static final Pattern pattern = Pattern.compile("[A-Za-z]");
     private final char value;
