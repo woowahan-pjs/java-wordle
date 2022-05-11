@@ -28,7 +28,7 @@ public class AnswerGroupProvider {
                     .map(Characters::new)
                     .collect(Collectors.toList());
         } catch (IOException | URISyntaxException e) {
-            throw new AnswerGroupNotFoundException(resource.getPath() + "경로의 " + FILE_NAME + "을 찾지 못하였습니다.");
+            throw new AnswerGroupNotFoundException("I/O exception 이거나 URI 참조로 구문을 분석할 수 없습니다.");
         }
 
         return answerGroup;
