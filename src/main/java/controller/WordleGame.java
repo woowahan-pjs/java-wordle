@@ -26,13 +26,14 @@ public class WordleGame {
         InputView.start();
         Characters answer = todayAnswer.choiceAnswer(LocalDate.now());
         List<Results> resultsList = new ArrayList<>();
-        int currentTurn = getCurrentTurn(answer, resultsList, TURN_INIT);
+        getCurrentTurn(answer, resultsList);
+        int currentTurn = turn.getValue();
         OutputView.turnOutput(currentTurn, resultsList);
     }
 
-    private int getCurrentTurn(Characters answer, List<Results> resultsList, int currentTurn) {
+    private void getCurrentTurn(Characters answer, List<Results> resultsList) {
         while (!turn.isGameOver()) {
-            currentTurn = turn.increase();
+            turn.increase();
             String input = InputView.input();
             Characters inputCharacters = new Characters(input);
             Results match = inputCharacters.match(answer);
@@ -42,6 +43,5 @@ public class WordleGame {
             }
             OutputView.output(resultsList);
         }
-        return currentTurn;
     }
 }

@@ -7,32 +7,32 @@ public class Turn {
     private static final int BOUNDARY_VALUE = 6;
     private static final String TURN_BOUNDARY_OVER_ERR_MSG = "6번까지 입력 가능합니다.";
 
-    private int turn;
+    private int value;
 
     public Turn() {
         this(INIT_VALUE);
     }
 
-    Turn(int turn) {
-        this.turn = turn;
+    Turn(int value) {
+        this.value = value;
     }
 
     public int increase() {
         validateIncrease();
-        return turn += INCREASE_VALUE;
+        return value += INCREASE_VALUE;
     }
 
     private void validateIncrease() {
-        if (turn + INCREASE_VALUE > BOUNDARY_VALUE) {
+        if (value + INCREASE_VALUE > BOUNDARY_VALUE) {
             throw new IllegalStateException(TURN_BOUNDARY_OVER_ERR_MSG);
         }
     }
 
     public boolean isGameOver() {
-        if (turn == BOUNDARY_VALUE) {
-            return true;
-        }
+        return value == BOUNDARY_VALUE;
+    }
 
-        return false;
+    public int getValue() {
+        return value;
     }
 }
