@@ -1,7 +1,4 @@
-package wordle.app.bucket.domain;
-
-import wordle.app.word.domain.Answer;
-import wordle.app.word.domain.Words;
+package wordle.app.word.domain;
 
 import java.io.IOException;
 import java.nio.file.Files;

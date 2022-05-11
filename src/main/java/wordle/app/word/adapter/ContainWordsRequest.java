@@ -1,4 +1,4 @@
-package wordle.app.bucket.adapter;
+package wordle.app.word.adapter;
 
 import wordle.app.word.domain.Words;
 

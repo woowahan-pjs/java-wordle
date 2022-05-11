@@ -1,16 +1,15 @@
 package wordle.config;
 
 
-import wordle.app.bucket.adapter.ContainWordsAdapter;
-import wordle.app.bucket.adapter.FindAnswerAdapter;
-import wordle.app.bucket.application.service.WordsBucketService;
-import wordle.app.bucket.domain.FileWordsBucket;
-import wordle.app.bucket.domain.WordsBucket;
+import wordle.app.word.adapter.FindAnswerAdapter;
+import wordle.app.word.domain.FileWordsBucket;
+import wordle.app.word.domain.WordsBucket;
 import wordle.app.game.base.Playable;
 import wordle.app.game.wordle.WordleGame;
+import wordle.app.match.adapter.MatchWordsAdapter;
 import wordle.app.match.application.service.MatchService;
 import wordle.app.word.adapter.InputWordsAdapter;
-import wordle.app.match.adapter.MatchWordsAdapter;
+import wordle.app.word.adapter.WordsBucketAdapter;
 import wordle.app.word.application.service.WordsService;
 
 import java.time.LocalDate;
@@ -19,25 +18,20 @@ public class WordleConfig {
 
     public Playable wordle() {
         final WordsBucket wordsBucket = new FileWordsBucket("src/main/resources/words.txt", LocalDate.of(2021, 6, 19));
-        final WordsBucketService wordsBucketService = wordsBucketService(wordsBucket);
-        final WordsService wordsService = wordsService();
-        return new WordleGame(containWordsAdapter(wordsBucketService), findAnswerAdapter(wordsBucketService), inputWordsAdapter(wordsService), matchWordsAdapter(matchService()));
+        final WordsService wordsService = wordsService(wordsBucket);
+        return new WordleGame(wordsBucketAdapter(wordsService), findAnswerAdapter(wordsService), inputWordsAdapter(wordsService), matchWordsAdapter(matchService()));
     }
 
-    private WordsBucketService wordsBucketService(final WordsBucket wordsBucket) {
-        return new WordsBucketService(wordsBucket);
+    private WordsBucketAdapter wordsBucketAdapter(final WordsService wordsService) {
+        return new WordsBucketAdapter(wordsService);
     }
 
-    private ContainWordsAdapter containWordsAdapter(final WordsBucketService wordsBucketService) {
-        return new ContainWordsAdapter(wordsBucketService);
+    private FindAnswerAdapter findAnswerAdapter(final WordsService wordsService) {
+        return new FindAnswerAdapter(wordsService);
     }
 
-    private FindAnswerAdapter findAnswerAdapter(final WordsBucketService wordsBucketService) {
-        return new FindAnswerAdapter(wordsBucketService);
-    }
-
-    private WordsService wordsService() {
-        return new WordsService();
+    private WordsService wordsService(final WordsBucket wordsBucket) {
+        return new WordsService(wordsBucket);
     }
 
     private InputWordsAdapter inputWordsAdapter(final WordsService wordsService) {

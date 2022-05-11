@@ -1,32 +1,32 @@
 package wordle.app.game.wordle;
 
-import wordle.app.bucket.adapter.ContainWordsAdapter;
-import wordle.app.bucket.adapter.ContainWordsRequest;
+import wordle.app.word.adapter.WordsBucketAdapter;
+import wordle.app.word.adapter.ContainWordsRequest;
 import wordle.app.game.base.Game;
 import wordle.app.word.adapter.InputWordsAdapter;
 import wordle.app.match.adapter.MatchWordsRequest;
 import wordle.app.word.domain.Answer;
 import wordle.app.match.domain.MatchResult;
 import wordle.app.word.domain.Words;
-import wordle.app.bucket.adapter.FindAnswerAdapter;
+import wordle.app.word.adapter.FindAnswerAdapter;
 import wordle.app.match.adapter.MatchWordsAdapter;
 import wordle.app.match.domain.MatchResults;
 
 public class WordleGame extends Game {
 
-    private final ContainWordsAdapter containWordsAdapter;
+    private final WordsBucketAdapter wordsBucketAdapter;
     private final InputWordsAdapter inputWordsAdapter;
     private final MatchWordsAdapter matchWordsAdapter;
     private final WordleGameView gameView;
     private final PlayingInfo playingInfo;
 
     public WordleGame(
-            final ContainWordsAdapter containWordsAdapter,
+            final WordsBucketAdapter wordsBucketAdapter,
             final FindAnswerAdapter answerAdapter,
             final InputWordsAdapter inputWordsAdapter,
             final MatchWordsAdapter matchWordsAdapter) {
 
-        this.containWordsAdapter = containWordsAdapter;
+        this.wordsBucketAdapter = wordsBucketAdapter;
         this.inputWordsAdapter = inputWordsAdapter;
         this.matchWordsAdapter = matchWordsAdapter;
         this.playingInfo = new PlayingInfo(answerAdapter.findAnswer());
@@ -56,7 +56,7 @@ public class WordleGame extends Game {
         Words words;
         do {
             words = inputWordsAdapter.inputWords();
-        } while (!containWordsAdapter.contains(new ContainWordsRequest(words)));
+        } while (!wordsBucketAdapter.contains(new ContainWordsRequest(words)));
 
         return words;
     }

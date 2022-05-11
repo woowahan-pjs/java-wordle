@@ -1,12 +1,12 @@
-package wordle.app.bucket.adapter;
+package wordle.app.word.adapter;
 
-import wordle.app.bucket.application.port.in.ContainWordsPort;
+import wordle.app.word.application.port.ContainWordsPort;
 
-public class ContainWordsAdapter {
+public class WordsBucketAdapter {
 
     private final ContainWordsPort containWordsPort;
 
-    public ContainWordsAdapter(final ContainWordsPort containWordsPort) {
+    public WordsBucketAdapter(final ContainWordsPort containWordsPort) {
         this.containWordsPort = containWordsPort;
     }
 

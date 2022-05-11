@@ -1,4 +1,4 @@
-package wordle.app.bucket.application.port.in;
+package wordle.app.word.application.port;
 
 import wordle.app.word.domain.Answer;
 
