@@ -19,8 +19,7 @@ public class WordFile {
             throw new IllegalArgumentException("올바른 파일이 필요합니다.");
         }
 
-        try {
-            final Scanner scanner = new Scanner(wordFile);
+        try(final Scanner scanner = new Scanner(wordFile)) {
 
             while (scanner.hasNext()) {
                 wordList.add(scanner.nextLine());
