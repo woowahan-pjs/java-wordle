@@ -24,7 +24,7 @@ class CharacterTest {
     void characterIsNotNumber(String input) {
         assertThatThrownBy(() -> new Character(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ILLEGAL_INPUT_ERR_MSG);
+                .hasMessage(String.format(ILLEGAL_INPUT_ERR_MSG, input));
     }
 
     @ParameterizedTest(name = "입력 문자 {0} 와 정답 문자 {1}를 비교하면 {2}가 결과로 나타난다.")

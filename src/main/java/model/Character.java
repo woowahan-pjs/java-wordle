@@ -6,7 +6,7 @@ import static model.Result.NON_EXIST;
 
 public class Character implements Comparable<Character> {
 
-    public static final String ILLEGAL_INPUT_ERR_MSG = "영어만 입력이 가능합니다.";
+    static final String ILLEGAL_INPUT_ERR_MSG = "영어만 입력이 가능합니다.(입력된 정답 문자는 %s입니다.)";
     private static final String INPUT_RANGE = "[a-zA-Z]";
 
     private static final int POSITION_INIT = 0;
@@ -27,7 +27,7 @@ public class Character implements Comparable<Character> {
 
     private void validate(String value) {
         if (!value.matches(INPUT_RANGE)) {
-            throw new IllegalArgumentException(ILLEGAL_INPUT_ERR_MSG);
+            throw new IllegalArgumentException(String.format(ILLEGAL_INPUT_ERR_MSG, value));
         }
     }
 
