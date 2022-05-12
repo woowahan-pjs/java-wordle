@@ -8,6 +8,69 @@
 
 ---
 
+## 기능 구현 사항
+### view
+* ConsoleInput.java
+  - [x] '정답을 입력해 주세요.' 문구와 함께 단어를 입력받는다
+
+* ConsoleOutput.java
+  + [x] 글자 수가 5자가 아닌 경우
+    + [x] '글자 수는 5글자여야 합니다.' 문구를 출력한다.
+  + [x] 글자 수가 맞는 경우
+    + WordPool 에 있는 단어인 경우
+      + [x] 정답과 비교한 결과를 출력한다
+    + WordPool 에 없는 단어인 경우
+      + [x] '단어가 목록에 없습니다.' 문구를 출력한다.
+  + [x] 입력된 단어가 영문자가 아닌 경우
+    + [x] '영문자만 입력 가능합니다.' 문구를 출력한다.
+
+### util
++ WordPoolGenerator.java : 유효 단어 목록 생성기
+  - [x] 글자 수가 5자인 단어들의 리스트를 반환한다
++ WordValidator.java : 단어 검증기
+  + [x] 글자 수가 5자가 아닌 경우를 검증한다
+  + [x] 입력된 단어가 영문자인지를 검증한다
+  + [x] WordPool 에 있는 단어인지를 검증한다
+
+### model
+* WordPool.java : words.txt에 있는 단어를 모두 들고 있는 객체
+  * [x] 단어 리스트에서 (현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어를 반환한다
+
+* Letter.java : 단어의 글자 1개를 가지고 있는 객체
+  * [x] 입력된 단어가 유효한 알파벳인지 검증한다
+
+* Word.java : 단어 리스트를 가지고 있는 객체(Letter[])
+  * [x] 오늘의 정답 단어와 입력된 단어를 비교
+    + [x] Alphabet, Letter가 저장된 배열의 인덱스를 비교해서 모두 일치하면 GREEN
+    + [x] Alphabet 은 일치하는데 Letter가 저장된 배열의 인덱스가 일치하지 않으면 YELLOW
+    + [x] Alphabet, Letter가 저장된 배열의 인덱스를 비교해서 모두 일치하지 않으며 GRAY
+
+* Tiles.java : 오늘의 정답 단어와 입력된 단어를 비교한 결과 데이터를 가지고 있는 객체
+
+* TileStatus : 판별 결과 enum(초록색, 노란색, 회색)
+  
+* Grid.java : 오늘의 정답 단어와 입력된 단어를 비교한 결과 데이터인 Tiles를 모두 가지고 있는 객체
+
+* Game.java : 오늘의 정답 단어(Word), 게임 결과(GameResult) 정보를 가지고 있는 객체
+  * [x] 오늘의 정답 단어를 가진다
+  * [x] 오늘의 정답 단어와 입력된 단어를 비교한 결과를 GameResult에 전달한다
+    * [x] 정답이면 게임 결과를 WIN으로 변경한다
+    * [x] 6번 이내로 정답을 맞추지 못한 경우 게임 결과를 LOSE로 변경한다
+
+* GameResult.java : 단어의 비교 결과(Grid) 정보와 게임의 상태(GameStatus) 정보를 가지고 있는 객체
+  * [x] 게임 시작시 게임 결과를 PROGRESS로 가진다
+  * [x] 게임 상태가 정답을 맞춘 경우인지 정답을 맞추지 못한 경우인지 체크하여 반환한다
+  * [x] 현재 입력이 몇번 진행되었는지 계산하여 반환한다
+
+* GameStatus.java : 게임의 상태 enum(진행, 승리, 패배)
+
+### 고민했던 부분
++ Validator를 어디에 위치시킬 것인가?
+  + Controller, Word 생성 메서드
++ Validator 내 validate 메서드 외 private 메서드를 private으로 가져가도 되는지?
++ Letter 내 Alphabet, Position 가 과도하게 객체를 쪼갠 것인지?
+---
+
 ## 🚀 기능 요구 사항
 
 선풍적인 인기를 끌었던 영어 단어 맞추기 게임이다.
@@ -61,7 +124,7 @@ spill
 ## 🎯 프로그래밍 요구 사항
 
 - JDK 11 버전에서 실행 가능해야 한다. **JDK 11에서 정상적으로 동작하지 않을 경우 0점 처리한다.**
-- 프로그램 실행의 시작점은 `Application`의 `main()`이다.
+- 프로그램 실행의 시작점은 `wordle.Application`의 `main()`이다.
 - [Java 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/master/styleguide/java) 가이드를 준수하며 프로그래밍한다.
 - 프로그래밍 요구 사항에서 별도의 변경 불가 안내가 없는 한 자유롭게 파일을 수정하고 패키지를 이동할 수 있다.
 - indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
