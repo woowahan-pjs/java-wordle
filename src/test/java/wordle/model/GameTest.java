@@ -20,7 +20,7 @@ public class GameTest {
 
 		// when
 		Game game = new Game(wordPool);
-		Word answer = new Word(wordPool.getTodayAnswerWord());
+		Word answer = Word.from(wordPool.getTodayAnswerWord());
 
 		// then
 		assertThat(game.getAnswer()).isEqualTo(answer);

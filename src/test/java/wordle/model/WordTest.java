@@ -15,7 +15,7 @@ class WordTest {
 	@DisplayName("Word는 Letter 5개를 가지고 있다.")
 	void wordShouldHaveFiveLetter(String userInput) {
 		// given
-		Word word = new Word(userInput);
+		Word word = Word.from(userInput);
 
 		// when
 		int numberOfLetters = word.getLetters().length;
@@ -30,14 +30,14 @@ class WordTest {
 	void 유효하지_않은_단어가_입력되면_오류가_발생한다(String userInput) {
 		// given & when & then
 		assertThatIllegalArgumentException().
-			isThrownBy(() -> new Word(userInput));
+			isThrownBy(() -> Word.from(userInput));
 	}
 
 	@Test
 	void 정답단어와_입력단어를_비교하여_글자가_같고_인덱스가_같으면_GREEN이다() {
 		// given
-		Word answerWord = new Word("apple");
-		Word inputWord = new Word("apple");
+		Word answerWord = Word.from("apple");
+		Word inputWord = Word.from("apple");
 
 		// when
 		Tiles matchResult = answerWord.calculateMatched(inputWord);
@@ -50,8 +50,8 @@ class WordTest {
 	@Test
 	void 정답단어와_입력단어를_비교하여_글자가_같고_인덱스가_다르면_YELLOW이다() {
 		// given
-		Word answerWord = new Word("apple");
-		Word inputWord = new Word("water");
+		Word answerWord = Word.from("apple");
+		Word inputWord = Word.from("water");
 
 		// when
 		Tiles matchResult = answerWord.calculateMatched(inputWord);
@@ -64,8 +64,8 @@ class WordTest {
 	@Test
 	void 정답단어와_입력단어를_비교하여_글자가_다르고_인덱스가_다르면_GRAY이다() {
 		// given
-		Word answerWord = new Word("apple");
-		Word inputWord = new Word("water");
+		Word answerWord = Word.from("apple");
+		Word inputWord = Word.from("water");
 
 		// when
 		Tiles matchResult = answerWord.calculateMatched(inputWord);

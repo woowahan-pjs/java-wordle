@@ -7,12 +7,19 @@ public class Word {
 	private static final int VALID_WORD_LENGTH = 5;
 	private static final int NUMBER_OF_LETTER = 5;
 	private static final String INVALID_WORD_LENGTH_MESSAGE = "단어는 5글자여야 합니다.";
-	private Letter[] letters = new Letter[NUMBER_OF_LETTER];
+	private final Letter[] letters = new Letter[NUMBER_OF_LETTER];
 
-	public Word(String input) {
-		validateInputWordLength(input);
-		createLetters(input);
+	private Word() {
+
 	}
+
+	public static Word from(String input) {
+		Word word = new Word();
+		word.validateInputWordLength(input);
+		word.createLetters(input);
+		return word;
+	}
+
 
 	public Letter[] getLetters() {
 		return letters;

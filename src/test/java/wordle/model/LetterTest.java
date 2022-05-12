@@ -26,7 +26,7 @@ class LetterTest {
 	void 단어_입력시_Letter_객체에_알파벳이_저장된다(char alphabet, int index) {
 		// given
 		String input = "apple";
-		Word answer = new Word(input);
+		Word answer = Word.from(input);
 
 		// when
 		Letter[] alphabetList = answer.getLetters();
@@ -39,7 +39,7 @@ class LetterTest {
 	@ValueSource(strings = {"apple", "world"})
 	void Letter_객체는_단어를_가지고_있다(String input) {
 		// given
-		Word answer = new Word(input);
+		Word answer = Word.from(input);
 
 		// when
 		String letters = answer.getAnswerWordAsString();
@@ -52,8 +52,8 @@ class LetterTest {
 	void 정답_단어와_입력된_단어를_비교한_결과_일치하면_참이다() {
 		// given
 		String input = "apple";
-		Word answer = new Word(input);
-		Word inputWord = new Word(input);
+		Word answer = Word.from(input);
+		Word inputWord = Word.from(input);
 
 		// when
 		answer.calculateMatched(inputWord);
@@ -66,8 +66,8 @@ class LetterTest {
 	@Test
 	void 정답_단어와_입력된_단어를_비교한_결과_일치하지_않으면_거짓이다() {
 		// given
-		Word answer = new Word("world");
-		Word userInput = new Word("apple");
+		Word answer = Word.from("world");
+		Word userInput = Word.from("apple");
 
 		// when
 		answer.calculateMatched(userInput);

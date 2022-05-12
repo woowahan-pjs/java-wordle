@@ -10,7 +10,7 @@ public class Game {
 	}
 
 	public void compareWith(String userInput) {
-		Word userInputWord = new Word(userInput);
+		Word userInputWord = Word.from(userInput);
 		gameResult.addTiles(answer.calculateMatched(userInputWord));
 		answerCheck(userInputWord);
 	}
@@ -41,7 +41,7 @@ public class Game {
 	}
 
 	private void init(Words wordList) {
-		answer = new Word(wordList.getTodayAnswerWord());
+		answer = Word.from(wordList.getTodayAnswerWord());
 	}
 
 }

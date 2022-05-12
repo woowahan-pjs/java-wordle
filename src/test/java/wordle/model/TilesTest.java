@@ -13,10 +13,10 @@ class TilesTest {
 	@MethodSource("parameterProvider")
 	void 단어의_비교결과_타일_배열이_반환된다(String answerWord, String inputWord, TileStatus[] expectedTileStatus) {
 		//given
-		Word answer = new Word(answerWord);
+		Word answer = Word.from(answerWord);
 
 		// when
-		Tiles matchResult = answer.calculateMatched(new Word(inputWord));
+		Tiles matchResult = answer.calculateMatched(Word.from(inputWord));
 		TileStatus[] matchResultStatus = matchResult.getStatus();
 
 		// then
