@@ -28,8 +28,18 @@ public class WordleMachine {
 
 		do {
 			userInputWord = consoleInput.readUserInput();
-		} while (!WordValidator.validate(userInputWord, WORD_POOL));
+		} while (!validateInputCheck(userInputWord));
 
 		return userInputWord;
+	}
+
+	private boolean validateInputCheck(String userInputWord) {
+		try {
+			WordValidator.validate(userInputWord, WORD_POOL);
+			return true;
+		} catch (Exception e) {
+			ConsoleOutput.printErrorMessage(e.getMessage());
+			return false;
+		}
 	}
 }

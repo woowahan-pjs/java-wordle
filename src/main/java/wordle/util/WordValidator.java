@@ -11,17 +11,10 @@ public class WordValidator {
 	private static final String WORD_PATTERN = "^[A-Za-z]+$";
 	private static final String INVALID_WORD_MESSAGE = "존재하지 않는 단어입니다.";
 
-	public static boolean validate(String userInput, WordPool wordPool) {
-		try {
-			validateWordLength(userInput);
-			validateAlphabet(userInput);
-			validateExistedWord(userInput, wordPool);
-		} catch (Exception e) {
-			ConsoleOutput.printErrorMessage(e.getMessage());
-			return false;
-		}
-
-		return true;
+	public static void validate(String userInput, WordPool wordPool) {
+		validateWordLength(userInput);
+		validateAlphabet(userInput);
+		validateExistedWord(userInput, wordPool);
 	}
 
 	private static void validateWordLength(String userInput) {
