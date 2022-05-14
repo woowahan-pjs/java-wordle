@@ -1,5 +1,7 @@
 package wordle.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import wordle.design.GameManager;
 import wordle.design.Judgement;
 import wordle.design.Printer;
