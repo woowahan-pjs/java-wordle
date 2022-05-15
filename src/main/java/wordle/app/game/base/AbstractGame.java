@@ -1,6 +1,6 @@
 package wordle.app.game.base;
 
-public abstract class Game implements Playable {
+public abstract class AbstractGame implements Playable {
 
     @Override
     public void play() {

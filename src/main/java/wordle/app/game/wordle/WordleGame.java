@@ -2,7 +2,7 @@ package wordle.app.game.wordle;
 
 import wordle.app.word.adapter.in.WordsBucketAdapter;
 import wordle.app.word.adapter.in.ContainWordsRequest;
-import wordle.app.game.base.Game;
+import wordle.app.game.base.AbstractGame;
 import wordle.app.word.adapter.in.InputWordsAdapter;
 import wordle.app.match.adapter.MatchWordsRequest;
 import wordle.app.word.domain.Answer;
@@ -12,7 +12,7 @@ import wordle.app.word.adapter.in.FindAnswerAdapter;
 import wordle.app.match.adapter.MatchWordsAdapter;
 import wordle.app.match.domain.MatchResults;
 
-public class WordleGame extends Game {
+public class WordleGame extends AbstractGame {
 
     private final WordsBucketAdapter wordsBucketAdapter;
     private final InputWordsAdapter inputWordsAdapter;

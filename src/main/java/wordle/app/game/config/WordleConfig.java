@@ -1,6 +1,8 @@
-package wordle.config;
+package wordle.app.game.config;
 
 
+import wordle.app.game.base.GameConfigurable;
+import wordle.app.game.base.GameType;
 import wordle.app.word.adapter.in.FindAnswerAdapter;
 import wordle.app.word.adapter.out.FileWordsBucket;
 import wordle.app.word.application.port.out.WordsBucketPort;
@@ -14,9 +16,15 @@ import wordle.app.word.application.service.WordsService;
 
 import java.time.LocalDate;
 
-public class WordleConfig {
+class WordleConfig implements GameConfigurable {
 
-    public Playable wordle() {
+    @Override
+    public GameType gameType() {
+        return GameType.WORDLE;
+    }
+
+    @Override
+    public Playable game() {
         final WordsBucketPort wordsBucket = new FileWordsBucket("src/main/resources/words.txt", LocalDate.of(2021, 6, 19));
         final WordsService wordsService = wordsService(wordsBucket);
         return new WordleGame(wordsBucketAdapter(wordsService), findAnswerAdapter(wordsService), inputWordsAdapter(wordsService), matchWordsAdapter(matchService()));
