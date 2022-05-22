@@ -32,17 +32,18 @@ public class Wordle {
         }
 
         BingoHistory history = new BingoHistory();
-        // 정답
+
         List<String> convertedGivenWord = new ArrayList<>(Arrays.asList(givenWord.split("")));
 
         for (int i = 0; i < 5; i++) {
             BingoStatus bingoStatus = BingoStatus.NOTHING;
-            if (targetWord.contains(convertedGivenWord.get(i)) && targetWord.get(i).equals(convertedGivenWord.get(i))) {
+            String givnWordCharacter = convertedGivenWord.get(i);
+            if (targetWord.contains(givnWordCharacter) && targetWord.get(i).equals(givnWordCharacter)) {
                 bingoStatus = BingoStatus.MATCH;
             }
 
-            if (targetWord.contains(convertedGivenWord.get(i)) && !targetWord.get(i)
-                    .equals(convertedGivenWord.get(i))) {
+            if (targetWord.contains(givnWordCharacter) && !targetWord.get(i)
+                    .equals(givnWordCharacter)) {
                 bingoStatus = BingoStatus.CONTAIN;
             }
             history.add(bingoStatus);
