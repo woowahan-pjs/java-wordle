@@ -32,4 +32,8 @@ public class ResultView {
     public void printTurnAndLimitTryToBingo(int turn, int limitTryToBingo) {
         System.out.printf("%d/%d\n\n", turn, limitTryToBingo);
     }
+
+    public void printInputErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }

@@ -58,8 +58,8 @@ public class WordleGameRunner {
                 resultView.printEmptyLine();
 
                 return new Word(givenWord);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException illegalArgEx) {
+                resultView.printInputErrorMessage(illegalArgEx.getMessage());
             }
 
             resultView.printRetryInputWord();
