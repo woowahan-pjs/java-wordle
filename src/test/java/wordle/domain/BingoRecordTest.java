@@ -18,10 +18,11 @@ import static wordle.domain.BingoStatus.NOTHING;
 
 @DisplayName("정답 여부 기록을 담당하는 `BingoRecord` 객체 태스트")
 class BingoRecordTest {
+
     private final List<BingoStatus> allContainStatuses = List.of(CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN, CONTAIN);
 
     @DisplayName("정답 여부 리스트가 주어지면 `BingoRecord` 객체 생성 성공")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> bingoStatuses: {0}")
     @MethodSource("bingoStatuses")
     void createBingoRecordIsSuccessGivenBingoStatuses(List<BingoStatus> bingoStatuses) {
         // Arrange
@@ -80,7 +81,7 @@ class BingoRecordTest {
     }
 
     @DisplayName("주어진 단어가 타겟 단어와 스펠링이 모두 일치하지 않는 경우 `false` 반환")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> isNotAllMatchStatuses: {0}")
     @MethodSource("isNotAllMatchStatuses")
     void returnFalseWhenWordIsNotExactlyMatchStatus(List<BingoStatus> isNotAllMatchStatuses) {
         // Arrange
