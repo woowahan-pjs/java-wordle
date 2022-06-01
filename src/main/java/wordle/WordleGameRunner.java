@@ -28,14 +28,14 @@ public class WordleGameRunner {
     public void run() {
         printGameStart();
 
-        compareToMatch(wordleGame);
+        compareToMatchGivenTimes();
     }
 
     private void printGameStart() {
         resultView.printGameStart();
     }
 
-    private void compareToMatch(WordleGame wordleGame) {
+    private void compareToMatchGivenTimes() {
         for (int i = 1; i <= limitTryToBingo; i++) {
             final Word usersWord = inputUsersWord();
 
