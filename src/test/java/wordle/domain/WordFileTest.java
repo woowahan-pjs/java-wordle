@@ -37,20 +37,20 @@ public class WordFileTest {
     }
 
     @DisplayName("스캔한 단어 목록 파일에서 목표 단어 추출하여 반환")
-    @ParameterizedTest
-    @MethodSource("targetDateAndExpectedTargetWord")
-    void returnTargetWordIsSuccessGivenDate(LocalDate targetDate, String expectedTargetWord) {
+    @ParameterizedTest(name = "[{index}] -> givenDate: {0}, expectedGoalWord: {1}")
+    @MethodSource("givenDateAndExpectedGoalWord")
+    void returnGoalWordIsSuccessGivenDate(LocalDate givenDate, String expectedGoalWord) {
         // Arrange
         final WordFile wordFile = new WordFile("words.txt");
 
         // Act
-        final String foundTargetWord = wordFile.findTargetWord(targetDate);
+        final String foundTargetWord = wordFile.findGoalWord(givenDate);
 
         // Assert
-        assertThat(foundTargetWord).isEqualTo(expectedTargetWord);
+        assertThat(foundTargetWord).isEqualTo(expectedGoalWord);
     }
 
-    private static Stream<Arguments> targetDateAndExpectedTargetWord() {
+    private static Stream<Arguments> givenDateAndExpectedGoalWord() {
         return Stream.of(
             Arguments.of(LocalDate.of(2022, 5, 1), "trash"),
             Arguments.of(LocalDate.of(2022, 5, 2), "fella"),

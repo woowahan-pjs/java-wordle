@@ -33,10 +33,10 @@ public class WordFile {
         return file;
     }
 
-    public String findTargetWord(LocalDate targetDate) {
+    public String findGoalWord(LocalDate givenDate) {
         final LocalDate conditionDate = LocalDate.of(2021, 6, 19);
 
-        final long diffDays = DAYS.between(conditionDate, targetDate);
+        final long diffDays = DAYS.between(conditionDate, givenDate);
 
         final int targetIdx = Math.abs((int) diffDays % wordList.size());
 

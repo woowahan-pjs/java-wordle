@@ -22,7 +22,7 @@ public class WordleGameRunner {
     }
 
     private String scanGoalWord() {
-        return new WordFile("words.txt").findTargetWord(LocalDate.now());
+        return new WordFile("words.txt").findGoalWord(LocalDate.now());
     }
 
     public void run() {
