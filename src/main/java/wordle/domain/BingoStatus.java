@@ -11,7 +11,7 @@ public enum BingoStatus {
         this.printFormat = printFormat;
     }
 
-    public Boolean isNotMatch() {
-        return this != MATCH;
+    public Boolean isMatch() {
+        return this == MATCH;
     }
 }

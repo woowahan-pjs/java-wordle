@@ -17,13 +17,7 @@ public class BingoRecord {
     }
 
     private boolean isAllMatch(List<BingoStatus> statuses) {
-        for (BingoStatus bingoStatus : statuses) {
-            if (bingoStatus.isNotMatch()) {
-                return false;
-            }
-        }
-
-        return true;
+        return statuses.stream().allMatch(BingoStatus::isMatch);
     }
 
     public boolean isAllMatch() {
