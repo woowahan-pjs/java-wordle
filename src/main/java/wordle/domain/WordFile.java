@@ -23,12 +23,14 @@ public class WordFile {
     }
 
     public String findGoalWord(LocalDate givenDate) {
+        final int goalIndex = Math.abs((int) getDiffDaysFromConditionDate(givenDate) % wordList.size());
+
+        return wordList.get(goalIndex);
+    }
+
+    private long getDiffDaysFromConditionDate(LocalDate givenDate) {
         final LocalDate conditionDate = LocalDate.of(2021, 6, 19);
 
-        final long diffDays = DAYS.between(conditionDate, givenDate);
-
-        final int targetIdx = Math.abs((int) diffDays % wordList.size());
-
-        return wordList.get(targetIdx);
+        return DAYS.between(conditionDate, givenDate);
     }
 }
