@@ -31,7 +31,7 @@ class WordleGameTest {
     }
 
     @DisplayName("`Word`가 주어지면 `WordleGame`의 `GoalWord`와 비교하여 결과 반환")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> goalWord: {0}, givenWord: {1}, expectedRecord: {2}")
     @MethodSource("goalWordAndGivenWordAndExpectedStatuses")
     void returnBingoStatusesIfCompareToMatch(Word goalWord, Word givenWord, BingoRecord expectedRecord) {
         // Arrange
@@ -45,7 +45,7 @@ class WordleGameTest {
     }
 
     @DisplayName("주어진 `Word`와 `WordleGame`의 `GoalWord`와 비교하여 동일한 경우 `isAllMatch` 함수는 `true` 반환")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> sameWord: {0}")
     @ValueSource(strings = {"apple", "metro", "petal", "legal"})
     void returnTrueIfGivenWordIsEqualToGoalWord(String sameWord) {
         // Arrange
@@ -61,7 +61,7 @@ class WordleGameTest {
     }
 
     @DisplayName("주어진 `Word`와 `WordleGame`의 `GoalWord`와 비교하여 동일하지 않는 경우 `isAllMatch` 함수는 `false` 반환")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> goalString: {0}, givenString: {1}")
     @CsvSource(value = {"apple:happy", "hairy:happy", "petal:fetal", "legal:regal"}, delimiter = ':')
     void returnFalseIfGivenWordIsNopEqualToGoalWord(String goalString, String givenString) {
         // Arrange

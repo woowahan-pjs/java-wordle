@@ -56,4 +56,12 @@ public class BingoRecord {
     public int hashCode() {
         return Objects.hash(statuses, isAllMatch());
     }
+
+    @Override
+    public String toString() {
+        return "BingoRecord{" +
+            "statuses=" + statuses +
+            ", isAllMatch=" + isAllMatch +
+            '}';
+    }
 }
