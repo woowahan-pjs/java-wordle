@@ -19,7 +19,7 @@ import static wordle.domain.BingoStatus.NOTHING;
 class WordTest {
 
     @DisplayName("5글자 문자열이 주어진 경우 `Word` 객체 생성 성공")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> givenWord: {0}")
     @ValueSource(strings = {"APPLE", "SCALE", "HAPPY", "white", "dress", "phone", "pepsi"})
     void createWordIsSuccessIfGivenWordLengthIsFive(String givenWord) {
         // Arrange
@@ -31,7 +31,7 @@ class WordTest {
     }
 
     @DisplayName("`Null` 또는 빈 문자열이 주어진 경우 `Word` 객체 생성 실패")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> givenWord: {0}")
     @NullAndEmptySource
     void createWordIsFailIfGivenWordIsNull(String givenWord) {
         // Arrange
@@ -44,7 +44,7 @@ class WordTest {
     }
 
     @DisplayName("5글자가 아닌 문자열이 주어진 경우 `Word` 객체 생성 실패")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> givenWord: {0}")
     @ValueSource(strings = {"   ", "S", "HA", "sun", "Next", "Kotlin", "happy new year"})
     void createWordIsFailIfGivenWordLengthIsNotEqualToFive(String givenWord) {
         // Arrange
@@ -57,7 +57,7 @@ class WordTest {
     }
 
     @DisplayName("주어진 `Word`가 정답 `Word`와 일치하는 지 비교하면 비교 결과를 리스트에 담아 반환")
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] -> goalWord: {0}, givenWord: {1}, expectedBingoStatuses: {2}")
     @MethodSource("goalWordAndGivenWordAndExpectedBingoStatuses")
     void returnBingoStatusesWhenCompareBetweenGoalWordAndGivenWord(Word goalWord, Word givenWord, List<BingoStatus> expectedBingoStatuses) {
         // Arrange
