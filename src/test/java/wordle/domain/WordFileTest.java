@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public class WordFileTest {
 
     @DisplayName("존재하는 파일을 넘겨 받는 경우 `WordFile` 객체 생성 성공")
     @Test
-    void createWordFileIsSuccessGivenExistFileName() {
+    void createWordFileIsSuccessGivenExistFileName() throws FileNotFoundException {
         // Arrange
         // Act
         // Assert
@@ -32,14 +33,14 @@ public class WordFileTest {
         // Assert
         assertThatThrownBy(() ->
             new WordFile("notExistWords.txt")
-        ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("올바른 파일이 필요합니다.");
+        ).isInstanceOf(FileNotFoundException.class)
+            .hasMessageContaining("존재하는 유효한 파일이 필요합니다.");
     }
 
     @DisplayName("스캔한 단어 목록 파일에서 목표 단어 추출하여 반환")
     @ParameterizedTest(name = "[{index}] -> givenDate: {0}, expectedGoalWord: {1}")
     @MethodSource("givenDateAndExpectedGoalWord")
-    void returnGoalWordIsSuccessGivenDate(LocalDate givenDate, String expectedGoalWord) {
+    void returnGoalWordIsSuccessGivenDate(LocalDate givenDate, String expectedGoalWord) throws FileNotFoundException {
         // Arrange
         final WordFile wordFile = new WordFile("words.txt");
 

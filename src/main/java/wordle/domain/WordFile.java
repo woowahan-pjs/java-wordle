@@ -1,36 +1,25 @@
 package wordle.domain;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class WordFile {
-    private static final String FILE_PATH = "./src/main/resources/";
+    private static final String FILE_PATH = "src/main/resources/";
     private final List<String> wordList = new ArrayList<>();
 
-    public WordFile(String fileName) {
-        final File wordFile = assertExist(new File(FILE_PATH + fileName));
-
-        try(final Scanner scanner = new Scanner(wordFile)) {
-
-            while (scanner.hasNext()) {
-                wordList.add(scanner.nextLine());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("파일 스캐너 생성 시 에러가 발생했습니다.");
+    public WordFile(String fileName) throws FileNotFoundException {
+        try {
+            wordList.addAll(Files.readAllLines(Path.of(FILE_PATH + fileName)));
+        } catch (IOException ioe) {
+            throw new FileNotFoundException("존재하는 유효한 파일이 필요합니다.");
         }
-    }
-
-    private File assertExist(File file) {
-        if (!file.exists()) {
-            throw new IllegalArgumentException("올바른 파일이 필요합니다.");
-        }
-
-        return file;
     }
 
     public String findGoalWord(LocalDate givenDate) {

@@ -6,6 +6,7 @@ import wordle.domain.WordleGame;
 import wordle.ui.InputView;
 import wordle.ui.ResultView;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class WordleGameRunner {
@@ -15,13 +16,17 @@ public class WordleGameRunner {
     private final WordleGame wordleGame;
 
     public WordleGameRunner(InputView inputView, ResultView resultView, int limitTryToBingo) {
-        this.inputView = inputView;
-        this.resultView = resultView;
-        this.limitTryToBingo = limitTryToBingo;
-        this.wordleGame = new WordleGame(new Word(scanGoalWord()));
+        try {
+            this.inputView = inputView;
+            this.resultView = resultView;
+            this.limitTryToBingo = limitTryToBingo;
+            this.wordleGame = new WordleGame(new Word(scanGoalWord()));
+        } catch (FileNotFoundException notFoundEx) {
+            throw new IllegalArgumentException("파일을 찾을 수 없어 게임을 종료합니다.");
+        }
     }
 
-    private String scanGoalWord() {
+    private String scanGoalWord() throws FileNotFoundException {
         return new WordFile("words.txt").findGoalWord(LocalDate.now());
     }
 
