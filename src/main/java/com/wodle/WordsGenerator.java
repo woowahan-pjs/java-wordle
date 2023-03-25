@@ -1,19 +1,24 @@
 package com.wodle;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.Duration;
+import com.wodle.utils.FileUtils;
+import com.wodle.utils.LocalDateTimeUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordsGenerator {
 
-    private static final String FILE_PATH= "words.txt";
+    private static final String FILE_PATH = "words.txt";
+
+    private final FileUtils fileUtils;
+    private final LocalDateTimeUtils localDateTimeUtils;
+
+    public WordsGenerator(FileUtils fileUtils, LocalDateTimeUtils localDateTimeUtils) {
+        this.fileUtils = fileUtils;
+        this.localDateTimeUtils = localDateTimeUtils;
+    }
 
     public Word getTodayWord(){
         try (Stream<String> stream = getStreamByFileName()) {
@@ -26,7 +31,7 @@ public class WordsGenerator {
                     () -> new RuntimeException("단어를 셋팅할수 없습니다")
                 );
             return new Word(todayWord);
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException("단어를 셋팅할수 없습니다", e);
         }
     }
@@ -47,14 +52,13 @@ public class WordsGenerator {
         }
     }
 
-    private int getTodayWordIndex(long totalCount){
+    private int getTodayWordIndex(long totalCount) {
         LocalDateTime base = LocalDate.of(2021, 6, 19)
             .atStartOfDay();
-        LocalDateTime now = LocalDate.now()
-            .atStartOfDay();
+        LocalDateTime now = LocalDateTime.now();
 
         long betweenDays = Duration.between(base, now).toDays();
 
-        return (int)(betweenDays % totalCount);
+        return (int) (betweenDays % totalCount);
     }
 }
