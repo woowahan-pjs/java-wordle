@@ -1,5 +1,6 @@
 package com.wodle;
 
+import com.wodle.domain.AnswerWord;
 import com.wodle.utils.FileUtils;
 import com.wodle.utils.LocalDateTimeUtils;
 import java.time.LocalDate;
