@@ -33,6 +33,17 @@ for(index of not match with word) {
     spell[inputSpell[index] - 'a'] 
 }
 ```
-
+---
+### Word 객체 설계 변경
+- Word 객체
+  - variables 
+    - String : 단어 
+  - method
+    - validate : 소문자 5글자 검증 
+- AnswerWord extends Word 
+  - variables
+    - boolean[26] : 단어 내 각 알파벳이 존재하는지 여부
+  - method
+    - Result : compare(Word word) 
 
 
