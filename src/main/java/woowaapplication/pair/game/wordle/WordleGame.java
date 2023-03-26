@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class WordleGame {
 
     public static final int TOTAL_CHANCE = 6;
+    public static final int KEYWORD_LENGTH = 5;
+
     private final String answerKeyword;
     private final Coin coin;
 
@@ -17,7 +19,7 @@ public class WordleGame {
         // 유효성 검사 진행
         // Validator 객체
         // 유효성 검사 메서드
-        boolean validateResult = KeywordValidator.validate(inputKeyword);
+        boolean validateResult = KeywordValidator.validate(inputKeyword, KEYWORD_LENGTH);
 
         if (!validateResult) {
             throw new IllegalArgumentException("잘못된 입력 값입니다");
