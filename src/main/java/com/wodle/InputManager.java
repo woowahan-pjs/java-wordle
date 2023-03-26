@@ -1,8 +1,7 @@
 package com.wodle;
 
-import static com.wodle.utils.StringUtils.matchesFiveSmallAlphabet;
-
 import camp.nextstep.edu.missionutils.Console;
+import com.wodle.domain.Word;
 import java.util.NoSuchElementException;
 
 public class InputManager {
