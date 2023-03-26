@@ -24,17 +24,17 @@ public class WordleGame {
         }
 
         //  정답 체크
-        WordleBlock[] checkResult = checkAnswer(inputKeyword);
+        WordleBlock[] resultBlocks = checkAnswer(inputKeyword);
 
-        boolean isAnswer = Arrays.stream(checkResult)
-                .allMatch(res -> res == WordleBlock.CORRECT);
+        boolean isAnswer = Arrays.stream(resultBlocks)
+                .allMatch(block -> block == WordleBlock.CORRECT);
 
         // 정답이 아니면 잔여 횟수 감소
         if (!isAnswer) {
             coin.decreaseChance();
         }
 
-        PlayResult result = new PlayResult(checkResult, coin);
+        PlayResult result = new PlayResult(resultBlocks, coin);
 
         return result;
     }
