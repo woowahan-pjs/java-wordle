@@ -1,6 +1,7 @@
 package com.wodle;
 
 import com.wodle.domain.TileColor;
+import java.util.Collections;
 import java.util.List;
 
 public class Result {
@@ -18,4 +19,6 @@ public class Result {
     public boolean isGameEnd() {
         return matchCount == matchStatus.size();
     }
+
+    public List<TileColor> getMatchStatus(){ return Collections.unmodifiableList(matchStatus) ;}
 }
