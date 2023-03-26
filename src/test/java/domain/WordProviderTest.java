@@ -1,12 +1,11 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class WordProviderTest {
 
@@ -42,5 +41,11 @@ public class WordProviderTest {
         assertThatThrownBy(()->wordProvider.loadWordFile("src/test/resources/testEmptyWords.txt"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("파일이 비어있습니다.");
+    }
+
+    @Test
+    @DisplayName("현재날짜 - 2021년 6월 19일 % 배열의 크기 번재 단어를 정답으로 생성하는 테스트")
+    void getAnswerByCriteriaDateTest() {
+
     }
 }
