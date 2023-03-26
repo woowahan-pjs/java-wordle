@@ -1,10 +1,11 @@
 package com.wodle;
 
+import static com.wodle.domain.TileColor.GREEN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.wodle.domain.TileColor;
 import java.util.Arrays;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,7 +15,7 @@ public class ResultTest {
     @Test
     public void GameEndTest() {
         //given
-        List<Integer> matchStatus =  Arrays.asList(2,2,2,2,2);
+        List<TileColor> matchStatus = Arrays.asList(GREEN, GREEN, GREEN, GREEN, GREEN);
         Result result = new Result(matchStatus);
 
         //when
@@ -26,16 +27,22 @@ public class ResultTest {
     @ParameterizedTest
     @CsvSource(
         value = {
-            "2,2,2,2,1",
-            "2,2,2,1,1",
-            "2,2,1,0,1",
-            "2,2,2,2,0",
-            "2,0,1,0,1"
+            "GREEN, GREEN, GREEN, GREEN, YELLOW",
+            "GREEN,GREEN,GREEN,YELLOW,YELLOW",
+            "GREEN,GREEN,YELLOW,GREY,YELLOW",
+            "GREEN,GREEN,GREEN,GREEN,GREY",
+            "GREEN,GREY,YELLOW,GREY,YELLOW"
         }, delimiter = ','
     )
-    public void GameNotEndTest(int r1, int r2, int r3, int r4 ,int r5) {
+    public void GameNotEndTest(String r1, String r2, String r3, String r4, String r5) {
         //given
-        List<Integer> matchStatus =  Arrays.asList(r1, r2, r3, r4, r5);
+        List<TileColor> matchStatus = Arrays.asList(
+            TileColor.valueOf(r1),
+            TileColor.valueOf(r2),
+            TileColor.valueOf(r3),
+            TileColor.valueOf(r4),
+            TileColor.valueOf(r5)
+        );
         Result result = new Result(matchStatus);
 
         //when
