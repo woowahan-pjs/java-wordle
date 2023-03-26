@@ -2,6 +2,8 @@ package com.wodle;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+import com.wodle.domain.Word;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.BeforeEach;
