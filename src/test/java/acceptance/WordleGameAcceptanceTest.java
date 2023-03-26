@@ -84,10 +84,10 @@ public class WordleGameAcceptanceTest {
     class 입력_검증_예외_케이스 {
 
         @Nested
-        @DisplayName("문자열이 아닌 입력이 들어오면")
+        @DisplayName("알파벳이 아닌 입력이 들어오면")
         class Context_with_not_string_input {
 
-            private final String 문자열이_아닌_키워드 = "12345";
+            private final String 알파벳이_아닌_키워드 = "12345";
 
             @Test
             @DisplayName("시도가 무효된다")
@@ -95,7 +95,7 @@ public class WordleGameAcceptanceTest {
                 int 기존_남은_횟수 = 워들_게임.getRestChance();
 
                 assertAll(
-                        () -> assertThatThrownBy(() -> 워들_게임.play(문자열이_아닌_키워드))
+                        () -> assertThatThrownBy(() -> 워들_게임.play(알파벳이_아닌_키워드))
                                 .isInstanceOf(IllegalArgumentException.class),
                         () -> 시도_횟수는_변하지_않는다(워들_게임, 기존_남은_횟수)
                 );
