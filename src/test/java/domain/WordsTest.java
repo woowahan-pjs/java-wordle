@@ -20,32 +20,25 @@ class WordsTest {
     void test01() {
         Words words = new Words(List.of("MySQL", "SLiPP"));
 
-        assertThat(words.getMatchWords()).containsExactly("MySQL", "SLiPP");
-    }
-
-    @DisplayName("문자와 숫자가 섞인 파일에서 Words 를 읽어온다.")
-    @Test
-    void test02() {
-        Words words = new Words(List.of("MySQL", "cake", "12345"));
-
-        assertThat(words.getMatchWords()).containsExactly("MySQL");
+        assertThat(words.getWords()).containsExactly(new Word("MySQL"), new Word("SLiPP"));
     }
 
     @DisplayName("주어진 Words 가 비어있으면 에러가 발생한다.")
     @Test
-    void test03() {
-        assertThatThrownBy(() -> new Words(Collections.emptyList())).isInstanceOf(IllegalStateException.class);
+    void test02() {
+        assertThatThrownBy(() -> new Words(Collections.emptyList())).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("주어진 Words 에 Word 가 없다면 에러가 발생한다.")
     @ParameterizedTest
     @MethodSource("generateData")
-    void test04(List<String> words) {
-        assertThatThrownBy(() -> new Words(words)).isInstanceOf(IllegalStateException.class);
+    void test03(List<String> words) {
+        assertThatThrownBy(() -> new Words(words)).isInstanceOf(IllegalArgumentException.class);
     }
 
     static Stream<Arguments> generateData() {
         return Stream.of(
+                Arguments.of(List.of("MySQL", "cake", "12345")),
                 Arguments.of(List.of("sister", "cake")),
                 Arguments.of(List.of("12345", "a1234")));
     }
