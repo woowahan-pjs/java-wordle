@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Words {
 
     private static final Pattern pattern = Pattern.compile("^[a-zA-Z]*");
+    public static final int WORD_LENGTH = 5;
 
     private final List<String> words;
 
@@ -15,19 +16,26 @@ public class Words {
             throw new IllegalStateException("파일이 비어 있습니다.");
         }
 
-        List<String> filterWords = words.stream()
-                .filter(word -> word.length() == 5)
-                .filter(word -> pattern.matcher(word).matches())
-                .collect(Collectors.toList());
+        List<String> matchWords = this.getMatchWords(words);
 
-        if (filterWords.size() == 0) {
+        if (matchWords.size() == 0) {
             throw new IllegalStateException("5글자인 단어가 존재하지 않습니다.");
         }
 
-        this.words = filterWords;
+        this.words = matchWords;
     }
 
-    public List<String> getWords() {
+    private List<String> getMatchWords(List<String> words) {
+        return words.stream()
+                    .filter(this::isMatchWord)
+                    .collect(Collectors.toList());
+    }
+
+    private boolean isMatchWord(String word){
+        return word.length() == WORD_LENGTH && pattern.matcher(word).matches();
+    }
+
+    public List<String> getMatchWords() {
         return words;
     }
 }
