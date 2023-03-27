@@ -11,7 +11,7 @@ class LetterTest {
 	@DisplayName("글자 생성 테스트")
 	@Test
 	void createLetterTest() {
-		assertThatCode(() -> new Letter('a'))
+		assertThatCode(() -> new Letter('a', 0))
 			.doesNotThrowAnyException();
 	}
 
@@ -19,14 +19,14 @@ class LetterTest {
 	@Test
 	void throwIllegalArgumentExceptionWhenNotEnglishTest() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new Letter('å'));
+			.isThrownBy(() -> new Letter('å', 1));
 	}
 
 	@DisplayName("같은 문자면 같은 객체인지 테스트")
 	@Test
 	void equalsValueTest() {
-		Letter a = new Letter('a');
-		Letter aLetter = new Letter('a');
+		Letter a = new Letter('a', 1);
+		Letter aLetter = new Letter('a', 2);
 		assertThat(a).isEqualTo(aLetter);
 	}
 
