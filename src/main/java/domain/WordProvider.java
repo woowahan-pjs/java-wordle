@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.List;
 
 public class WordProvider {
-    private final List<String> words;
+    private List<String> words;
     private final LocalDate criteriaDate;
 
     public WordProvider(String filePath, LocalDate criteriaDate) {
@@ -16,9 +16,8 @@ public class WordProvider {
         this.criteriaDate = criteriaDate;
     }
 
-    public List<String> getWordList(String filePath) {
+    private List<String> getWordList(String filePath) {
         Path path = Path.of(filePath);
-        List<String> words;
         try {
             words = Files.readAllLines(path);
         } catch (IOException e) {
