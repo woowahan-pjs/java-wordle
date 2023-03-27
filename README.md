@@ -5,15 +5,15 @@
 ### 기능 목록
 - [x] 게임 시작 시 게임 시작 메시지를 출력한다.
 - [ ] 사용자는 5글자를 입력한다.
-  - [ ] 글자는 영어이어야 한다.
+  - [x] 글자는 영어이어야 한다.
   - [ ] 영어가 아니면 IllegalArgumentException이 발생한다.
-  - [ ] 입력 시 입력한 문자를 대문자로 변환한다.
+  - [x] 입력 시 입력한 문자를 대문자로 변환한다.
   - [ ] 5글자가 아니면 IllegalArgumentException이 발생한다.
-- [ ] 정답을 생성한다.
-  - [ ] 정답은`words.txt` 에서 단어들을 읽어온다.
-  - [ ] `words.txt` 파일이 없으면 IllegalArgumentException이 발생한다.
-  - [ ] `words.txt` 파일에 단어가 없으면 IllegalArgumentException이 발생한다.
-  - [ ] ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어를 정답으로 생성한다.
+- [x] 정답을 생성한다.
+  - [x] 정답은`words.txt` 에서 단어들을 읽어온다.
+  - [x] `words.txt` 파일이 없으면 IllegalArgumentException이 발생한다.
+  - [x] `words.txt` 파일에 단어가 없으면 IllegalArgumentException이 발생한다.
+  - [x] ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어를 정답으로 생성한다.
 - [ ] 답안과 정답을 비교하여 결과를 반환한다.
   - [ ] 결과는 상태(MatchStatus)를 가지고 있다.
   - [ ] MatchStatus 는 GREEN / YELLOW / GRAY 중 하나이다.
