@@ -4,6 +4,11 @@ public class Application {
 
     public static void main(String[] args) {
         WordleGame wordleGame = new WordleGame();
-        wordleGame.start();
+        // 정답을 추출
+        String answer = "answer";
+        int count = 1;
+
+        wordleGame.start(answer);
+
     }
 }
