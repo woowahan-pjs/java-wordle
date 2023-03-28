@@ -86,7 +86,7 @@ spill
 - view
 
 
-### 객체 설계
+### 최초 설계
 
 - Application#main()
 - WordleGames - 6개의 WordleGame

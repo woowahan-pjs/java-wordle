@@ -1,14 +1,14 @@
-import domain.WordleGame;
+import domain.WordleGames;
 
 public class Application {
 
     public static void main(String[] args) {
-        WordleGame wordleGame = new WordleGame();
+        WordleGames wordleGames = new WordleGames();
         // 정답을 추출
         String answer = "answer";
         int count = 1;
 
-        wordleGame.start(answer);
+        wordleGames.start(answer);
 
     }
 }
