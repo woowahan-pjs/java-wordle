@@ -1,5 +1,7 @@
 package domain;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,12 @@ public class Words {
         }
 
         return words.stream().map(Word::new).collect(Collectors.toList());
+    }
+
+    public Word getResult(LocalDate now) {
+        long between = ChronoUnit.DAYS.between(LocalDate.of(2021, 6, 19), now);
+
+        return this.words.get((int) (between % words.size()));
     }
 
     public List<Word> getWords() {

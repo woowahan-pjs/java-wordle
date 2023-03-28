@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -41,5 +42,35 @@ class WordsTest {
                 Arguments.of(List.of("MySQL", "cake", "12345")),
                 Arguments.of(List.of("sister", "cake")),
                 Arguments.of(List.of("12345", "a1234")));
+    }
+
+    @DisplayName("정답을 가져온다.")
+    @Test
+    void test04() {
+        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
+
+        Word word = words.getResult(LocalDate.of(2021, 6, 22));
+
+        assertThat(word).isEqualTo(new Word("MySQL"));
+    }
+
+    @DisplayName("정답을 가져온다.")
+    @Test
+    void test05() {
+        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
+
+        Word word = words.getResult(LocalDate.of(2021, 6, 21));
+
+        assertThat(word).isEqualTo(new Word("words"));
+    }
+
+    @DisplayName("정답을 가져온다.")
+    @Test
+    void test06() {
+        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
+
+        Word word = words.getResult(LocalDate.of(2021, 6, 23));
+
+        assertThat(word).isEqualTo(new Word("SLiPP"));
     }
 }
