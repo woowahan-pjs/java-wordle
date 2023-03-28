@@ -73,3 +73,26 @@ spill
 - else 예약어를 쓰지 않는다.
     - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
     - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
+
+## 규칙
+
+- 25분동안 한명이 코딩하고 5분 쉬고 교대
+
+## 설계
+
+### 패키지 설계
+
+- domain
+- view
+
+
+### 객체 설계
+
+- Application#main()
+- WordleGames - 6개의 WordleGame
+  - worldGames#start()
+    - input: 입력한 단어, output : Tile 5개
+- Word - 5개의 Tile
+- Tile - 네모하나 (흰색, 노란색, 초록색, 회색)
+- AnswerFinder
+  - words.txt 에서 정답을 추출하는 로직이 하나 필요함.
