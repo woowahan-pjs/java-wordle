@@ -21,6 +21,10 @@ public class Word {
         return word.length() != WORD_LENGTH || !pattern.matcher(word).matches();
     }
 
+    public String getWord() {
+        return word;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
