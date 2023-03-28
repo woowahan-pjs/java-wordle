@@ -49,9 +49,9 @@ class WordsTest {
     void test04() {
         Words words = new Words(List.of("MySQL", "SLiPP", "words"));
 
-        Word word = words.getResult(LocalDate.of(2021, 6, 22));
+        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 22));
 
-        assertThat(word).isEqualTo(new Word("MySQL"));
+        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("MySQL")));
     }
 
     @DisplayName("정답을 가져온다.")
@@ -59,9 +59,9 @@ class WordsTest {
     void test05() {
         Words words = new Words(List.of("MySQL", "SLiPP", "words"));
 
-        Word word = words.getResult(LocalDate.of(2021, 6, 21));
+        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 21));
 
-        assertThat(word).isEqualTo(new Word("words"));
+        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("words")));
     }
 
     @DisplayName("정답을 가져온다.")
@@ -69,8 +69,8 @@ class WordsTest {
     void test06() {
         Words words = new Words(List.of("MySQL", "SLiPP", "words"));
 
-        Word word = words.getResult(LocalDate.of(2021, 6, 23));
+        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 23));
 
-        assertThat(word).isEqualTo(new Word("SLiPP"));
+        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("SLiPP")));
     }
 }

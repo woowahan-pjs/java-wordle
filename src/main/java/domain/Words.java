@@ -20,10 +20,10 @@ public class Words {
         return words.stream().map(Word::new).collect(Collectors.toList());
     }
 
-    public Word getResult(LocalDate now) {
+    public CorrectAnswer getCorrectAnswer(LocalDate now) {
         long between = ChronoUnit.DAYS.between(LocalDate.of(2021, 6, 19), now);
 
-        return this.words.get((int) (between % words.size()));
+        return new CorrectAnswer(this.words.get((int) (between % words.size())));
     }
 
     public List<Word> getWords() {
