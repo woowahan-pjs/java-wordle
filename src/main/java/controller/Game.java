@@ -3,18 +3,18 @@ package controller;
 import java.time.LocalDate;
 
 import domain.Answer;
-import domain.Word;
 import domain.AnswerGenerator;
+import domain.Result;
+import domain.Word;
 import view.InputView;
 
 public class Game {
 	private final InputView view;
-	private Answer answer;
-	private AnswerGenerator answerGenerator;
+	private final AnswerGenerator answerGenerator;
 
-	public Game(InputView view, AnswerGenerator answerGenerator) {
-		this.view = view;
-		this.answerGenerator = answerGenerator;
+	public Game(String path) {
+		this.view = new InputView();
+		this.answerGenerator = new AnswerGenerator(path);
 	}
 
 	public void start(LocalDate currentDate) {
@@ -25,10 +25,10 @@ public class Game {
 			Word userInputWord = Word.from(inputString);
 
 			String answerString = answerGenerator.getAnswer(currentDate);
-			Word answerWord = Word.from(answerString);
+			Answer answerWord = Answer.from(answerString);
 
-			// List<MatchStatus> result = answerWord.compare(userInputWord);
-			// System.out.println("result = " + result);
+			Result result =  answerWord.compare(userInputWord);
+			System.out.println("result = " + result);
 		}
 	}
 }

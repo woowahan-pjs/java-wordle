@@ -1,8 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Answer {
 	private final Word answerWord;
@@ -15,12 +14,10 @@ public class Answer {
 		return new Answer(Word.from(input));
 	}
 
-	public List<MatchStatus> compare(Word word) {
-		List<MatchStatus> result = new ArrayList<>();
-		for (Letter letter : word.getLetters()) {
-			result.add(this.match(letter));
-		}
-		return result;
+	public Result compare(Word word) {
+		return word.getLetters().stream()
+			.map(this::match)
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Result::new));
 	}
 
 	private MatchStatus match(Letter letter) {

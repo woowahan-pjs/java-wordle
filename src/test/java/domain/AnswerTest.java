@@ -33,19 +33,42 @@ class AnswerTest {
 	@Test
 	@DisplayName("정답과 입력값 비교하여 MatchStatus 리스트로 반환")
 	void testWithInputString() {
-		 //given
-		 Answer answer = Answer.from("spill");
-		 Word target = Word.from("hello");
+		//given
+		Answer answer = Answer.from("spill");
+		Word target = Word.from("hello");
 
 		//when
-		 List<MatchStatus> result = answer.compare(target);
+		Result result = answer.compare(target);
 
-		 //then
-		 assertThat(result.get(0)).isEqualTo(MatchStatus.GRAY);
-		 assertThat(result.get(1)).isEqualTo(MatchStatus.GRAY);
-		 assertThat(result.get(2)).isEqualTo(MatchStatus.YELLOW);
-		 assertThat(result.get(3)).isEqualTo(MatchStatus.GREEN);
-		 assertThat(result.get(4)).isEqualTo(MatchStatus.GRAY);
+		//then
+		assertThat(result).isEqualTo(
+			new Result(List.of(
+				MatchStatus.GRAY,
+				MatchStatus.GRAY,
+				MatchStatus.YELLOW,
+				MatchStatus.GREEN,
+				MatchStatus.GRAY
+			)));
+	}
 
+	@Test
+	@DisplayName("글자가 모두 같으면 Green 만을 가진 결과 반환")
+	void allGreenTest() {
+		//given
+		Answer answer = Answer.from("spill");
+		Word target = Word.from("spill");
+
+		//when
+		Result result = answer.compare(target);
+
+		//then
+		assertThat(result).isEqualTo(
+			new Result(List.of(
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN
+			)));
 	}
 }
