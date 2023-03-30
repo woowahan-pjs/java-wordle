@@ -8,7 +8,7 @@ public class WordleGameController {
         String todayKeyword = AnswerKeywordInitializer.getTodayKeyword();
         Coin coin = new Coin(WordleGame.TOTAL_CHANCE);
 
-        WordleGame wordleGame = new WordleGame(todayKeyword, coin);
+        WordleGame wordleGame = new WordleGame(coin);
 
         Scanner sc = new Scanner(System.in);
 
