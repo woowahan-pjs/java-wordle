@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class LocalDateTimeUtils {
 
-    public long getBetweenDays(LocalDateTime past, LocalDateTime future) {
+    public static long getBetweenDays(LocalDateTime past, LocalDateTime future) {
         return Duration.between(past, future)
             .toDays();
     }

@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 
 public class FileUtils {
 
-    public Stream<String> getStreamByFileName(String filePath) {
-        URL resource = getClass().getClassLoader().getResource(filePath);
+    public static Stream<String> getStreamByFileName(String filePath) {
+        URL resource = FileUtils.class.getClassLoader().getResource(filePath);
         if (resource == null) {
             throw new IllegalArgumentException("File not found");
         }
