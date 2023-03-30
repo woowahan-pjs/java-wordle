@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AnswerWord extends Word {
 
-    private boolean[] alphabetExistInfoStore = new boolean[26];
+    private final boolean[] alphabetExistInfoStore = new boolean[26];
 
     public AnswerWord(String word) {
         super(word);
