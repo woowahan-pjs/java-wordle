@@ -7,11 +7,16 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-public class WordProvider {
+public class AnswerGenerator {
+    private static final LocalDate CRITERIA_DATE = LocalDate.of(2021, 6, 19);
     private List<String> words;
     private final LocalDate criteriaDate;
 
-    public WordProvider(String filePath, LocalDate criteriaDate) {
+    public AnswerGenerator(String filePath) {
+        this.words = getWordList(filePath);
+        this.criteriaDate = CRITERIA_DATE;
+    }
+    public AnswerGenerator(String filePath, LocalDate criteriaDate) {
         this.words = getWordList(filePath);
         this.criteriaDate = criteriaDate;
     }
