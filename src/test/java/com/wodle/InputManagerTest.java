@@ -1,6 +1,7 @@
 package com.wodle;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 import com.wodle.domain.Word;
@@ -36,11 +37,11 @@ class InputManagerTest {
         //given
         inputSetting("\nabcde");
 
-        //when
-        Word word = inputManager.inputWord();
-
-        //then
-        assertThat(word.getWord()).isEqualTo("abcde");
+        //when && then
+        assertThatThrownBy(
+            () -> inputManager.inputWord()
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("user input require 5 small alphabet");
     }
 
     private void inputSetting(String input) {

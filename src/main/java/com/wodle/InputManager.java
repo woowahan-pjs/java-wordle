@@ -11,7 +11,7 @@ public class InputManager {
             String userInput = Console.readLine();
             return new Word(userInput);
         } catch (IllegalArgumentException e) {
-            return this.inputWord();
+            throw e;
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException("No such line");
         }
