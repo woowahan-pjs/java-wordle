@@ -1,5 +1,6 @@
-package com.wodle;
+package com.wodle.service;
 
+import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
 import com.wodle.domain.Word;
 import java.util.LinkedList;

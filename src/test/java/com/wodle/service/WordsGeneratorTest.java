@@ -1,4 +1,4 @@
-package com.wodle;
+package com.wodle.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 import com.wodle.domain.Word;
+import com.wodle.service.WordsGenerator;
 import com.wodle.utils.FileUtils;
 import com.wodle.utils.LocalDateTimeUtils;
 import java.util.stream.Stream;

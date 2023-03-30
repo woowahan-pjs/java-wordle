@@ -1,4 +1,4 @@
-package com.wodle;
+package com.wodle.service;
 
 import static com.wodle.domain.TileColor.GREEN;
 import static com.wodle.domain.TileColor.GREY;
@@ -6,7 +6,9 @@ import static com.wodle.domain.TileColor.YELLOW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.domain.AnswerWord;
+import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
+import com.wodle.service.ViewManager;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;

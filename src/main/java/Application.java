@@ -1,9 +1,7 @@
-import camp.nextstep.edu.missionutils.Console;
-import com.wodle.GameHost;
-import com.wodle.InputManager;
-import com.wodle.ViewManager;
-import com.wodle.WordsGenerator;
-import com.wodle.domain.TileColor;
+import com.wodle.controller.GameHost;
+import com.wodle.service.InputManager;
+import com.wodle.service.ViewManager;
+import com.wodle.service.WordsGenerator;
 
 public class Application {
 

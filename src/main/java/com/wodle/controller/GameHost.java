@@ -1,7 +1,11 @@
-package com.wodle;
+package com.wodle.controller;
 
 import com.wodle.domain.AnswerWord;
+import com.wodle.domain.Result;
 import com.wodle.domain.Word;
+import com.wodle.service.InputManager;
+import com.wodle.service.ViewManager;
+import com.wodle.service.WordsGenerator;
 
 public class GameHost {
 

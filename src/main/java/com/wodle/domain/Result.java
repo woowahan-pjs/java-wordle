@@ -1,4 +1,4 @@
-package com.wodle;
+package com.wodle.domain;
 
 import com.wodle.domain.TileColor;
 import java.util.Collections;

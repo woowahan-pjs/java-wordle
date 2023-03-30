@@ -1,6 +1,5 @@
 package com.wodle.domain;
 
-import com.wodle.Result;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

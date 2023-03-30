@@ -1,8 +1,9 @@
-package com.wodle;
+package com.wodle.domain;
 
 import static com.wodle.domain.TileColor.GREEN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
 import java.util.Arrays;
 import java.util.List;

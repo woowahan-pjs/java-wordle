@@ -1,10 +1,11 @@
-package com.wodle;
+package com.wodle.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 import com.wodle.domain.Word;
+import com.wodle.service.InputManager;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.BeforeEach;

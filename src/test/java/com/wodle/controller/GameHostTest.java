@@ -1,10 +1,14 @@
-package com.wodle;
+package com.wodle.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
+import com.wodle.controller.GameHost;
+import com.wodle.service.InputManager;
+import com.wodle.service.ViewManager;
+import com.wodle.service.WordsGenerator;
 import com.wodle.utils.FileUtils;
 import com.wodle.utils.LocalDateTimeUtils;
 import java.io.ByteArrayInputStream;
