@@ -32,7 +32,7 @@ class ViewManagerTest {
 
         //when
         OutputStream out = getOutputStream();
-        viewManager.printResult(result);
+        viewManager.printCompareResult(result);
 
         //then
         assertThat(out.toString()).isEqualTo("\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE8\uD83D\uDFE8⬜\n");
@@ -45,11 +45,11 @@ class ViewManagerTest {
         List<TileColor> tileColors2 = Arrays.asList(GREEN, YELLOW, YELLOW, YELLOW, GREY);
         Result result1 = new Result(tileColors1);
         Result result2 = new Result(tileColors2);
-        viewManager.printResult(result1);
+        viewManager.printCompareResult(result1);
 
         //when
         OutputStream out = getOutputStream();
-        viewManager.printResult(result2);
+        viewManager.printCompareResult(result2);
 
         //then
         assertThat(out.toString()).isEqualTo(

@@ -12,7 +12,7 @@ public class ViewManager {
         wordMatchResults = new LinkedList<>();
     }
 
-    public void printResult(Result woreCompareResult) {
+    public void printCompareResult(Result woreCompareResult) {
         wordMatchResults.add(woreCompareResult.getMatchStatus());
 
         for (List<TileColor> wordMatchResult : wordMatchResults) {
