@@ -1,11 +1,15 @@
 package com.wodle;
 
 import com.wodle.domain.TileColor;
+import com.wodle.domain.Word;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ViewManager {
 
+    private static final String FAIL_RESULT_TEXT = "실패 하셨습니다.";
+    private static final String SUCCESS_RESULT_TEXT = "성공 하셨습니다.";
+    private static final String TODAY_WORD_PREFIX = "오늘의 단어 ";
     private final List<List<TileColor>> wordMatchResults;
 
     public ViewManager() {
@@ -19,6 +23,24 @@ public class ViewManager {
             print(wordMatchResult);
             System.out.println();
         }
+    }
+
+    public void printResult(boolean isGameEnd, Word todayWord) {
+        if (isGameEnd) {
+            successResultPrint();
+            return;
+        }
+
+        failResultPrint(todayWord);
+    }
+
+    private void failResultPrint(Word todayWord) {
+        System.out.println(FAIL_RESULT_TEXT);
+        System.out.println(TODAY_WORD_PREFIX + todayWord.getWord());
+    }
+
+    private void successResultPrint() {
+        System.out.println(SUCCESS_RESULT_TEXT);
     }
 
     private void print(List<TileColor> curWordMatchResult) {
