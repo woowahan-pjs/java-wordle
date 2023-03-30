@@ -1,27 +1,29 @@
 package domain;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Word {
     public static final int WORD_LENGTH = 5;
-    private static final Pattern pattern = Pattern.compile("^[a-zA-Z]*");
 
-    private final String word;
+    private final List<Letter> word;
 
     public Word(String word) {
         if (this.isNotMatchWord(word)) {
             throw new IllegalArgumentException(word + "는 5글자의 알파벳이 아닙니다.");
         }
 
-        this.word = word;
+        this.word = word.chars().mapToObj(c -> (char) c)
+                        .map(Letter::new)
+                        .collect(Collectors.toList());
     }
 
     private boolean isNotMatchWord(String word){
-        return word.length() != WORD_LENGTH || !pattern.matcher(word).matches();
+        return word.length() != WORD_LENGTH;
     }
 
-    public String getWord() {
+    public List<Letter> getWord() {
         return word;
     }
 
@@ -41,7 +43,7 @@ public class Word {
     @Override
     public String toString() {
         return "Word{" +
-                "word='" + word + '\'' +
+                "word=" + word +
                 '}';
     }
 }

@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class Answer {
 
-    private final Word correctAnswer;
+    private final Word answer;
 
-    public Answer(Word correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public Answer(Word answer) {
+        this.answer = answer;
     }
 
     public List<Tile> compare(Word answer) {
@@ -20,23 +20,22 @@ public class Answer {
         // 위치와 글자가 틀리면 회색
         List<Tile> tiles = new ArrayList<>();
 
-        Map<Character, Long> map = this.correctAnswer.getWord()
-                .chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+        Map<Letter, Long> letterMap = this.answer.getWord()
+                                           .stream()
+                                           .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
 
         for (int i = 0; i < 5; i++) {
-            Long count = map.get(answer.getWord().charAt(i));
+            Long count = letterMap.get(answer.getWord().get(i));
 
             if (Objects.isNull(count) || count == 0) {
                 tiles.add(Tile.GRAY);
             } else {
-                if (this.correctAnswer.getWord().charAt(i) == answer.getWord().charAt(i)) {
+                if (this.answer.getWord().get(i).equals(answer.getWord().get(i))) {
                     tiles.add(Tile.GREEN);
                 } else {
                     tiles.add(Tile.YELLOW);
                 }
-                map.put(answer.getWord().charAt(i), count - 1);
+                letterMap.put(answer.getWord().get(i), count - 1);
             }
         }
 
@@ -49,11 +48,11 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer that = (Answer) o;
-        return Objects.equals(correctAnswer, that.correctAnswer);
+        return Objects.equals(answer, that.answer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(correctAnswer);
+        return Objects.hash(answer);
     }
 }
