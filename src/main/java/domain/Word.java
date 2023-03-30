@@ -39,6 +39,17 @@ public class Word {
 		}
 	}
 
+	// public List<MatchStatus> compare(Word userInputWord) {
+	// }
+
+	public boolean contains(Letter letter) {
+		return letters.contains(letter);
+	}
+
+	public Letter get(int position) {
+		return letters.get(position);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -55,4 +66,5 @@ public class Word {
 	public int hashCode() {
 		return letters != null ? letters.hashCode() : 0;
 	}
+
 }

@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Answer {
-	private final List<Letter> answer;
+	private final Word answerWord;
 
-	public Answer(List<Letter> answer) {
-		this.answer = answer;
+	private Answer(Word answerWord) {
+		this.answerWord = answerWord;
+	}
+
+	public static Answer from(String input) {
+		return new Answer(Word.from(input));
 	}
 
 	public List<MatchStatus> compare(List<Letter> letters) {
@@ -20,10 +24,10 @@ public class Answer {
 	}
 
 	private MatchStatus match(Letter letter) {
-		if (!answer.contains(letter)) {
+		if (!answerWord.contains(letter)) {
 			return MatchStatus.GRAY;
 		}
-		if (letter.equals(answer.get(letter.getPosition()))) {
+		if (letter.equals(answerWord.get(letter.getPosition()))) {
 			return MatchStatus.GREEN;
 		}
 		return MatchStatus.YELLOW;
@@ -36,13 +40,13 @@ public class Answer {
 		if (o == null || getClass() != o.getClass())
 			return false;
 
-		Answer answer1 = (Answer)o;
+		Answer answer = (Answer)o;
 
-		return Objects.equals(answer, answer1.answer);
+		return Objects.equals(answerWord, answer.answerWord);
 	}
 
 	@Override
 	public int hashCode() {
-		return answer != null ? answer.hashCode() : 0;
+		return answerWord != null ? answerWord.hashCode() : 0;
 	}
 }
