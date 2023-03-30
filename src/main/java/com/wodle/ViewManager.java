@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ViewManager {
 
-    private List<List<TileColor>> wordMatchResults;
+    private final List<List<TileColor>> wordMatchResults;
 
     public ViewManager() {
         wordMatchResults = new LinkedList<>();
@@ -23,7 +23,7 @@ public class ViewManager {
 
     private void print(List<TileColor> curWordMatchResult) {
         for (TileColor tileColor : curWordMatchResult) {
-            System.out.print(tileColor.name() + " ");
+            System.out.print(tileColor.getPrint());
         }
     }
 }

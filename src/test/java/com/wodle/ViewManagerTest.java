@@ -35,7 +35,7 @@ class ViewManagerTest {
         viewManager.printResult(result);
 
         //then
-        assertThat(out.toString()).isEqualTo("GREEN GREEN YELLOW YELLOW GREY \n");
+        assertThat(out.toString()).isEqualTo("\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE8\uD83D\uDFE8⬜\n");
     }
 
     @Test
@@ -53,7 +53,7 @@ class ViewManagerTest {
 
         //then
         assertThat(out.toString()).isEqualTo(
-            "GREEN GREEN YELLOW YELLOW GREY \nGREEN YELLOW YELLOW YELLOW GREY \n");
+            "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE8\uD83D\uDFE8⬜\n\uD83D\uDFE9\uD83D\uDFE8\uD83D\uDFE8\uD83D\uDFE8⬜\n");
     }
 
     private OutputStream getOutputStream() {
