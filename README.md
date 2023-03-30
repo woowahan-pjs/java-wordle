@@ -15,11 +15,11 @@
   - [x] `words.txt` 파일에 단어가 없으면 IllegalArgumentException이 발생한다.
   - [x] ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어를 정답으로 생성한다.
 - [ ] 답안과 정답을 비교하여 결과를 반환한다.
-  - [ ] 결과는 상태(MatchStatus)를 가지고 있다.
-  - [ ] MatchStatus 는 GREEN / YELLOW / GRAY 중 하나이다.
-    - [ ] 문자와 위치가 일치하는 경우: GREEN
-    - [ ] 문자가 일치하지만, 위치가 일치하지 않는 경우: YELLOW
-    - [ ] 문자와 위치가 일치하지 않는 경우: GRAY
+  - [x] 결과는 상태(MatchStatus)를 가지고 있다.
+  - [x] MatchStatus 는 GREEN / YELLOW / GRAY 중 하나이다.
+    - [x] 문자와 위치가 일치하는 경우: GREEN
+    - [x] 문자가 일치하지만, 위치가 일치하지 않는 경우: YELLOW
+    - [x] 문자와 위치가 일치하지 않는 경우: GRAY
   - [ ] 매 라운드의 결과를 Results가 기억한다.
 - [ ] 결과를 출력한다.
   - [ ] 사용자는 6번의 라운드를 진행할 수 있다.
