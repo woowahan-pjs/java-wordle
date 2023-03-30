@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Word {
 
-	private List<Letter> letters;
+	private final List<Letter> letters;
 
 	private Word(List<Letter> letters) {
 		this.letters = letters;
@@ -20,6 +20,10 @@ public class Word {
 			letterList.add(new Letter(chars[i], i));
 		}
 		return new Word(letterList);
+	}
+
+	public List<Letter> getLetters() {
+		return letters;
 	}
 
 	private static void validate(String input) {

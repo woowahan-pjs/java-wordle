@@ -15,9 +15,9 @@ public class Answer {
 		return new Answer(Word.from(input));
 	}
 
-	public List<MatchStatus> compare(List<Letter> letters) {
+	public List<MatchStatus> compare(Word word) {
 		List<MatchStatus> result = new ArrayList<>();
-		for (Letter letter : letters) {
+		for (Letter letter : word.getLetters()) {
 			result.add(this.match(letter));
 		}
 		return result;
