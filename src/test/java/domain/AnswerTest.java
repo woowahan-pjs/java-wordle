@@ -7,14 +7,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CorrectAnswerTest {
+class AnswerTest {
 
     @DisplayName("정답을 모두 맟췄을 때 모두 초록색이 나온다.")
     @Test
     void test01() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
+        Answer answer = new Answer(new Word("spill"));
 
-        List<Tile> tiles = correctAnswer.compare(new Word("spill"));
+        List<Tile> tiles = answer.compare(new Word("spill"));
 
         assertThat(tiles).containsExactly(Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN);
     }
@@ -22,9 +22,9 @@ class CorrectAnswerTest {
     @DisplayName("정답을 모두 빗나갔을 때 모두 노란색이 나온다.")
     @Test
     void test02() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
+        Answer answer = new Answer(new Word("spill"));
 
-        List<Tile> tiles = correctAnswer.compare(new Word("llsip"));
+        List<Tile> tiles = answer.compare(new Word("llsip"));
 
         assertThat(tiles).containsExactly(Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW);
     }
@@ -32,9 +32,9 @@ class CorrectAnswerTest {
     @DisplayName("정답을 모두 틀렸을 때 모두 회색이 나온다.")
     @Test
     void test03() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
+        Answer answer = new Answer(new Word("spill"));
 
-        List<Tile> tiles = correctAnswer.compare(new Word("mongo"));
+        List<Tile> tiles = answer.compare(new Word("mongo"));
 
         assertThat(tiles).containsExactly(Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY);
     }

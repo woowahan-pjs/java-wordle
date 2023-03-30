@@ -44,33 +44,28 @@ class WordsTest {
                 Arguments.of(List.of("12345", "a1234")));
     }
 
-    @DisplayName("정답을 가져온다.")
-    @Test
-    void test04() {
-        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
+    @DisplayName("words 정답을 가져온다.")
+    @ParameterizedTest
+    @MethodSource("generateAnswerData")
+    void test04(LocalDate now, String result) {
+        Words words = new Words(List.of("MySQL", "SLiPP", "Words"));
 
-        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 22));
+        Answer answer = words.getAnswer(now);
 
-        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("MySQL")));
+        assertThat(answer).isEqualTo(getAnswer(result));
     }
 
-    @DisplayName("정답을 가져온다.")
-    @Test
-    void test05() {
-        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
-
-        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 21));
-
-        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("words")));
+    static Stream<Arguments> generateAnswerData() {
+        return Stream.of(
+                Arguments.of(Words.DEFAULT_DATE.plusDays(0), "MySQL"),
+                Arguments.of(Words.DEFAULT_DATE.plusDays(1), "SLiPP"),
+                Arguments.of(Words.DEFAULT_DATE.plusDays(2), "Words"),
+                Arguments.of(Words.DEFAULT_DATE.plusDays(3), "MySQL"),
+                Arguments.of(Words.DEFAULT_DATE.plusDays(4), "SLiPP")
+        );
     }
 
-    @DisplayName("정답을 가져온다.")
-    @Test
-    void test06() {
-        Words words = new Words(List.of("MySQL", "SLiPP", "words"));
-
-        CorrectAnswer correctAnswer = words.getCorrectAnswer(LocalDate.of(2021, 6, 23));
-
-        assertThat(correctAnswer).isEqualTo(new CorrectAnswer(new Word("SLiPP")));
+    private static Answer getAnswer(String result) {
+        return new Answer(new Word(result));
     }
 }

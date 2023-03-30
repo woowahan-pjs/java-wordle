@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Words {
+    public static final LocalDate DEFAULT_DATE = LocalDate.of(2021, 6, 19);
     private final List<Word> words;
 
     public Words(List<String> words) {
@@ -20,10 +21,11 @@ public class Words {
         return words.stream().map(Word::new).collect(Collectors.toList());
     }
 
-    public CorrectAnswer getCorrectAnswer(LocalDate now) {
-        long between = ChronoUnit.DAYS.between(LocalDate.of(2021, 6, 19), now);
+    public Answer getAnswer(LocalDate now) {
+        long betweenDay = ChronoUnit.DAYS.between(DEFAULT_DATE, now);
 
-        return new CorrectAnswer(this.words.get((int) (between % words.size())));
+        Word answer = this.words.get((int) (betweenDay % words.size()));
+        return new Answer(answer);
     }
 
     public List<Word> getWords() {

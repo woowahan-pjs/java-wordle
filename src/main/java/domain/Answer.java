@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CorrectAnswer {
+public class Answer {
 
     private final Word correctAnswer;
 
-    public CorrectAnswer(Word correctAnswer) {
+    public Answer(Word correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
@@ -48,7 +48,7 @@ public class CorrectAnswer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CorrectAnswer that = (CorrectAnswer) o;
+        Answer that = (Answer) o;
         return Objects.equals(correctAnswer, that.correctAnswer);
     }
 
