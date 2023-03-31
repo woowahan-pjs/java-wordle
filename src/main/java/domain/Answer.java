@@ -1,55 +1,68 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Answer {
 
     private final Word answer;
 
-    private final Map<Letter, Long> letterMap;
+    private boolean isSuccess = false;
 
     public Answer(Word answer) {
         this.answer = answer;
-        this.letterMap = answer.getWord()
-                            .stream()
-                            .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
     }
 
     public List<Tile> compare(Word answer) {
+        Map<Letter, Long> letterMap = getLetterMap();
+
         List<Tile> result = new ArrayList<>();
 
         for (int i = 0; i < Word.WORD_LENGTH; i++) {
-            Letter inputLetter = answer.getWord().get(i);
-            Letter answerLetter = this.answer.getWord().get(i);
-            Long count = letterMap.get(inputLetter);
+            Long count = letterMap.get(answer.getWord().get(i));
 
-            Tile tile = getTile(count, answerLetter, inputLetter);
+            Tile tile = getTile(count, this.answer.getWord().get(i), answer.getWord().get(i));
             result.add(tile);
 
-            decreaseCountIfAnswerCorrect(tile, inputLetter, count);
+            letterMap.put(answer.getWord().get(i), letterMap.getOrDefault(answer.getWord().get(i), 0L) - 1);
         }
+        endGame(result);
 
         return result;
     }
 
-    private void decreaseCountIfAnswerCorrect(Tile tile, Letter inputLetter, Long count) {
-        if (tile.isNotWrong()) {
-            letterMap.put(inputLetter, count - 1);
+    private Map<Letter, Long> getLetterMap() {
+        return this.answer.getWord()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+    }
+
+    private void endGame(List<Tile> result) {
+        int count = Collections.frequency(result, Tile.GREEN);
+
+        if (count == Word.WORD_LENGTH) {
+            this.isSuccess = true;
         }
     }
 
+//    private void decreaseCountIfAnswerCorrect(Tile tile, Letter inputLetter, Long count) {
+//        if (tile.isNotWrong()) {
+//            letterMap.put(inputLetter, count - 1);
+//        }
+//    }
+
     private Tile getTile(Long count, Letter answerLetter, Letter letter) {
-        if (count == null || count == 0) {
+        if (count == null || count <= 0) {
             return Tile.GRAY;
         }
         if (answerLetter.equals(letter)) {
             return Tile.GREEN;
         }
         return Tile.YELLOW;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
     }
 
     @Override
@@ -63,5 +76,12 @@ public class Answer {
     @Override
     public int hashCode() {
         return Objects.hash(answer);
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answer=" + answer +
+                '}';
     }
 }

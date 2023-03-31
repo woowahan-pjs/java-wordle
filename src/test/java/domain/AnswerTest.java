@@ -39,6 +39,18 @@ class AnswerTest {
         assertThat(tiles).containsExactly(Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY);
     }
 
+    @DisplayName("두 번 호출 시 동일한 값이 나온다.")
+    @Test
+    void test04() {
+        Answer answer = new Answer(new Word("spill"));
+
+        List<Tile> tiles1 = answer.compare(new Word("llsip"));
+        assertThat(tiles1).containsExactly(Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW);
+        // 실패발생
+        List<Tile> tiles2 = answer.compare(new Word("llsip"));
+        assertThat(tiles2).containsExactly(Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW);
+    }
+
     /*@DisplayName("그린 1개, 노란색 1개, 회색 3개인 답안을 비교한다.")
     @Test
     void test01() {
