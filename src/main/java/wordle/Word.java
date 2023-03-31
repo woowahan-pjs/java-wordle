@@ -1,21 +1,34 @@
 package wordle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Word {
-    private char ch;
+    private static final int MAX_LENGTH = 5;
+    private final List<Letter> letters;
 
-    public Word(char ch) {
-        validateAlpha(ch);
-        this.ch = ch;
+    public Word(String text) {
+        validateLength(text);
+
+        letters = new ArrayList<>();
+        for (char ch: text.toCharArray()) {
+            letters.add(new Letter(ch));
+        }
     }
 
-    public char getValue() {
-        return ch;
+    public String castWordsToString() {
+        StringBuilder wordsToString = new StringBuilder();
+
+        for (Letter letter : letters) {
+            wordsToString.append(letter.getValue());
+        }
+
+        return wordsToString.toString();
     }
 
-    private void validateAlpha(char ch) {
-        // Word 라는 클래스가 하나의 글자
-        if (ch > 'z' || ch <'a') {
-            throw new IllegalArgumentException("shoud be alphabet");
+    private void validateLength(String text) {
+        if (text.length() != MAX_LENGTH) {
+            throw new IllegalArgumentException("text length cannot be over than MAX_LENGTH");
         }
     }
 }
