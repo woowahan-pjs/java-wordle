@@ -11,7 +11,7 @@ public class Words {
         validateLength(text);
 
         words = new ArrayList<>();
-        for (String ch: text.split("")) {
+        for (char ch: text.toCharArray()) {
             words.add(new Word(ch));
         }
     }

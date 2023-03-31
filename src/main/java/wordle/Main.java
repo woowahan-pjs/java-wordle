@@ -6,8 +6,11 @@ public class Main {
     public static void main(String[] args) {
         // 동작하는 코드 만들기
         // user input
+        GameMachine gameMachine = new GameMachine();
 
+        String question = gameMachine.findQuestion();
 
+        System.out.println(question);
 
 
 //        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -16,7 +19,7 @@ public class Main {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        
+
 
         // 사용자로부터 입력 받는부분
         // 입력을 검증하는부분
@@ -26,8 +29,8 @@ public class Main {
 
         // 사용자로부터 입력 받기
         // String str = getUserInput();
-        String question = "asdfg"; // 정답
-        String answer   = "azxgv";  // 사용자의 입력 값
+        question = "asdfg";
+        String answer = "azxgv";  // 사용자의 입력 값
 
         List<Result> results = GameMachine.compare(question, answer);
     }
