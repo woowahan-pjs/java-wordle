@@ -12,4 +12,8 @@ public enum Tile {
     public boolean isNotWrong() {
         return this != GRAY;
     }
+
+    public String getTile() {
+        return tile;
+    }
 }

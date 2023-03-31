@@ -13,7 +13,6 @@ public class Answer {
     private final Map<Letter, Long> letterMap;
 
     public Answer(Word answer) {
-
         this.answer = answer;
         this.letterMap = answer.getWord()
                             .stream()
