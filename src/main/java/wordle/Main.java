@@ -1,24 +1,35 @@
 package wordle;
 
+import wordle.view.GameView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // 동작하는 코드 만들기
         // user input
+
+        String inputData = null;
+
         GameMachine gameMachine = new GameMachine();
+        GameView gameView = new GameView();
 
         String question = gameMachine.findQuestion();
 
-        System.out.println(question);
+        gameView.initialize();
+        gameView.inputAnswer();
 
 
-//        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-//            String inputData = br.readLine();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            inputData = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Words words = new Words((inputData));
 
 
         // 사용자로부터 입력 받는부분

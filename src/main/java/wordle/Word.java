@@ -1,7 +1,5 @@
 package wordle;
 
-import java.util.regex.Pattern;
-
 public class Word {
     private char ch;
 
