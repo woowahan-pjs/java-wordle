@@ -12,14 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameMachine {
-    //목표: words.txt 에서 정답을 하나 불러온다.
-    public String findQuestion() {
-        List<String> list = wrodsTxtFileToList();
-        int index = calcGetQuestionIndex(list.size());
-        return list.get(index);
+    private final List<String> wordsTxtFileToList;
+
+    GameMachine() {
+        wordsTxtFileToList = wordsTxtFileToList();
     }
 
-    private List<String> wrodsTxtFileToList() {
+    //목표: words.txt 에서 정답을 하나 불러온다.
+    public String findQuestion() {
+        int index = calcGetQuestionIndex(wordsTxtFileToList.size());
+        return wordsTxtFileToList.get(index);
+    }
+
+    private List<String> wordsTxtFileToList() {
         try {
             Path path = Paths.get(ClassLoader.getSystemResource("words.txt").toURI());
 
@@ -55,5 +60,9 @@ public class GameMachine {
         }
 
         return results;
+    }
+
+    public boolean checkAnswer(Words userInputAnswer) {
+        return wordsTxtFileToList.contains(userInputAnswer.castWordsToString());
     }
 }

@@ -29,8 +29,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        Words words = new Words((inputData));
-
 
         // 사용자로부터 입력 받는부분
         // 입력을 검증하는부분
