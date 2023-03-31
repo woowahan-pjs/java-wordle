@@ -16,6 +16,16 @@ public class Words {
         }
     }
 
+    public String castWordsToString() {
+        StringBuilder wordsToString = new StringBuilder();
+
+        for (Word word : words) {
+            wordsToString.append(word.getValue());
+        }
+
+        return wordsToString.toString();
+    }
+
     private void validateLength(String text) {
         if (text.length() != MAX_LENGTH) {
             throw new IllegalArgumentException("text length cannot be over than MAX_LENGTH");

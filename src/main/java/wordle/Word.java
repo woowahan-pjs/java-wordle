@@ -8,6 +8,10 @@ public class Word {
         this.ch = ch;
     }
 
+    public char getValue() {
+        return ch;
+    }
+
     private void validateAlpha(char ch) {
         // Word 라는 클래스가 하나의 글자
         if (ch > 'z' || ch <'a') {
