@@ -7,9 +7,12 @@
 ### service
 1. InputManager
 - 사용자의 입력을 Word 객체로 전달 받는다
-2. ViewManger
+2. InputViewManger 
+- ViewManger을 주입받는다. 
+- 단어 입력 전 / 후 출력을 관리하고, InputManager을 통해 단어를 받는다.
+3. ViewManger
 - 사용자에게 출력하는 모든 로직을 담당한다
-3. WordsGenerator 
+4. WordsGenerator 
 - 날짜에 따라 오늘의 정답 단어를 AnswerWord로 추출한다
 
 ### domain
