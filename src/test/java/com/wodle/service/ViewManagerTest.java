@@ -3,15 +3,13 @@ package com.wodle.service;
 import static com.wodle.domain.TileColor.GREEN;
 import static com.wodle.domain.TileColor.GREY;
 import static com.wodle.domain.TileColor.YELLOW;
+import static com.wodle.testUtils.SystemInOutUtils.getOutputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.domain.AnswerWord;
 import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
-import com.wodle.service.ViewManager;
-import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,11 +89,5 @@ class ViewManagerTest {
         //then
         assertThat(out.toString()).isEqualTo(
             "실패 하셨습니다.\n오늘의 단어 " + answerWord.getWord() + "\n");
-    }
-
-    private OutputStream getOutputStream() {
-        OutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        return out;
     }
 }

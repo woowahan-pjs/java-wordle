@@ -1,5 +1,6 @@
 package com.wodle.service;
 
+import static com.wodle.testUtils.SystemInOutUtils.inputSetting;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -43,9 +44,5 @@ class InputManagerTest {
             () -> inputManager.inputWord()
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("user input require 5 small alphabet");
-    }
-
-    private void inputSetting(String input) {
-        System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
     }
 }
