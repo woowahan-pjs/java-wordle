@@ -1,5 +1,6 @@
 package wordle;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -24,6 +25,15 @@ class GameMachineTest {
         List<Result> results = GameMachine.compare(출제자_문제, 응시자_답변);
 
         assertThat(results).containsExactly(Result.정답, Result.틀림, Result.틀림, Result.틀림, Result.문자만_같음);
+    }
+
+    @Test
+    void find_question() {
+//        GameMachine gameMachine = new GameMachine();
+//
+//        String question = gameMachine.findQuestion();
+//
+//        Assertions.assertThat(question).isEqualTo("cigar");
     }
 
 }
