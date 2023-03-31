@@ -10,38 +10,48 @@ public class Answer {
 
     private final Word answer;
 
+    private final Map<Letter, Long> letterMap;
+
     public Answer(Word answer) {
+
         this.answer = answer;
+        this.letterMap = answer.getWord()
+                            .stream()
+                            .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
     }
 
     public List<Tile> compare(Word answer) {
-        // 위치와 글자가 맞으면 초록색
-        // 위치가 틀리고, 글자가 맞으면 노란색
-        // 위치와 글자가 틀리면 회색
-        List<Tile> tiles = new ArrayList<>();
+        List<Tile> result = new ArrayList<>();
 
-        Map<Letter, Long> letterMap = this.answer.getWord()
-                                           .stream()
-                                           .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+        for (int i = 0; i < Word.WORD_LENGTH; i++) {
+            Letter inputLetter = answer.getWord().get(i);
+            Letter answerLetter = this.answer.getWord().get(i);
+            Long count = letterMap.get(inputLetter);
 
-        for (int i = 0; i < 5; i++) {
-            Long count = letterMap.get(answer.getWord().get(i));
+            Tile tile = getTile(count, answerLetter, inputLetter);
+            result.add(tile);
 
-            if (Objects.isNull(count) || count == 0) {
-                tiles.add(Tile.GRAY);
-            } else {
-                if (this.answer.getWord().get(i).equals(answer.getWord().get(i))) {
-                    tiles.add(Tile.GREEN);
-                } else {
-                    tiles.add(Tile.YELLOW);
-                }
-                letterMap.put(answer.getWord().get(i), count - 1);
-            }
+            decreaseCountIfAnswerCorrect(tile, inputLetter, count);
         }
 
-        return tiles;
+        return result;
     }
 
+    private void decreaseCountIfAnswerCorrect(Tile tile, Letter inputLetter, Long count) {
+        if (tile.isNotWrong()) {
+            letterMap.put(inputLetter, count - 1);
+        }
+    }
+
+    private Tile getTile(Long count, Letter answerLetter, Letter letter) {
+        if (count == null || count == 0) {
+            return Tile.GRAY;
+        }
+        if (answerLetter.equals(letter)) {
+            return Tile.GREEN;
+        }
+        return Tile.YELLOW;
+    }
 
     @Override
     public boolean equals(Object o) {
