@@ -9,10 +9,6 @@ public enum Tile {
         this.tile = tile;
     }
 
-    public boolean isNotWrong() {
-        return this != GRAY;
-    }
-
     public String getTile() {
         return tile;
     }

@@ -45,12 +45,6 @@ public class Answer {
         }
     }
 
-//    private void decreaseCountIfAnswerCorrect(Tile tile, Letter inputLetter, Long count) {
-//        if (tile.isNotWrong()) {
-//            letterMap.put(inputLetter, count - 1);
-//        }
-//    }
-
     private Tile getTile(Long count, Letter answerLetter, Letter letter) {
         if (count == null || count <= 0) {
             return Tile.GRAY;
