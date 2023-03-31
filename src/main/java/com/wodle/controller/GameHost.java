@@ -25,22 +25,48 @@ public class GameHost {
     }
 
     public void play() {
-        AnswerWord word = wordsGenerator.getTodayWord();
-        Coins coins = new Coins(START_COIN);
-        boolean isGameEnd = false;
+        GameMachine machine = init();
 
         viewManager.printGameStart();
 
-        while (!coins.isEmpty() && !isGameEnd) {
-            coins.use();
+        while (machine.isGameNotEnd()) {
+            machine.useCoin();
             Word inputWord = inputManager.inputWord();
-            Result wordCompareResult = word.compare(inputWord);
+            Result wordCompareResult = machine.compareWord(inputWord);
             viewManager.printCompareResult(wordCompareResult);
 
-            isGameEnd = wordCompareResult.isGameEnd();
+            machine.isGameEnd = wordCompareResult.isGameEnd();
         }
 
-        viewManager.printResult(isGameEnd, word);
+        viewManager.printResult(machine.isGameEnd, machine.word);
+    }
+
+    private GameMachine init(){
+        AnswerWord word = wordsGenerator.getTodayWord();
+        return new GameMachine(word, START_COIN);
+    }
+
+    private static class GameMachine {
+        private final AnswerWord word;
+        private final Coins coins;
+        private boolean isGameEnd = false;
+
+        public GameMachine(AnswerWord word, int startCoin){
+            this.word = word;
+            this.coins = new Coins(startCoin);
+        }
+
+        public boolean isGameNotEnd (){
+            return !coins.isEmpty() && !isGameEnd;
+        }
+
+        public void useCoin(){
+            coins.use();
+        }
+
+        public Result compareWord(Word inputWord){
+            return this.word.compare(inputWord);
+        }
     }
 
 }
