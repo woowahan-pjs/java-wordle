@@ -9,6 +9,7 @@ import com.wodle.service.ViewManager;
 import com.wodle.service.WordsGenerator;
 
 public class GameHost {
+
     private static final int START_COIN = 6;
     private final InputManager inputManager;
 
@@ -30,9 +31,9 @@ public class GameHost {
 
         viewManager.printGameStart();
 
-        while(!coins.isEmpty() && !isGameEnd) {
+        while (!coins.isEmpty() && !isGameEnd) {
             coins.use();
-            Word inputWord = getInputWord();
+            Word inputWord = inputManager.inputWord();
             Result wordCompareResult = word.compare(inputWord);
             viewManager.printCompareResult(wordCompareResult);
 
@@ -42,14 +43,4 @@ public class GameHost {
         viewManager.printResult(isGameEnd, word);
     }
 
-    private Word getInputWord() {
-        try {
-            viewManager.printRequestWordInput();
-            return inputManager.inputWord();
-        } catch (Exception e) {
-            viewManager.notifyInvalidInputWord();
-            return getInputWord();
-        }
-
-    }
 }
