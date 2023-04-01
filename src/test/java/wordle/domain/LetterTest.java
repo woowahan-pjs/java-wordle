@@ -1,6 +1,6 @@
-package wordle;
+package wordle.domain;
 
-class WordTest {
+class LetterTest {
 
 //    @Test
 //    void test() {

@@ -1,13 +1,12 @@
-package wordle;
+package wordle.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wordle.domain.Word;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class WordsTest {
+class WordTest {
 
     @Test
     @DisplayName("Word의 길이는 5를 초과한 경우 실패합니다.")

@@ -1,7 +1,7 @@
 package wordle;
 
-import wordle.util.FileReader;
 import wordle.domain.Result;
+import wordle.util.FileReader;
 import wordle.view.GameView;
 
 import java.io.BufferedReader;
