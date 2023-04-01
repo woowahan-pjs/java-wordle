@@ -34,4 +34,12 @@ class WordlesTest {
         assertThat(result).containsExactlyElementsOf(expected);
     }
 
+    @Test
+    void test() {
+        Wordles wordles = new Wordles("hello", "oabco");
+
+        List<TileColor> result = wordles.isWordleCompleted();
+        System.out.println(result);
+    }
+
 }

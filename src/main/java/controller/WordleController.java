@@ -1,7 +1,6 @@
 package controller;
 
 import domain.WordleGames;
-import domain.Wordles;
 
 public class WordleController {
 
@@ -13,7 +12,7 @@ public class WordleController {
         String answer = "answer";
 
         WordleGames wordleGames = new WordleGames();
-        wordleGames.start(answer);
+        wordleGames.start(answer, "input");
 
     }
 }

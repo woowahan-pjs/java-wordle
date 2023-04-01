@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class WordleGames {
 
     private WordleGame wordleGame = new WordleGame();
@@ -8,20 +10,37 @@ public class WordleGames {
 
     }
 
-    public void start(String answer) {
-        //d
-        //d
+    public Tiles start(String answer, String input) {
         // answer -> char
-        Wordles answerWordles = new Wordles(answer, "input");
+        Wordles answerWordles = new Wordles(answer, input);
+        Tiles tiles = new Tiles();
 
-        WordleGameStatus status;
         int count = 1;
         do {
             // 단어 입력
-            String inputWord = "";
-            status = wordleGame.start(answerWordles, inputWord);
-            count++;
-        } while(WordleGameStatus.END.equals(status) || count <= 6);
+            Tile tile = wordleGame.start(answerWordles);
 
+            tiles.addTiles(tile);
+
+            // 전부다 그린일경우 -> 게임 종료
+            List<TileColor> tileColors = tile.getTileColors();
+
+            boolean allGreen = true;
+
+            for (int i = 0; i < tileColors.size(); i++) {
+                if (!tileColors.get(i).equals(TileColor.GREEN)) {
+                    allGreen = false;
+                    break;
+                }
+            }
+
+            if (allGreen) {
+                return tiles;
+            }
+            count++;
+        } while(count <= 6);
+
+        return tiles;
     }
+
 }

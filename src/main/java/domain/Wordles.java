@@ -23,22 +23,37 @@ public class Wordles {
         return words;
     }
 
-
     public List<TileColor> isWordleCompleted() {
         List<TileColor> tileColors = new ArrayList<>();
-        // 정답과 사용자의 입력 비교
         int size = answer.size();
-        for (int i = 0; i < size; i++) {
-            if (answer.get(i).getWord() == input.get(i).getWord()) {
-                tileColors.add(TileColor.GREEN);
-            } else if (answer.contains(input.get(i))) {
-                tileColors.add(TileColor.YELLOW);
-            } else {
-                tileColors.add(TileColor.WHITE);
-            }
 
+        for (int i = 0; i < size; i++) {
+            makeTileColor(tileColors, i);
         }
         return tileColors;
+    }
+
+    private List<TileColor> makeTileColor(List<TileColor> tileColors, int i) {
+        if (isSameWordIndex(i)) {
+            tileColors.add(TileColor.GREEN);
+            return tileColors;
+        }
+
+        if (isSameWordDifferentIndex(i)) {
+            tileColors.add(TileColor.YELLOW);
+            return tileColors;
+        }
+
+        tileColors.add(TileColor.WHITE);
+        return tileColors;
+    }
+
+    private boolean isSameWordIndex(int i) {
+        return answer.get(i).getWord() == input.get(i).getWord();
+    }
+
+    private boolean isSameWordDifferentIndex(int i) {
+        return answer.contains(input.get(i));
     }
 
 }
