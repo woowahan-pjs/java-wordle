@@ -1,12 +1,11 @@
 package domain;
 
+import java.util.List;
+
 public class WordleComparer {
 
-    public WordleGameStatus compareWordle(Wordles wordles) {
-        if (wordles.isWordleCompleted()) {
-            return WordleGameStatus.END;
-        }
-
-        return WordleGameStatus.ING;
+    public Tiles compareWordle(Wordles wordles) {
+        List<TileColor> wordleCompleted = wordles.isWordleCompleted();
+        return new Tiles();
     }
 }

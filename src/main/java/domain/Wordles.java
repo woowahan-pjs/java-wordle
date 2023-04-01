@@ -24,18 +24,21 @@ public class Wordles {
     }
 
 
-    public boolean isWordleCompleted() {
+    public List<TileColor> isWordleCompleted() {
+        List<TileColor> tileColors = new ArrayList<>();
         // 정답과 사용자의 입력 비교
         int size = answer.size();
         for (int i = 0; i < size; i++) {
-            if (isNotEqualWord(i)) {
-                return false;
+            if (answer.get(i).getWord() == input.get(i).getWord()) {
+                tileColors.add(TileColor.GREEN);
+            } else if (answer.contains(input.get(i))) {
+                tileColors.add(TileColor.YELLOW);
+            } else {
+                tileColors.add(TileColor.WHITE);
             }
+
         }
-        return true;
+        return tileColors;
     }
 
-    private boolean isNotEqualWord(int i) {
-        return answer.get(i).getWord() != input.get(i).getWord();
-    }
 }
