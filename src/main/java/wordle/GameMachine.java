@@ -7,35 +7,10 @@ import wordle.view.GameView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameMachine {
-    // TODO
-//    private final List<String> words;
-//
-//    GameMachine() {
-//        words = words();
-//    }
-//
-//    //목표: words.txt 에서 정답을 하나 불러온다.
-//    public String findQuestion() {
-//        int index = calcGetQuestionIndex(words.size());
-//        return words.get(index);
-//    }
-//
-//    public boolean checkAnswer(Word userInputAnswer) {
-//        return words.contains(userInputAnswer.castWordsToString());
-//    }
-
-    private int calcGetQuestionIndex(int wordsTxtSize) {
-        long todayToEpochDay = LocalDate.now().toEpochDay();
-        long standardDateToEpochDay = LocalDate.of(2021, Month.JUNE, 19).toEpochDay();
-
-        return (int) ((todayToEpochDay - standardDateToEpochDay) % wordsTxtSize);
-    }
 
     public static List<Result> compare(String question, String answer) {
         String[] questionStrings = question.split("");
