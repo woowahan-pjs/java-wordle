@@ -19,4 +19,8 @@ public class Coin {
     public int getRestChance() {
         return restChance;
     }
+
+    public boolean isGameOver() {
+        return restChance < 1;
+    }
 }
