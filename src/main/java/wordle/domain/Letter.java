@@ -1,4 +1,4 @@
-package wordle;
+package wordle.domain;
 
 public class Letter {
     private char ch;
