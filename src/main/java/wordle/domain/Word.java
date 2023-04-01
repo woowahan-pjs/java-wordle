@@ -1,7 +1,5 @@
 package wordle.domain;
 
-import wordle.domain.Letter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Word {
         validateLength(text);
 
         letters = new ArrayList<>();
-        for (char ch: text.toCharArray()) {
+        for (char ch : text.toCharArray()) {
             letters.add(new Letter(ch));
         }
     }
