@@ -1,5 +1,7 @@
 package wordle.domain;
 
+import java.util.Objects;
+
 public class Letter {
     private char ch;
 
@@ -17,5 +19,18 @@ public class Letter {
         if (ch > 'z' || ch < 'a') {
             throw new IllegalArgumentException("shoud be alphabet");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Letter letter = (Letter) o;
+        return ch == letter.ch;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ch);
     }
 }

@@ -2,6 +2,7 @@ package wordle.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Word {
     private static final int MAX_LENGTH = 5;
@@ -30,5 +31,18 @@ public class Word {
         if (text.length() != MAX_LENGTH) {
             throw new IllegalArgumentException("text length cannot be over than MAX_LENGTH");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Word word = (Word) o;
+        return Objects.equals(letters, word.letters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(letters);
     }
 }
