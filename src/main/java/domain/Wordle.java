@@ -8,4 +8,7 @@ public class Wordle {
         this.word = word;
     }
 
+    public char getWord() {
+        return word;
+    }
 }
