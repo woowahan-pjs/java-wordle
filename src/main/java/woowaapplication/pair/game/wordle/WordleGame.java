@@ -2,6 +2,9 @@ package woowaapplication.pair.game.wordle;
 
 import java.util.List;
 import java.util.Scanner;
+import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
+import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
+import woowaapplication.pair.game.wordle.exception.ReadFileException;
 
 public class WordleGame {
 
@@ -21,7 +24,17 @@ public class WordleGame {
         Scanner sc = ready();
 
         while (!wordleGameService.isGameOver()) {
-            run(sc);
+            try {
+                run(sc);
+            } catch (InvalidInputKeywordException e) {
+                System.out.println("올바른 입력이 아닙니다. 다시 시도해주세요.");
+            } catch (InvalidAnswerKeywordException e) {
+                System.out.println("오늘의 정답 키워드가 유효하지 않습니다. 관리자에게 문의해주세요.");
+                break;
+            } catch (ReadFileException e) {
+                System.out.println("파일을 읽는데 실패했습니다. 관리자에게 문의해주세요.");
+                break;
+            }
         }
 
         terminate();

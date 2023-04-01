@@ -1,13 +1,21 @@
 package woowaapplication.pair.game.wordle;
 
+import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
+
 public class KeywordValidator {
 
-    public static boolean validate(String keyword, int lengthLimit) {
+    public static void validate(String keyword, int lengthLimit) {
         if (keyword == null) {
-            return false;
+            throw new InvalidInputKeywordException();
         }
 
-        return isAlphabetic(keyword) && isLengthValid(keyword, lengthLimit);
+        if (!isAlphabetic(keyword)) {
+            throw new InvalidInputKeywordException();
+        }
+
+        if (!isLengthValid(keyword, lengthLimit)) {
+            throw new InvalidInputKeywordException();
+        }
     }
 
     private static boolean isAlphabetic(String keyword) {

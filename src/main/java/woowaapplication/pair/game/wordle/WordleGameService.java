@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
 
 public class WordleGameService {
 
@@ -44,9 +45,12 @@ public class WordleGameService {
     public String getAnswerKeyword() {
         List<String> keywords = readKeywordsFromFile();
 
+        if (keywords.isEmpty()) {
+            throw new InvalidAnswerKeywordException();
+        }
+
         int index = findAnswerKeywordIndex(keywords);
 
-        //TODO: 키워드가 null이라면 논리적 예외 발생 시켜주면 좋을 듯 함
         return keywords.get(index);
     }
 
