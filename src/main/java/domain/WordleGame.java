@@ -8,6 +8,6 @@ public class WordleGame {
         // answer <-> inputWord 정답을 비교한다.
         WordleGameResponse rseponse = wordleComparer.compareWordle(wordles, inputWord);
 
-
+        // test
     }
 }
