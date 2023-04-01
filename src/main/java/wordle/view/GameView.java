@@ -1,5 +1,6 @@
 package wordle.view;
 
+import wordle.domain.GameRecord;
 import wordle.domain.GameRecords;
 import wordle.domain.Round;
 
@@ -19,5 +20,11 @@ public class GameView {
 
     public void printRound(Round round) {
         System.out.println(round);
+    }
+
+    public void printRecords(GameRecords gameRecords) {
+        gameRecords.getRecords().stream()
+            .map(GameRecord::getResults)
+            .forEach(System.out::println);
     }
 }
