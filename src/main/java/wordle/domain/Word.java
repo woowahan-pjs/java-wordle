@@ -1,4 +1,6 @@
-package wordle;
+package wordle.domain;
+
+import wordle.domain.Letter;
 
 import java.util.ArrayList;
 import java.util.List;
