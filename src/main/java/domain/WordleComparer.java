@@ -2,7 +2,11 @@ package domain;
 
 public class WordleComparer {
 
-    public WordleGameResponse compareWordle(Wordles wordles, String inputWord) {
-        // TODO
+    public WordleGameStatus compareWordle(Wordles wordles, Wordles inputWord) {
+        if (wordles.compare(inputWord)) {
+            return WordleGameStatus.END;
+        }
+
+        return WordleGameStatus.ING;
     }
 }

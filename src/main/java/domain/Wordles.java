@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wordles {
-
-    private final List<Wordle> words;
+    private final List<Wordle> answer;
+    private final List<Wordle> input;
 
     public Wordles(String answer) {
-        this.words = toWords(answer);
+        this.answer = toWords(answer);
     }
 
     private List<Wordle> toWords(String answer) {
@@ -22,4 +22,7 @@ public class Wordles {
     }
 
 
+    public boolean compare(String inputWord) {
+
+    }
 }

@@ -4,10 +4,11 @@ public class WordleGame {
 
     private WordleComparer wordleComparer = new WordleComparer();
 
-    public WordleGameResponse start(Wordles wordles, String inputWord) {
+    public WordleGameStatus start(Wordles wordles, String inputWord) {
         // answer <-> inputWord 정답을 비교한다.
-        WordleGameResponse rseponse = wordleComparer.compareWordle(wordles, inputWord);
+        wordles.add(inputWord);
+        WordleGameStatus rseponse = wordleComparer.compareWordle(wordles, new Wordles(inputWord));
 
-        // test
+        return null;
     }
 }
