@@ -4,7 +4,7 @@ import static com.wodle.testUtils.SystemInOutUtils.getOutputStream;
 import static com.wodle.testUtils.SystemInOutUtils.inputSetting;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wodle.service.InputViewManager;
+import com.wodle.service.InputMangerProxy;
 import com.wodle.service.ViewManager;
 import com.wodle.service.WordsGenerator;
 import com.wodle.testUtils.StaticMockingUtils;
@@ -21,10 +21,10 @@ class GameHostTest extends StaticMockingUtils {
     public void init() {
         super.init();
         ViewManager viewManager = new ViewManager();
-        InputViewManager inputManager = new InputViewManager(viewManager);
+        InputMangerProxy inputManagerProxy = new InputMangerProxy(viewManager);
         WordsGenerator wordsGenerator = new WordsGenerator();
         gameHost = new GameHost(
-            inputManager,
+            inputManagerProxy,
             viewManager,
             wordsGenerator
         );

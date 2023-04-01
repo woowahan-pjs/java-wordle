@@ -11,13 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class InputViewManagerTest {
+class InputMangerProxyTest {
 
-    private InputViewManager inputViewManager;
+    private InputMangerProxy inputMangerProxy;
 
     @BeforeEach
     public void init() {
-        inputViewManager = new InputViewManager(new ViewManager());
+        inputMangerProxy = new InputMangerProxy(new ViewManager());
     }
 
     @ParameterizedTest
@@ -35,7 +35,7 @@ class InputViewManagerTest {
         OutputStream out = getOutputStream();
 
         //when
-        Word word = inputViewManager.inputWord();
+        Word word = inputMangerProxy.inputWord();
 
         //then
         assertAll(

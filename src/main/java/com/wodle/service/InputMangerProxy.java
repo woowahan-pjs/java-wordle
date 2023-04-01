@@ -2,11 +2,11 @@ package com.wodle.service;
 
 import com.wodle.domain.Word;
 
-public class InputViewManager extends InputManager {
+public class InputMangerProxy extends InputManager {
 
     private final ViewManager viewManager;
 
-    public InputViewManager(ViewManager viewManager) {
+    public InputMangerProxy(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
 

@@ -11,15 +11,15 @@ import com.wodle.service.WordsGenerator;
 public class GameHost {
 
     private static final int START_COIN = 6;
-    private final InputManager inputManager;
+    private final InputManager inputManagerProxy;
 
     private final ViewManager viewManager;
 
     private final WordsGenerator wordsGenerator;
 
-    public GameHost(InputManager inputManager, ViewManager viewManager,
+    public GameHost(InputManager inputManagerProxy, ViewManager viewManager,
         WordsGenerator wordsGenerator) {
-        this.inputManager = inputManager;
+        this.inputManagerProxy = inputManagerProxy;
         this.viewManager = viewManager;
         this.wordsGenerator = wordsGenerator;
     }
@@ -31,7 +31,7 @@ public class GameHost {
 
         while (machine.isGameNotEnd()) {
             machine.useCoin();
-            Word inputWord = inputManager.inputWord();
+            Word inputWord = inputManagerProxy.inputWord();
             Result wordCompareResult = machine.compareWord(inputWord);
             viewManager.printCompareResult(wordCompareResult);
 
