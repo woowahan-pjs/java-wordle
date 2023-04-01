@@ -6,7 +6,8 @@ public class WordleGame {
 
     public WordleGameStatus start(Wordles wordles, String inputWord) {
         // answer <-> inputWord 정답을 비교한다.
-        WordleGameStatus rseponse = wordleComparer.compareWordle(wordles, inputWord);
+        wordles.add(inputWord);
+        WordleGameStatus rseponse = wordleComparer.compareWordle(wordles, new Wordles(inputWord));
 
         return null;
     }
