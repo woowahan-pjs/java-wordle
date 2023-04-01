@@ -1,8 +1,19 @@
 package wordle.domain;
 
 public enum Result {
-    정답, // 위치와 문자가 맞다 (초록색)
-    문자만_같음,// 위치는 틀리고 문자는 맞다 (노란색)
-    틀림, // 둘다 틀렸다 (회색)
+    CORRECT("\uD83D\uDFE9"),
+    HALF_CORRECT("\uD83D\uDFE8"),
+    WRONG("⬜"),
     ;
+
+    private final String cell;
+
+    Result(final String cell) {
+        this.cell = cell;
+    }
+
+    @Override
+    public String toString() {
+        return cell;
+    }
 }
