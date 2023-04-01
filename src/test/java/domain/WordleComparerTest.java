@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class WordleComparerTest {
 
     @Test
-    void test() {
+    void end() {
         Wordles answer = new Wordles("march");
         String inputWordle = "march";
 
@@ -17,6 +17,17 @@ class WordleComparerTest {
         WordleGameStatus wordleGameResponse = wordleComparer.compareWordle(answer, inputWordle);
 
         assertThat(wordleGameResponse).isEqualTo(WordleGameStatus.END);
+    }
+
+    @Test
+    void ing() {
+        Wordles answer = new Wordles("march");
+        String inputWordle = "aaaaa";
+
+        WordleComparer wordleComparer = new WordleComparer();
+        WordleGameStatus wordleGameResponse = wordleComparer.compareWordle(answer, inputWordle);
+
+        assertThat(wordleGameResponse).isEqualTo(WordleGameStatus.ING);
     }
 
 }
