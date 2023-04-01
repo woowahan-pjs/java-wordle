@@ -2,9 +2,9 @@ package domain;
 
 public class WordleComparer {
 
-    public WordleGameResponse compareWordle(Wordles wordles, String inputWord) {
+    public WordleGameStatus compareWordle(Wordles wordles, String inputWord) {
         // TODO
 
-        return null;
+        return WordleGameStatus.END;
     }
 }

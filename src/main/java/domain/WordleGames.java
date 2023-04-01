@@ -14,14 +14,14 @@ public class WordleGames {
         // answer -> char
         Wordles answerWordles = new Wordles(answer);
 
-        WordleGameResponse response;
+        WordleGameStatus status;
         int count = 1;
         do {
             // 단어 입력
             String inputWord = "";
-            response = wordleGame.start(answerWordles, inputWord);
+            status = wordleGame.start(answerWordles, inputWord);
             count++;
-        } while(response.isNotEnd() || count <= 6);
+        } while(WordleGameStatus.END.equals(status) || count <= 6);
 
     }
 }
