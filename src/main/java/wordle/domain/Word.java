@@ -33,6 +33,31 @@ public class Word {
         }
     }
 
+    public List<Result> compare(Word target) {
+        List<Result> results = new ArrayList<>();
+        for (int i=0; i < letters.size(); i++) {
+            Letter questionLetter = letters.get(i);
+            Letter answerLetter = target.letters.get(i);
+
+            if (questionLetter.equals(answerLetter)) {
+                results.add(Result.CORRECT);
+            } else if (target.letters.contains(questionLetter)) {
+                results.add(Result.HALF_CORRECT);
+            } else {
+                results.add(Result.WRONG);
+            }
+        }
+        return results;
+    }
+
+//    if (questionStrings[i].equals(answerStrings[i])) {
+//        results.add(Result.CORRECT);
+//    } else if (answer.contains(questionStrings[i])) {
+//        results.add(Result.HALF_CORRECT);
+//    } else {
+//        results.add(Result.WRONG);
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

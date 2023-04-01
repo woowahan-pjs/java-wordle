@@ -3,6 +3,8 @@ package wordle.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -26,5 +28,16 @@ class WordTest {
         Word word = new Word("abcde");
 
         assertThat(word.castWordsToString()).isEqualTo("abcde");
+    }
+
+    @Test
+    @DisplayName("정답과 답안의 일치여부를 검사한다.")
+    void wordCompareTest() {
+        Word sourceWord = new Word("asdfg");
+        Word targetWord = new Word("qwefg");
+
+        List<Result> results = sourceWord.compare(targetWord);
+
+        assertThat(results).isEqualTo(List.of(Result.WRONG, Result.WRONG, Result.WRONG, Result.CORRECT, Result.CORRECT));
     }
 }

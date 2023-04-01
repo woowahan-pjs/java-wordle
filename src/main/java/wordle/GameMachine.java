@@ -1,36 +1,19 @@
 package wordle;
 
 import wordle.domain.Result;
+import wordle.domain.Word;
+import wordle.domain.Worker;
 import wordle.util.FileReader;
 import wordle.view.GameView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class GameMachine {
-
-    public static List<Result> compare(String question, String answer) {
-        String[] questionStrings = question.split("");
-
-        String[] answerStrings = answer.split("");
-
-        List<Result> results = new ArrayList<>();
-
-        for (int i = 0; i < questionStrings.length; i++) {
-            if (questionStrings[i].equals(answerStrings[i])) {
-                results.add(Result.CORRECT);
-            } else if (answer.contains(questionStrings[i])) {
-                results.add(Result.HALF_CORRECT);
-            } else {
-                results.add(Result.WRONG);
-            }
-        }
-
-        return results;
-    }
 
     public void start() {
         FileReader fileReader = new FileReader(); // TODO: 이름
@@ -42,11 +25,14 @@ public class GameMachine {
         gameView.inputAnswer();
 
         String inputData = getUserInput();
-        // validate inputData
-        // TODO: new Word(inputDate);
-
+        Word inputWord = new Word(inputData);
+        Worker worker = new Worker(transToWords(questions));
+        Word question = worker.proposeQuestion();
         // 입력과 정답을 비교하는 부분
+        List<Result> results = question.compare(inputWord);
         // 결과 출력
+
+
 
 //        List<Result> results = GameMachine.compare(question, answer);
     }
@@ -59,5 +45,12 @@ public class GameMachine {
         } catch (IOException e) {
             throw new RuntimeException(e); // TODO: change
         }
+    }
+
+    private List<Word> transToWords(List<String> words) {
+        return words.stream()
+            .map(Word::new)
+            .collect(toList())
+            ;
     }
 }

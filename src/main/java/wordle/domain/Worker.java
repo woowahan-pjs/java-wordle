@@ -9,6 +9,10 @@ public class Worker {
     private final List<Word> words;
     private final IndexGenerator indexGenerator;
 
+    public Worker(List<Word> words) {
+        this.words = words;
+        this.indexGenerator = new DefaultGenerator();
+    }
 
     public Worker(List<Word> words, IndexGenerator indexGenerator) {
         this.words = words;
