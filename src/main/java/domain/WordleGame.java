@@ -6,7 +6,9 @@ public class WordleGame {
 
     public WordleGameStatus start(Wordles wordles, String inputWord) {
         // answer <-> inputWord 정답을 비교한다.
-        WordleGameStatus response = wordleComparer.compareWordle(wordles, new Wordles(inputWord));
+        WordleGameStatus response = wordleComparer.compareWordle(wordles);
+
+        // 5개의 Tile 생성, 1개의 Tiles 생성
 
         return null;
     }

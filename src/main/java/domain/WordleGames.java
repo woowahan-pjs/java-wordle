@@ -12,7 +12,7 @@ public class WordleGames {
         //d
         //d
         // answer -> char
-        Wordles answerWordles = new Wordles(answer);
+        Wordles answerWordles = new Wordles(answer, "input");
 
         WordleGameStatus status;
         int count = 1;
