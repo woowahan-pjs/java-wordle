@@ -4,21 +4,24 @@ public class WordleGames {
 
     private WordleGame wordleGame = new WordleGame();
 
+    public WordleGames() {
+
+    }
+
     public void start(String answer) {
         //d
         //d
         // answer -> char
-        Wordles wordles = new Wordles(answer);
+        Wordles answerWordles = new Wordles(answer);
 
-        while (count <= 6) {
+        WordleGameResponse response;
+        int count = 1;
+        do {
             // 단어 입력
             String inputWord = "";
-            WordleGameResponse response = wordleGame.start(wordles, inputWord);
-            if (response 정답이면) {
-                break;
-            }
+            response = wordleGame.start(answerWordles, inputWord);
             count++;
-        }
+        } while(response.isNotEnd() || count <= 6);
 
     }
 }
