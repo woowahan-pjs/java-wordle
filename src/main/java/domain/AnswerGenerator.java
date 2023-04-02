@@ -9,8 +9,8 @@ import java.util.List;
 
 public class AnswerGenerator {
     private static final LocalDate CRITERIA_DATE = LocalDate.of(2021, 6, 19);
-    private List<String> words;
     private final LocalDate criteriaDate;
+    private List<String> words;
 
     public AnswerGenerator(String filePath) {
         this.words = getWordList(filePath);
