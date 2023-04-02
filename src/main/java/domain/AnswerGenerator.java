@@ -16,10 +16,6 @@ public class AnswerGenerator {
         this.words = getWordList(filePath);
         this.criteriaDate = CRITERIA_DATE;
     }
-    public AnswerGenerator(String filePath, LocalDate criteriaDate) {
-        this.words = getWordList(filePath);
-        this.criteriaDate = criteriaDate;
-    }
 
     private List<String> getWordList(String filePath) {
         Path path = Path.of(filePath);
