@@ -15,7 +15,6 @@ import static view.output.OutputView.printMain;
 
 public class WordleController {
 
-
     public void start() {
         // view 의 Input~  기능을 통해서 입력받고
         // view 의 Output~ 기능을 통해서 출력하고
@@ -49,13 +48,21 @@ public class WordleController {
     }
 
     private static List<String> readFromInputStream(InputStream inputStream) throws IOException {
-        List<String> txtFileLine = new ArrayList<>();
+        List<String> txtFileLine;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                txtFileLine.add(line);
-            }
+            txtFileLine = extractTextLines(br);
         }
+        return txtFileLine;
+    }
+
+    private static List<String> extractTextLines(BufferedReader br) throws IOException {
+        List<String> txtFileLine = new ArrayList<>();
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            txtFileLine.add(line);
+        }
+
         return txtFileLine;
     }
 }

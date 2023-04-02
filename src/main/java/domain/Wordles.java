@@ -2,8 +2,10 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Wordles {
+    public static final int WORD_SIZE = 5;
     private final List<Wordle> answer;
     private final List<Wordle> input;
 
@@ -13,7 +15,8 @@ public class Wordles {
     }
 
     private List<Wordle> toWords(String word) {
-        // TODO: word 유효성 검증 추가
+        validateWord(word);
+        
         List<Wordle> words = new ArrayList<>();
 
         for (char ch : word.toCharArray()) {
@@ -21,6 +24,23 @@ public class Wordles {
         }
 
         return words;
+    }
+
+    private void validateWord(String word) {
+        Objects.requireNonNull(word, "word must not null, word: " + word);
+
+        if (word.length() != WORD_SIZE) {
+            throw new IllegalArgumentException("word 단어의 길이는 5글자여야 합니다. 현재 길이: " + word.length());
+        }
+
+        if (!isAlpha(word)) {
+            throw new IllegalArgumentException("word 단어는 영문자여야 합니다. 현재 단어: " + word);
+        }
+
+    }
+
+    private boolean isAlpha(String s) {
+        return s.matches("^[a-zA-Z]*$");
     }
 
     public List<TileColor> isWordleCompleted() {
