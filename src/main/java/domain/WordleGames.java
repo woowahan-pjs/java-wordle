@@ -6,13 +6,16 @@ import static view.input.InputView.inputPlayerWordle;
 import static view.output.OutputView.printInputAnswer;
 
 public class WordleGames {
+    private final int START_COUNT = 1;
+    private final int END_COUNT = 6;
 
     private WordleGame wordleGame = new WordleGame();
+
 
     public Tiles start(String answer) {
         Tiles tiles = new Tiles();
 
-        int count = 1;
+        int count = START_COUNT;
         do {
             printInputAnswer();
 
@@ -24,9 +27,13 @@ public class WordleGames {
             OutputView.printTile(tiles);
 
             count++;
-        } while(!tiles.hasAllGreen() && count <= 6);
+        } while(isContinueGame(tiles, count));
 
         return tiles;
+    }
+
+    private boolean isContinueGame(Tiles tiles, int count) {
+        return !tiles.hasAllGreen() && count <= END_COUNT;
     }
 
 }

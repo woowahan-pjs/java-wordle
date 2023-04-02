@@ -4,7 +4,8 @@ import domain.Tiles;
 
 public class OutputView {
 
-    private OutputView() { }
+    private OutputView() {
+    }
 
     public static void printMain() {
         System.out.println("WORDLE을 6번 만에 맞춰 보세요.");
@@ -16,17 +17,7 @@ public class OutputView {
     }
 
     public static void printTile(Tiles tiles) {
-        tiles.getTiles()
-                .stream()
-                .forEach(tile -> {
-                    tile.getTileColors()
-                            .stream()
-                            .forEach(tileColor ->
-                                    System.out.print(tileColor.getTile())
-                            );
-                    System.out.println();
-                        }
-                );
+        System.out.println(tiles.print());
     }
 
 }

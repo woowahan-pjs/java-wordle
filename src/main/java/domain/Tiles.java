@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tiles {
 
@@ -22,5 +23,11 @@ public class Tiles {
 
     public boolean hasAllGreen() {
         return allGreen;
+    }
+
+    public String print() {
+        return tiles.stream()
+                .map(Tile::printTile)
+                .collect(Collectors.joining("\n"));
     }
 }

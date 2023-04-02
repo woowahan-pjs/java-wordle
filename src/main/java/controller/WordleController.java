@@ -14,6 +14,7 @@ import java.util.List;
 import static view.output.OutputView.printMain;
 
 public class WordleController {
+    private final String FILE_NAME = "words.txt";
 
     public void start() {
         printMain();
@@ -26,7 +27,7 @@ public class WordleController {
 
     private String searchAnswer() {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("words.txt");
+        InputStream is = classloader.getResourceAsStream(FILE_NAME);
         List<String> strings = new ArrayList<>();
         try {
              strings = readFromInputStream(is);
@@ -37,14 +38,14 @@ public class WordleController {
         return strings.get(index.intValue());
     }
 
-    private static Long calculateAnswerIndex(List<String> strings) {
+    private Long calculateAnswerIndex(List<String> strings) {
         LocalDate today = LocalDate.now();
         LocalDate date = LocalDate.of(2021, 6, 19);
         long diffDays = Math.abs(ChronoUnit.DAYS.between(today, date));
         return diffDays % strings.size();
     }
 
-    private static List<String> readFromInputStream(InputStream inputStream) throws IOException {
+    private List<String> readFromInputStream(InputStream inputStream) throws IOException {
         List<String> txtFileLine;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             txtFileLine = extractTextLines(br);
@@ -52,7 +53,7 @@ public class WordleController {
         return txtFileLine;
     }
 
-    private static List<String> extractTextLines(BufferedReader br) throws IOException {
+    private List<String> extractTextLines(BufferedReader br) throws IOException {
         List<String> txtFileLine = new ArrayList<>();
         String line;
 

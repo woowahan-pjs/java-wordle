@@ -43,7 +43,7 @@ public class Wordles {
         return s.matches("^[a-zA-Z]*$");
     }
 
-    public List<TileColor> isWordleCompleted() {
+    public List<TileColor> makeTileColorList() {
         List<TileColor> tileColors = new ArrayList<>();
         int size = answer.size();
 

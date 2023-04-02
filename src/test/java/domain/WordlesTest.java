@@ -13,7 +13,7 @@ class WordlesTest {
     void allGreen() {
         Wordles wordles = new Wordles("spill", "spill");
 
-        List<TileColor> result = wordles.isWordleCompleted();
+        List<TileColor> result = wordles.makeTileColorList();
 
         assertThat(result).contains(
                 TileColor.GREEN,
@@ -28,7 +28,7 @@ class WordlesTest {
     void allGreen2() {
         Wordles wordles = new Wordles("spill", "hello");
 
-        List<TileColor> result = wordles.isWordleCompleted();
+        List<TileColor> result = wordles.makeTileColorList();
         List<TileColor> expected = List.of(TileColor.WHITE,TileColor.WHITE,TileColor.YELLOW,TileColor.GREEN,TileColor.WHITE);
 
         assertThat(result).containsExactlyElementsOf(expected);
@@ -38,7 +38,7 @@ class WordlesTest {
     void test() {
         Wordles wordles = new Wordles("hello", "oabco");
 
-        List<TileColor> result = wordles.isWordleCompleted();
+        List<TileColor> result = wordles.makeTileColorList();
         System.out.println(result);
     }
 
