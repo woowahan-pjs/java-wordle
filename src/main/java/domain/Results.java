@@ -18,4 +18,14 @@ public class Results {
 	public int size() {
 		return results.size();
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder print = new StringBuilder();
+		for (Result result : results) {
+			print.append(result).append("\n");
+		}
+		return print.toString();
+	}
 }
