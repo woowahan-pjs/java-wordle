@@ -21,10 +21,6 @@ public class GameMachine {
         Worker worker = new Worker(transToWords(questions));
         Word question = worker.proposeQuestion();
 
-        // 반복되는부분
-        // 정답을 입력해 주세요.
-        //spill
-        //
         Round round = new Round();
         GameRecords gameRecords = new GameRecords();
         while (!round.isFinal()) {
