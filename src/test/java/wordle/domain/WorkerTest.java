@@ -13,9 +13,9 @@ class WorkerTest {
     @DisplayName("선택된 정답은 words에 포함되어 있어야한다.")
     void questionShouldContainsInWords() {
         List<Word> words = List.of(
-            new Word("asdfg"),
-            new Word("zxcvb"),
-            new Word("qwert")
+                new Word("asdfg"),
+                new Word("zxcvb"),
+                new Word("qwert")
         );
         Worker worker = new Worker(words, size -> 0);
 
@@ -28,9 +28,9 @@ class WorkerTest {
     @DisplayName("워커에 의해 선택된 정답은 Words에 포함되어있는 경우 True를 반환한다.")
     void test() {
         List<Word> words = List.of(
-          new Word("asdfq"),
-          new Word("poiue"),
-          new Word("zxcvb")
+                new Word("asdfq"),
+                new Word("poiue"),
+                new Word("zxcvb")
         );
         String inputAnswer = "poiue";
 
