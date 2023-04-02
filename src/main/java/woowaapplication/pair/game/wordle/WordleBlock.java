@@ -6,16 +6,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum WordleBlock {
-    CORRECT("GREEN", "🟩"),
-    EXIST_BUT_WRONG_SPOT("YELLOW", "🟨"),
-    WRONG("GRAY", "⬜"),
+    CORRECT( "🟩"),
+    EXIST_BUT_WRONG_SPOT( "🟨"),
+    WRONG( "⬜"),
     ;
 
-    private final String color;
     private final String emoji;
 
-    WordleBlock(String color, String emoji) {
-        this.color = color;
+    WordleBlock(String emoji) {
         this.emoji = emoji;
     }
 

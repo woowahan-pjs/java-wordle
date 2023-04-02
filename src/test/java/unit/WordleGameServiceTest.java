@@ -24,9 +24,9 @@ class WordleGameServiceTest {
 
     @BeforeEach
     void setUp() {
-        Coin coin = new Coin(총_기회_횟수);
-        WordleGameStorage wordleGameStorage = new WordleGameStorage(coin);
-        워들_게임_서비스 = new WordleGameService(wordleGameStorage, 비교날짜);
+        Coin coin = Coin.of(총_기회_횟수);
+        WordleGameStorage wordleGameStorage = WordleGameStorage.of(coin);
+        워들_게임_서비스 = WordleGameService.of(wordleGameStorage, 비교날짜);
     }
 
     @Nested

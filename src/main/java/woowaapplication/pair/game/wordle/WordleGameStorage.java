@@ -20,11 +20,11 @@ public class WordleGameStorage {
     }
 
     public boolean isGameOver() {
-        return coin.isGameOver();
+        return coin.isOutOfChance();
     }
 
     public boolean isClear() {
-        return this.isClear;
+        return isClear;
     }
 
     public void checkAnswer(WordleBlock[] wordleBlocks) {
@@ -44,5 +44,9 @@ public class WordleGameStorage {
         return wordleBlocksHistory.stream()
                 .map(WordleBlock::toEmojiList)
                 .collect(Collectors.toList());
+    }
+
+    public static WordleGameStorage of(Coin coin) {
+        return new WordleGameStorage(coin);
     }
 }

@@ -16,7 +16,6 @@ public class WordleGameService {
     private final LocalDate standardDate = LocalDate.of(2021, 6, 19);
     private final LocalDate comparisonDate;
 
-    // TODO: LocalDate.now() 좀 더 좋은 테스트 방법 생각해보기
     public WordleGameService(WordleGameStorage wordleGameStorage, LocalDate comparisonDate) {
         this.wordleGameStorage = wordleGameStorage;
         this.comparisonDate = comparisonDate;
@@ -31,7 +30,6 @@ public class WordleGameService {
         return wordleGameStorage.isGameOver() || wordleGameStorage.isClear();
     }
 
-    // 정답 체크 메서드
     public List<String[]> playRound(String inputKeyword) {
         String answerKeyword = getAnswerKeyword();
         WordleBlock[] wordleBlocks = WordleBlock.toList(inputKeyword, answerKeyword);
@@ -63,5 +61,13 @@ public class WordleGameService {
         Period period = Period.between(standardDate, comparisonDate);
 
         return (period.getDays() % keywords.size()) - 1;
+    }
+
+    public static WordleGameService of(WordleGameStorage wordleGameStorage) {
+        return new WordleGameService(wordleGameStorage);
+    }
+
+    public static WordleGameService of(WordleGameStorage wordleGameStorage, LocalDate comparisonDate) {
+        return new WordleGameService(wordleGameStorage, comparisonDate);
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
 import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
+import woowaapplication.pair.game.wordle.exception.OutOfChanceException;
 import woowaapplication.pair.game.wordle.exception.ReadFileException;
 
 public class WordleGame {
@@ -14,10 +15,10 @@ public class WordleGame {
     private final WordleGameUI wordleGameUI;
 
     public WordleGame() {
-        Coin coin = new Coin(TOTAL_CHANCE);
-        WordleGameStorage wordleGameStorage = new WordleGameStorage(coin);
-        this.wordleGameUI = new WordleGameUI(wordleGameStorage);
-        this.wordleGameService = new WordleGameService(wordleGameStorage);
+        Coin coin = Coin.of(TOTAL_CHANCE);
+        WordleGameStorage wordleGameStorage = WordleGameStorage.of(coin);
+        this.wordleGameUI = WordleGameUI.of(wordleGameStorage);
+        this.wordleGameService = WordleGameService.of(wordleGameStorage);
     }
 
     public void start() {
@@ -27,12 +28,15 @@ public class WordleGame {
             try {
                 run(sc);
             } catch (InvalidInputKeywordException e) {
-                System.out.println("올바른 입력이 아닙니다. 다시 시도해주세요.");
+                System.out.println(e.getMessage());
             } catch (InvalidAnswerKeywordException e) {
-                System.out.println("오늘의 정답 키워드가 유효하지 않습니다. 관리자에게 문의해주세요.");
+                System.out.println(e.getMessage());
                 break;
             } catch (ReadFileException e) {
-                System.out.println("파일을 읽는데 실패했습니다. 관리자에게 문의해주세요.");
+                System.out.println(e.getMessage());
+                break;
+            } catch (OutOfChanceException e) {
+                System.out.println(e.getMessage());
                 break;
             }
         }
@@ -44,21 +48,19 @@ public class WordleGame {
         String inputKeyword = sc.nextLine();
 
         KeywordValidator.validate(inputKeyword, KEYWORD_LENGTH);
-        List<String[]> 게임_결과 = wordleGameService.playRound(inputKeyword);
+        List<String[]> gameResult = wordleGameService.playRound(inputKeyword);
 
-        wordleGameUI.printResult(게임_결과);
+        wordleGameUI.printResult(gameResult);
     }
 
     private Scanner ready() {
-        // 인트로 출력
         Scanner sc = new Scanner(System.in);
-        System.out.println("WORDLE을 6번 만에 맞춰 보세요.");
-        System.out.println("시도의 결과는 타일의 색 변화로 나타납니다.");
+        WordleGameUI.printReady();
 
         return sc;
     }
 
     private void terminate() {
-        System.out.println("게임이 종료되었습니다.");
+        WordleGameUI.printTerminate();
     }
 }
