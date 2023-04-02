@@ -10,10 +10,6 @@ public class Tiles {
     private List<Tile> tiles = new ArrayList<>();
     private boolean allGreen;
 
-    public List<Tile> getTiles() {
-        return tiles;
-    }
-
     public void addTiles(Tile tile) {
         tiles.add(tile);
         if(tile.isAllGreen()) {
