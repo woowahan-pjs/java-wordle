@@ -19,6 +19,17 @@ public class Results {
 		return results.size();
 	}
 
+	public boolean hasCorrect() {
+		List<MatchStatus> greenStatuses = List.of(
+			MatchStatus.GREEN,
+			MatchStatus.GREEN,
+			MatchStatus.GREEN,
+			MatchStatus.GREEN,
+			MatchStatus.GREEN
+		);
+		Result greenResult = new Result(greenStatuses);
+		return results.contains(greenResult);
+	}
 
 	@Override
 	public String toString() {
@@ -28,4 +39,5 @@ public class Results {
 		}
 		return print.toString();
 	}
+
 }
