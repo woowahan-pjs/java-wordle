@@ -5,7 +5,7 @@ public enum MatchStatus {
 	YELLOW("\uD83D\uDFE8"),
 	GREEN("\uD83D\uDFE9");
 
-	private String unicode;
+	private final String unicode;
 
 	MatchStatus(String unicode) {
 		this.unicode = unicode;
