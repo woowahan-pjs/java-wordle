@@ -23,11 +23,13 @@ public class GameMachine {
 
         Round round = new Round();
         GameRecords gameRecords = new GameRecords();
+
         while (!round.isFinal()) {
             gameView.inputAnswer();
-
             InputReader inputReader = new InputReader();
+
             String inputData = inputReader.getUserInput();
+
             Word inputWord = new Word(inputData);
             List<Result> results = question.compare(inputWord);
             gameRecords.add(new GameRecord(results));
@@ -39,8 +41,8 @@ public class GameMachine {
 
     private List<Word> transToWords(List<String> words) {
         return words.stream()
-            .map(Word::new)
-            .collect(toList())
-            ;
+                .map(Word::new)
+                .collect(toList())
+                ;
     }
 }
