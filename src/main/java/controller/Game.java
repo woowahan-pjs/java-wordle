@@ -2,17 +2,14 @@ package controller;
 
 import java.time.LocalDate;
 
-import domain.Answer;
-import domain.AnswerGenerator;
-import domain.Result;
-import domain.Results;
-import domain.Word;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
 public class Game {
 	private static final String FILE_PATH = "src/main/resources/words.txt";
 	private final InputView inputView;
+	private final InputValidator inputValidator;
 	private final OutputView outputView;
 	private final AnswerGenerator answerGenerator;
 	private final Results results;
@@ -24,6 +21,7 @@ public class Game {
 		this.answerGenerator = new AnswerGenerator(FILE_PATH);
 		this.results = new Results();
 		this.roundNumber = 0;
+		this.inputValidator = new InputValidator();
 	}
 
 	public void start(LocalDate currentDate) {
@@ -48,7 +46,13 @@ public class Game {
 	private Word getUserInputWord() {
 		inputView.printInputMessage();
 		String inputString = inputView.getUserInput();
+		validateInput(inputString);
 		return Word.from(inputString);
+	}
+
+	private void validateInput(String inputString) {
+		inputValidator.validateEnglish(inputString);
+		inputValidator.validateLength(inputString);
 	}
 
 	private boolean isCorrect() {
