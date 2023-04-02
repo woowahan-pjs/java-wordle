@@ -47,10 +47,5 @@ public class Game {
 			}
 			outputView.print(results);
 		}
-
-	}
-
-	private boolean isPlayable() {
-		return roundNumber <= 6 || results.hasCorrect();
 	}
 }
