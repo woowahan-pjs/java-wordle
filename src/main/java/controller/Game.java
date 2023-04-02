@@ -5,16 +5,19 @@ import java.time.LocalDate;
 import domain.Answer;
 import domain.AnswerGenerator;
 import domain.Result;
+import domain.Results;
 import domain.Word;
 import view.InputView;
 
 public class Game {
 	private final InputView view;
 	private final AnswerGenerator answerGenerator;
+	private final Results results;
 
 	public Game(String path) {
 		this.view = new InputView();
 		this.answerGenerator = new AnswerGenerator(path);
+		this.results = new Results();
 	}
 
 	public void start(LocalDate currentDate) {
@@ -28,7 +31,8 @@ public class Game {
 			Answer answerWord = Answer.from(answerString);
 
 			Result result =  answerWord.compare(userInputWord);
-			System.out.println("result = " + result);
+			results.add(result);
 		}
+
 	}
 }
