@@ -22,7 +22,7 @@ public class Game {
 		this.outputView = new OutputView();
 		this.answerGenerator = new AnswerGenerator(path);
 		this.results = new Results();
-		this.roundNumber = 1;
+		this.roundNumber = 0;
 	}
 
 	public void start(LocalDate currentDate) {
@@ -41,6 +41,8 @@ public class Game {
 			results.add(result);
 			if (results.hasCorrect()) {
 				outputView.printRount(roundNumber);
+				outputView.print(results);
+				break;
 			}
 			outputView.print(results);
 		}
