@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class GameMachine {
 
     public void start() {
-        FileReader fileReader = new FileReader(); // TODO: 이름
+        FileReader fileReader = new FileReader();
         List<String> questions = fileReader.readAll("words.txt");
 
         GameView gameView = new GameView();
@@ -33,7 +33,7 @@ public class GameMachine {
             Word inputWord = new Word(inputData);
             List<Result> results = question.compare(inputWord);
             gameRecords.add(new GameRecord(results));
-            gameView.printRecords(gameRecords); // print game record
+            gameView.printRecords(gameRecords);
 
             round.next();
         }
@@ -42,7 +42,6 @@ public class GameMachine {
     private List<Word> transToWords(List<String> words) {
         return words.stream()
                 .map(Word::new)
-                .collect(toList())
-                ;
+                .collect(toList());
     }
 }

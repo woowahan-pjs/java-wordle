@@ -12,8 +12,9 @@ public class Word {
         validateLength(text);
 
         letters = new ArrayList<>();
+        int index = 0;
         for (char ch : text.toCharArray()) {
-            letters.add(new Letter(ch));
+            letters.add(new Letter(index++, ch));
         }
     }
 
@@ -33,22 +34,32 @@ public class Word {
         }
     }
 
-    public List<Result> compare(Word target) {
-        List<Result> results = new ArrayList<>();
-        // 맞는 글자는 초록색, 위치가 틀리면 노란색, 없으면 회색
-        for (int i = 0; i < letters.size(); i++) {
-            Letter questionLetter = letters.get(i);
-            Letter answerLetter = target.letters.get(i);
-
-            if (answerLetter.equals(questionLetter)) {
-                results.add(Result.CORRECT);
-            } else if (letters.contains(answerLetter)) {
-                results.add(Result.HALF_CORRECT);
-            } else {
-                results.add(Result.WRONG);
-            }
+    // 우선순위
+    //  완전일치 있으면 반환
+    //  포지션만 다른거 있으면 반환
+    //  아니면 다르다고 반환
+    private Result check(Letter target) {
+        if (letters.contains(target)) {
+            return Result.CORRECT;
         }
-        return results;
+        if (containsDiffPosition(target)) {
+            return Result.HALF_CORRECT;
+        }
+        return Result.WRONG;
+    }
+
+    private boolean containsDiffPosition(Letter target) {
+        return letters.stream()
+                .anyMatch(letter -> letter.hasSameValueAndDiffPosition(target));
+    }
+
+    public List<Result> compare(Word target) {
+        List<Result> list = new ArrayList<>();
+        for (Letter letter : target.letters) {
+            Result check = check(letter);
+            list.add(check);
+        }
+        return list;
     }
 
     @Override
