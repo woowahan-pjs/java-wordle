@@ -22,9 +22,12 @@ public class GameView {
         System.out.println(round);
     }
 
+    // result
     public void printRecords(GameRecords gameRecords) {
-        gameRecords.getRecords().stream()
-            .map(GameRecord::getResults)
-            .forEach(System.out::println);
+//        gameRecords.getRecords().stream()
+//            .map(GameRecord::getResults)
+//            .forEach(System.out::print);
+
+
     }
 }

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 public class InputReader {
 
     public String getUserInput() {
+        //TODO: input stream error
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             return br.readLine();
         } catch (IOException e) {
