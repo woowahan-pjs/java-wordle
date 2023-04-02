@@ -24,7 +24,7 @@ public class WordleGames {
             OutputView.printTile(tiles);
 
             count++;
-        } while(count <= 6);
+        } while(!tiles.hasAllGreen() && count <= 6);
 
         return tiles;
     }

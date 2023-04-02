@@ -14,4 +14,9 @@ public class Tile {
     public List<TileColor> getTileColors() {
         return tileColors;
     }
+
+    public boolean isAllGreen() {
+        return tileColors.stream()
+                .allMatch(t -> t.equals(TileColor.GREEN));
+    }
 }

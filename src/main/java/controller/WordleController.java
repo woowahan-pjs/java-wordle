@@ -16,15 +16,12 @@ import static view.output.OutputView.printMain;
 public class WordleController {
 
     public void start() {
-        // view 의 Input~  기능을 통해서 입력받고
-        // view 의 Output~ 기능을 통해서 출력하고
         printMain();
 
         String answer = searchAnswer();
 
         WordleGames wordleGames = new WordleGames();
         wordleGames.start(answer);
-
     }
 
     private String searchAnswer() {
@@ -44,7 +41,7 @@ public class WordleController {
         LocalDate today = LocalDate.now();
         LocalDate date = LocalDate.of(2021, 6, 19);
         long diffDays = Math.abs(ChronoUnit.DAYS.between(today, date));
-        return Long.valueOf(diffDays % strings.size());
+        return diffDays % strings.size();
     }
 
     private static List<String> readFromInputStream(InputStream inputStream) throws IOException {
