@@ -8,23 +8,26 @@ import domain.Result;
 import domain.Results;
 import domain.Word;
 import view.InputView;
+import view.OutputView;
 
 public class Game {
-	private final InputView view;
+	private final InputView inputView;
+	private final OutputView outputView;
 	private final AnswerGenerator answerGenerator;
 	private final Results results;
 
 	public Game(String path) {
-		this.view = new InputView();
+		this.inputView = new InputView();
+		this.outputView = new OutputView();
 		this.answerGenerator = new AnswerGenerator(path);
 		this.results = new Results();
 	}
 
 	public void start(LocalDate currentDate) {
-		view.printStartMessage();
+		inputView.printStartMessage();
 		for (int i = 0; i < 6; i++) {
-			view.printInputMessage();
-			String inputString = view.getUserInput();
+			inputView.printInputMessage();
+			String inputString = inputView.getUserInput();
 			Word userInputWord = Word.from(inputString);
 
 			String answerString = answerGenerator.getAnswer(currentDate);
@@ -32,6 +35,8 @@ public class Game {
 
 			Result result =  answerWord.compare(userInputWord);
 			results.add(result);
+			outputView.print(results);
+
 		}
 
 	}

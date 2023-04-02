@@ -35,4 +35,13 @@ public class Result {
 	public int hashCode() {
 		return statuses != null ? statuses.hashCode() : 0;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder print = new StringBuilder();
+		for (MatchStatus status : statuses) {
+			print.append(status);
+		}
+		return print.toString();
+	}
 }
