@@ -54,4 +54,37 @@ class ResultsTest {
 		// then
 		assertThat(results.size()).isEqualTo(2);
 	}
+
+	@Test
+	@DisplayName("게임이 끝났는지 여부 파악")
+	void testEndGame() {
+		// given
+		Results results = new Results();
+
+		List<MatchStatus> yellowStatuses = List.of(
+				MatchStatus.YELLOW,
+				MatchStatus.YELLOW,
+				MatchStatus.YELLOW,
+				MatchStatus.YELLOW,
+				MatchStatus.YELLOW
+		);
+		Result yellowResult = new Result(yellowStatuses);
+		results.add(yellowResult);
+
+		List<MatchStatus> greenStatuses = List.of(
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN,
+				MatchStatus.GREEN
+		);
+		Result greenResult = new Result(greenStatuses);
+		results.add(greenResult);
+
+		//when
+		boolean isEndGame = results.isEnd();
+
+		//then
+		assertThat(isEndGame).isTrue();
+	}
 }
