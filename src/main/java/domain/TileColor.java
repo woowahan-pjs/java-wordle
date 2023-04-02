@@ -14,5 +14,7 @@ public enum TileColor {
         this.tile = tile;
     }
 
-
+    public String getTile() {
+        return tile;
+    }
 }

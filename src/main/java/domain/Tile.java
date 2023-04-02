@@ -11,10 +11,6 @@ public class Tile {
         this.tileColors = tileColors;
     }
 
-    public void addTile(TileColor tileColor) {
-        tileColors.add(tileColor);
-    }
-
     public List<TileColor> getTileColors() {
         return tileColors;
     }

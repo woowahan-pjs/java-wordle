@@ -2,6 +2,9 @@ package domain;
 
 import java.util.List;
 
+import static view.input.InputView.inputPlayerWordle;
+import static view.output.OutputView.printInputAnswer;
+
 public class WordleGames {
 
     private WordleGame wordleGame = new WordleGame();
@@ -10,13 +13,17 @@ public class WordleGames {
 
     }
 
-    public Tiles start(String answer, String input) {
+    public Tiles start(String answer) {
         // answer -> char
-        Wordles answerWordles = new Wordles(answer, input);
         Tiles tiles = new Tiles();
 
         int count = 1;
         do {
+            printInputAnswer();
+
+            String input = inputPlayerWordle();
+            Wordles answerWordles = new Wordles(answer, input);
+
             // 단어 입력
             Tile tile = wordleGame.start(answerWordles);
 
