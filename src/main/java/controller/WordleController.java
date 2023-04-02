@@ -6,6 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import static view.output.OutputView.printMain;
 
@@ -17,30 +21,41 @@ public class WordleController {
         // view 의 Output~ 기능을 통해서 출력하고
         printMain();
 
-        String answer = "answer";
+        String answer = searchAnswer();
 
         WordleGames wordleGames = new WordleGames();
         wordleGames.start(answer);
 
     }
 
-    public static void main(String[] args) throws IOException {
+    private String searchAnswer() {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("words.txt");
-
-        System.out.println(readFromInputStream(is));
+        List<String> strings = new ArrayList<>();
+        try {
+             strings = readFromInputStream(is);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Long index = calculateAnswerIndex(strings);
+        return strings.get(index.intValue());
     }
 
-    private static String readFromInputStream(InputStream inputStream)
-            throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br
-                     = new BufferedReader(new InputStreamReader(inputStream))) {
+    private static Long calculateAnswerIndex(List<String> strings) {
+        LocalDate today = LocalDate.now();
+        LocalDate date = LocalDate.of(2021, 6, 19);
+        long diffDays = Math.abs(ChronoUnit.DAYS.between(today, date));
+        return Long.valueOf(diffDays % strings.size());
+    }
+
+    private static List<String> readFromInputStream(InputStream inputStream) throws IOException {
+        List<String> txtFileLine = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
+                txtFileLine.add(line);
             }
         }
-        return resultStringBuilder.toString();
+        return txtFileLine;
     }
 }

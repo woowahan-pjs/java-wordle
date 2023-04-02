@@ -1,5 +1,7 @@
 package domain;
 
+import view.output.OutputView;
+
 import java.util.List;
 
 import static view.input.InputView.inputPlayerWordle;
@@ -40,7 +42,7 @@ public class WordleGames {
                     break;
                 }
             }
-
+            OutputView.printTile(tiles);
             if (allGreen) {
                 return tiles;
             }
