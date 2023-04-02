@@ -15,17 +15,21 @@ public class Game {
 	private final OutputView outputView;
 	private final AnswerGenerator answerGenerator;
 	private final Results results;
+	private int roundNumber;
 
 	public Game(String path) {
 		this.inputView = new InputView();
 		this.outputView = new OutputView();
 		this.answerGenerator = new AnswerGenerator(path);
 		this.results = new Results();
+		this.roundNumber = 1;
 	}
 
 	public void start(LocalDate currentDate) {
 		inputView.printStartMessage();
+
 		for (int i = 0; i < 6; i++) {
+			roundNumber += 1;
 			inputView.printInputMessage();
 			String inputString = inputView.getUserInput();
 			Word userInputWord = Word.from(inputString);
@@ -33,11 +37,17 @@ public class Game {
 			String answerString = answerGenerator.getAnswer(currentDate);
 			Answer answerWord = Answer.from(answerString);
 
-			Result result =  answerWord.compare(userInputWord);
+			Result result = answerWord.compare(userInputWord);
 			results.add(result);
+			if (results.hasCorrect()) {
+				outputView.printRount(roundNumber);
+			}
 			outputView.print(results);
-
 		}
 
+	}
+
+	private boolean isPlayable() {
+		return roundNumber <= 6 || results.hasCorrect();
 	}
 }
