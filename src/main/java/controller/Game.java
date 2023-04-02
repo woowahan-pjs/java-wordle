@@ -28,24 +28,36 @@ public class Game {
 
 	public void start(LocalDate currentDate) {
 		inputView.printStartMessage();
-
 		for (int i = 0; i < 6; i++) {
 			roundNumber += 1;
-			inputView.printInputMessage();
-			String inputString = inputView.getUserInput();
-			Word userInputWord = Word.from(inputString);
-
-			String answerString = answerGenerator.getAnswer(currentDate);
-			Answer answerWord = Answer.from(answerString);
-
+			Word userInputWord = getUserInputWord();
+			Answer answerWord = getAnswerWord(currentDate);
 			Result result = answerWord.compare(userInputWord);
 			results.add(result);
-			if (results.hasCorrect()) {
-				outputView.printRount(roundNumber);
-				outputView.print(results);
+			if (isCorrect()){
 				break;
 			}
-			outputView.print(results);
 		}
+	}
+
+	private Answer getAnswerWord(LocalDate currentDate) {
+		String answerString = answerGenerator.getAnswer(currentDate);
+		return Answer.from(answerString);
+	}
+
+	private Word getUserInputWord() {
+		inputView.printInputMessage();
+		String inputString = inputView.getUserInput();
+		return Word.from(inputString);
+	}
+
+	private boolean isCorrect() {
+		if (results.hasCorrect()) {
+			outputView.printRount(roundNumber);
+			outputView.print(results);
+			return true;
+		}
+		outputView.print(results);
+		return false;
 	}
 }
