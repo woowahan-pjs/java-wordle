@@ -1,12 +1,16 @@
-package wordle.domain;
+package wordle.domain.word;
+
+import wordle.domain.Result;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Word {
     private static final int MAX_LENGTH = 5;
-    private final List<Letter> letters;
+
+    private final List<PositionLetter> letters;
 
     public Word(String text) {
         validateLength(text);
@@ -14,18 +18,9 @@ public class Word {
         letters = new ArrayList<>();
         int index = 0;
         for (char ch : text.toCharArray()) {
-            letters.add(new Letter(index++, ch));
+            PositionLetter letter = PositionLetter.of(index++, ch);
+            letters.add(letter);
         }
-    }
-
-    public String castWordsToString() {
-        StringBuilder wordsToString = new StringBuilder();
-
-        for (Letter letter : letters) {
-            wordsToString.append(letter.getValue());
-        }
-
-        return wordsToString.toString();
     }
 
     private void validateLength(String text) {
@@ -34,11 +29,18 @@ public class Word {
         }
     }
 
-    // 우선순위
-    //  완전일치 있으면 반환
-    //  포지션만 다른거 있으면 반환
-    //  아니면 다르다고 반환
-    private Result check(Letter target) {
+    private boolean containsDiffPosition(PositionLetter target) {
+        return letters.stream()
+                .anyMatch(letter -> letter.hasSameValueAndDiffPosition(target));
+    }
+
+    public List<Result> compare(Word target) {
+        return target.letters.stream()
+                .map(this::compareLetter)
+                .collect(Collectors.toList());
+    }
+
+    private Result compareLetter(PositionLetter target) {
         if (letters.contains(target)) {
             return Result.CORRECT;
         }
@@ -46,20 +48,6 @@ public class Word {
             return Result.HALF_CORRECT;
         }
         return Result.WRONG;
-    }
-
-    private boolean containsDiffPosition(Letter target) {
-        return letters.stream()
-                .anyMatch(letter -> letter.hasSameValueAndDiffPosition(target));
-    }
-
-    public List<Result> compare(Word target) {
-        List<Result> list = new ArrayList<>();
-        for (Letter letter : target.letters) {
-            Result check = check(letter);
-            list.add(check);
-        }
-        return list;
     }
 
     @Override

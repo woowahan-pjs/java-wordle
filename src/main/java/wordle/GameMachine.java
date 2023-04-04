@@ -1,6 +1,7 @@
 package wordle;
 
 import wordle.domain.*;
+import wordle.domain.word.Word;
 import wordle.util.FileReader;
 import wordle.util.InputReader;
 import wordle.view.GameView;

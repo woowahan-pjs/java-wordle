@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import wordle.domain.word.Word;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -25,15 +26,6 @@ class WordTest {
     void wordLengthLessThan5ShouldFail() {
         assertThatThrownBy(() -> new Word("abcd")).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    void wordToStringTest() {
-
-        Word word = new Word("abcde");
-
-        assertThat(word.castWordsToString()).isEqualTo("abcde");
-    }
-
 
     @DisplayName("정답과 답안의 일치여부를 검사한다.")
     @ParameterizedTest(name = "문제 {0}, 답 {1}, 결과 {2}")

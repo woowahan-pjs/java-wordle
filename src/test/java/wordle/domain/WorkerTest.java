@@ -2,6 +2,7 @@ package wordle.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import wordle.domain.word.Word;
 
 import java.util.List;
 
