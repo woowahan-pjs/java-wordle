@@ -20,13 +20,14 @@ public class Letter {
         this.ch = ch;
     }
 
-    private void validateAlpha(char ch) {
+    private static void validateAlpha(char ch) {
         if (ch > 'z' || ch < 'a') {
             throw new IllegalArgumentException("shoud be alphabet");
         }
     }
 
     public static Letter from(char ch) {
+        validateAlpha(ch);
         return cache.get(ch);
     }
 
