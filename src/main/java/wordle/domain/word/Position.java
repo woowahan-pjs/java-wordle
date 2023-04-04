@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Position {
-
     private static final int MIN_POSITION = 0;
     private static final int MAX_POSITION = 5;
     private static final Map<Integer, Position> cache = new HashMap<>();

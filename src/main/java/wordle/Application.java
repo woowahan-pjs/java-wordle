@@ -5,5 +5,4 @@ public class Application {
         GameMachine gameMachine = new GameMachine();
         gameMachine.start();
     }
-
 }
