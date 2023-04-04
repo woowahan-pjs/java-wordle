@@ -1,7 +1,6 @@
 package wordle.domain;
 
 public class Round {
-
     private static final int MAX_ROUND = 6;
     private int current = 1;
 

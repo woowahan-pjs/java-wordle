@@ -1,6 +1,8 @@
 package wordle;
 
 import wordle.domain.*;
+import wordle.domain.record.GameRecord;
+import wordle.domain.record.GameRecords;
 import wordle.domain.word.Word;
 import wordle.util.FileReader;
 import wordle.util.InputReader;

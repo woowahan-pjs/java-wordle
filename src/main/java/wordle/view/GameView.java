@@ -1,7 +1,7 @@
 package wordle.view;
 
-import wordle.domain.GameRecord;
-import wordle.domain.GameRecords;
+import wordle.domain.record.GameRecord;
+import wordle.domain.record.GameRecords;
 import wordle.domain.Result;
 
 public class GameView {

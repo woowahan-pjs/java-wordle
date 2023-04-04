@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReader {
-
     public List<String> readAll(String filename) {
         try {
             Path path = Paths.get(ClassLoader.getSystemResource(filename).toURI());
