@@ -22,13 +22,14 @@ public class Position {
         this.value = value;
     }
 
-    private void validate(int value) {
+    private static void validate(int value) {
         if (value < MIN_POSITION || value > MAX_POSITION) {
             throw new IllegalArgumentException(String.format("should be %d < position < %d", MIN_POSITION, MAX_POSITION));
         }
     }
 
     public static Position from(int value) {
+        validate(value);
         return cache.get(value);
     }
 
