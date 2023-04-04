@@ -34,9 +34,10 @@ class WorkerTest {
                 Word.fromString("zxcvb")
         );
         String inputAnswer = "poiue";
-
         Worker worker = new Worker(words, size -> 1);
+
         boolean check = worker.isAnswerEmbedded(Word.fromString(inputAnswer));
+
         assertThat(check).isTrue();
     }
 }
