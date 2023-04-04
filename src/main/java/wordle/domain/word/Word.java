@@ -2,9 +2,10 @@ package wordle.domain.word;
 
 import wordle.domain.Result;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Word {
@@ -12,26 +13,25 @@ public class Word {
 
     private final List<PositionLetter> letters;
 
-    public Word(String text) {
-        validateLength(text);
-
-        letters = new ArrayList<>();
-        int index = 0;
-        for (char ch : text.toCharArray()) {
-            PositionLetter letter = PositionLetter.of(index++, ch);
-            letters.add(letter);
-        }
+    private Word(List<PositionLetter> letters) {
+        this.letters = letters;
     }
 
-    private void validateLength(String text) {
+    public static Word fromString(String text) {
+        validateLength(text);
+
+        AtomicInteger position = new AtomicInteger(0);
+        List<PositionLetter> positionLetters = Arrays.stream(text.split(""))
+                .map(value -> PositionLetter.of(position.getAndIncrement(), value.charAt(0)))
+                .collect(Collectors.toList());
+
+        return new Word(positionLetters);
+    }
+
+    private static void validateLength(String text) {
         if (text.length() != MAX_LENGTH) {
             throw new IllegalArgumentException("text length cannot be over than MAX_LENGTH");
         }
-    }
-
-    private boolean containsDiffPosition(PositionLetter target) {
-        return letters.stream()
-                .anyMatch(letter -> letter.hasSameValueAndDiffPosition(target));
     }
 
     public List<Result> compare(Word target) {
@@ -48,6 +48,11 @@ public class Word {
             return Result.HALF_CORRECT;
         }
         return Result.WRONG;
+    }
+
+    private boolean containsDiffPosition(PositionLetter target) {
+        return letters.stream()
+                .anyMatch(letter -> letter.hasSameValueAndDiffPosition(target));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class GameMachine {
 
             String inputData = inputReader.getUserInput();
 
-            Word inputWord = new Word(inputData);
+            Word inputWord = Word.fromString(inputData);
             List<Result> results = question.compare(inputWord);
             gameRecords.add(new GameRecord(results));
             gameView.printRecords(gameRecords);
@@ -44,7 +44,7 @@ public class GameMachine {
 
     private List<Word> transToWords(List<String> words) {
         return words.stream()
-                .map(Word::new)
+                .map(Word::fromString)
                 .collect(toList());
     }
 }

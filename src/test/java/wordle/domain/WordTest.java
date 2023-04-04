@@ -18,21 +18,23 @@ class WordTest {
     @Test
     @DisplayName("Word의 길이는 5를 초과한 경우 실패합니다.")
     void wordLengthShouldEqualTo5() {
-        assertThatThrownBy(() -> new Word("abcdef")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Word.fromString("abcdef"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("Word의 길이는 5 미만인 경우 실패합니다.")
     void wordLengthLessThan5ShouldFail() {
-        assertThatThrownBy(() -> new Word("abcd")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Word.fromString("abcd"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("정답과 답안의 일치여부를 검사한다.")
     @ParameterizedTest(name = "문제 {0}, 답 {1}, 결과 {2}")
     @MethodSource("sample")
     void wordCompareTest(String question, String answer, List<Result> expected) {
-        Word sourceWord = new Word(question);
-        Word targetWord = new Word(answer);
+        Word sourceWord = Word.fromString(question);
+        Word targetWord = Word.fromString(answer);
 
         List<Result> results = sourceWord.compare(targetWord);
 
