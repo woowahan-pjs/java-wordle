@@ -1,0 +1,5 @@
+package wordle;
+
+class GameMachineTest {
+
+}
