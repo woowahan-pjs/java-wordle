@@ -3,12 +3,12 @@ package domain;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Words {
+    private static final LocalDate BASE_DATE_FOR_ANSWER = LocalDate.of(2021, 6, 19);
     private final List<Word> words;
 
     public Words(String... words){
@@ -22,7 +22,7 @@ public class Words {
     }
 
     public Word answer(LocalDate from){
-        Period period = Period.between(LocalDate.of(2021, 6, 19), from);
+        Period period = Period.between(BASE_DATE_FOR_ANSWER, from);
         int range = period.getDays()%words.size();
         return words.get(range);
     }
