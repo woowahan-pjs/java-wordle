@@ -21,10 +21,6 @@ public class Words {
         this.words = Collections.unmodifiableList(words);
     }
 
-    public boolean contains(Word word){
-        return words.contains(word);
-    }
-
     public Word answer(LocalDate from){
         Period period = Period.between(LocalDate.of(2021, 6, 19), from);
         int range = period.getDays()%words.size();

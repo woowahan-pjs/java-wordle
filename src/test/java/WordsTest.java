@@ -8,16 +8,6 @@ import java.time.LocalDate;
 public class WordsTest {
 
     @Test
-    void containsWord(){
-        //given
-        Words words = new Words("aaaaa", "bbbbb", "ccccc");
-
-        //when
-        Assertions.assertTrue(words.contains(new Word("aaaaa")));
-        Assertions.assertFalse(words.contains(new Word("ddddd")));
-    }
-
-    @Test
     void getArrayLocation(){
         //given
         Words words = new Words("aaaaa", "bbbbb");
