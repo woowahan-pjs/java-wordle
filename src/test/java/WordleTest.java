@@ -18,7 +18,7 @@ public class WordleTest {
     }
 
     @Test
-    void readFile() throws URISyntaxException, IOException {
+    void readFile() {
         //when
         String[] words = IOUtils.readFromResource("words.txt");
 
