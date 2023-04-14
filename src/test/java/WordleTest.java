@@ -20,10 +20,10 @@ public class WordleTest {
     @Test
     void readFile() {
         //when
-        String[] words = IOUtils.readFromResource("words.txt");
+        List<String> words = IOUtils.readFromResource("words.txt");
 
         //then
-        Assertions.assertEquals(words[0], "cigar");
+        Assertions.assertEquals(words.get(0), "cigar");
     }
 
     @Test

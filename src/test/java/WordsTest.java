@@ -4,13 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WordsTest {
 
     @Test
     void getArrayLocation(){
         //given
-        Words words = new Words("aaaaa", "bbbbb");
+        Words words = Words.of(Arrays.asList("aaaaa", "bbbbb"));
 
         //when
         Word answers = words.answer(LocalDate.of(2021, 6, 20));
@@ -21,7 +23,7 @@ public class WordsTest {
 
     @Test
     void validation() {
-        Words words = new Words("aaaaa");
+        Words words = Words.of(Arrays.asList("aaaaa"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             words.matchingAnswer(new Word("bbbbb"));
         });

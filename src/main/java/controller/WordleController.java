@@ -15,7 +15,7 @@ public class WordleController {
     private static final String WORDS_TXT = "words.txt";
 
     public static void main(String[] args) {
-        Words words = new Words(IOUtils.readFromResource(WORDS_TXT));
+        Words words = Words.of(IOUtils.readFromResource(WORDS_TXT));
 
         ResultView.startComent();
 
