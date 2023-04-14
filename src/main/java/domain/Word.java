@@ -14,7 +14,7 @@ public class Word {
         this.word = word;
     }
 
-    public List<Color> compareWith(Word input) {
+    public Colors compareWith(Word input) {
         List<Color> result = new ArrayList<>();
         char[] answerArray = word.toCharArray();
         char[] inputArray = input.word.toCharArray();
@@ -23,7 +23,7 @@ public class Word {
             result.add(mapped(answerArray[i], inputArray[i]));
         }
 
-        return result;
+        return new Colors(result);
     }
 
     private Color mapped(char answer, char input) {

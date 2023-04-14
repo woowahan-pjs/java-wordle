@@ -24,7 +24,7 @@ public class Words {
         return words.get(range);
     }
 
-    public List<Color> matchingAnswer(Word input) {
+    public Colors matchingAnswer(Word input) {
         validate(input);
         Word answer = answer(LocalDate.now());
         return answer.compareWith(input);

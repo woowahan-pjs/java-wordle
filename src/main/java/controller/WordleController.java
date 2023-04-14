@@ -1,13 +1,11 @@
 package controller;
 
-import domain.Color;
+import domain.Colors;
 import domain.TryResult;
 import domain.Words;
 import ui.IOUtils;
 import ui.InputView;
 import ui.ResultView;
-
-import java.util.List;
 
 public class WordleController {
 
@@ -22,7 +20,7 @@ public class WordleController {
         TryResult tryResult = new TryResult();
         int round = 0;
         while (round++ < PLAY_ROUND && !tryResult.isFinished()) {
-            List<Color> colors = words.matchingAnswer(InputView.inputComment());
+            Colors colors = words.matchingAnswer(InputView.inputComment());
             tryResult.addTry(colors);
             ResultView.results(tryResult);
         }

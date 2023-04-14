@@ -1,4 +1,4 @@
-import domain.Color;
+import domain.Colors;
 import domain.Word;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,8 @@ public class WordleTest {
     @Test
     void compare() {
         Word answer = new Word("spill");
-        List<Color> colors = answer.compareWith(new Word("hello"));
-        Assertions.assertEquals(Arrays.asList(GREY, GREY, YELLOW, GREEN, GREY), colors);
+        Colors colors = answer.compareWith(new Word("hello"));
+        Assertions.assertEquals(new Colors(Arrays.asList(GREY, GREY, YELLOW, GREEN, GREY)), colors);
     }
 
     @Test

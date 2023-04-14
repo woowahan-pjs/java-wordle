@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Color;
+import domain.Colors;
 import domain.TryResult;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class ResultView {
     }
 
     public static void results(TryResult tryResult) {
-        List<List<Color>> results = tryResult.getResults();
+        List<Colors> results = tryResult.getResults();
         if (tryResult.isFinished()) {
             System.out.println(String.format("%d/6", tryResult.count()));
         }
 
-        for (List colors : results) {
+        for (Colors colors : results) {
             System.out.println(colors);
         }
     }

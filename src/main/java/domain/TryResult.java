@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TryResult {
-    private static final List<Color> ALL_GREEN = List.of(Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN);
-    private List<List<Color>> results = new ArrayList<>();
+    private List<Colors> results = new ArrayList<>();
     private boolean finished;
 
-    public void addTry(List<Color> colors) {
-        if (colors.equals(ALL_GREEN)) {
+    public void addTry(Colors colors) {
+        if (colors.isAllGreen()) {
             finished = true;
         }
         results.add(colors);
@@ -19,7 +18,7 @@ public class TryResult {
         return results.size();
     }
 
-    public List<List<Color>> getResults() {
+    public List<Colors> getResults() {
         return results;
     }
 
