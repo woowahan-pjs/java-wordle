@@ -2,7 +2,6 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
