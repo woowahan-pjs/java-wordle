@@ -8,7 +8,7 @@ public class TryResult {
     private List<List<Color>> results = new ArrayList<>();
     private boolean finished;
 
-    public void addTry (List<Color> colors) {
+    public void addTry(List<Color> colors) {
         if (colors.equals(ALL_GREEN)) {
             finished = true;
         }
@@ -18,6 +18,7 @@ public class TryResult {
     public int count() {
         return results.size();
     }
+
     public List<List<Color>> getResults() {
         return results;
     }

@@ -21,9 +21,9 @@ public class Words {
         this.words = Collections.unmodifiableList(words);
     }
 
-    public Word answer(LocalDate from){
+    public Word answer(LocalDate from) {
         Period period = Period.between(BASE_DATE_FOR_ANSWER, from);
-        int range = period.getDays()%words.size();
+        int range = period.getDays() % words.size();
         return words.get(range);
     }
 
