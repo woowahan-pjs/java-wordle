@@ -30,13 +30,13 @@ public class Word {
         if (answer == input) {
             return Color.GREEN;
         }
-        if (isContains2(input)) {
+        if (isContains(input)) {
             return Color.YELLOW;
         }
         return Color.GREY;
     }
 
-    private boolean isContains2(char c) {
+    private boolean isContains(char c) {
         return this.word.contains(String.valueOf(c));
     }
 
