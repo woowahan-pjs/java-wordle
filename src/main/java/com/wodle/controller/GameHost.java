@@ -5,9 +5,9 @@ import com.wodle.domain.GameMachine;
 import com.wodle.domain.Result;
 import com.wodle.domain.Word;
 import com.wodle.service.InputManager;
+import com.wodle.service.InputManagerImpl;
 import com.wodle.service.ViewManager;
 import com.wodle.service.WordGenerator;
-import com.wodle.service.WordGeneratorImpl;
 
 public class GameHost {
 
@@ -18,7 +18,7 @@ public class GameHost {
 
     private final WordGenerator wordGenerator;
 
-    public GameHost(InputManager inputManagerProxy, ViewManager viewManager,
+    public GameHost(InputManagerImpl inputManagerProxy, ViewManager viewManager,
         WordGenerator wordGenerator) {
         this.inputManagerProxy = inputManagerProxy;
         this.viewManager = viewManager;

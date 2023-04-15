@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 class InputManagerTest implements SystemInOutUtils {
 
-    private InputManager inputManager;
+    private InputManagerImpl inputManager;
 
     @BeforeEach
     public void init() {
-        inputManager = new InputManager();
+        inputManager = new InputManagerImpl();
     }
 
 

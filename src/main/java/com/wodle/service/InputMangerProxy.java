@@ -2,7 +2,7 @@ package com.wodle.service;
 
 import com.wodle.domain.Word;
 
-public class InputMangerProxy extends InputManager {
+public class InputMangerProxy extends InputManagerImpl {
 
     private final ViewManagerImpl viewManager;
 
