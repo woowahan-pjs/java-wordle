@@ -28,15 +28,16 @@ public class WordleGame {
             try {
                 run(sc);
             } catch (InvalidInputKeywordException e) {
-                System.out.println(e.getMessage());
+                WordleGameUI.printMessage(e.getMessage());
+                break;
             } catch (InvalidAnswerKeywordException e) {
-                System.out.println(e.getMessage());
+                WordleGameUI.printMessage(e.getMessage());
                 break;
             } catch (ReadFileException e) {
-                System.out.println(e.getMessage());
+                WordleGameUI.printMessage(e.getMessage());
                 break;
             } catch (OutOfChanceException e) {
-                System.out.println(e.getMessage());
+                WordleGameUI.printMessage(e.getMessage());
                 break;
             }
         }
