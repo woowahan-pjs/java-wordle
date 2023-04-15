@@ -21,7 +21,7 @@ public class Answer {
         for (int i = 0; i < Word.WORD_LENGTH; i++) {
             Long count = letterMap.get(answer.getWord().get(i));
 
-            Tile tile = getTile(count, this.answer.getWord().get(i), answer.getWord().get(i));
+            Tile tile = Tile.getTile(count, this.answer.getWord().get(i), answer.getWord().get(i));
             result.add(tile);
 
             letterMap.put(answer.getWord().get(i), letterMap.getOrDefault(answer.getWord().get(i), 0L) - 1);
@@ -43,16 +43,6 @@ public class Answer {
         if (count == Word.WORD_LENGTH) {
             this.isSuccess = true;
         }
-    }
-
-    private Tile getTile(Long count, Letter answerLetter, Letter letter) {
-        if (count == null || count <= 0) {
-            return Tile.GRAY;
-        }
-        if (answerLetter.equals(letter)) {
-            return Tile.GREEN;
-        }
-        return Tile.YELLOW;
     }
 
     public boolean isSuccess() {

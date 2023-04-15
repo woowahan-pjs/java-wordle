@@ -12,4 +12,14 @@ public enum Tile {
     public String getTile() {
         return tile;
     }
+
+    public static Tile getTile(Long count, Letter answerLetter, Letter letter) {
+        if (count == null || count <= 0) {
+            return Tile.GRAY;
+        }
+        if (answerLetter.equals(letter)) {
+            return Tile.GREEN;
+        }
+        return Tile.YELLOW;
+    }
 }
