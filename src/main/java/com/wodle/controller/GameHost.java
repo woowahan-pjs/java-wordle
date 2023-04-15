@@ -1,11 +1,12 @@
 package com.wodle.controller;
 
 import com.wodle.domain.AnswerWord;
-import com.wodle.domain.Coins;
+import com.wodle.domain.GameMachine;
 import com.wodle.domain.Result;
 import com.wodle.domain.Word;
 import com.wodle.service.InputManager;
 import com.wodle.service.ViewManager;
+import com.wodle.service.ViewManagerImpl;
 import com.wodle.service.WordsGenerator;
 
 public class GameHost {
@@ -25,7 +26,8 @@ public class GameHost {
     }
 
     public void play() {
-        GameMachine machine = init();
+        AnswerWord word = wordsGenerator.getTodayWord();
+        GameMachine machine = new GameMachine(word, START_COIN);
 
         viewManager.printGameStart();
 
@@ -35,38 +37,10 @@ public class GameHost {
             Result wordCompareResult = machine.compareWord(inputWord);
             viewManager.printCompareResult(wordCompareResult);
 
-            machine.isGameEnd = wordCompareResult.isGameEnd();
+            machine.saveGameStatus(wordCompareResult.isGameEnd());
         }
 
-        viewManager.printResult(machine.isGameEnd, machine.word);
-    }
-
-    private GameMachine init(){
-        AnswerWord word = wordsGenerator.getTodayWord();
-        return new GameMachine(word, START_COIN);
-    }
-
-    private static class GameMachine {
-        private final AnswerWord word;
-        private final Coins coins;
-        private boolean isGameEnd = false;
-
-        public GameMachine(AnswerWord word, int startCoin){
-            this.word = word;
-            this.coins = new Coins(startCoin);
-        }
-
-        public boolean isGameNotEnd (){
-            return !coins.isEmpty() && !isGameEnd;
-        }
-
-        public void useCoin(){
-            coins.use();
-        }
-
-        public Result compareWord(Word inputWord){
-            return this.word.compare(inputWord);
-        }
+        viewManager.printResult(machine.isGameEnd(), machine.getWord());
     }
 
 }

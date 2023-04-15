@@ -4,13 +4,12 @@ package com.wodle.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.service.InputMangerProxy;
-import com.wodle.service.ViewManager;
+import com.wodle.service.ViewManagerImpl;
 import com.wodle.service.WordsGenerator;
 import com.wodle.testUtils.FileMockUtils;
 import com.wodle.testUtils.LocalDateTimeMockUtils;
 import com.wodle.testUtils.SystemInOutUtils;
 import java.io.OutputStream;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ class GameHostTest implements FileMockUtils, LocalDateTimeMockUtils, SystemInOut
         fileMockUtilsInit();
         localDateTimeMockUtilsInit();
 
-        ViewManager viewManager = new ViewManager();
+        ViewManagerImpl viewManager = new ViewManagerImpl();
         InputMangerProxy inputManagerProxy = new InputMangerProxy(viewManager);
         WordsGenerator wordsGenerator = new WordsGenerator();
         gameHost = new GameHost(

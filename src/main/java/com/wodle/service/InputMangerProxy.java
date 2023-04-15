@@ -4,9 +4,9 @@ import com.wodle.domain.Word;
 
 public class InputMangerProxy extends InputManager {
 
-    private final ViewManager viewManager;
+    private final ViewManagerImpl viewManager;
 
-    public InputMangerProxy(ViewManager viewManager) {
+    public InputMangerProxy(ViewManagerImpl viewManager) {
         this.viewManager = viewManager;
     }
 

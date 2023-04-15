@@ -17,13 +17,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class ViewManagerTest implements SystemInOutUtils {
+class ViewManagerImplTest implements SystemInOutUtils {
 
-    private ViewManager viewManager;
+    private ViewManagerImpl viewManager;
 
     @BeforeEach
     public void init() {
-        viewManager = new ViewManager();
+        viewManager = new ViewManagerImpl();
     }
 
 

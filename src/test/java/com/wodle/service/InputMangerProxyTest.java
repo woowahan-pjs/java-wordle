@@ -16,7 +16,7 @@ class InputMangerProxyTest implements SystemInOutUtils {
 
     @BeforeEach
     public void init() {
-        inputMangerProxy = new InputMangerProxy(new ViewManager());
+        inputMangerProxy = new InputMangerProxy(new ViewManagerImpl());
     }
 
     @ParameterizedTest
