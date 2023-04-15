@@ -6,8 +6,8 @@ import com.wodle.domain.Result;
 import com.wodle.domain.Word;
 import com.wodle.service.InputManager;
 import com.wodle.service.ViewManager;
-import com.wodle.service.ViewManagerImpl;
-import com.wodle.service.WordsGenerator;
+import com.wodle.service.WordGenerator;
+import com.wodle.service.WordGeneratorImpl;
 
 public class GameHost {
 
@@ -16,17 +16,17 @@ public class GameHost {
 
     private final ViewManager viewManager;
 
-    private final WordsGenerator wordsGenerator;
+    private final WordGenerator wordGenerator;
 
     public GameHost(InputManager inputManagerProxy, ViewManager viewManager,
-        WordsGenerator wordsGenerator) {
+        WordGenerator wordGenerator) {
         this.inputManagerProxy = inputManagerProxy;
         this.viewManager = viewManager;
-        this.wordsGenerator = wordsGenerator;
+        this.wordGenerator = wordGenerator;
     }
 
     public void play() {
-        AnswerWord word = wordsGenerator.getTodayWord();
+        AnswerWord word = wordGenerator.getTodayWord();
         GameMachine machine = new GameMachine(word, START_COIN);
 
         viewManager.printGameStart();

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.service.InputMangerProxy;
 import com.wodle.service.ViewManagerImpl;
-import com.wodle.service.WordsGenerator;
+import com.wodle.service.WordGeneratorImpl;
 import com.wodle.testUtils.FileMockUtils;
 import com.wodle.testUtils.LocalDateTimeMockUtils;
 import com.wodle.testUtils.SystemInOutUtils;
@@ -24,11 +24,11 @@ class GameHostTest implements FileMockUtils, LocalDateTimeMockUtils, SystemInOut
 
         ViewManagerImpl viewManager = new ViewManagerImpl();
         InputMangerProxy inputManagerProxy = new InputMangerProxy(viewManager);
-        WordsGenerator wordsGenerator = new WordsGenerator();
+        WordGeneratorImpl wordGenerator = new WordGeneratorImpl();
         gameHost = new GameHost(
             inputManagerProxy,
             viewManager,
-            wordsGenerator
+            wordGenerator
         );
     }
 

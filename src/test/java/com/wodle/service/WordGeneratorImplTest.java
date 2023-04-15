@@ -6,20 +6,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.wodle.domain.Word;
 import com.wodle.testUtils.FileMockUtils;
 import com.wodle.testUtils.LocalDateTimeMockUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WordsGeneratorTest implements FileMockUtils, LocalDateTimeMockUtils {
+class WordGeneratorImplTest implements FileMockUtils, LocalDateTimeMockUtils {
 
-    private WordsGenerator wordsGenerator;
+    private WordGeneratorImpl wordGeneratorImpl;
 
     @BeforeEach
     public void init() {
         fileMockUtilsInit();
         localDateTimeMockUtilsInit();
 
-        wordsGenerator = new WordsGenerator();
+        wordGeneratorImpl = new WordGeneratorImpl();
     }
 
 
@@ -30,7 +29,7 @@ class WordsGeneratorTest implements FileMockUtils, LocalDateTimeMockUtils {
         mockingFileUtilsGetStreamByFileName("aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee");
 
         //when
-        Word todayWord = wordsGenerator.getTodayWord();
+        Word todayWord = wordGeneratorImpl.getTodayWord();
 
         //then
         assertThat(todayWord.getWord()).isEqualTo("ddddd");
@@ -44,7 +43,7 @@ class WordsGeneratorTest implements FileMockUtils, LocalDateTimeMockUtils {
 
         //then
         assertThatThrownBy(
-            () -> wordsGenerator.getTodayWord()
+            () -> wordGeneratorImpl.getTodayWord()
         ).isInstanceOf(RuntimeException.class)
             .hasMessage("can not setting word");
 
