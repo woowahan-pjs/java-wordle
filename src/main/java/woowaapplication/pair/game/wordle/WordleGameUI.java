@@ -1,13 +1,16 @@
 package woowaapplication.pair.game.wordle;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class WordleGameUI {
 
     private final WordleGameStorage wordleGameStorage;
+    private final Scanner sc;
 
-    public WordleGameUI(WordleGameStorage wordleGameStorage) {
+    public WordleGameUI(WordleGameStorage wordleGameStorage, Scanner sc) {
         this.wordleGameStorage = wordleGameStorage;
+        this.sc = sc;
     }
 
     public static void printReady() {
@@ -17,6 +20,10 @@ public class WordleGameUI {
 
     public static void printTerminate() {
         printMessage("게임이 종료되었습니다.");
+    }
+
+    public String getInputKeyword() {
+        return sc.nextLine();
     }
 
     public void printResult(List<String[]> gameResult) {
@@ -29,8 +36,8 @@ public class WordleGameUI {
                 .forEach(WordleGameUI::printMessage);
     }
 
-    public static WordleGameUI of(WordleGameStorage wordleGameStorage) {
-        return new WordleGameUI(wordleGameStorage);
+    public static WordleGameUI of(WordleGameStorage wordleGameStorage, Scanner sc) {
+        return new WordleGameUI(wordleGameStorage, sc);
     }
 
     public static void printMessage(String message) {

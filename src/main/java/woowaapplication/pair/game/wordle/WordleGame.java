@@ -17,16 +17,16 @@ public class WordleGame {
     public WordleGame() {
         Coin coin = Coin.of(TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = WordleGameStorage.of(coin);
-        this.wordleGameUI = WordleGameUI.of(wordleGameStorage);
+        this.wordleGameUI = WordleGameUI.of(wordleGameStorage, new Scanner(System.in));
         this.wordleGameService = WordleGameService.of(wordleGameStorage);
     }
 
     public void start() {
-        Scanner sc = ready();
+        ready();
 
         while (!wordleGameService.isGameOver()) {
             try {
-                run(sc);
+                run();
             } catch (InvalidInputKeywordException e) {
                 WordleGameUI.printMessage(e.getMessage());
                 break;
@@ -45,8 +45,8 @@ public class WordleGame {
         terminate();
     }
 
-    private void run(Scanner sc) {
-        String inputKeyword = sc.nextLine();
+    private void run() {
+        String inputKeyword = wordleGameUI.getInputKeyword();
 
         KeywordValidator.validate(inputKeyword, KEYWORD_LENGTH);
         List<String[]> gameResult = wordleGameService.playRound(inputKeyword);
@@ -54,11 +54,8 @@ public class WordleGame {
         wordleGameUI.printResult(gameResult);
     }
 
-    private Scanner ready() {
-        Scanner sc = new Scanner(System.in);
+    private void ready() {
         WordleGameUI.printReady();
-
-        return sc;
     }
 
     private void terminate() {
