@@ -8,11 +8,11 @@ public class WordleGameStorage {
 
     private final List<WordleBlock[]> wordleBlocksHistory = new ArrayList<>();
     private final Coin coin;
-    private boolean isClear;
+    private boolean isGameClear;
 
     public WordleGameStorage(Coin coin) {
         this.coin = coin;
-        this.isClear = false;
+        this.isGameClear = false;
     }
 
     public int getRestChance() {
@@ -23,17 +23,17 @@ public class WordleGameStorage {
         return coin.isOutOfChance();
     }
 
-    public boolean isClear() {
-        return isClear;
+    public boolean isGameClear() {
+        return isGameClear;
     }
 
     public void checkAnswer(WordleBlock[] wordleBlocks) {
         wordleBlocksHistory.add(wordleBlocks);
-        isClear = WordleBlock.isAllCorrect(wordleBlocks);
+        isGameClear = WordleBlock.isAllCorrect(wordleBlocks);
     }
 
     public void decreaseChance() {
-        if (isClear) {
+        if (isGameClear) {
             return;
         }
 

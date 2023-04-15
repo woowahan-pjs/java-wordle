@@ -27,7 +27,7 @@ public class WordleGameService {
     }
 
     public boolean isGameOver() {
-        return wordleGameStorage.isGameOver() || wordleGameStorage.isClear();
+        return wordleGameStorage.isGameOver() || wordleGameStorage.isGameClear();
     }
 
     public List<String[]> playRound(String inputKeyword) {

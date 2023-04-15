@@ -40,7 +40,7 @@ class WordleGameStorageTest {
             void it_clear_game() {
                 wordleGameStorage.checkAnswer(워들_블럭들);
 
-                assertThat(wordleGameStorage.isClear()).isTrue();
+                assertThat(wordleGameStorage.isGameClear()).isTrue();
             }
         }
 
@@ -54,7 +54,7 @@ class WordleGameStorageTest {
             void it_clear_game() {
                 wordleGameStorage.checkAnswer(워들_블럭들);
 
-                assertThat(wordleGameStorage.isClear()).isFalse();
+                assertThat(wordleGameStorage.isGameClear()).isFalse();
             }
         }
     }

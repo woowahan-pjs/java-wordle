@@ -20,7 +20,7 @@ public class WordleGameUI {
     }
 
     public void printResult(List<String[]> gameResult) {
-        if (wordleGameStorage.isClear()) {
+        if (wordleGameStorage.isGameClear()) {
             System.out.println(wordleGameStorage.getRestChance() + "/" + WordleGame.TOTAL_CHANCE);
         }
 
