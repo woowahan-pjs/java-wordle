@@ -1,5 +1,12 @@
 # 미션 - 워들
 
+## 👥 페어 멤버
+| ALEX |HOLDEN  |
+| --- | --- |
+[<img src="https://avatars.githubusercontent.com/u/59248326?v=4" width="100">](https://github.com/giibeom)| [<img src="https://avatars.githubusercontent.com/u/46865281?v=4" width="100">](https://github.com/seung-00) |
+
+---
+
 ## 🔍 진행 방식
 
 - 미션은 **기능 요구 사항, 프로그래밍 요구 사항, 과제 진행 요구 사항** 세 가지로 구성되어 있다.
