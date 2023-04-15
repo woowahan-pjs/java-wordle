@@ -1,3 +1,5 @@
+package domain;
+
 import domain.Word;
 import domain.Words;
 import java.time.LocalDate;
