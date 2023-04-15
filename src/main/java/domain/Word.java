@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Word {
+
     private final String word;
 
     public Word(String word) {
@@ -20,30 +21,24 @@ public class Word {
         char[] inputArray = input.word.toCharArray();
 
         for (int i = 0; i < answerArray.length; i++) {
-            result.add(mapped(answerArray[i], inputArray[i]));
+            result.add(Color.mapped(this, answerArray[i], inputArray[i]));
         }
 
         return result;
     }
 
-    private Color mapped(char answer, char input) {
-        if (answer == input) {
-            return Color.GREEN;
-        }
-        if (isContains2(input)) {
-            return Color.YELLOW;
-        }
-        return Color.GREY;
-    }
-
-    private boolean isContains2(char c) {
+    public boolean isContains(char c) {
         return this.word.contains(String.valueOf(c));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Word word1 = (Word) o;
         return Objects.equals(word, word1.word);
     }
