@@ -1,7 +1,8 @@
 import domain.Color;
 import domain.Colors;
 import domain.Word;
-import org.junit.jupiter.api.Assertions;
+import domain.Words;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ui.IOUtils;
 
@@ -16,23 +17,24 @@ public class WordleTest {
         Colors colors = answer.compareWith(new Word("hello"));
 
         //then
-        Assertions.assertEquals(
-            new Colors(Color.GREY, Color.GREY, Color.YELLOW, Color.GREEN, Color.GREY),
-            colors
+        Assertions.assertThat(colors).isEqualTo(
+            new Colors(Color.GREY, Color.GREY, Color.YELLOW, Color.GREEN, Color.GREY)
         );
     }
 
     @Test
     void readFile() {
         //when
-        String[] words = IOUtils.readFromResource("words.txt");
+        Words words = IOUtils.readFromResource("test_words.txt");
 
         //then
-        Assertions.assertEquals(words[0], "cigar");
+        Assertions.assertThat(words).isEqualTo(new Words("cigar"));
     }
 
     @Test
     void sizeCheck() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Word("aaaa"));
+        Assertions.assertThatThrownBy(() -> new Words("aaaa"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("단어는 다섯글자로만 입력 가능합니다");
     }
 }

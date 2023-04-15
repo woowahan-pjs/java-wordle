@@ -13,7 +13,7 @@ public class WordleController {
     private static final int PLAY_ROUND = 6;
 
     public static void main(String[] args) {
-        Words words = new Words(IOUtils.readFromResource("words.txt"));
+        Words words = IOUtils.readFromResource("words.txt");
 
         ResultView.startComent();
 
