@@ -62,7 +62,8 @@ spill
 
 - JDK 11 버전에서 실행 가능해야 한다. **JDK 11에서 정상적으로 동작하지 않을 경우 0점 처리한다.**
 - 프로그램 실행의 시작점은 `Application`의 `main()`이다.
-- [Java 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/master/styleguide/java) 가이드를 준수하며 프로그래밍한다.
+- [Java 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/master/styleguide/java) 가이드를
+  준수하며 프로그래밍한다.
 - 프로그래밍 요구 사항에서 별도의 변경 불가 안내가 없는 한 자유롭게 파일을 수정하고 패키지를 이동할 수 있다.
 - indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
     - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
@@ -73,3 +74,35 @@ spill
 - else 예약어를 쓰지 않는다.
     - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
     - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
+
+---
+
+# 업무 방식 - 페어프로그래밍
+
+* Intellij Code With me 를 사용하여 페어 프로그래밍을 진행 합니다.
+    * 이거 재밌네요
+* Start role
+    * navigator: jimbae
+    * driver: yj
+* Role 스위치 방식
+    * 각각의 기능 혹은 메소드 단위로 드라이버와 네비게이터를 지정하여 진행한다.
+* Repository
+    * fork 'woowahan-pjs/java-wordle' repository
+* Requirements analysis method
+    * In -> Out
+
+# 기능 정의
+
+* 정답 : s p i l l
+* X X Y G X
+    * 입력 : h e l l o
+* hello 와 label 비교하여 단어 맞추기
+* enum : YELLOW, GREEN, GREY
+    * 위치와 단어가 동일하면 GREEN
+    * 단어만 존재하면 YELLOW
+    * 없으면 GREY
+* words.txt 파일에서 오늘의 단어를 선택한다.
+    * 단어는 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기)
+* 결과를 저장하는 객체 - ArrayList
+* 입력을 담당하는 객체
+* 다섯글자만 입력 가능하도록 validation
