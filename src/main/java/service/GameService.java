@@ -16,18 +16,18 @@ import java.util.List;
 
 public class GameService {
 
-    public Answer init() {
+    public Words init() {
         InputView.inputStartGame();
-        Words words = new Words(WordsGenerator.read(FileConfig.FILE_PATH));
-        return words.getAnswer(LocalDate.now());
+        return new Words(WordsGenerator.read(FileConfig.FILE_PATH));
     }
 
-    public List<GameHistory> startGame(Answer answer) {
+    public List<GameHistory> startGame(Words words) {
         List<GameHistory> gameHistories = new ArrayList<>();
+        Answer answer = words.getAnswer(LocalDate.now());
 
         int count = 0;
         while (isRound(answer, count)) {
-            Word inputWord = new Word(InputView.inputWord());
+            Word inputWord = words.getWord(InputView.inputWord());
             List<Tile> tiles = answer.compare(inputWord);
             gameHistories.add(new GameHistory(tiles));
             print(answer, gameHistories);

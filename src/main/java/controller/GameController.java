@@ -1,9 +1,11 @@
 package controller;
 
 import domain.Answer;
+import domain.Words;
 import dto.GameHistory;
 import service.GameService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class GameController {
@@ -15,8 +17,8 @@ public class GameController {
     }
 
     public void start() {
-        Answer answer = gameService.init();
-        List<GameHistory> gameHistories = gameService.startGame(answer);
+        Words words = gameService.init();
+        List<GameHistory> gameHistories = gameService.startGame(words);
         gameService.endGame(gameHistories);
     }
 }

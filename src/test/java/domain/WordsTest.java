@@ -55,6 +55,25 @@ class WordsTest {
         assertThat(answer).isEqualTo(getAnswer(result));
     }
 
+    @DisplayName("Word 를 가져온다.")
+    @Test
+    void test05() {
+        Words words = new Words(List.of("MySQL", "SLiPP", "Words"));
+
+        Word word = words.getWord("MySQL");
+
+        assertThat(word).isEqualTo(new Word("MySQL"));
+    }
+
+    @DisplayName("Word 가 존재하지 않는다면 에러가 발생한다.")
+    @Test
+    void test06() {
+        Words words = new Words(List.of("MySQL", "SLiPP", "Words"));
+
+        assertThatThrownBy(() -> words.getWord("build"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     static Stream<Arguments> generateAnswerData() {
         return Stream.of(
                 Arguments.of(Words.DEFAULT_DATE.plusDays(0), "MySQL"),

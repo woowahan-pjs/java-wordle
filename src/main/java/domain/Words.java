@@ -28,6 +28,18 @@ public class Words {
         return new Answer(answer);
     }
 
+    public Word getWord(String word) {
+        Word inputWord = new Word(word);
+        validateExist(inputWord);
+        return inputWord;
+    }
+
+    private void validateExist(Word word) {
+        if (!words.contains(word)) {
+            throw new IllegalArgumentException("존재하지 않는 단어입니다.");
+        }
+    }
+
     public List<Word> getWords() {
         return words;
     }
