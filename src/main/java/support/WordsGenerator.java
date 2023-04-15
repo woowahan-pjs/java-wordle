@@ -7,6 +7,9 @@ import java.util.List;
 
 public class WordsGenerator {
 
+    private WordsGenerator() {
+    }
+
     public static List<String> read(String filePath) {
         try {
             return Files.readAllLines(Paths.get(filePath));
