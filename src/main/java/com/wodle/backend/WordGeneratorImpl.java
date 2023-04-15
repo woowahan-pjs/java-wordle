@@ -1,4 +1,4 @@
-package com.wodle.service;
+package com.wodle.backend;
 
 import com.wodle.domain.AnswerWord;
 import com.wodle.utils.FileUtils;

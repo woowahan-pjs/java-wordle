@@ -1,4 +1,4 @@
-package com.wodle.service;
+package com.wodle.ui;
 
 import com.wodle.domain.Result;
 import com.wodle.domain.Word;

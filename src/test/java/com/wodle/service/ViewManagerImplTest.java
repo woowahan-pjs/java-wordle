@@ -9,6 +9,7 @@ import com.wodle.domain.AnswerWord;
 import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
 import com.wodle.testUtils.SystemInOutUtils;
+import com.wodle.ui.ViewManagerImpl;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;

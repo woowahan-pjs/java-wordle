@@ -3,6 +3,7 @@ package com.wodle.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.wodle.backend.InputManagerImpl;
 import com.wodle.domain.Word;
 import com.wodle.testUtils.SystemInOutUtils;
 import org.junit.jupiter.api.BeforeEach;

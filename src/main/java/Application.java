@@ -1,8 +1,8 @@
 import com.wodle.controller.GameHost;
-import com.wodle.service.InputManagerImpl;
-import com.wodle.service.InputMangerProxy;
-import com.wodle.service.ViewManagerImpl;
-import com.wodle.service.WordGeneratorImpl;
+import com.wodle.backend.InputManagerImpl;
+import com.wodle.backend.InputMangerProxy;
+import com.wodle.ui.ViewManagerImpl;
+import com.wodle.backend.WordGeneratorImpl;
 
 public class Application {
 

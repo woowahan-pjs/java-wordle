@@ -1,4 +1,4 @@
-package com.wodle.service;
+package com.wodle.backend;
 
 import camp.nextstep.edu.missionutils.Console;
 import com.wodle.domain.Word;

@@ -1,6 +1,7 @@
-package com.wodle.service;
+package com.wodle.backend;
 
 import com.wodle.domain.Word;
+import com.wodle.ui.ViewManagerImpl;
 
 public class InputMangerProxy extends InputManagerImpl {
 

@@ -3,9 +3,9 @@ package com.wodle.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wodle.service.InputMangerProxy;
-import com.wodle.service.ViewManagerImpl;
-import com.wodle.service.WordGeneratorImpl;
+import com.wodle.backend.InputMangerProxy;
+import com.wodle.ui.ViewManagerImpl;
+import com.wodle.backend.WordGeneratorImpl;
 import com.wodle.testUtils.FileMockUtils;
 import com.wodle.testUtils.LocalDateTimeMockUtils;
 import com.wodle.testUtils.SystemInOutUtils;

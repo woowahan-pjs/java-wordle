@@ -3,8 +3,10 @@ package com.wodle.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.wodle.backend.InputMangerProxy;
 import com.wodle.domain.Word;
 import com.wodle.testUtils.SystemInOutUtils;
+import com.wodle.ui.ViewManagerImpl;
 import java.io.OutputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

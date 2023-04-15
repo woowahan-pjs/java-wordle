@@ -3,6 +3,7 @@ package com.wodle.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.wodle.backend.WordGeneratorImpl;
 import com.wodle.domain.Word;
 import com.wodle.testUtils.FileMockUtils;
 import com.wodle.testUtils.LocalDateTimeMockUtils;

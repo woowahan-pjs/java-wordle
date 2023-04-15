@@ -1,4 +1,9 @@
-package com.wodle.domain;
+package com.wodle.service;
+
+import com.wodle.domain.AnswerWord;
+import com.wodle.domain.Coins;
+import com.wodle.domain.Result;
+import com.wodle.domain.Word;
 
 public class GameMachine {
     private final AnswerWord word;
