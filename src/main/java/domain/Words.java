@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Words {
 
+    public static final LocalDate START_DATE = LocalDate.of(2021, 6, 19);
     private final List<Word> words;
 
     public Words(String... words) {
@@ -26,7 +27,7 @@ public class Words {
     }
 
     public Word answer(LocalDate from) {
-        Period period = Period.between(LocalDate.of(2021, 6, 19), from);
+        Period period = Period.between(START_DATE, from);
         int range = period.getDays() % words.size();
         return words.get(range);
     }
