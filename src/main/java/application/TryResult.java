@@ -1,5 +1,6 @@
-package domain;
+package application;
 
+import domain.Colors;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,14 @@ public class TryResult {
     }
 
     public boolean isFinished() {
-        Colors colors = results.get(results.size() - 1);
+        Colors colors = getLastColor();
         return colors.isAllGreen();
+    }
+
+    private Colors getLastColor() {
+        if (results.size() == 0) {
+            return Colors.EMPTY;
+        }
+        return results.get(results.size() - 1);
     }
 }

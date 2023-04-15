@@ -1,7 +1,7 @@
 package ui;
 
 import domain.Colors;
-import domain.TryResult;
+import application.TryResult;
 import java.util.List;
 
 public class ResultView {

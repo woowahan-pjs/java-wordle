@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class Colors {
 
+    public static final Colors EMPTY = new Colors();
+
     private static final Colors ALL_GREENS = new Colors(
         List.of(Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN));
 
