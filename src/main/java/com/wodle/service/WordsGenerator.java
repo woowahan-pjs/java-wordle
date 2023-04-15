@@ -22,7 +22,7 @@ public class WordsGenerator {
             String todayWord = wordList.get(wordIndex);
             return new AnswerWord(todayWord);
         } catch (RuntimeException e) {
-            throw new RuntimeException("단어를 셋팅할수 없습니다", e);
+            throw new RuntimeException("can not setting word", e);
         }
     }
 
@@ -31,7 +31,7 @@ public class WordsGenerator {
             .atStartOfDay();
         LocalDateTime now = LocalDateTime.now();
 
-        long betweenDays = LocalDateTimeUtils.getBetweenDays(base, now);
+        long betweenDays = LocalDateTimeUtils.getInstance().getBetweenDays(base, now);
 
         return (int) (betweenDays % totalCount);
     }
