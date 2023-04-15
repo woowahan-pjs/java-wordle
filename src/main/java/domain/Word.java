@@ -10,13 +10,17 @@ public class Word {
     private final List<Letter> word;
 
     public Word(String word) {
-        if (this.isNotMatchWord(word)) {
-            throw new IllegalArgumentException(word + "는 5글자의 알파벳이 아닙니다.");
-        }
+        validate(word);
 
         this.word = word.chars().mapToObj(c -> (char) c)
                         .map(Letter::new)
                         .collect(Collectors.toList());
+    }
+
+    public void validate(String word) {
+        if (this.isNotMatchWord(word)) {
+            throw new IllegalArgumentException(word + "는 5글자의 알파벳이 아닙니다.");
+        }
     }
 
     private boolean isNotMatchWord(String word){
