@@ -26,7 +26,7 @@ public class GameService {
         List<GameHistory> gameHistories = new ArrayList<>();
 
         int count = 0;
-        while (count < InputView.GAME_TOTAL_ROUND && !answer.isSuccess()) {
+        while (isRound(answer, count)) {
             Word inputWord = new Word(InputView.inputWord());
             List<Tile> tiles = answer.compare(inputWord);
             gameHistories.add(new GameHistory(tiles));
@@ -35,6 +35,10 @@ public class GameService {
         }
 
         return gameHistories;
+    }
+
+    private static boolean isRound(Answer answer, int count) {
+        return count < InputView.GAME_TOTAL_ROUND && !answer.isSuccess();
     }
 
     private void print(Answer answer, List<GameHistory> gameHistories) {
