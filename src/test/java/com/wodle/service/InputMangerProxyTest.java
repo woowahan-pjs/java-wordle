@@ -1,17 +1,16 @@
 package com.wodle.service;
 
-import static com.wodle.testUtils.SystemInOutUtils.getOutputStream;
-import static com.wodle.testUtils.SystemInOutUtils.inputSetting;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.wodle.domain.Word;
+import com.wodle.testUtils.SystemInOutUtils;
 import java.io.OutputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class InputMangerProxyTest {
+class InputMangerProxyTest implements SystemInOutUtils {
 
     private InputMangerProxy inputMangerProxy;
 

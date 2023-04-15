@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class LocalDateTimeUtilsTest {
 
-    private LocalDateTimeUtils localDateTimeUtils;
-
-    @BeforeEach
-    public void init() {
-        localDateTimeUtils = new LocalDateTimeUtils();
-    }
-
     @Test
     public void NormalTimeCompare() {
         //given
@@ -25,7 +18,7 @@ class LocalDateTimeUtilsTest {
             .atStartOfDay();
 
         //when
-        long betweenDays = localDateTimeUtils.getBetweenDays(past, future);
+        long betweenDays = LocalDateTimeUtils.getInstance().getBetweenDays(past, future);
 
         //then
         assertThat(betweenDays).isEqualTo(3);
@@ -40,7 +33,7 @@ class LocalDateTimeUtilsTest {
             .atStartOfDay();
 
         //when
-        long betweenDays = localDateTimeUtils.getBetweenDays(past, future);
+        long betweenDays = LocalDateTimeUtils.getInstance().getBetweenDays(past, future);
 
         //then
         assertThat(betweenDays).isEqualTo(-3);
@@ -53,7 +46,7 @@ class LocalDateTimeUtilsTest {
         LocalDateTime future = LocalDateTime.of(2023, 03, 27, 5, 3);
 
         //when
-        long betweenDays = localDateTimeUtils.getBetweenDays(past, future);
+        long betweenDays = LocalDateTimeUtils.getInstance().getBetweenDays(past, future);
 
         //then
         assertThat(betweenDays).isEqualTo(1);

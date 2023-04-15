@@ -16,7 +16,7 @@ class FileUtilsTest {
 
     @BeforeEach
     public void init() {
-        fileUtils = new FileUtils();
+        fileUtils = FileUtils.getInstance();
     }
 
     @Test

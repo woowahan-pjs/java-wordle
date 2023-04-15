@@ -3,12 +3,12 @@ package com.wodle.service;
 import static com.wodle.domain.TileColor.GREEN;
 import static com.wodle.domain.TileColor.GREY;
 import static com.wodle.domain.TileColor.YELLOW;
-import static com.wodle.testUtils.SystemInOutUtils.getOutputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.domain.AnswerWord;
 import com.wodle.domain.Result;
 import com.wodle.domain.TileColor;
+import com.wodle.testUtils.SystemInOutUtils;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class ViewManagerTest {
+class ViewManagerTest implements SystemInOutUtils {
 
     private ViewManager viewManager;
 

@@ -14,7 +14,7 @@ public class WordsGenerator {
     private static final String FILE_PATH = "words.txt";
 
     public AnswerWord getTodayWord() {
-        try (Stream<String> stream = FileUtils.getStreamByFileName(FILE_PATH)) {
+        try (Stream<String> stream = FileUtils.getInstance().getStreamByFileName(FILE_PATH)) {
             List<String> wordList = stream.collect(Collectors.toList());
             long fileMaxLines = wordList.size();
             int wordIndex = getTodayWordIndex(fileMaxLines);

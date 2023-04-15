@@ -1,7 +1,7 @@
 package com.wodle.domain;
 
 
-import static com.wodle.utils.StringUtils.matchesFiveSmallAlphabet;
+import com.wodle.utils.StringUtils;
 
 public class Word {
 
@@ -13,7 +13,7 @@ public class Word {
     }
 
     private void validate(String word) {
-        if (!matchesFiveSmallAlphabet(word)) {
+        if (!StringUtils.getInstance().matchesFiveSmallAlphabet(word)) {
             throw new IllegalArgumentException("user input require 5 small alphabet");
         }
     }

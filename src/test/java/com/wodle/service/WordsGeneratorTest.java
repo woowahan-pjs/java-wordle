@@ -4,26 +4,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wodle.domain.Word;
-import com.wodle.testUtils.StaticMockingUtils;
+import com.wodle.testUtils.FileMockUtils;
+import com.wodle.testUtils.LocalDateTimeMockUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WordsGeneratorTest extends StaticMockingUtils {
+class WordsGeneratorTest implements FileMockUtils, LocalDateTimeMockUtils {
 
     private WordsGenerator wordsGenerator;
 
     @BeforeEach
     public void init() {
-        super.init();
+        fileMockUtilsInit();
+        localDateTimeMockUtilsInit();
 
         wordsGenerator = new WordsGenerator();
     }
 
-    @AfterEach
-    public void destroy() {
-        super.destroy();
-    }
 
     @Test
     public void todayWordsTest() {
@@ -48,7 +46,7 @@ class WordsGeneratorTest extends StaticMockingUtils {
         assertThatThrownBy(
             () -> wordsGenerator.getTodayWord()
         ).isInstanceOf(RuntimeException.class)
-            .hasMessage("단어를 셋팅할수 없습니다");
+            .hasMessage("can not setting word");
 
     }
 

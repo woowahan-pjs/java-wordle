@@ -1,25 +1,28 @@
 package com.wodle.controller;
 
-import static com.wodle.testUtils.SystemInOutUtils.getOutputStream;
-import static com.wodle.testUtils.SystemInOutUtils.inputSetting;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wodle.service.InputMangerProxy;
 import com.wodle.service.ViewManager;
 import com.wodle.service.WordsGenerator;
-import com.wodle.testUtils.StaticMockingUtils;
+import com.wodle.testUtils.FileMockUtils;
+import com.wodle.testUtils.LocalDateTimeMockUtils;
+import com.wodle.testUtils.SystemInOutUtils;
 import java.io.OutputStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class GameHostTest extends StaticMockingUtils {
+class GameHostTest implements FileMockUtils, LocalDateTimeMockUtils, SystemInOutUtils {
 
     private GameHost gameHost;
 
     @BeforeEach
     public void init() {
-        super.init();
+        fileMockUtilsInit();
+        localDateTimeMockUtilsInit();
+
         ViewManager viewManager = new ViewManager();
         InputMangerProxy inputManagerProxy = new InputMangerProxy(viewManager);
         WordsGenerator wordsGenerator = new WordsGenerator();
@@ -28,11 +31,6 @@ class GameHostTest extends StaticMockingUtils {
             viewManager,
             wordsGenerator
         );
-    }
-
-    @AfterEach
-    public void destroy() {
-        super.destroy();
     }
 
     @Test

@@ -11,7 +11,7 @@ class StringUtilsTest {
     @ValueSource(strings = {"aaaaa", "bbbbb", "ccccc", "ddddd"})
     public void normalTest(String source) {
         //when
-        boolean result = StringUtils.matchesFiveSmallAlphabet(source);
+        boolean result = StringUtils.getInstance().matchesFiveSmallAlphabet(source);
 
         //then
         assertThat(result).isTrue();
@@ -21,7 +21,7 @@ class StringUtilsTest {
     @ValueSource(strings = {"aaaa", "bbb", "cc", "d", "Aaaaa", "1aaaa", "ㅁaaaa"})
     public void abNormalTest(String source) {
         //when
-        boolean result = StringUtils.matchesFiveSmallAlphabet(source);
+        boolean result = StringUtils.getInstance().matchesFiveSmallAlphabet(source);
 
         //then
         assertThat(result).isFalse();

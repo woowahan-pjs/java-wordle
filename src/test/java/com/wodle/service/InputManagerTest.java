@@ -1,18 +1,14 @@
 package com.wodle.service;
 
-import static com.wodle.testUtils.SystemInOutUtils.inputSetting;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-
 import com.wodle.domain.Word;
-import com.wodle.service.InputManager;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
+import com.wodle.testUtils.SystemInOutUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class InputManagerTest {
+class InputManagerTest implements SystemInOutUtils {
 
     private InputManager inputManager;
 
