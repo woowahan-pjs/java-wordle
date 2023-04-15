@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class Words {
 
-    public static final LocalDate START_DATE = LocalDate.of(2021, 6, 19);
     private final List<Word> words;
 
     public Words(String... words) {
@@ -23,26 +22,19 @@ public class Words {
         this.words = Collections.unmodifiableList(words);
     }
 
-    public boolean contains(Word word) {
-        return words.contains(word);
-    }
-
-    public Word answer(LocalDate from) {
-        Period period = Period.between(START_DATE, from);
+    public Word answer(LocalDate from, LocalDate to) {
+        Period period = Period.between(from, to);
         int range = period.getDays() % words.size();
         return words.get(range);
     }
 
-    public Colors matchingAnswer(Word input) {
-        validate(input);
-        Word answer = answer(LocalDate.now());
-        return answer.compareWith(input);
-    }
-
-    private void validate(Word input) {
+    public Word getWord(String word) {
+        Word input = new Word(word);
         if (!words.contains(input)) {
             throw new IllegalArgumentException("단어집에 없는 단어를 선택하였습니다.");
         }
+
+        return input;
     }
 
     @Override
