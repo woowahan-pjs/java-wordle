@@ -33,7 +33,7 @@ class WordTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    public List<Letter> getLetters(String word) {
+    private List<Letter> getLetters(String word) {
         return word.chars().mapToObj(c -> (char) c)
                    .map(Letter::new)
                    .collect(Collectors.toList());
