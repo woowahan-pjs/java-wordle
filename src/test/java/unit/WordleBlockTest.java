@@ -12,55 +12,38 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import woowaapplication.pair.game.wordle.WordleBlock;
 
+@DisplayName("워들 블럭 관리 기능 테스트")
 class WordleBlockTest {
 
     @Nested
     @DisplayNameGeneration(ReplaceUnderscores.class)
-    class 입력_키워드와_정답_키워드로_워들블럭_리스트를_만드는_기능 {
-        private String 정답_키워드 = "jason";
+    class 워들_블럭_결과_목록을_네모칸_이모지로_변환하는_기능 {
 
         @Nested
-        @DisplayName("입력 키워드가 정답일 경우")
-        class Context_with_correct_input_keyword {
-            private String 입력_키워드 = "jason";
+        @DisplayName("워들 블럭 결과 목록을 네모칸 이모지로 변환하면")
+        class Context_with_wordle_block_list {
+            private WordleBlock[] 워들_블럭_목록 = {CORRECT, EXIST_BUT_WRONG_SPOT, WRONG};
 
             @Test
-            @DisplayName("CORRECT로 구성된 워들 블럭들을 반환환다")
-            void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
+            @DisplayName("네모칸 이모지로 변환된 목록을 반환한다")
+            void it_returns_emoji_list() {
+                String[] 네모칸_이모지_목록 = WordleBlock.toEmojiList(워들_블럭_목록);
 
-                assertThat(워들_블럭들).containsOnly(CORRECT);
+                assertThat(네모칸_이모지_목록).containsExactly("🟩", "🟨", "⬜");
             }
         }
 
         @Nested
-        @DisplayName("입력 키워드가 한 글자도 못맞춘 경우")
-        class Context_with_wrong_input_keyword {
-            private String 입력_키워드 = "xxxxx";
+        @DisplayName("워들 블럭 결과 목록이 비어있으면")
+        class Context_with_empty_wordle_block_list {
+            private WordleBlock[] 워들_블럭_목록 = {};
 
             @Test
-            @DisplayName("WRONG으로 구성된 워들 블럭들을 반환환다")
-            void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
+            @DisplayName("비어있는 목록을 반환한다")
+            void it_returns_empty_list() {
+                String[] 네모칸_이모지_목록 = WordleBlock.toEmojiList(워들_블럭_목록);
 
-                assertThat(워들_블럭들).containsOnly(WRONG);
-            }
-        }
-
-        @Nested
-        @DisplayName("입력 키워드의 첫번째 글자는 정답이고,"
-                + "나머지 글자들은 정답 키워드에 존재하는 글자이지만 다른 위치에 있는 경우")
-        class Context_with_exist_but_wrong_spot_input_keyword {
-
-            private String 입력_키워드 = "jjjjj";
-
-            @Test
-            @DisplayName("첫번째는 CORRECT, 나머지는 EXIST_BUT_WRONG_SPOT으로 구성된 워들 블럭들을 반환환다")
-            void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
-
-                assertThat(워들_블럭들).containsExactly(CORRECT, EXIST_BUT_WRONG_SPOT, EXIST_BUT_WRONG_SPOT,
-                        EXIST_BUT_WRONG_SPOT, EXIST_BUT_WRONG_SPOT);
+                assertThat(네모칸_이모지_목록).isEmpty();
             }
         }
     }

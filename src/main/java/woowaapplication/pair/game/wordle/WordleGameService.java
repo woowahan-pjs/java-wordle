@@ -1,11 +1,7 @@
 package woowaapplication.pair.game.wordle;
 
 
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
-import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
 
 public class WordleGameService {
 
@@ -13,61 +9,25 @@ public class WordleGameService {
 
     private final WordleGameStorage wordleGameStorage;
 
-    private final LocalDate standardDate = LocalDate.of(2021, 6, 19);
-    private final LocalDate comparisonDate;
+    private final AnswerKeyword answerKeyword;
 
-    public WordleGameService(WordleGameStorage wordleGameStorage, LocalDate comparisonDate) {
+    private WordleGameService(WordleGameStorage wordleGameStorage, AnswerKeyword answerKeyword) {
         this.wordleGameStorage = wordleGameStorage;
-        this.comparisonDate = comparisonDate;
+        this.answerKeyword = answerKeyword;
     }
 
-    public WordleGameService(WordleGameStorage wordleGameStorage) {
-        this.wordleGameStorage = wordleGameStorage;
-        this.comparisonDate = LocalDate.now();
+    public static WordleGameService of(WordleGameStorage wordleGameStorage, AnswerKeyword answerKeyword) {
+        return new WordleGameService(wordleGameStorage, answerKeyword);
     }
 
     public boolean isGameOver() {
-        return wordleGameStorage.isGameOver() || wordleGameStorage.isClear();
+        return wordleGameStorage.isOutOfChance() || wordleGameStorage.isClear();
     }
 
     public List<String[]> playRound(String inputKeyword) {
-        String answerKeyword = getAnswerKeyword();
-        WordleBlock[] wordleBlocks = WordleBlock.toList(inputKeyword, answerKeyword);
-
-        wordleGameStorage.checkAnswer(wordleBlocks);
         wordleGameStorage.decreaseChance();
+        wordleGameStorage.checkAnswer(inputKeyword, answerKeyword);
 
         return wordleGameStorage.convertHistoryToEmoji();
-    }
-
-    public String getAnswerKeyword() {
-        List<String> keywords = readKeywordsFromFile();
-
-        if (keywords.isEmpty()) {
-            throw new InvalidAnswerKeywordException();
-        }
-
-        int index = findAnswerKeywordIndex(keywords);
-
-        return keywords.get(index);
-    }
-
-    private List<String> readKeywordsFromFile() {
-        URL resource = getClass().getClassLoader().getResource(WORDS_FILE_NAME);
-        return FileReader.readLinesFromFile(resource);
-    }
-
-    private int findAnswerKeywordIndex(List<String> keywords) {
-        Period period = Period.between(standardDate, comparisonDate);
-
-        return (period.getDays() % keywords.size()) - 1;
-    }
-
-    public static WordleGameService of(WordleGameStorage wordleGameStorage) {
-        return new WordleGameService(wordleGameStorage);
-    }
-
-    public static WordleGameService of(WordleGameStorage wordleGameStorage, LocalDate comparisonDate) {
-        return new WordleGameService(wordleGameStorage, comparisonDate);
     }
 }

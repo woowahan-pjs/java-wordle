@@ -10,16 +10,20 @@ public class WordleGameStorage {
     private final Coin coin;
     private boolean isClear;
 
-    public WordleGameStorage(Coin coin) {
+    private WordleGameStorage(Coin coin) {
         this.coin = coin;
         this.isClear = false;
+    }
+
+    public static WordleGameStorage of(Coin coin) {
+        return new WordleGameStorage(coin);
     }
 
     public int getRestChance() {
         return coin.getRestChance();
     }
 
-    public boolean isGameOver() {
+    public boolean isOutOfChance() {
         return coin.isOutOfChance();
     }
 
@@ -27,9 +31,9 @@ public class WordleGameStorage {
         return isClear;
     }
 
-    public void checkAnswer(WordleBlock[] wordleBlocks) {
-        wordleBlocksHistory.add(wordleBlocks);
-        isClear = WordleBlock.isAllCorrect(wordleBlocks);
+    public void checkAnswer(String inputKeyword, AnswerKeyword answerKeyword) {
+        isClear = answerKeyword.isCorrect(inputKeyword);
+        wordleBlocksHistory.add(answerKeyword.convertToWordleBlocks(inputKeyword));
     }
 
     public void decreaseChance() {
@@ -44,9 +48,5 @@ public class WordleGameStorage {
         return wordleBlocksHistory.stream()
                 .map(WordleBlock::toEmojiList)
                 .collect(Collectors.toList());
-    }
-
-    public static WordleGameStorage of(Coin coin) {
-        return new WordleGameStorage(coin);
     }
 }

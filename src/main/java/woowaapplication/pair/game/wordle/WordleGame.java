@@ -1,5 +1,6 @@
 package woowaapplication.pair.game.wordle;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
@@ -15,10 +16,11 @@ public class WordleGame {
     private final WordleGameUI wordleGameUI;
 
     public WordleGame() {
+        AnswerKeyword answerKeyword = new AnswerKeyword(LocalDate.now());
         Coin coin = Coin.of(TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = WordleGameStorage.of(coin);
         this.wordleGameUI = WordleGameUI.of(wordleGameStorage, new Scanner(System.in));
-        this.wordleGameService = WordleGameService.of(wordleGameStorage);
+        this.wordleGameService = WordleGameService.of(wordleGameStorage, answerKeyword);
     }
 
     public void start() {
