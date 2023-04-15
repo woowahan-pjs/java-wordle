@@ -1,24 +1,29 @@
 import domain.Color;
+import domain.Colors;
 import domain.Word;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ui.IOUtils;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.List;
-
 public class WordleTest {
+
     @Test
     void compare() {
+        //given
         Word answer = new Word("spill");
-        List<Color> colors = answer.compareWith(new Word("hello"));
-        Assertions.assertEquals(Arrays.asList(Color.GREY, Color.GREY, Color.YELLOW, Color.GREEN, Color.GREY), colors);
+
+        //when
+        Colors colors = answer.compareWith(new Word("hello"));
+
+        //then
+        Assertions.assertEquals(
+            new Colors(Color.GREY, Color.GREY, Color.YELLOW, Color.GREEN, Color.GREY),
+            colors
+        );
     }
 
     @Test
-    void readFile() throws URISyntaxException, IOException {
+    void readFile() {
         //when
         String[] words = IOUtils.readFromResource("words.txt");
 
@@ -28,8 +33,6 @@ public class WordleTest {
 
     @Test
     void sizeCheck() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Word("aaaa");
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Word("aaaa"));
     }
 }

@@ -1,7 +1,9 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Colors {
 
@@ -9,6 +11,11 @@ public class Colors {
         List.of(Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN));
 
     private final List<Color> colors;
+
+    public Colors(Color... colors) {
+        this(Arrays.stream(colors)
+            .collect(Collectors.toList()));
+    }
 
     public Colors(List<Color> colors) {
         this.colors = colors;

@@ -35,7 +35,7 @@ public class Words {
     public Colors matchingAnswer(Word input) {
         validate(input);
         Word answer = answer(LocalDate.now());
-        return new Colors(answer.compareWith(input));
+        return answer.compareWith(input);
     }
 
     private void validate(Word input) {
