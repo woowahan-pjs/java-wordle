@@ -2,18 +2,24 @@
 
 ### controller
 1. GameHost
-- Service Layer을 통해 게임의 흐름을 통제한다 
+- GameService를 통해 게임을 실행한다.
 
 ### service
+1. GameService
+- 여러 Backend / UI Serice를 사용하여 게임을 실행한다. 
+
+### backend
 1. InputManager
 - 사용자의 입력을 Word 객체로 전달 받는다
-2. InputViewManger 
-- ViewManger을 주입받는다. 
+2. InputViewManger
+- ViewManger을 주입받는다.
 - 단어 입력 전 / 후 출력을 관리하고, InputManager을 통해 단어를 받는다.
-3. ViewManger
-- 사용자에게 출력하는 모든 로직을 담당한다
-4. WordsGenerator 
+3. WordsGenerator 
 - 날짜에 따라 오늘의 정답 단어를 AnswerWord로 추출한다
+
+### ui
+1. ViewManger
+- 사용자에게 출력하는 모든 로직을 담당한다
 
 ### domain
 1. Word
@@ -29,6 +35,11 @@
 - 최초 코인 개수를 통해 생성
 - 문자 입력시 코인 개수 감소
 - 코인이 남아있는지 여부 확인
+6. User
+- Coin을 가지고 게임을 수행한다.
+7. GameHost
+- AnswerWord를 초기화 한다
+- 사용자의 입력에 대해 정답과 비교하여, 결과를 출력한다.
 
 ### utils
 1. FileUtils
