@@ -1,9 +1,9 @@
 package unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static woowaapplication.pair.game.wordle.WordleBlock.CORRECT;
-import static woowaapplication.pair.game.wordle.WordleBlock.EXIST_BUT_WRONG_SPOT;
-import static woowaapplication.pair.game.wordle.WordleBlock.WRONG;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.CORRECT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.EXIST_BUT_WRONG_SPOT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.WRONG;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +11,10 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import woowaapplication.pair.game.wordle.Coin;
-import woowaapplication.pair.game.wordle.WordleBlock;
+
+import woowaapplication.pair.game.wordle.WordleGameService;
+import woowaapplication.pair.game.wordle.domain.Coin;
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
 import woowaapplication.pair.game.wordle.WordleGame;
 import woowaapplication.pair.game.wordle.WordleGameStorage;
 
@@ -22,7 +24,7 @@ class WordleGameStorageTest {
 
     @BeforeEach
     void setUp() {
-        Coin coin = Coin.of(WordleGame.TOTAL_CHANCE);
+        Coin coin = Coin.of(WordleGameService.TOTAL_CHANCE);
         wordleGameStorage = WordleGameStorage.of(coin);
     }
 
@@ -36,11 +38,11 @@ class WordleGameStorageTest {
             private WordleBlock[] 워들_블럭들 = {CORRECT, CORRECT, CORRECT, CORRECT, CORRECT};
 
             @Test
-            @DisplayName("게임 클리어로 판단한다")
+            @DisplayName("게임 엔드 판단한다")
             void it_clear_game() {
                 wordleGameStorage.checkAnswer(워들_블럭들);
 
-                assertThat(wordleGameStorage.isGameClear()).isTrue();
+                assertThat(wordleGameStorage.isGameEnd()).isTrue();
             }
         }
 
@@ -54,7 +56,7 @@ class WordleGameStorageTest {
             void it_clear_game() {
                 wordleGameStorage.checkAnswer(워들_블럭들);
 
-                assertThat(wordleGameStorage.isGameClear()).isFalse();
+                assertThat(wordleGameStorage.isGameEnd()).isFalse();
             }
         }
     }

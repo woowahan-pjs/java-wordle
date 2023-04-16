@@ -5,11 +5,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
+import woowaapplication.pair.game.wordle.dto.GameResultDto;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
 
 public class WordleGameService {
 
     public static final String WORDS_FILE_NAME = "words.txt";
+
+    public static final int TOTAL_CHANCE = 6;
 
     private final WordleGameStorage wordleGameStorage;
 
@@ -26,18 +31,29 @@ public class WordleGameService {
         this.comparisonDate = LocalDate.now();
     }
 
-    public boolean isGameOver() {
-        return wordleGameStorage.isGameOver() || wordleGameStorage.isGameClear();
+    public boolean isGameEnd() {
+        return wordleGameStorage.isGameEnd();
     }
 
-    public List<String[]> playRound(String inputKeyword) {
+    public int getRestChance() {
+        return wordleGameStorage.getRestChance();
+    }
+
+    public GameResultDto playRound(String inputKeyword) {
         String answerKeyword = getAnswerKeyword();
         WordleBlock[] wordleBlocks = WordleBlock.toList(inputKeyword, answerKeyword);
 
         wordleGameStorage.checkAnswer(wordleBlocks);
         wordleGameStorage.decreaseChance();
 
-        return wordleGameStorage.convertHistoryToEmoji();
+        // return wordleGameStorage.convertHistoryToEmoji();
+
+        return GameResultDto.of(
+            wordleGameStorage.convertHistoryToEmoji(),
+            WordleGameService.TOTAL_CHANCE,
+            wordleGameStorage.getRestChance(),
+            wordleGameStorage.isGameEnd()
+        );
     }
 
     public String getAnswerKeyword() {

@@ -1,4 +1,4 @@
-package woowaapplication.pair.game.wordle;
+package woowaapplication.pair.game.wordle.domain;
 
 import woowaapplication.pair.game.wordle.exception.OutOfChanceException;
 

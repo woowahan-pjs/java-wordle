@@ -2,12 +2,12 @@ package woowaapplication.pair.game.wordle;
 
 import java.util.List;
 
+import woowaapplication.pair.game.wordle.dto.GameResultDto;
+
 public class WordleGameUI {
 
-    private final WordleGameStorage wordleGameStorage;
 
-    public WordleGameUI(WordleGameStorage wordleGameStorage) {
-        this.wordleGameStorage = wordleGameStorage;
+    public WordleGameUI() {
     }
 
     public static void printReady() {
@@ -19,17 +19,12 @@ public class WordleGameUI {
         System.out.println("게임이 종료되었습니다.");
     }
 
-    public void printResult(List<String[]> gameResult) {
-        if (wordleGameStorage.isGameClear()) {
-            System.out.println(wordleGameStorage.getRestChance() + "/" + WordleGame.TOTAL_CHANCE);
-        }
-
-        gameResult.stream()
-                .map(array -> String.join(" ", array))
-                .forEach(System.out::println);
+    public void printResult(GameResultDto gameResultDto) {
+        System.out.println(gameResultDto.getHistory());
+        System.out.println(gameResultDto.getChance());
     }
 
-    public static WordleGameUI of(WordleGameStorage wordleGameStorage) {
-        return new WordleGameUI(wordleGameStorage);
+    public static WordleGameUI of() {
+        return new WordleGameUI();
     }
 }

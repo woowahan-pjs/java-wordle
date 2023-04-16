@@ -12,10 +12,11 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import woowaapplication.pair.game.wordle.Coin;
+import woowaapplication.pair.game.wordle.domain.Coin;
 import woowaapplication.pair.game.wordle.WordleGame;
 import woowaapplication.pair.game.wordle.WordleGameService;
 import woowaapplication.pair.game.wordle.WordleGameStorage;
+import woowaapplication.pair.game.wordle.dto.GameResultDto;
 
 @DisplayName("워들 인수 테스트")
 public class WordleGameAcceptanceTest {
@@ -27,7 +28,7 @@ public class WordleGameAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-        코인 = Coin.of(WordleGame.TOTAL_CHANCE);
+        코인 = Coin.of(WordleGameService.TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = WordleGameStorage.of(코인);
         워들_게임 = WordleGameService.of(wordleGameStorage, 비교_날짜);
     }
@@ -44,11 +45,11 @@ public class WordleGameAcceptanceTest {
             @Test
             @DisplayName("남은 시도 횟수가 그대로 반환되고 5개의 네모칸이 모두 초록색으로 반환된다")
             void it_returns_remaining_chance_and_answer() {
-                String[] 게임_결과 = 워들_게임.playRound(오늘의_정답_키워드).get(0);
+                GameResultDto 게임_결과 = 워들_게임.playRound(오늘의_정답_키워드);
 
                 assertAll(
-                        () -> 정답_표시가_반환된다(게임_결과),
-                        () -> 남은_시도_횟수는_예상_기회_횟수와_동일하다(코인, WordleGame.TOTAL_CHANCE)
+                        () -> 정답_표시가_반환된다(게임_결과.getHistory()),
+                        () -> 남은_시도_횟수는_예상_기회_횟수와_동일하다(코인, WordleGameService.TOTAL_CHANCE)
                 );
             }
         }
@@ -68,10 +69,10 @@ public class WordleGameAcceptanceTest {
             @DisplayName("남은 시도 횟수가 1 감소되고 올바른 알파벳인 자리는 초록색, 위치가 틀린 자리는 노란색, 오답은 흰색으로 표시한다")
             void it_returns_answer_and_decrease_rest_chance() {
                 int 기존_남은_시도_횟수 = 코인.getRestChance();
-                String[] 게임_결과 = 워들_게임.playRound(오답_키워드).get(0);
+                String 게임_결과 = 워들_게임.playRound(오답_키워드).getHistory();
 
                 assertAll(
-                        () -> 게임_결과가_반환된다(게임_결과, "🟩", "⬜", "🟨", "🟨", "🟩"),
+                        () -> 게임_결과가_반환된다(게임_결과, "🟩 ⬜ 🟨 🟨 🟩"),
                         () -> 남은_시도_횟수는_예상_기회_횟수와_동일하다(코인, 기존_남은_시도_횟수 - 1)
                 );
             }

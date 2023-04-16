@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import woowaapplication.pair.game.wordle.domain.Coin;
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
+
 public class WordleGameStorage {
 
     private final List<WordleBlock[]> wordleBlocksHistory = new ArrayList<>();
@@ -19,12 +22,16 @@ public class WordleGameStorage {
         return coin.getRestChance();
     }
 
-    public boolean isGameOver() {
+    private boolean isGameOver() {
         return coin.isOutOfChance();
     }
 
-    public boolean isGameClear() {
+    private boolean isGameClear() {
         return isGameClear;
+    }
+
+    public boolean isGameEnd() {
+        return isGameOver() || isGameClear();
     }
 
     public void checkAnswer(WordleBlock[] wordleBlocks) {

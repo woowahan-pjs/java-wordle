@@ -1,7 +1,7 @@
 package unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static woowaapplication.pair.game.wordle.WordleGame.TOTAL_CHANCE;
+import static woowaapplication.pair.game.wordle.WordleGameService.TOTAL_CHANCE;
 
 import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import woowaapplication.pair.game.wordle.Coin;
+import woowaapplication.pair.game.wordle.domain.Coin;
 import woowaapplication.pair.game.wordle.WordleGameService;
 import woowaapplication.pair.game.wordle.WordleGameStorage;
 

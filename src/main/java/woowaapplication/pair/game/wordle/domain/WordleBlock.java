@@ -1,9 +1,11 @@
-package woowaapplication.pair.game.wordle;
+package woowaapplication.pair.game.wordle.domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import woowaapplication.pair.game.wordle.WordleGame;
 
 public enum WordleBlock {
     CORRECT( "🟩"),

@@ -1,16 +1,16 @@
 package unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static woowaapplication.pair.game.wordle.WordleBlock.CORRECT;
-import static woowaapplication.pair.game.wordle.WordleBlock.EXIST_BUT_WRONG_SPOT;
-import static woowaapplication.pair.game.wordle.WordleBlock.WRONG;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.CORRECT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.EXIST_BUT_WRONG_SPOT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.WRONG;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import woowaapplication.pair.game.wordle.WordleBlock;
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
 
 class WordleBlockTest {
 
