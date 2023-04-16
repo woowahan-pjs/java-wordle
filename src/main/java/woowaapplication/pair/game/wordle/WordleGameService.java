@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
+import woowaapplication.pair.game.util.FileReader;
 import woowaapplication.pair.game.wordle.domain.WordleBlock;
 import woowaapplication.pair.game.wordle.dto.GameResultDto;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
@@ -35,18 +36,12 @@ public class WordleGameService {
         return wordleGameStorage.isGameEnd();
     }
 
-    public int getRestChance() {
-        return wordleGameStorage.getRestChance();
-    }
-
     public GameResultDto playRound(String inputKeyword) {
         String answerKeyword = getAnswerKeyword();
         WordleBlock[] wordleBlocks = WordleBlock.toList(inputKeyword, answerKeyword);
 
         wordleGameStorage.checkAnswer(wordleBlocks);
         wordleGameStorage.decreaseChance();
-
-        // return wordleGameStorage.convertHistoryToEmoji();
 
         return GameResultDto.of(
             wordleGameStorage.convertHistoryToEmoji(),

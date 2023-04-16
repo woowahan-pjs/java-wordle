@@ -1,8 +1,8 @@
 package woowaapplication.pair.game.wordle;
 
-import java.util.List;
 import java.util.Scanner;
 
+import woowaapplication.pair.game.util.KeywordValidator;
 import woowaapplication.pair.game.wordle.domain.Coin;
 import woowaapplication.pair.game.wordle.dto.GameResultDto;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;

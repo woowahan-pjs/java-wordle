@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import woowaapplication.pair.game.wordle.KeywordValidator;
+import woowaapplication.pair.game.util.KeywordValidator;
 import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
 
 class KeywordValidatorTest {
