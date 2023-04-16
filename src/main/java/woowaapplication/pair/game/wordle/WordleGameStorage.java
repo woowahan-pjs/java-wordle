@@ -4,38 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import woowaapplication.pair.game.wordle.domain.Coin;
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
+
 public class WordleGameStorage {
 
     private final List<WordleBlock[]> wordleBlocksHistory = new ArrayList<>();
     private final Coin coin;
-    private boolean isClear;
 
     public WordleGameStorage(Coin coin) {
         this.coin = coin;
-        this.isClear = false;
     }
 
     public int getRestChance() {
         return coin.getRestChance();
     }
 
-    public boolean isGameOver() {
+    private boolean isGameOver() {
         return coin.isOutOfChance();
     }
 
-    public boolean isClear() {
-        return isClear;
-    }
-
-    public void checkAnswer(WordleBlock[] wordleBlocks) {
-        wordleBlocksHistory.add(wordleBlocks);
-        isClear = WordleBlock.isAllCorrect(wordleBlocks);
-    }
-
-    public void decreaseChance() {
-        if (isClear) {
-            return;
+    public boolean isGameClear() {
+        if (wordleBlocksHistory.isEmpty()){
+            return false;
         }
+        return WordleBlock.isAllCorrect(wordleBlocksHistory.get(wordleBlocksHistory.size() - 1));
+    }
+
+    public boolean isGameEnd() {
+        return isGameOver() || isGameClear();
+    }
+
+    public void submit(WordleBlock[] wordleBlocks) {
+        wordleBlocksHistory.add(wordleBlocks);
 
         coin.decreaseChance();
     }

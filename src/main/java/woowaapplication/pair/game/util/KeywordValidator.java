@@ -1,4 +1,4 @@
-package woowaapplication.pair.game.wordle;
+package woowaapplication.pair.game.util;
 
 import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
 

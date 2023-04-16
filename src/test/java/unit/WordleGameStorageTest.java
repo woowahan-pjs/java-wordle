@@ -1,9 +1,9 @@
 package unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static woowaapplication.pair.game.wordle.WordleBlock.CORRECT;
-import static woowaapplication.pair.game.wordle.WordleBlock.EXIST_BUT_WRONG_SPOT;
-import static woowaapplication.pair.game.wordle.WordleBlock.WRONG;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.CORRECT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.EXIST_BUT_WRONG_SPOT;
+import static woowaapplication.pair.game.wordle.domain.WordleBlock.WRONG;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,9 +11,10 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import woowaapplication.pair.game.wordle.Coin;
-import woowaapplication.pair.game.wordle.WordleBlock;
+
 import woowaapplication.pair.game.wordle.WordleGame;
+import woowaapplication.pair.game.wordle.domain.Coin;
+import woowaapplication.pair.game.wordle.domain.WordleBlock;
 import woowaapplication.pair.game.wordle.WordleGameStorage;
 
 @DisplayName("워들 게임 저장소 테스트")
@@ -36,11 +37,11 @@ class WordleGameStorageTest {
             private WordleBlock[] 워들_블럭들 = {CORRECT, CORRECT, CORRECT, CORRECT, CORRECT};
 
             @Test
-            @DisplayName("게임 클리어로 판단한다")
+            @DisplayName("게임 엔드 판단한다")
             void it_clear_game() {
-                wordleGameStorage.checkAnswer(워들_블럭들);
+                wordleGameStorage.submit(워들_블럭들);
 
-                assertThat(wordleGameStorage.isClear()).isTrue();
+                assertThat(wordleGameStorage.isGameEnd()).isTrue();
             }
         }
 
@@ -52,9 +53,9 @@ class WordleGameStorageTest {
             @Test
             @DisplayName("게임 클리어 실패로 판단한다")
             void it_clear_game() {
-                wordleGameStorage.checkAnswer(워들_블럭들);
+                wordleGameStorage.submit(워들_블럭들);
 
-                assertThat(wordleGameStorage.isClear()).isFalse();
+                assertThat(wordleGameStorage.isGameEnd()).isFalse();
             }
         }
     }

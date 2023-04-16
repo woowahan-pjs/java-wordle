@@ -1,4 +1,4 @@
-package woowaapplication.pair.game.wordle;
+package woowaapplication.pair.game.util;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

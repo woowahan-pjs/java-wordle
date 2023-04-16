@@ -1,9 +1,11 @@
-package woowaapplication.pair.game.wordle;
+package woowaapplication.pair.game.wordle.domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import woowaapplication.pair.game.wordle.WordleGame;
 
 public enum WordleBlock {
     CORRECT( "🟩"),
@@ -26,7 +28,7 @@ public enum WordleBlock {
                 .allMatch(block -> block == WordleBlock.CORRECT);
     }
 
-    public static WordleBlock[] toList(String inputKeyword, String answerKeyword) {
+    public static WordleBlock[] from(String inputKeyword, String answerKeyword) {
         WordleBlock[] resultBlocks = new WordleBlock[WordleGame.KEYWORD_LENGTH];
         Set<Character> answerLetters = createAnswerLetters(answerKeyword);
 
