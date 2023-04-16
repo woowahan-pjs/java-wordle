@@ -1,7 +1,5 @@
 package woowaapplication.pair.game.wordle;
 
-import java.util.Scanner;
-
 import woowaapplication.pair.game.util.KeywordValidator;
 import woowaapplication.pair.game.wordle.domain.Coin;
 import woowaapplication.pair.game.wordle.domain.WordleBlock;
@@ -16,14 +14,16 @@ public class WordleGame {
 
     public static final int KEYWORD_LENGTH = 5;
 
+    private String answerKeyword;
+
 private final WordleGameStorage wordleGameStorage;
 
-    private final WordleGameUI wordleGameUI;
+    private final WordleGameIO wordleGameIO;
 
     public WordleGame() {
         Coin coin = Coin.of(this.TOTAL_CHANCE);
         this.wordleGameStorage = WordleGameStorage.of(coin);
-        this.wordleGameUI = WordleGameUI.of();
+        this.wordleGameIO = WordleGameIO.of();
     }
 
     public static WordleGame of() {
@@ -31,11 +31,11 @@ private final WordleGameStorage wordleGameStorage;
     }
 
     public void start() {
-        Scanner sc = ready();
+        ready();
 
         while (!wordleGameStorage.isGameEnd()) {
             try {
-                run(sc);
+                run();
             } catch (InvalidInputKeywordException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidAnswerKeywordException e) {
@@ -53,15 +53,14 @@ private final WordleGameStorage wordleGameStorage;
         terminate();
     }
 
-    private void run(Scanner sc) {
-        String inputKeyword = sc.nextLine();
+    private void run() {
+        String inputKeyword = WordleGameIO.printInputKeyword();
 
         KeywordValidator.validate(inputKeyword, KEYWORD_LENGTH);
-        String answerKeyword = WordleGameAnswerGenerator.getAnswerKeyword();
 
         GameResultDto gameResultDto = playRound(inputKeyword, answerKeyword);
 
-        wordleGameUI.printResult(gameResultDto);
+        wordleGameIO.printResult(gameResultDto);
     }
 
     public GameResultDto playRound(String inputKeyword, String answerKeyword) {
@@ -77,14 +76,13 @@ private final WordleGameStorage wordleGameStorage;
         );
     }
 
-    private Scanner ready() {
-        Scanner sc = new Scanner(System.in);
-        WordleGameUI.printReady();
+    private void ready() {
+        WordleGameIO.printReady();
 
-        return sc;
+        answerKeyword = WordleGameAnswerGenerator.getAnswerKeyword();
     }
 
     private void terminate() {
-        WordleGameUI.printTerminate();
+        WordleGameIO.printTerminate();
     }
 }
