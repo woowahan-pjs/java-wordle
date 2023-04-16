@@ -12,10 +12,9 @@ import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import woowaapplication.pair.game.wordle.WordleGameService;
+import woowaapplication.pair.game.wordle.WordleGame;
 import woowaapplication.pair.game.wordle.domain.Coin;
 import woowaapplication.pair.game.wordle.domain.WordleBlock;
-import woowaapplication.pair.game.wordle.WordleGame;
 import woowaapplication.pair.game.wordle.WordleGameStorage;
 
 @DisplayName("워들 게임 저장소 테스트")
@@ -24,7 +23,7 @@ class WordleGameStorageTest {
 
     @BeforeEach
     void setUp() {
-        Coin coin = Coin.of(WordleGameService.TOTAL_CHANCE);
+        Coin coin = Coin.of(WordleGame.TOTAL_CHANCE);
         wordleGameStorage = WordleGameStorage.of(coin);
     }
 
@@ -40,7 +39,7 @@ class WordleGameStorageTest {
             @Test
             @DisplayName("게임 엔드 판단한다")
             void it_clear_game() {
-                wordleGameStorage.checkAnswer(워들_블럭들);
+                wordleGameStorage.submit(워들_블럭들);
 
                 assertThat(wordleGameStorage.isGameEnd()).isTrue();
             }
@@ -54,7 +53,7 @@ class WordleGameStorageTest {
             @Test
             @DisplayName("게임 클리어 실패로 판단한다")
             void it_clear_game() {
-                wordleGameStorage.checkAnswer(워들_블럭들);
+                wordleGameStorage.submit(워들_블럭들);
 
                 assertThat(wordleGameStorage.isGameEnd()).isFalse();
             }

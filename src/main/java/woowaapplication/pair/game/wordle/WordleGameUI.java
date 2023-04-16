@@ -21,7 +21,10 @@ public class WordleGameUI {
 
     public void printResult(GameResultDto gameResultDto) {
         System.out.println(gameResultDto.getHistory());
-        System.out.println(gameResultDto.getChance());
+
+        if (gameResultDto.isClear()) {
+            System.out.println(gameResultDto.getChance());
+        }
     }
 
     public static WordleGameUI of() {

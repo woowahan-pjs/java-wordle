@@ -11,11 +11,9 @@ public class WordleGameStorage {
 
     private final List<WordleBlock[]> wordleBlocksHistory = new ArrayList<>();
     private final Coin coin;
-    private boolean isGameClear;
 
     public WordleGameStorage(Coin coin) {
         this.coin = coin;
-        this.isGameClear = false;
     }
 
     public int getRestChance() {
@@ -26,23 +24,19 @@ public class WordleGameStorage {
         return coin.isOutOfChance();
     }
 
-    private boolean isGameClear() {
-        return isGameClear;
+    public boolean isGameClear() {
+        if (wordleBlocksHistory.isEmpty()){
+            return false;
+        }
+        return WordleBlock.isAllCorrect(wordleBlocksHistory.get(wordleBlocksHistory.size() - 1));
     }
 
     public boolean isGameEnd() {
         return isGameOver() || isGameClear();
     }
 
-    public void checkAnswer(WordleBlock[] wordleBlocks) {
+    public void submit(WordleBlock[] wordleBlocks) {
         wordleBlocksHistory.add(wordleBlocks);
-        isGameClear = WordleBlock.isAllCorrect(wordleBlocks);
-    }
-
-    public void decreaseChance() {
-        if (isGameClear) {
-            return;
-        }
 
         coin.decreaseChance();
     }

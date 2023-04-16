@@ -28,7 +28,7 @@ public enum WordleBlock {
                 .allMatch(block -> block == WordleBlock.CORRECT);
     }
 
-    public static WordleBlock[] toList(String inputKeyword, String answerKeyword) {
+    public static WordleBlock[] from(String inputKeyword, String answerKeyword) {
         WordleBlock[] resultBlocks = new WordleBlock[WordleGame.KEYWORD_LENGTH];
         Set<Character> answerLetters = createAnswerLetters(answerKeyword);
 

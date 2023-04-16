@@ -7,19 +7,22 @@ public class GameResultDto {
 	private final String history;
 	private final String chance;
 
-	public GameResultDto(String history, String chance) {
+	private final boolean isClear;
+
+	public GameResultDto(String history, String chance, boolean isClear) {
 		this.history = history;
 		this.chance = chance;
+		this.isClear = isClear;
 	}
 
-	public static GameResultDto of(List<String[]> scores, int totalChance, int restChance, boolean isGameEnd) {
-		String chance = isGameEnd? (totalChance - restChance) + "/" + totalChance : null;
+	public static GameResultDto of(List<String[]> scores, int totalChance, int restChance, boolean isClear) {
+		String chance = isClear? (totalChance - restChance) + "/" + totalChance : null;
 
 		String history = scores.stream()
-				.map(array -> String.join(" ", array))
-				.collect(Collectors.joining("\r"));
+				.map(array -> java.lang.String.join(" ", array))
+				.collect(Collectors.joining("\n"));
 
-		return new GameResultDto(history, chance);
+		return new GameResultDto(history, chance, isClear);
 	}
 
 	public String getHistory() {
@@ -28,5 +31,9 @@ public class GameResultDto {
 
 	public String getChance() {
 		return chance;
+	}
+
+	public boolean isClear() {
+		return isClear;
 	}
 }

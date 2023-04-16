@@ -1,4 +1,4 @@
-package unit;
+package unit.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static woowaapplication.pair.game.wordle.domain.WordleBlock.CORRECT;
@@ -27,7 +27,7 @@ class WordleBlockTest {
             @Test
             @DisplayName("CORRECT로 구성된 워들 블럭들을 반환환다")
             void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
+                WordleBlock[] 워들_블럭들 = WordleBlock.from(입력_키워드, 정답_키워드);
 
                 assertThat(워들_블럭들).containsOnly(CORRECT);
             }
@@ -41,7 +41,7 @@ class WordleBlockTest {
             @Test
             @DisplayName("WRONG으로 구성된 워들 블럭들을 반환환다")
             void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
+                WordleBlock[] 워들_블럭들 = WordleBlock.from(입력_키워드, 정답_키워드);
 
                 assertThat(워들_블럭들).containsOnly(WRONG);
             }
@@ -57,7 +57,7 @@ class WordleBlockTest {
             @Test
             @DisplayName("첫번째는 CORRECT, 나머지는 EXIST_BUT_WRONG_SPOT으로 구성된 워들 블럭들을 반환환다")
             void it_returns_correct_wordle_blocks() {
-                WordleBlock[] 워들_블럭들 = WordleBlock.toList(입력_키워드, 정답_키워드);
+                WordleBlock[] 워들_블럭들 = WordleBlock.from(입력_키워드, 정답_키워드);
 
                 assertThat(워들_블럭들).containsExactly(CORRECT, EXIST_BUT_WRONG_SPOT, EXIST_BUT_WRONG_SPOT,
                         EXIST_BUT_WRONG_SPOT, EXIST_BUT_WRONG_SPOT);
