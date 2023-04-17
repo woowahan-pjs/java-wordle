@@ -1,7 +1,6 @@
 package domain;
 
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Answer {
     private final Word answerWord;
@@ -15,20 +14,32 @@ public class Answer {
     }
 
     public Result compare(Word word) {
-        return word.getLetters().stream()
-                .map(this::match)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Result::new));
+        List<MatchStatus> matchStatuses = new ArrayList<>();
+        Map<Character, Integer> charMap = new HashMap<>();
+        for (Letter letter : answerWord.getLetters()) {
+            charMap.put(letter.getLetter(), charMap.getOrDefault(letter.getLetter(), 0) + 1);
+        }
+        for (int i = 0; i < word.getLetters().size(); i++) {
+            if (word.getLetters().get(i).getLetter().equals(answerWord.getLetters().get(i).getLetter())) {
+                if (charMap.get(word.getLetters().get(i).getLetter()) > 0) {
+                    charMap.put(word.getLetters().get(i).getLetter(), charMap.get(word.getLetters().get(i).getLetter()) - 1);
+                    matchStatuses.add(MatchStatus.GREEN);
+                    continue;
+                }
+                matchStatuses.add(MatchStatus.GRAY);
+                continue;
+            }
+            if (charMap.containsKey(word.getLetters().get(i).getLetter())) {
+                matchStatuses.add(MatchStatus.YELLOW);
+                continue;
+            }
+            matchStatuses.add(MatchStatus.GRAY);
+        }
+
+
+        return new Result(matchStatuses);
     }
 
-    private MatchStatus match(Letter letter) {
-        if (!answerWord.contains(letter)) {
-            return MatchStatus.GRAY;
-        }
-        if (letter.equals(answerWord.get(letter.getPosition()))) {
-            return MatchStatus.GREEN;
-        }
-        return MatchStatus.YELLOW;
-    }
 
     @Override
     public boolean equals(Object o) {

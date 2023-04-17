@@ -22,11 +22,11 @@ class AnswerTest {
     @DisplayName("생성자로 인스턴스 만들었을 때 멤버변수에 answer 둥록.")
     void testAnswer() {
         assertAll(
-                () -> assertThat(word.get(0)).isEqualTo(new Letter('s', 0)),
-                () -> assertThat(word.get(1)).isEqualTo(new Letter('p', 1)),
-                () -> assertThat(word.get(2)).isEqualTo(new Letter('i', 2)),
-                () -> assertThat(word.get(3)).isEqualTo(new Letter('l', 3)),
-                () -> assertThat(word.get(4)).isEqualTo(new Letter('l', 4))
+                () -> assertThat(word.get(0)).isEqualTo(new Letter('s')),
+                () -> assertThat(word.get(1)).isEqualTo(new Letter('p')),
+                () -> assertThat(word.get(2)).isEqualTo(new Letter('i')),
+                () -> assertThat(word.get(3)).isEqualTo(new Letter('l')),
+                () -> assertThat(word.get(4)).isEqualTo(new Letter('l'))
         );
     }
 
@@ -65,6 +65,69 @@ class AnswerTest {
         assertThat(result).isEqualTo(
                 new Result(List.of(
                         MatchStatus.GREEN,
+                        MatchStatus.GREEN,
+                        MatchStatus.GREEN,
+                        MatchStatus.GREEN,
+                        MatchStatus.GREEN
+                )));
+    }
+
+    @Test
+    @DisplayName("글자에 알맞는 결과 반환1")
+    void wordsTest1() {
+        //given
+        Answer answer = Answer.from("spill");
+        Word target = Word.from("spoll");
+
+        //when
+        Result result = answer.compare(target);
+
+        //then
+        assertThat(result).isEqualTo(
+                new Result(List.of(
+                        MatchStatus.GREEN,
+                        MatchStatus.GREEN,
+                        MatchStatus.GRAY,
+                        MatchStatus.GREEN,
+                        MatchStatus.GREEN
+                )));
+    }
+
+    @Test
+    @DisplayName("글자에 알맞는 결과 반환2")
+    void wordsTest2() {
+        //given
+        Answer answer = Answer.from("spill");
+        Word target = Word.from("llips");
+
+        //when
+        Result result = answer.compare(target);
+
+        //then
+        assertThat(result).isEqualTo(
+                new Result(List.of(
+                        MatchStatus.YELLOW,
+                        MatchStatus.YELLOW,
+                        MatchStatus.GREEN,
+                        MatchStatus.YELLOW,
+                        MatchStatus.YELLOW
+                )));
+    }
+
+    @Test
+    @DisplayName("글자에 알맞는 결과 반환3")
+    void wordsTest3() {
+        //given
+        Answer answer = Answer.from("deapt");
+        Word target = Word.from("aeapt");
+
+        //when
+        Result result = answer.compare(target);
+
+        //then
+        assertThat(result).isEqualTo(
+                new Result(List.of(
+                        MatchStatus.GRAY,
                         MatchStatus.GREEN,
                         MatchStatus.GREEN,
                         MatchStatus.GREEN,

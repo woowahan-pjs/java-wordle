@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,13 @@ public class InputValidator {
     }
 
     public boolean validateLength(String input) {
-        String trim = input.trim();
-        return trim.length() == INPUT_WORD_LENGTH;
+        return input.length() == INPUT_WORD_LENGTH;
+    }
+
+    public void validateInFile(String input) {
+        List<String> words = AnswerGenerator.getAnswerWords();
+        if (!words.contains(input)) {
+            throw new IllegalArgumentException("파일에 없는 단어입니다.");
+        }
     }
 }

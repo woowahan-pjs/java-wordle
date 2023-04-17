@@ -27,7 +27,7 @@ public class Game {
     public void start(LocalDate currentDate) {
         inputView.printStartMessage();
         for (int i = 0; i < 6; i++) {
-            roundNumber += 1;
+            roundNumber++;
             Word userInputWord = getUserInputWord();
             Answer answerWord = getAnswerWord(currentDate);
             Result result = answerWord.compare(userInputWord);
@@ -46,13 +46,8 @@ public class Game {
     private Word getUserInputWord() {
         inputView.printInputMessage();
         String inputString = inputView.getUserInput();
-        validateInput(inputString);
+        inputValidator.validateInFile(inputString);
         return Word.from(inputString);
-    }
-
-    private void validateInput(String inputString) {
-        inputValidator.validateEnglish(inputString);
-        inputValidator.validateLength(inputString);
     }
 
     private boolean isCorrect() {
@@ -64,4 +59,5 @@ public class Game {
         outputView.print(results);
         return false;
     }
+
 }

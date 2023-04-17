@@ -2,10 +2,12 @@ package domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputValidatorTest {
 
@@ -63,5 +65,13 @@ class InputValidatorTest {
     @ValueSource(strings = {"abc  ", "ab cd", "    b"})
     void letterWithBlankTest(String input) {
         assertThat(validator.validateEnglish(input)).isFalse();
+    }
+
+    @Test
+    @DisplayName("파일에 없는 단어이면 예외발생")
+    void notExistWordTest() {
+        assertThatThrownBy(() -> validator.validateInFile("words"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("파일에 없는 단어입니다.");
     }
 }

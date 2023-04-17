@@ -16,8 +16,8 @@ public class Word {
         validate(input);
         char[] chars = input.toCharArray();
         List<Letter> letterList = new ArrayList<>();
-        for (int i = 0; i < chars.length; i++) {
-            letterList.add(new Letter(chars[i], i));
+        for (char aChar : chars) {
+            letterList.add(new Letter(aChar));
         }
         return new Word(letterList);
     }
@@ -42,9 +42,6 @@ public class Word {
     public List<Letter> getLetters() {
         return letters;
     }
-
-    // public List<MatchStatus> compare(Word userInputWord) {
-    // }
 
     public boolean contains(Letter letter) {
         return letters.contains(letter);
