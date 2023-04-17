@@ -50,44 +50,4 @@ class AnswerTest {
         List<Tile> tiles2 = answer.compare(new Word("llsip"));
         assertThat(tiles2).containsExactly(Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW, Tile.YELLOW);
     }
-
-    /*@DisplayName("그린 1개, 노란색 1개, 회색 3개인 답안을 비교한다.")
-    @Test
-    void test01() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
-
-        List<Tile> tiles = correctAnswer.compare(new Word("hello"));
-
-        assertThat(tiles).containsExactly(Tile.GRAY, Tile.GRAY, Tile.YELLOW, Tile.GREEN, Tile.GRAY);
-    }
-
-    @DisplayName("그린 1개, 노란색 1개, 회색 3개인 답안을 비교한다.")
-    @Test
-    void test02() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
-
-        List<Tile> tiles = correctAnswer.compare(new Word("label"));
-
-        assertThat(tiles).containsExactly(Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GREEN);
-    }
-
-    @DisplayName("입력된 답안을 존재하는 Word 인지 비교한다.")
-    @Test
-    void test03() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
-
-        List<Tile> tiles = correctAnswer.compare(new Word("spell"));
-
-        assertThat(tiles).containsExactly(Tile.GREEN, Tile.GREEN, Tile.GRAY, Tile.GREEN, Tile.GREEN);
-    }
-
-    @DisplayName("입력된 답안을 존재하는 Word 인지 비교한다.")
-    @Test
-    void test04() {
-        CorrectAnswer correctAnswer = new CorrectAnswer(new Word("spill"));
-
-        List<Tile> tiles = correctAnswer.compare(new Word("spill"));
-
-        assertThat(tiles).containsExactly(Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN);
-    }*/
 }
