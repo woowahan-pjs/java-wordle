@@ -28,9 +28,9 @@ public class Letter {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        Letter letter1 = (Letter) o;
+        Letter targetLetter = (Letter)o;
 
-        return letter == letter1.letter;
+        return letter == targetLetter.letter;
     }
 
     @Override
