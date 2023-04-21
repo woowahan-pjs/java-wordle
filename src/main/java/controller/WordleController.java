@@ -28,14 +28,14 @@ public class WordleController {
     private String searchAnswer() {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream(FILE_NAME);
-        List<String> strings = new ArrayList<>();
+        List<String> textFileLines;
         try {
-             strings = readFromInputStream(is);
+             textFileLines = readFromInputStream(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Long index = calculateAnswerIndex(strings);
-        return strings.get(index.intValue());
+        Long index = calculateAnswerIndex(textFileLines);
+        return textFileLines.get(index.intValue());
     }
 
     private Long calculateAnswerIndex(List<String> strings) {
