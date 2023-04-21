@@ -24,12 +24,19 @@ public class WordleGames {
 
             Tile tile = wordleGame.start(answerWordles);
             tiles.addTiles(tile);
-            OutputView.printTile(tiles);
+            printTiles(tiles, count);
 
             count++;
-        } while(isContinueGame(tiles, count));
+        } while (isContinueGame(tiles, count));
 
         return tiles;
+    }
+
+    private void printTiles(Tiles tiles, int count) {
+        if (!isContinueGame(tiles, count)) {
+            OutputView.printCount(count, END_COUNT);
+        }
+        OutputView.printTile(tiles);
     }
 
     private boolean isContinueGame(Tiles tiles, int count) {

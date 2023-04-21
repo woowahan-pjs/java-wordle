@@ -20,4 +20,7 @@ public class OutputView {
         System.out.println(tiles.print());
     }
 
+    public static void printCount(int count, int endCount) {
+        System.out.println("\n" + count + "/" + endCount + "\n");
+    }
 }
