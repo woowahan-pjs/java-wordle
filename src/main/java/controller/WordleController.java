@@ -27,10 +27,10 @@ public class WordleController {
 
     private String searchAnswer() {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream(FILE_NAME);
+        InputStream inputStream = classloader.getResourceAsStream(FILE_NAME);
         List<String> textFileLines;
         try {
-             textFileLines = readFromInputStream(is);
+             textFileLines = readFromInputStream(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
