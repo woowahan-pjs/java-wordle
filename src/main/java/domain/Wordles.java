@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Wordles {
     public static final int WORD_SIZE = 5;
@@ -16,7 +18,7 @@ public class Wordles {
 
     private List<Wordle> toWords(String word) {
         validateWord(word);
-        
+
         List<Wordle> words = new ArrayList<>();
 
         for (char ch : word.toCharArray()) {
@@ -44,14 +46,9 @@ public class Wordles {
     }
 
     public List<TileColor> makeTileColorList() {
-        List<TileColor> tileColors = new ArrayList<>();
-        int size = answer.size();
-
-        for (int i = 0; i < size; i++) {
-            TileColor tileColor = makeTileColor(i);
-            tileColors.add(tileColor);
-        }
-        return tileColors;
+        return IntStream.range(0, answer.size())
+                .mapToObj(this::makeTileColor)
+                .collect(Collectors.toList());
     }
 
     private TileColor makeTileColor(int index) {
