@@ -36,21 +36,16 @@ public class AnswerExtractor {
     }
 
     private static List<String> readFromInputStream(InputStream inputStream) throws IOException {
-        List<String> txtFileLine;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            txtFileLine = extractTextLines(br);
-        }
-        return txtFileLine;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        return extractTextLines(bufferedReader);
     }
 
     private static List<String> extractTextLines(BufferedReader br) throws IOException {
         List<String> txtFileLine = new ArrayList<>();
         String line;
-
         while ((line = br.readLine()) != null) {
             txtFileLine.add(line);
         }
-
         return txtFileLine;
     }
 }
