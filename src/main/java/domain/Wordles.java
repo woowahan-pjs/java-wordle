@@ -33,13 +33,13 @@ public class Wordles {
             throw new IllegalArgumentException("word 단어의 길이는 5글자여야 합니다. 현재 길이: " + word.length());
         }
 
-        if (!isAlpha(word)) {
+        if (!isAlphabet(word)) {
             throw new IllegalArgumentException("word 단어는 영문자여야 합니다. 현재 단어: " + word);
         }
 
     }
 
-    private boolean isAlpha(String s) {
+    private boolean isAlphabet(String s) {
         return s.matches("^[a-zA-Z]*$");
     }
 

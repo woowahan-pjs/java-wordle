@@ -40,11 +40,11 @@ public class AnswerExtractor {
     }
 
     private static List<String> extractTextLines(BufferedReader br) throws IOException {
-        List<String> txtFileLine = new ArrayList<>();
+        List<String> txtFileLines = new ArrayList<>();
         String line;
         while ((line = br.readLine()) != null) {
-            txtFileLine.add(line);
+            txtFileLines.add(line);
         }
-        return txtFileLine;
+        return txtFileLines;
     }
 }
