@@ -48,24 +48,22 @@ public class Wordles {
         int size = answer.size();
 
         for (int i = 0; i < size; i++) {
-            makeTileColor(tileColors, i);
+            TileColor tileColor = makeTileColor(i);
+            tileColors.add(tileColor);
         }
         return tileColors;
     }
 
-    private List<TileColor> makeTileColor(List<TileColor> tileColors, int i) {
-        if (isSameWordIndex(i)) {
-            tileColors.add(TileColor.GREEN);
-            return tileColors;
+    private TileColor makeTileColor(int index) {
+        if (isSameWordIndex(index)) {
+            return TileColor.GREEN;
         }
 
-        if (isSameWordDifferentIndex(i)) {
-            tileColors.add(TileColor.YELLOW);
-            return tileColors;
+        if (isSameWordDifferentIndex(index)) {
+            return TileColor.YELLOW;
         }
 
-        tileColors.add(TileColor.WHITE);
-        return tileColors;
+        return TileColor.WHITE;
     }
 
     private boolean isSameWordIndex(int i) {
