@@ -34,15 +34,15 @@ public class WordleController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Long index = calculateAnswerIndex(textFileLines);
-        return textFileLines.get(index.intValue());
+        Integer index = calculateAnswerIndex(textFileLines);
+        return textFileLines.get(index);
     }
 
-    private Long calculateAnswerIndex(List<String> strings) {
+    private Integer calculateAnswerIndex(List<String> strings) {
         LocalDate today = LocalDate.now();
         LocalDate date = LocalDate.of(2021, 6, 19);
         long diffDays = Math.abs(ChronoUnit.DAYS.between(today, date));
-        return diffDays % strings.size();
+        return Long.valueOf(diffDays % strings.size()).intValue();
     }
 
     private List<String> readFromInputStream(InputStream inputStream) throws IOException {
