@@ -18,14 +18,13 @@ public class AnswerExtractor {
     private static String searchAnswer(String fileName) {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classloader.getResourceAsStream(fileName);
-        List<String> textFileLines;
         try {
-            textFileLines = readFromInputStream(inputStream);
+            List<String> textFileLines = readFromInputStream(inputStream);
+            Integer index = calculateAnswerIndex(textFileLines);
+            return textFileLines.get(index);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Integer index = calculateAnswerIndex(textFileLines);
-        return textFileLines.get(index);
     }
 
     private static Integer calculateAnswerIndex(List<String> strings) {
