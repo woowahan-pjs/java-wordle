@@ -1,5 +1,17 @@
 # 미션 - 워들
 
+## 👥 페어 멤버
+| ALEX |HOLDEN  |
+| --- | --- |
+[<img src="https://avatars.githubusercontent.com/u/59248326?v=4" width="100">](https://github.com/giibeom)| [<img src="https://avatars.githubusercontent.com/u/46865281?v=4" width="100">](https://github.com/seung-00) |
+
+* [Alex 님의 repository](https://github.com/giibeom/study-java-wordle) 에서 페어 프로그래밍을 진행했습니다.
+  * 이 repository 는 해당 repository 를 미러링했습니다.
+* 진행 방식은 해당 [repository wiki](https://github.com/giibeom/study-java-wordle/wiki) 에 정리되어 있습니다. 
+
+
+---
+
 ## 🔍 진행 방식
 
 - 미션은 **과제 진행 요구 사항**, **기능 요구 사항**, **프로그래밍 요구 사항** 세 가지로 구성되어 있다.
