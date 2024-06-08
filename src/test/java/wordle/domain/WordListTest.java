@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WordListTest {
 
-
     @Test
     void 주어진_단어가_wordList_안에_있으면_true를_반환한다() {
         // given
@@ -52,5 +51,11 @@ public class WordListTest {
         WordList wordList = new WordList(List.of());
 
         assertThrows(NoSuchElementException.class, () -> wordList.select(List::getFirst));
+    }
+
+    @Test
+    void 주어진_단어가_5글자가_아니라면_예외를_발생한다() {
+        // given when then
+        assertThrowsExactly(RuntimeException.class, () -> new Word("abcdef"));
     }
 }
