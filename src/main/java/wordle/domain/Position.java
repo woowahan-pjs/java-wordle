@@ -26,4 +26,8 @@ public class Position {
     public int hashCode() {
         return Objects.hash(position);
     }
+
+    public boolean notEquals(Position position) {
+        return !equals(position);
+    }
 }
