@@ -12,4 +12,8 @@ public class WordList {
     public boolean contains(Word word) {
         return wordList.contains(word);
     }
+
+    public Word select(final Selector selector) {
+        return selector.select(wordList);
+    }
 }

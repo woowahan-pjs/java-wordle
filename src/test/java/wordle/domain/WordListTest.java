@@ -41,7 +41,7 @@ public class WordListTest {
         Word word = new Word("cigar");
 
         WordList wordList = new WordList(List.of(word));
-        Word actual = wordList.select(() -> word);
+        Word actual = wordList.select(List::getFirst);
 
         assertEquals(actual, word);
     }
