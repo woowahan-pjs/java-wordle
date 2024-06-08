@@ -40,6 +40,60 @@
 | 시작     | Start          | 플레이어가 워들을 시작하는 행위                             |
 | 종료     | End            | 워들이 종료되는 행위(라운드가 전부 끝났거나, 그 전에 정답을 맞추면 종료된다)  |
 
+## 모델링
+### 클래스 다이어그램
+```mermaid
+---
+title: Wordle
+---
+classDiagram
+    class Word {
+        -List<Letter> letters
+        +compare(Word word) Results
+        -compare(Letter letter) Result 
+    }
+    class Letter{
+        -char alphabet
+        -Position position
+        +equals(Letter letter) boolean
+        +isSameAlphabetDifferentPosition(Letter letter) boolean 
+    }
+    class Results {
+        -Result[] results
+        +add(Result result) void
+        +isCheckedPosition(Position position) boolean
+    }
+    class Result {
+        -Tile tile
+        -Position poistion
+    }
+    class IWordComparable {
+        +compare(Word word) Results 
+    }
+    class ETile {
+        -TileType type
+    }
+    class AnswerFormula{
+        -Date baseDate
+        +calculate()
+    }
+    class Wordle {
+        -WordBook wordBook
+        -Results results
+        -Round round
+        +start()
+    }
+    class WordBook {
+        -List<String> wordBook
+        +pick(AnswerFormula formula) Word
+        +exist(Word inputWord) boolean
+    }
+    class Round {
+        -final int ROUND = 6;
+        -int curruntRound;
+        +isEnd() boolean
+    }
+```
 
 ## 🚀 세부 요구 사항
 - 6x5 격자를 통해서 5글자 단어를 6번 만에 추측한다.
