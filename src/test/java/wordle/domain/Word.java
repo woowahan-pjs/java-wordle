@@ -13,7 +13,14 @@ public class Word {
     }
 
     private static void validate(final String word) {
-        if(word.trim().length() != WORD_SIZE) {
+        if (word.trim().length() != WORD_SIZE) {
+            throw new RuntimeException();
+        }
+        boolean result = word.chars()
+                .mapToObj(c -> (char) c)
+                .allMatch(c -> c >= 'a' && c <= 'z');
+
+        if (!result) {
             throw new RuntimeException();
         }
     }
