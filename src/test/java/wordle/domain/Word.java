@@ -3,10 +3,19 @@ package wordle.domain;
 import java.util.Objects;
 
 public class Word {
+    public static final int WORD_SIZE = 5;
+
     private String word;
 
     public Word(String word) {
+        validate(word);
         this.word = word;
+    }
+
+    private static void validate(final String word) {
+        if(word.trim().length() != WORD_SIZE) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
