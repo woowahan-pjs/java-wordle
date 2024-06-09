@@ -6,18 +6,23 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class AnswerProvider {
 
     private static final String WORDS_FILE_PATH = "words.txt";
 
+    private AnswerProvider() {
+        
+    }
+
     public static String todayAnswer() {
         try {
             URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
             List<String> strings = Files.readAllLines(Paths.get(resource.toURI()));
-            int index = getTodayIndex();
-            return strings.get(index);
+            int dayDiff = getTodayIndex();
+            return strings.get(dayDiff % strings.size());
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
@@ -26,9 +31,9 @@ public class AnswerProvider {
     }
 
     private static int getTodayIndex() {
-        // TODO ((현재날짜 - 2021/6/19) % 배열의 크기) 계산
-        LocalDate today = LocalDate.now();
         LocalDate reference = LocalDate.of(2021, 6, 19);
-        return 0;
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(reference, today);
+        return period.getDays();
     }
 }
