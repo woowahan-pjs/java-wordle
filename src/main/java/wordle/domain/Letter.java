@@ -32,4 +32,8 @@ public class Letter {
     public boolean isSameAlphabet(Letter letter) {
         return letter.alphabet == this.alphabet;
     }
+
+    public Position getPosition() {
+        return position;
+    }
 }

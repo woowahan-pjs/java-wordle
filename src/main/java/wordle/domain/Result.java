@@ -7,8 +7,12 @@ public class Result {
     private final Position position;
 
     public Result(Tile tile, int position) {
+        this(tile, new Position(position));
+    }
+
+    public Result(Tile tile, Position position) {
         this.tile = tile;
-        this.position = new Position(position);
+        this.position = position;
     }
 
     @Override
