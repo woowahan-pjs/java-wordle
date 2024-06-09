@@ -9,8 +9,24 @@ public class Round {
     private final Map<Tile, Integer> result;
 
     public Round(String input) {
+        validateInput(input);
         this.input = input;
         this.result = new EnumMap<>(Tile.class);
+    }
+
+    private void validateInput(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException();
+        }
+        if (input.length() != 5) {
+            throw new IllegalArgumentException();
+        }
+        char[] inputChars = input.toLowerCase().toCharArray();
+        for (char ch : inputChars) {
+            if (ch < 'a' || ch > 'z') {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     public Map<Tile, Integer> roundResult(Answer answer) {
