@@ -38,6 +38,7 @@ public class WordTest {
                 ResultFixture.createGreenResult(3),
                 ResultFixture.createGreenResult(4));
     }
+
     @Test
     void 글자는_같지만_위치가_전부_다른_Word를_비교하면_노란_결과들을_반환한다(){
         Word baseWord = new Word("abcde");
@@ -49,6 +50,21 @@ public class WordTest {
                 ResultFixture.createYellowResult(0),
                 ResultFixture.createYellowResult(1),
                 ResultFixture.createYellowResult(2),
+                ResultFixture.createYellowResult(3),
+                ResultFixture.createYellowResult(4));
+    }
+
+    @Test
+    void 글자와_위치가_일부가_같은_Word를_비교하면_초록_노란_결과들을_반환한다(){
+        Word baseWord = new Word("abcde");
+        Word targetWord = new Word("edcba");
+
+        Results results = baseWord.compare(targetWord);
+
+        assertThat(results).containsExactly(
+                ResultFixture.createYellowResult(0),
+                ResultFixture.createYellowResult(1),
+                ResultFixture.createGreenResult(2),
                 ResultFixture.createYellowResult(3),
                 ResultFixture.createYellowResult(4));
     }
