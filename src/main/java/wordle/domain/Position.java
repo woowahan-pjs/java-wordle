@@ -2,7 +2,7 @@ package wordle.domain;
 
 import java.util.Objects;
 
-public class Position {
+public class Position implements Comparable<Position> {
 
     private final int position;
 
@@ -29,5 +29,9 @@ public class Position {
 
     public boolean notEquals(Position position) {
         return !equals(position);
+    }
+
+    public int compareTo(Position position) {
+        return Integer.compare(this.position, position.position);
     }
 }

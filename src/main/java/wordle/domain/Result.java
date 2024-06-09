@@ -2,7 +2,7 @@ package wordle.domain;
 
 import java.util.Objects;
 
-public class Result {
+public class Result implements Comparable<Result> {
     private final Tile tile;
     private final Position position;
 
@@ -30,5 +30,22 @@ public class Result {
     @Override
     public int hashCode() {
         return Objects.hash(tile, position);
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "tile=" + tile +
+                ", position=" + position +
+                '}';
+    }
+
+    public boolean isSamePosition(Position position) {
+        return this.position.equals(position);
+    }
+
+    @Override
+    public int compareTo(Result o) {
+        return position.compareTo(o.position);
     }
 }

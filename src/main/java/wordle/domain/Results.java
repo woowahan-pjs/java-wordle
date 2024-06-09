@@ -1,14 +1,15 @@
 package wordle.domain;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Results implements Iterable<Result> {
 
-    private final List<Result> results;
+    private final SortedSet<Result> results;
+
     public Results() {
-        this.results = new ArrayList<>();
+        this.results = new TreeSet<>();
     }
 
     @Override
@@ -18,5 +19,15 @@ public class Results implements Iterable<Result> {
 
     public void add(Result result) {
         results.add(result);
+    }
+
+    public boolean isCheckedPosition(Position position) {
+        for (Result result : results) {
+            if (result.isSamePosition(position)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

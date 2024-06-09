@@ -1,11 +1,12 @@
 package wordle.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import wordle.exception.WordInputNotValidException;
 
-public class Word {
+public class Word implements Iterable<Letter> {
 
     public static final int WORD_LENGTH = 5;
     private List<Letter> letters;
@@ -22,31 +23,49 @@ public class Word {
         }
     }
 
-    public Results compare(Word targetWord) {
-        Result[] results = new Result[WORD_LENGTH];
-        for (int i = 0; i < WORD_LENGTH; i++) {
-            Letter letter = letters.get(i);
-            results[i] = targetWord.compare(letter);
-        }
-        return new Results(results);
-    }
-
-    private Result compare(Letter targetLetter){
-        for (int i = 0; i < this.letters.size(); i++) {
-            Letter letter = this.letters.get(i);
-            if(letter.equals(targetLetter)){
-                return new Result(Tile.GREEN, targetLetter.getPosition());
+    public Results compare(Word inputWord) {
+        Results results = new Results();
+        for (Letter letter : inputWord) {
+            Result green = findGreen(letter);
+            if (green != null) {
+                results.add(green);
             }
         }
 
+        for (Letter letter : inputWord) {
+            if (results.isCheckedPosition(letter.getPosition())) {
+                continue;
+            }
+
+            Result yellow = findYellow(letter);
+            if (yellow != null) {
+                results.add(yellow);
+            } else {
+                results.add(new Result(Tile.GRAY, letter.getPosition()));
+            }
+        }
+
+        return results;
+    }
+
+    private Result findYellow(Letter targetLetter) {
         for (int i = 0; i < this.letters.size(); i++) {
             Letter letter = this.letters.get(i);
-            if(letter.isSameAlphabet(targetLetter)){
+            if (letter.isSameAlphabet(targetLetter)) {
                 return new Result(Tile.YELLOW, targetLetter.getPosition());
             }
         }
+        return null;
+    }
 
-        return new Result(Tile.GRAY, targetLetter.getPosition());
+    private Result findGreen(Letter targetLetter) {
+        for (int i = 0; i < this.letters.size(); i++) {
+            Letter letter = this.letters.get(i);
+            if (letter.equals(targetLetter)) {
+                return new Result(Tile.GREEN, targetLetter.getPosition());
+            }
+        }
+        return null;
     }
 
     @Override
@@ -64,5 +83,10 @@ public class Word {
     @Override
     public int hashCode() {
         return Objects.hash(letters);
+    }
+
+    @Override
+    public Iterator<Letter> iterator() {
+        return this.letters.iterator();
     }
 }
