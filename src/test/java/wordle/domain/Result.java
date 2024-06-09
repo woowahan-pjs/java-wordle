@@ -1,7 +1,10 @@
 package wordle.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class Result {
     private List<ResultType> resultTypes;
@@ -12,6 +15,10 @@ public class Result {
 
     public boolean allMatched() {
         return resultTypes.stream().allMatch(ResultType.MATCHED::equals);
+    }
+
+    public List<ResultType> getResult() {
+        return Collections.unmodifiableList(resultTypes);
     }
 
     @Override
