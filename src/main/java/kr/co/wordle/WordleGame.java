@@ -1,7 +1,5 @@
 package kr.co.wordle;
 
-import java.util.Map;
-
 public class WordleGame {
 
     private static final int MAX_ROUND = 6;
@@ -19,13 +17,13 @@ public class WordleGame {
         while (currentRound <= MAX_ROUND) {
             String input = console.inputView();
             Round round = new Round(input);
-            Map<Tile, Integer> result = round.roundResult(answer);
+            RoundResult result = round.roundResult(answer);
+            console.printResult(result);
 
-            if (result.getOrDefault(Tile.GREEN, 0) == 5) {
-                System.out.printf("%d/%d", currentRound, MAX_ROUND);
+            if (result.isAllGreen()) {
+                console.printRound(currentRound, MAX_ROUND);
                 break;
             }
-            System.out.println("다시");
 
             currentRound++;
         }

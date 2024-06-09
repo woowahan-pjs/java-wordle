@@ -1,17 +1,14 @@
 package kr.co.wordle;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 public class Round {
 
     private final String input;
-    private final Map<Tile, Integer> result;
+    private final RoundResult roundResult;
 
     public Round(String input) {
         validateInput(input);
         this.input = input;
-        this.result = new EnumMap<>(Tile.class);
+        this.roundResult = new RoundResult();
     }
 
     private void validateInput(String input) {
@@ -29,13 +26,14 @@ public class Round {
         }
     }
 
-    public Map<Tile, Integer> roundResult(Answer answer) {
+    public RoundResult roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
         for (int i = 0; i < inputChars.length; i++) {
             Tile key = getTile(answer, i, inputChars[i]);
-            result.compute(key, (k, v) -> (v == null) ? 1 : v + 1);
+            roundResult.update(key);
+
         }
-        return result;
+        return roundResult;
     }
 
     public Tile getTile(Answer answer, int index, char target) {

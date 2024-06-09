@@ -13,4 +13,12 @@ public class Console {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
+
+    public void printResult(RoundResult roundResult) {
+        System.out.println(roundResult);
+    }
+
+    public void printRound(int currentRound, int maxRound) {
+        System.out.printf("%d/%d", currentRound, maxRound);
+    }
 }
