@@ -12,6 +12,10 @@ public class Word {
         this.word = word;
     }
 
+    public String getWord() {
+        return word;
+    }
+
     private static void validate(final String word) {
         if (word.trim().length() != WORD_SIZE) {
             throw new RuntimeException();
