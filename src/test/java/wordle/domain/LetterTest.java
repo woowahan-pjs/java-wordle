@@ -32,9 +32,9 @@ public class LetterTest {
     }
 
     @Test
-    void 알파벳은_같지만_포지션이_다른경우를_확인할_수_있다() {
+    void 알파벳은_같은지_확인할_수_있다() {
         Letter letter = new Letter('a', 0);
 
-        assertThat(letter.isSameAlphabetDifferentPosition(new Letter('a', 1))).isTrue();
+        assertThat(letter.isSameAlphabet(new Letter('a', 1))).isTrue();
     }
 }

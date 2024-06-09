@@ -29,10 +29,7 @@ public class Letter {
         return Objects.hash(alphabet, position);
     }
 
-    public boolean isSameAlphabetDifferentPosition(Letter letter) {
-        if (letter.alphabet != this.alphabet) {
-            return false;
-        }
-        return letter.position.notEquals(this.position);
+    public boolean isSameAlphabet(Letter letter) {
+        return letter.alphabet == this.alphabet;
     }
 }
