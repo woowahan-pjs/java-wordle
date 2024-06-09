@@ -10,6 +10,10 @@ public class Result {
         this.resultTypes = resultTypes;
     }
 
+    public boolean allMatched() {
+        return resultTypes.stream().allMatch(ResultType.MATCHED::equals);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
