@@ -9,9 +9,9 @@ class ResultsTest {
 
     @Test
     void Results_생성테스트(){
-        Result[] results = ResultFixture.createGreenResults(5);
+        Results results = ResultFixture.createGreenResults(5);
 
-        assertThat(new Results(results)).containsExactly(
+        assertThat(results).containsExactly(
                 ResultFixture.createGreenResult(0),
                 ResultFixture.createGreenResult(1),
                 ResultFixture.createGreenResult(2),
