@@ -39,6 +39,13 @@ public class Word {
             }
         }
 
+        for (int i = 0; i < this.letters.size(); i++) {
+            Letter letter = this.letters.get(i);
+            if(letter.isSameAlphabet(targetLetter)){
+                return new Result(Tile.YELLOW, targetLetter.getPosition());
+            }
+        }
+
         return null;
     }
 
