@@ -24,20 +24,18 @@ public class Word implements Iterable<Letter> {
     }
 
     public Results compare(Word inputWord) {
+        boolean[] visit = new boolean[WORD_LENGTH];
+
         Results results = new Results();
         for (Letter letter : inputWord) {
-            Result green = findGreen(letter);
+            Result green = findGreen(letter, visit);
             if (green != null) {
                 results.add(green);
             }
         }
 
         for (Letter letter : inputWord) {
-            if (results.isCheckedPosition(letter.getPosition())) {
-                continue;
-            }
-
-            Result yellow = findYellow(letter);
+            Result yellow = findYellow(letter, visit);
             if (yellow != null) {
                 results.add(yellow);
             } else {
@@ -48,20 +46,25 @@ public class Word implements Iterable<Letter> {
         return results;
     }
 
-    private Result findYellow(Letter targetLetter) {
+    private Result findYellow(Letter targetLetter, boolean[] visit) {
         for (int i = 0; i < this.letters.size(); i++) {
             Letter letter = this.letters.get(i);
+            if(visit[i]){
+                continue;
+            }
             if (letter.isSameAlphabet(targetLetter)) {
+                visit[i] = true;
                 return new Result(Tile.YELLOW, targetLetter.getPosition());
             }
         }
         return null;
     }
 
-    private Result findGreen(Letter targetLetter) {
+    private Result findGreen(Letter targetLetter, boolean[] visit) {
         for (int i = 0; i < this.letters.size(); i++) {
             Letter letter = this.letters.get(i);
             if (letter.equals(targetLetter)) {
+                visit[i] = true;
                 return new Result(Tile.GREEN, targetLetter.getPosition());
             }
         }

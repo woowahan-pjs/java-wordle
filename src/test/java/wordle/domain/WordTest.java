@@ -83,4 +83,34 @@ public class WordTest {
                 ResultFixture.createGrayResult(3),
                 ResultFixture.createGrayResult(4));
     }
+
+    @Test
+    void 글자와_위치가_전부_같은게_두개_위치만_다른게_한개_전부_다른게_두개인_Word를_비교하면_결과들을_반환한다(){
+        Word answerWord = new Word("abcde"); // 정답
+        Word inputWord = new Word("abejk"); // input
+
+        Results results = answerWord.compare(inputWord);
+
+        assertThat(results).containsExactly(
+                ResultFixture.createGreenResult(0),
+                ResultFixture.createGreenResult(1),
+                ResultFixture.createYellowResult(2),
+                ResultFixture.createGrayResult(3),
+                ResultFixture.createGrayResult(4));
+    }
+
+    @Test
+    void 같은_문자가_2개_입력되었을_때_해당_문자가_정답에_하나만_존재하지만_위치가_틀린_경우_첫번째_문자만_노란색으로_반환된다(){
+        Word answerWord = new Word("lurid"); // 정답
+        Word inputWord = new Word("hello"); // input
+
+        Results results = answerWord.compare(inputWord);
+
+        assertThat(results).containsExactly(
+                ResultFixture.createGrayResult(0),
+                ResultFixture.createGrayResult(1),
+                ResultFixture.createYellowResult(2),
+                ResultFixture.createGrayResult(3),
+                ResultFixture.createGrayResult(4));
+    }
 }
