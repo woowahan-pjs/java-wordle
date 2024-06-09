@@ -68,4 +68,19 @@ public class WordTest {
                 ResultFixture.createYellowResult(3),
                 ResultFixture.createYellowResult(4));
     }
+
+    @Test
+    void 글자와_위치가_전부_다른_Word를_비교하면_회색_결과들을_반환한다(){
+        Word baseWord = new Word("abcde");
+        Word targetWord = new Word("fghij");
+
+        Results results = baseWord.compare(targetWord);
+
+        assertThat(results).containsExactly(
+                ResultFixture.createGrayResult(0),
+                ResultFixture.createGrayResult(1),
+                ResultFixture.createGrayResult(2),
+                ResultFixture.createGrayResult(3),
+                ResultFixture.createGrayResult(4));
+    }
 }

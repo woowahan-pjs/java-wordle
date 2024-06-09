@@ -19,4 +19,8 @@ public class ResultFixture {
     public static Result createYellowResult(int position) {
         return new Result(Tile.YELLOW, position);
     }
+
+    public static Result createGrayResult(int position) {
+        return new Result(Tile.GRAY, position);
+    }
 }

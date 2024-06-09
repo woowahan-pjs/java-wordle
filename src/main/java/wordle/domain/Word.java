@@ -46,7 +46,7 @@ public class Word {
             }
         }
 
-        return null;
+        return new Result(Tile.GRAY, targetLetter.getPosition());
     }
 
     @Override
