@@ -1,19 +1,16 @@
 package kr.co.wordle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WordleGame {
 
     private static final int MAX_ROUND = 6;
     private final Console console;
     private final Answer answer;
-    private final List<RoundResult> roundResults;
+    private final StringBuilder roundResults;
 
     public WordleGame() {
         this.console = new Console();
         this.answer = new Answer();
-        this.roundResults = new ArrayList<>();
+        this.roundResults = new StringBuilder();
     }
 
     public void start() {
@@ -22,16 +19,16 @@ public class WordleGame {
         while (currentRound <= MAX_ROUND) {
             String input = console.inputView();
             Round round = new Round(input);
-            RoundResult roundResult = round.roundResult(answer);
-            roundResults.add(roundResult);
+            roundResults.append(round.roundResult(answer)).append("\n");
 
-            if (roundResult.isAllGreen()) {
+            if (round.isSuccess()) {
                 console.printRound(currentRound, MAX_ROUND);
+                console.printResult(roundResults);
                 break;
             }
+
             console.printResult(roundResults);
             currentRound++;
         }
-
     }
 }

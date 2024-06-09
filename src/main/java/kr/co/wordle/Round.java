@@ -26,14 +26,18 @@ public class Round {
         }
     }
 
-    public RoundResult roundResult(Answer answer) {
+    public boolean isSuccess() {
+        return roundResult.isAllGreen();
+    }
+
+    public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
         for (int i = 0; i < inputChars.length; i++) {
             Tile key = getTile(answer, i, inputChars[i]);
             roundResult.update(key);
 
         }
-        return roundResult;
+        return roundResult.toString();
     }
 
     public Tile getTile(Answer answer, int index, char target) {

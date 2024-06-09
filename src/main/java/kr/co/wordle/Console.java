@@ -1,6 +1,5 @@
 package kr.co.wordle;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -15,13 +14,11 @@ public class Console {
         return sc.nextLine();
     }
 
-    public void printResult(List<RoundResult> roundResults) {
-        for (RoundResult result : roundResults) {
-            System.out.println(result);
-        }
+    public void printResult(StringBuilder roundResults) {
+        System.out.println(roundResults);
     }
 
     public void printRound(int currentRound, int maxRound) {
-        System.out.printf("%d/%d", currentRound, maxRound);
+        System.out.printf("%d/%d%n", currentRound, maxRound);
     }
 }
