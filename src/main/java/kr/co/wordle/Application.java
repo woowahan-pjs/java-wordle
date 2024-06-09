@@ -4,6 +4,8 @@ public class Application {
     public static void main(String[] args) {
         Console console = new Console();
         console.init();
-        console.inputView();
+        String input = console.inputView();
+        Answer answer = new Answer();
+        answer.roundResult(input);
     }
 }
