@@ -3,6 +3,9 @@ package wordle;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        IOView ioView = new IOView();
+        ioView.printInitGameMessage();
+        ioView.printInputAnswerMessage();
+        String input = ioView.inputAnswer();
     }
 }
