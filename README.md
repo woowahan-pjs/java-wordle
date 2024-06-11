@@ -87,3 +87,5 @@ spill
 - 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(System.out, System.in, Scanner) 로직은 제외한다.
     - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.
     - 힌트: MVC 패턴 기반으로 구현한 후, View와 Controller를 제외한 Model에 대한 단위 테스트 추가에 집중한다.
+
+
