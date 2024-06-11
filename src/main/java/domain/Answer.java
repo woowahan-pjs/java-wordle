@@ -20,11 +20,11 @@ public class Answer {
         this.value = availableWords.get(index);
     }
     Boolean exists(char inputChar) {
-        return true;
+        return value.indexOf(inputChar) != -1;
     }
 
     Boolean isCorrect(int index, char inputChar) {
-        return true;
+        return value.indexOf(inputChar) == index;
     }
 
     @Override
