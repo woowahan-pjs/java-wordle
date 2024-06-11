@@ -1,15 +1,10 @@
 package wordle;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Wordle {
 
-    private static final String GRAY_TILE = "⬜";
-    private static final String YELLOW_TILE = "\uD83D\uDFE8";
-    private static final String GREEN_TILE = "\uD83D\uDFE9";
     private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
 
     private final IOView ioView;
@@ -67,57 +62,41 @@ public class Wordle {
         }
     }
 
-    /**
-     * 단어 비교 기능
-     * - 각 자리의 단어가 같은지 체크하는 기능
-     * - 자리가 같지 않아도 단어가 포함되는지 체크하는 기능 (개수도 체크가 되어야 한다.)
-     * - 우선순위는 1번이므로 하나씩 덮어쓰면 된다
-     */
-    private static String compareLetter(String answer, String input) {
+    private String compareLetter(String answer, String input) {
         char[] answerArr = answer.toCharArray();
         char[] inputArr = input.toCharArray();
-        String[] result = new String[5];
+        Result result = checkContainsValue(answerArr, inputArr);
 
-        checkContainsValue(answerArr, inputArr, result);
-        return String.join("", result);
+        return result.toString();
     }
 
-    /**
-     * 포함하지 않으면 회색
-     * 포함하면 노란색(그런데 개수도 같아야 함)
-     */
-    private static void checkContainsValue(char[] answerArr, char[] inputArr, String[] result) {
-        Map<Character, Integer> answerCharacterCountMap = createCharacterCountMap(answerArr);
+    private Result checkContainsValue(char[] answerArr, char[] inputArr) {
+        Answer answer = new Answer(answerArr);
+        Result result = new Result(5);
 
-        // 초록색 먼저하고 선차감
         for (int i = 0; i < 5; i++) {
             char input = inputArr[i];
-            if (answerArr[i] == input) {
-                answerCharacterCountMap.put(input, answerCharacterCountMap.get(input) - 1);
-                result[i] = GREEN_TILE;
+            if (answer.equalsPositionAndCharacter(i, input)) {
+                answer.decreaseCount(input);
+
+                result.addGreenTile(i);
             }
         }
 
-        for (int i = 0; i < 5; i++) {// ㅇㅣㄴ덱스
-            char input = inputArr[i];  // 입력한 값
-            if (answerCharacterCountMap.containsKey(input) && answerCharacterCountMap.get(input) > 0) {
-                answerCharacterCountMap.put(input, answerCharacterCountMap.get(input) - 1);  // 개수 차감
-                result[i] = YELLOW_TILE;
-            } else if (answerCharacterCountMap.containsKey(input) && answerCharacterCountMap.get(input) <= 0) {  // 개수가 없을떄
-                if (result[i] == null || !result[i].equals(GREEN_TILE)) {
-                    result[i] = GRAY_TILE;
+        for (int i = 0; i < 5; i++) {
+            char input = inputArr[i];
+            if (answer.canDecreaseCount(input)) {
+                answer.decreaseCount(input);
+                result.addYellowTile(i);
+            } else if (answer.canNotDecreaseCount(input)) {
+                if (result.isNullOrNotGreenTile(i)) {
+                    result.addGrayTile(i);
                 }
             } else {
-                result[i] = GRAY_TILE;
+                result.addGrayTile(i);
             }
         }
-    }
 
-    private static Map<Character, Integer> createCharacterCountMap(char[] answerArr) {
-        Map<Character, Integer> characterCountMap = new HashMap<>();
-        for (char answerChar : answerArr) {
-            characterCountMap.put(answerChar, characterCountMap.getOrDefault(answerChar, 0) + 1);
-        }
-        return characterCountMap;
+        return result;
     }
 }
