@@ -1,6 +1,7 @@
 package wordle;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Wordle {
@@ -21,7 +22,8 @@ public class Wordle {
         List<String> wordList = wordsReader.read();
         Words words = new Words(wordList, LocalDate.of(2021, 6, 19));
         LocalDate now = LocalDate.now();
-        String answer = words.getWordOfDay(now);
+        String wordOfDay = words.getWordOfDay(now);
+        Answer answer = new Answer(wordOfDay);
 
         TileHistory tileHistory = new TileHistory();
         int tryCount = 0;
@@ -62,38 +64,38 @@ public class Wordle {
         }
     }
 
-    private String compareLetter(String answer, String input) {
-        char[] answerArr = answer.toCharArray();
+    private String compareLetter(Answer answer, String input) {
+        List<Letter> inputLetters = new ArrayList<>();
         char[] inputArr = input.toCharArray();
-        Result result = checkContainsValue(answerArr, inputArr);
+        for (int i = 0; i < inputArr.length; i++) {
+            inputLetters.add(new Letter(i, inputArr[i]));
+        }
+
+        Result result = checkContainsValue(answer, inputLetters);
 
         return result.toString();
     }
 
-    private Result checkContainsValue(char[] answerArr, char[] inputArr) {
-        Answer answer = new Answer(answerArr);
+    private Result checkContainsValue(Answer answer, List<Letter> inputLetters) {
         Result result = new Result(5);
 
-        for (int i = 0; i < 5; i++) {
-            char input = inputArr[i];
-            if (answer.equalsPositionAndCharacter(i, input)) {
-                answer.decreaseCount(input);
-
-                result.addGreenTile(i);
+        for (Letter inputLetter : inputLetters) {
+            if (answer.equalsPositionAndValue(inputLetter)) {
+                answer.decreaseCount(inputLetter);
+                result.addGreenTile(inputLetter.getPosition());
             }
         }
 
-        for (int i = 0; i < 5; i++) {
-            char input = inputArr[i];
-            if (answer.canDecreaseCount(input)) {
-                answer.decreaseCount(input);
-                result.addYellowTile(i);
-            } else if (answer.canNotDecreaseCount(input)) {
-                if (result.isNullOrNotGreenTile(i)) {
-                    result.addGrayTile(i);
+        for (Letter inputLetter : inputLetters) {
+            if (answer.canDecreaseCount(inputLetter)) {
+                answer.decreaseCount(inputLetter);
+                result.addYellowTile(inputLetter.getPosition());
+            } else if (answer.canNotDecreaseCount(inputLetter)) {
+                if (result.isNullOrNotGreenTile(inputLetter.getPosition())) {
+                    result.addGrayTile(inputLetter.getPosition());
                 }
             } else {
-                result.addGrayTile(i);
+                result.addGrayTile(inputLetter.getPosition());
             }
         }
 
