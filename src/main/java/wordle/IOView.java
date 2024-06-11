@@ -21,4 +21,24 @@ public class IOView {
     public String inputAnswer() {
         return scanner.nextLine();
     }
+
+    public void printHistories(TileHistory tileHistory) {
+        System.out.println(tileHistory);
+    }
+
+    public void printTryCount(int tryCount, int totalCount) {
+        System.out.println(tryCount + "/" + totalCount);
+    }
+
+    public void printTryCount(String tryCount, int totalCount) {
+        System.out.println(tryCount + "/" + totalCount);
+    }
+
+    public void printNotEnoughLettersMessage() {
+        System.out.println("Not enough letters!");
+    }
+
+    public void printNotInWordListMessage() {
+        System.out.println("Not in word list!");
+    }
 }

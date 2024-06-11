@@ -3,9 +3,7 @@ package wordle;
 public class Main {
 
     public static void main(String[] args) {
-        IOView ioView = new IOView();
-        ioView.printInitGameMessage();
-        ioView.printInputAnswerMessage();
-        String input = ioView.inputAnswer();
+        Wordle wordle = new Wordle(new IOView(), new WordsReader());
+        wordle.start();
     }
 }

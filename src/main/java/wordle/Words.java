@@ -19,4 +19,8 @@ public class Words {
         int wordIndex = (int) (nowEpochDay - cutoffEpochDay) % words.size();
         return words.get(wordIndex);
     }
+
+    public boolean notContains(String input) {
+        return !words.contains(input);
+    }
 }
