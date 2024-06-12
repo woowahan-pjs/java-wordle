@@ -4,25 +4,26 @@ import wordle.domain.*;
 import wordle.view.InputView;
 import wordle.view.OutputView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Game {
     private static final int MAX_ATTEMPT = 6;
 
-    private InputView inputView;
-    private OutputView outputView;
-    private WordListReader wordListReader;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final WordListReader wordListReader;
 
-    public Game(InputView inputView, OutputView outputView, WordListReader wordListReader) {
+    public Game(final InputView inputView,
+                final OutputView outputView,
+                final WordListReader wordListReader) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.wordListReader = wordListReader;
     }
 
-    public void start() {
+    public void start(final Selector selector) {
         final WordList wordList = wordListReader.read();
-        final Answer answer = new Answer(wordList.select(new TimeBaseAnswerSelector(LocalDate.now())));
+        final Answer answer = new Answer(wordList.select(selector));
         outputView.welcome(MAX_ATTEMPT);
         Results results = new Results(new ArrayList<>(), MAX_ATTEMPT);
         for (int i = 0; i < MAX_ATTEMPT; i++) {
