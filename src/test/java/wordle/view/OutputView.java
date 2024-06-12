@@ -9,7 +9,7 @@ public interface OutputView {
 
     void wrongWord();
 
-    void showResults(Results results, final int maxAttempt);
+    void showResults(final Results results, final int attempt, final int maxAttempt);
 
     void insertedWord(String wordString);
 }

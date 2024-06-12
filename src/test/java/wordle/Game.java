@@ -5,6 +5,7 @@ import wordle.view.InputView;
 import wordle.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class Game {
     private static final int MAX_ATTEMPT = 6;
@@ -25,16 +26,22 @@ public class Game {
         final WordList wordList = wordListReader.read();
         final Answer answer = new Answer(wordList.select(selector));
         outputView.welcome(MAX_ATTEMPT);
+        execute(wordList, answer);
+    }
+
+    private void execute(final WordList wordList, final Answer answer) {
         Results results = new Results(new ArrayList<>(), MAX_ATTEMPT);
-        for (int i = 0; i < MAX_ATTEMPT; i++) {
-            final Guess guess = inputWord(wordList);
-            final Result result = answer.examineResult(guess);
-            results.add(result);
-            outputView.showResults(results, MAX_ATTEMPT);
-            if (results.isFinished()) {
-                break;
-            }
-        }
+        IntStream.range(0, MAX_ATTEMPT)
+                .mapToObj(i -> i)
+                .takeWhile(attempt -> !results.isFinished(attempt))
+                .forEach(attempt -> examine(wordList, answer, attempt, results));
+    }
+
+    private void examine(final WordList wordList, final Answer answer, final Integer attempt, final Results results) {
+        final Guess guess = inputWord(wordList);
+        final Result result = answer.examineResult(guess);
+        results.add(result);
+        outputView.showResults(results, attempt, MAX_ATTEMPT);
     }
 
     private Guess inputWord(WordList wordList) {

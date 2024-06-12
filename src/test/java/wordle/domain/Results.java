@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Results {
     private List<Result> results;
-    private boolean isFinished = false;
-
     private int maxAttempt;
 
     public Results(List<Result> results, final int maxAttempt) {
@@ -20,13 +18,10 @@ public class Results {
 
     public void add(Result result) {
         results.add(result);
-        if (allMatched() || results.size() == maxAttempt) {
-            isFinished = true;
-        }
     }
 
-    public boolean isFinished() {
-        return isFinished;
+    public boolean isFinished(int attempt) {
+        return (allMatched() || attempt == maxAttempt);
     }
 
     public int size() {
