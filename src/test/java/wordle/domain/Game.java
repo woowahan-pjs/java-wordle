@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -114,11 +115,19 @@ class ConsoleOutputView implements OutputView {
 
         final String resultSentence = results.getResults().stream()
                 .map(it -> it.getResult().stream()
-                        .map(ResultType::name)
+                        .map(ConsoleOutputView::color)
                         .collect(Collectors.joining())
                 ).collect(Collectors.joining("\n"));
 
         System.out.println(resultSentence);
+    }
+
+    private static String color(final ResultType resultType) {
+        return switch (resultType) {
+            case MATCHED -> "🟩";
+            case EXIST -> "🟨";
+            case MISMATCHED -> "⬜";
+        };
     }
 
     @Override
