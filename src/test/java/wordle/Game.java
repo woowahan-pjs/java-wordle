@@ -21,11 +21,10 @@ public class Game {
     }
 
     public void start() {
-        // todo 게임 시작
         final WordList wordList = wordListReader.read();
         final Answer answer = new Answer(wordList.select(new TimeBaseAnswerSelector(LocalDate.now())));
-        outputView.welcome();
-        Results results = new Results(new ArrayList<>());
+        outputView.welcome(MAX_ATTEMPT);
+        Results results = new Results(new ArrayList<>(), MAX_ATTEMPT);
         for (int i = 0; i < MAX_ATTEMPT; i++) {
             final Guess guess = inputWord(wordList);
             final Result result = answer.examineResult(guess);

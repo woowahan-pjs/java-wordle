@@ -7,8 +7,11 @@ public class Results {
     private List<Result> results;
     private boolean isFinished = false;
 
-    public Results(List<Result> results) {
+    private int maxAttempt;
+
+    public Results(List<Result> results, final int maxAttempt) {
         this.results = results;
+        this.maxAttempt = maxAttempt;
     }
 
     private boolean allMatched() {
@@ -17,7 +20,7 @@ public class Results {
 
     public void add(Result result) {
         results.add(result);
-        if (allMatched() || results.size() == 6) {
+        if (allMatched() || results.size() == maxAttempt) {
             isFinished = true;
         }
     }

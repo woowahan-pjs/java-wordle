@@ -3,7 +3,7 @@ package wordle.view;
 import wordle.domain.Results;
 
 public interface OutputView {
-    void welcome();
+    void welcome(final int maxAttempt);
 
     void insertWord();
 
