@@ -41,4 +41,8 @@ public class Word {
     public int hashCode() {
         return Objects.hash(word);
     }
+
+    public boolean isSameWord(final String word) {
+        return this.word.equals(word);
+    }
 }

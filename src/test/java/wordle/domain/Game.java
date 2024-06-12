@@ -25,7 +25,7 @@ public class Game {
         outputView.welcome();
         Results results = new Results(new ArrayList<>());
         for (int i = 0; i < MAX_ATTEMPT; i++) {
-            final Word word = inputWord();
+            final Word word = inputWord(wordList);
             final Result result = answer.examineResult(new Guess(word.getWord()));
             results.add(result);
             outputView.showResults(results, MAX_ATTEMPT);
@@ -35,16 +35,16 @@ public class Game {
         }
     }
 
-    private Word inputWord() {
+    private Word inputWord(WordList wordList) {
         try {
             outputView.insertWord();
             final String wordString = inputView.inputWord();
-            final Word word = new Word(wordString);
+            final Word word = wordList.find(wordString); // 요구사항에는 이 부분은 없는 듯 합니다.
             outputView.insertedWord(wordString);    // 요구사항에는 이 부분은 없는 듯 합니다.
             return word;
         } catch (final Exception e) {
             outputView.wrongWord();
-            return inputWord();
+            return inputWord(wordList);
         }
     }
 }
