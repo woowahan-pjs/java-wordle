@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class WordListFileReader implements WordListReader {
+public class WordListFileReader implements WordListReader {
     private static final String FILE_PATH = "src/main/resources/words.txt";
     private static final WordList wordList = initializeWordList();
 

@@ -1,5 +1,5 @@
 package wordle.domain;
 
-interface WordListReader {
+public interface WordListReader {
     WordList read();
 }

@@ -1,4 +1,9 @@
-package wordle.domain;
+package wordle;
+
+import wordle.Game;
+import wordle.domain.WordListFileReader;
+import wordle.view.ConsoleInputView;
+import wordle.view.ConsoleOutputView;
 
 public class Application {
     public static void main(String[] args) {
