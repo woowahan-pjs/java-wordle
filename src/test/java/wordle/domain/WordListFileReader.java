@@ -16,18 +16,13 @@ class WordListFileReader implements WordListReader {
                     .stream()
                     .map(Word::new)
                     .toList());
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Answer read(final Selector selector) {
-        return new Answer(wordList.select(selector).getWord());
-    }
-
     @Override
     public WordList read() {
-        return null;
+        return wordList;
     }
 }

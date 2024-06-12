@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Answer extends Word {
+
+    public Answer(final Word select) {
+        this(select.getWord());
+    }
+
     public Answer(String word) {
         super(word);
     }

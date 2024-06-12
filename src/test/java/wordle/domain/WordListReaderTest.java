@@ -28,11 +28,6 @@ public class WordListReaderTest {
     class TestWordListReader implements WordListReader {
 
         @Override
-        public Answer read(final Selector selector) {
-            throw new RuntimeException();
-        }
-
-        @Override
         public WordList read() {
             return new WordList(List.of(new Word("apple")));
         }

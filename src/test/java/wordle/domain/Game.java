@@ -20,7 +20,8 @@ public class Game {
 
     public void start() {
         // todo 게임 시작
-        final Answer answer = wordListReader.read(new TimeBaseAnswerSelector(LocalDate.now()));
+        final WordList wordList = wordListReader.read();
+        final Answer answer = new Answer(wordList.select(new TimeBaseAnswerSelector(LocalDate.now())));
         outputView.welcome();
         Results results = new Results(new ArrayList<>());
         for (int i = 0; i < MAX_ATTEMPT; i++) {
