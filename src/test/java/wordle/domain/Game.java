@@ -17,22 +17,26 @@ public class Game {
     private OutputView outputView;
     private AnswerReader answerReader;
 
+    public Game(InputView inputView, OutputView outputView, AnswerReader answerReader) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.answerReader = answerReader;
+    }
+
     public void start() {
         // todo 게임 시작
         final Answer answer = answerReader.read(new TimeBaseAnswerSelector(LocalDate.now()));
         outputView.welcome();
-        List<Result> results = new ArrayList<>();
+        Results results = new Results(new ArrayList<>());
         for (int i = 0; i < MAX_ATTEMPT; i++) {
             final Word word = inputWord();
             final Result result = answer.examineResult(new Guess(word.getWord()));
             results.add(result);
-            final boolean allMatch = results.stream().anyMatch(Result::allMatched);
-            if (allMatch) {
+            outputView.showResults(results, MAX_ATTEMPT);
+            if (results.isFinished()) {
                 break;
             }
-            outputView.insertWord();
         }
-        outputView.showResults(results, MAX_ATTEMPT);
     }
 
     private Word inputWord() {
@@ -40,7 +44,7 @@ public class Game {
             outputView.insertWord();
             final String wordString = inputView.inputWord();
             final Word word = new Word(wordString);
-            outputView.insertedWord(wordString);
+            outputView.insertedWord(wordString);    // 요구사항에는 이 부분은 없는 듯 합니다.
             return word;
         } catch (final Exception e) {
             outputView.wrongWord();
@@ -61,7 +65,7 @@ interface OutputView {
 
     void wrongWord();
 
-    void showResults(List<Result> results, final int maxAttempt);
+    void showResults(Results results, final int maxAttempt);
 
     void insertedWord(String wordString);
 }
@@ -103,9 +107,12 @@ class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void showResults(final List<Result> results, final int maxAttempt) {
-        System.out.println("%s/%s".formatted(results.size(), maxAttempt));
-        final String resultSentence = results.stream()
+    public void showResults(final Results results, final int maxAttempt) {
+        if (results.isFinished()) {
+            System.out.println("%s/%s".formatted(results.size(), maxAttempt));
+        }
+
+        final String resultSentence = results.getResults().stream()
                 .map(it -> it.getResult().stream()
                         .map(ResultType::name)
                         .collect(Collectors.joining())
