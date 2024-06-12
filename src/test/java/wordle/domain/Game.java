@@ -1,14 +1,8 @@
 package wordle.domain;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -16,17 +10,17 @@ public class Game {
 
     private InputView inputView;
     private OutputView outputView;
-    private AnswerReader answerReader;
+    private WordListReader wordListReader;
 
-    public Game(InputView inputView, OutputView outputView, AnswerReader answerReader) {
+    public Game(InputView inputView, OutputView outputView, WordListReader wordListReader) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.answerReader = answerReader;
+        this.wordListReader = wordListReader;
     }
 
     public void start() {
         // todo 게임 시작
-        final Answer answer = answerReader.read(new TimeBaseAnswerSelector(LocalDate.now()));
+        final Answer answer = wordListReader.read(new TimeBaseAnswerSelector(LocalDate.now()));
         outputView.welcome();
         Results results = new Results(new ArrayList<>());
         for (int i = 0; i < MAX_ATTEMPT; i++) {
@@ -136,28 +130,3 @@ class ConsoleOutputView implements OutputView {
     }
 }
 
-interface AnswerReader {
-    Answer read(final Selector selector);
-}
-
-class AnswerFileReader implements AnswerReader {
-    private static final String FILE_PATH = "src/main/resources/words.txt";
-    private static final WordList wordList = initializeWordList();
-
-    private static WordList initializeWordList() {
-        try {
-            final Path path = Paths.get(FILE_PATH);
-            return new WordList(Files.readAllLines(path)
-                    .stream()
-                    .map(Word::new)
-                    .toList());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public Answer read(final Selector selector) {
-        return new Answer(wordList.select(selector).getWord());
-    }
-}
