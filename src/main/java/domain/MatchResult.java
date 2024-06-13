@@ -9,6 +9,10 @@ public class MatchResult {
         this.hint = hint;
     }
 
+    public String getTile() {
+        return hint.getTile();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
