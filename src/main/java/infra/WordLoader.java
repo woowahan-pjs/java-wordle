@@ -1,3 +1,4 @@
+
 package infra;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class WordLoader {
 
-    private  WordLoader() {
+    public  WordLoader() {
     }
 
     public static List<String> read(String filePath) {

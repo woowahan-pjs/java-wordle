@@ -1,9 +1,11 @@
+
 package domain;
 
-
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.List;
+import java.util.Objects;
 
 public class Answer {
     private String value;
@@ -12,24 +14,34 @@ public class Answer {
         this.value = value;
     }
 
+    public Answer(LocalDate currentDate, List<String> availableWords) {
+        LocalDate fixedDate = LocalDate.of(2021, 6, 19);
+        int diffDay = Period.between(fixedDate, currentDate).getDays();
+        int index = diffDay % availableWords.size();
+        this.value = availableWords.get(index);
+    }
+
+
     Boolean exists(char inputChar) {
-        return true;
+        return value.indexOf(inputChar) != -1;
     }
 
     Boolean isCorrect(int index, char inputChar) {
-        return true;
+        return value.indexOf(inputChar) == index;
     }
 
-    public static Answer from(List<String> avaliableWords) {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate fixedDate = LocalDate.of(2021, 6, 19);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        int formattedDate = Integer.parseInt(currentDate.format(formatter));
-        int fixedFormattedDate = Integer.parseInt(fixedDate.format(formatter));
+        Answer answer = (Answer) o;
 
-        int idx = (formattedDate - fixedFormattedDate) % avaliableWords.size();
+        return Objects.equals(value, answer.value);
+    }
 
-        return new Answer(avaliableWords.get(idx));
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }
