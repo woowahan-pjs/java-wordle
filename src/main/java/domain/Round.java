@@ -16,4 +16,12 @@ public class Round {
     Boolean isLastRound() {
         return this.current >= this.limit;
     }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
 }

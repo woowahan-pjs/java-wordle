@@ -7,6 +7,7 @@ import domain.Round;
 import ui.GuideTextView;
 import ui.HintView;
 import ui.InputView;
+import ui.RoundView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class GameManager {
     private GuideTextView guideTextView;
     private InputView inputView;
     private HintView hintView;
+    private RoundView roundView;
 
     protected GameManager() {
         this.matchResults = new ArrayList<>();
@@ -36,6 +38,7 @@ public class GameManager {
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
         this.hintView = new HintView();
+        this.roundView = new RoundView();
     }
 
 
@@ -50,11 +53,13 @@ public class GameManager {
         MatchResults matchResultOfInput = inputWord.match(answer);
         this.matchResults.add(matchResultOfInput);
 
+        // 정답 확인
+        if(matchResultOfInput.isEndGame()) {
+            roundView.render(round.getCurrent(),round.getLimit());
+        }
+
         // 힌트 노출
         hintView.render(this.matchResults);
-
-        // 정답 확인
-        // 저
 
 
 

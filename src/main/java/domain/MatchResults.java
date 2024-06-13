@@ -19,4 +19,8 @@ public class MatchResults implements Iterable<MatchResult> {
     public List<MatchResult> getResults() {
         return results;
     }
+
+    public boolean isEndGame() {
+        return results.stream().allMatch(MatchResult::isCorrect);
+    }
 }
