@@ -6,13 +6,13 @@ public enum Hint {
     EXIST("🟨"),              //\uD83D\\uDFE8
     NOT_EXIST("⬜");
 
-    private final String hint;
+    private final String tile;
 
     Hint(String hint) {
-        this.hint = hint;
+        this.tile = hint;
     }
 
-    public String getHint() {
-        return hint;
+    public String getTile() {
+        return tile;
     }
 }
