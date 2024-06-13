@@ -17,7 +17,7 @@ public class BaseAnswerFormulaTest {
         TimeTestSupporter.runWithMock(mockedDate, () -> {
             BaseAnswerFormula answerFormula = new BaseAnswerFormula();
 
-            long index = answerFormula.calculate(wordCount);
+            int index = answerFormula.calculate(wordCount);
 
             assertThat(index).isEqualTo(expected);
         });
