@@ -8,6 +8,8 @@ import org.mockito.Mockito;
 
 public class TimeTestSupporter {
 
+    public static final LocalDate mockedDate = LocalDate.of(2024, 6, 12);
+
     public static void runWithMock(final LocalDate mockDate, final Runnable runnable) {
         try (MockedStatic<LocalDate> localDateMockedStatic = mockStatic(LocalDate.class,
                 Mockito.CALLS_REAL_METHODS)) {
