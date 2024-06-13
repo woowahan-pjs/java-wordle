@@ -5,23 +5,17 @@ import java.util.List;
 
 public class Results {
     private List<Result> results;
-    private int maxAttempt;
 
-    public Results(List<Result> results, final int maxAttempt) {
+    public Results(List<Result> results) {
         this.results = results;
-        this.maxAttempt = maxAttempt;
     }
 
-    private boolean allMatched() {
+    public boolean hasAnswer() {
         return results.stream().anyMatch(Result::allMatched);
     }
 
     public void add(Result result) {
         results.add(result);
-    }
-
-    public boolean isFinished(int attempt) {
-        return (allMatched() || attempt == maxAttempt);
     }
 
     public int size() {

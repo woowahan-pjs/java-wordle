@@ -26,7 +26,7 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void showResults(final Results results, final int attempt, final int maxAttempt) {
-        if (results.isFinished(attempt)) {
+        if (results.hasAnswer() || attempt == maxAttempt) {
             System.out.println("%s/%s".formatted(results.size(), maxAttempt));
         }
 

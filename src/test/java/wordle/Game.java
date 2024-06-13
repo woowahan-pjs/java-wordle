@@ -30,10 +30,10 @@ public class Game {
     }
 
     private void execute(final WordList wordList, final Answer answer) {
-        Results results = new Results(new ArrayList<>(), MAX_ATTEMPT);
+        Results results = new Results(new ArrayList<>());
         IntStream.range(0, MAX_ATTEMPT)
-                .mapToObj(i -> i)
-                .takeWhile(attempt -> !results.isFinished(attempt))
+                .boxed()
+                .takeWhile(attempt -> results.hasAnswer())
                 .forEach(attempt -> examine(wordList, answer, attempt, results));
     }
 
