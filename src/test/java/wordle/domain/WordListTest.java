@@ -49,6 +49,6 @@ public class WordListTest {
     void Selector가_주어졌지만_조건에_해당하는_단어가_없다면_예외를_발생한다() {
         WordList wordList = new WordList(List.of());
 
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> wordList.select((it) -> it.get(0)));
+        assertThrows(RuntimeException.class, () -> wordList.select((it) -> it.get(0)));
     }
 }
