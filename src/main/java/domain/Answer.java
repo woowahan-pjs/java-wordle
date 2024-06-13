@@ -24,7 +24,7 @@ public class Answer {
     }
 
     Boolean isCorrect(int index, char inputChar) {
-        return value.indexOf(inputChar) == index;
+        return value.charAt(index) == inputChar;
     }
 
     @Override

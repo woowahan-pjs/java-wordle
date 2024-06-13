@@ -66,4 +66,22 @@ class InputWordTest {
                 new MatchResult('r', Hint.EXIST)
         );
     }
+
+    @Test
+    @DisplayName("입력단어와 정답 위치 확인 테스트")
+    void test() {
+        List<String> words = List.of("colon");
+
+        InputWord inputWord = new InputWord("colon", words);
+        Answer answer = new Answer("colon");
+        MatchResults matchResults = inputWord.match(answer);
+
+        assertThat(matchResults.getResults()).containsExactly(
+                new MatchResult('c', Hint.CORRECT),
+                new MatchResult('o', Hint.CORRECT),
+                new MatchResult('l', Hint.CORRECT),
+                new MatchResult('o', Hint.CORRECT),
+                new MatchResult('n', Hint.CORRECT)
+        );
+    }
 }
