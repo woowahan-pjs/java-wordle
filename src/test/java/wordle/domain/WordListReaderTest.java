@@ -20,8 +20,8 @@ public class WordListReaderTest {
     class TestSelector implements Selector {
 
         @Override
-        public Word select(final List<Word> wordList) {
-            return wordList.getFirst();
+        public Word select(final WordList wordList) {
+            return wordList.get(0);
         }
     }
 

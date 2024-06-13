@@ -1,7 +1,6 @@
 package wordle.domain;
 
 import java.time.*;
-import java.util.List;
 
 public class TimeBaseAnswerSelector implements Selector {
 
@@ -12,18 +11,14 @@ public class TimeBaseAnswerSelector implements Selector {
         this.localDate = localDate;
     }
 
-    public Word select(List<Word> wordList) {
-        if (wordList.isEmpty()) {
-            throw new RuntimeException();
-        }
+    @Override
+    public Word select(final WordList wordList) {
         final long epochSecond = localDate.toEpochSecond(LocalTime.of(0, 0), ZoneOffset.UTC);
         final long baseEpochSecond = BASE_LOCAL_DATE.toEpochSecond(LocalTime.of(0, 0), ZoneOffset.UTC);
         final long timeDifference = Math.subtractExact(epochSecond, baseEpochSecond);
         if (timeDifference < 0) {
             throw new RuntimeException();
         }
-
-        final int index = (int) timeDifference % wordList.size();
-        return wordList.get(index);
+        return wordList.get(timeDifference % wordList.size());
     }
 }

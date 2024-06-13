@@ -4,7 +4,6 @@ package wordle.domain;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,12 +14,10 @@ class TimeBaseAnswerSelectorTest {
         // given
         final TimeBaseAnswerSelector answerSelector = new TimeBaseAnswerSelector(LocalDate.of(2024, 6, 9));
         final String expectedWord = "cigar";
-        final List<Word> words = List.of(expectedWord, "apple", "grape", "melon").stream()
-                .map(Word::new)
-                .toList();
+        final WordList wordList = new WordList(expectedWord, "apple", "grape", "melon");
 
         // when
-        final Word actual = answerSelector.select(words);
+        final Word actual = answerSelector.select(wordList);
 
         // then
         assertEquals(actual, new Word(expectedWord));

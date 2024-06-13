@@ -41,7 +41,7 @@ public class WordListTest {
         Word word = new Word("cigar");
 
         WordList wordList = new WordList(List.of(word));
-        Word actual = wordList.select(List::getFirst);
+        Word actual = wordList.select((it) -> it.get(0));
 
         assertEquals(actual, word);
     }
@@ -50,6 +50,6 @@ public class WordListTest {
     void Selector가_주어졌지만_조건에_해당하는_단어가_없다면_얘외를_발생한다() {
         WordList wordList = new WordList(List.of());
 
-        assertThrows(NoSuchElementException.class, () -> wordList.select(List::getFirst));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> wordList.select((it) -> it.get(0)));
     }
 }
