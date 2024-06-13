@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,7 +46,7 @@ public class WordListTest {
     }
 
     @Test
-    void Selector가_주어졌지만_조건에_해당하는_단어가_없다면_얘외를_발생한다() {
+    void Selector가_주어졌지만_조건에_해당하는_단어가_없다면_예외를_발생한다() {
         WordList wordList = new WordList(List.of());
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> wordList.select((it) -> it.get(0)));

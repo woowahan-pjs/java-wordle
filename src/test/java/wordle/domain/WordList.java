@@ -32,22 +32,18 @@ public class WordList {
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public boolean isEmpty() {
-        return wordList.isEmpty();
-    }
-
     public int size() {
         return wordList.size();
     }
 
     public Word get(final long index) {
-        if (wordList.isEmpty()) {
-            throw new RuntimeException();
-        }
         return get((int) index);
     }
 
     public Word get(final int index) {
+        if (wordList.isEmpty()) {
+            throw new RuntimeException();
+        }
         return wordList.get(index);
     }
 }

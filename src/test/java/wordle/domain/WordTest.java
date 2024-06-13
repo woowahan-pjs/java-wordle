@@ -13,7 +13,7 @@ public class WordTest {
     }
 
     @Test
-    void 단어에_알파벳_소문자_문자가_들어오면_생성할_수_있다() {
+    void 단어에_5글자_알파벳_소문자_문자가_들어오면_생성할_수_있다() {
         // given
         String word = "cigar";
 
