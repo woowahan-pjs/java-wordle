@@ -11,5 +11,5 @@ public interface OutputView {
 
     void showResults(final Results results, final int attempt, final int maxAttempt);
 
-    void insertedWord(String wordString);
+    void insertedWord(final String wordString);
 }
