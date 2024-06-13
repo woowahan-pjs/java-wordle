@@ -24,6 +24,7 @@ public class GameManager {
     private InputView inputView;
     private HintView hintView;
     private RoundView roundView;
+    private boolean isEndGame = false;
 
     protected GameManager() {
         this.matchResults = new ArrayList<>();
@@ -44,9 +45,13 @@ public class GameManager {
 
     public void start() {
         guideTextView.render();
+        while(!this.isEndGame && round.isNotFinalRound()) {
+            startRound();
+        }
+    }
 
+    private void startRound() {
         // 라운드 입력 view
-        System.out.println(this.answer);
         String input = inputView.input();
 
         InputWord inputWord = new InputWord(input, this.availableWords);
@@ -54,15 +59,14 @@ public class GameManager {
         this.matchResults.add(matchResultOfInput);
 
         // 정답 확인
-        if(matchResultOfInput.isEndGame()) {
+        boolean isEndGame = matchResultOfInput.isEndGame();
+        if(isEndGame) {
             roundView.render(round.getCurrent(),round.getLimit());
+            this.isEndGame = isEndGame;
         }
 
         // 힌트 노출
         hintView.render(this.matchResults);
-
-
-
-
+        round.goNext();
     }
 }

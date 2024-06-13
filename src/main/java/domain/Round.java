@@ -9,7 +9,7 @@ public class Round {
         this.current = current;
     }
 
-    void goNext() {
+    public void goNext() {
         this.current++;
     }
 
@@ -23,5 +23,9 @@ public class Round {
 
     public int getCurrent() {
         return current;
+    }
+
+    public boolean isNotFinalRound() {
+        return current <= limit;
     }
 }
