@@ -17,6 +17,12 @@ public class LetterCounter {
         letterCountMap.put(inputLetter, letterCountMap.get(inputLetter) - 1);
     }
 
+    public void decreaseCount(Letters letters) {
+        for (Letter letter : letters.getLetters()) {
+            letterCountMap.put(letter, letterCountMap.get(letter) - 1);
+        }
+    }
+
     public boolean canDecreaseCount(Letter inputLetter) {
         return letterCountMap.containsKey(inputLetter) && letterCountMap.get(inputLetter) > 0;
     }

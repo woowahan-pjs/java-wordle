@@ -75,6 +75,12 @@ public class Wordle {
     }
 
     private Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
+        Result result = new Result(5);
+        Letters sameLetters = answerLetters.findSameLetters(inputLetters);
+        letterCounter.decreaseCount(sameLetters);
+        result.addGreenTile(sameLetters);
+
+
         return null;
     }
 

@@ -16,6 +16,12 @@ public class Result {
         tiles[index] = GREEN_TILE;
     }
 
+    public void addGreenTile(Letters letters) {
+        for(Letter letter : letters.getLetters()) {
+            tiles[letter.getPosition()] = GREEN_TILE;
+        }
+    }
+
     public void addYellowTile(int index) {
         tiles[index] = YELLOW_TILE;
     }

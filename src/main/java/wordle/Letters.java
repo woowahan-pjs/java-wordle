@@ -17,6 +17,10 @@ public class Letters {
         }
     }
 
+    public Letters(List<Letter> letters) {
+        this.letters = letters;
+    }
+
     public List<Letter> getLetters() {
         return letters;
     }
@@ -31,7 +35,19 @@ public class Letters {
 
     public String combine() {
         return letters.stream()
-                .map(Letter::getValue)
-                .collect(Collectors.joining(""));
+            .map(Letter::getValue)
+            .collect(Collectors.joining(""));
+    }
+
+    public boolean contains(Letter letter) {
+        return letters.contains(letter);
+    }
+
+    public Letters findSameLetters(Letters other) {
+        List<Letter> filteredLetters = this.letters.stream()
+            .filter(other::contains)
+            .toList();
+
+        return new Letters(filteredLetters);
     }
 }
