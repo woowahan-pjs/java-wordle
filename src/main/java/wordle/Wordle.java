@@ -10,10 +10,12 @@ public class Wordle {
 
     private final IOView ioView;
     private final WordsReader wordsReader;
+    private final WordleValidator wordleValidator;
 
-    public Wordle(IOView ioView, WordsReader wordsReader) {
+    public Wordle(IOView ioView, WordsReader wordsReader, WordleValidator wordleValidator) {
         this.ioView = ioView;
         this.wordsReader = wordsReader;
+        this.wordleValidator = wordleValidator;
     }
 
     public void start() {
@@ -32,18 +34,12 @@ public class Wordle {
             String input = ioView.inputAnswer();
 
             Input inputClass = new Input(input);
-
-            if (inputClass.lessThan(5)) { // 5는 게임 규칙
+            if (wordleValidator.isInvalidLength(inputClass)) {
                 ioView.printNotEnoughLettersMessage();
                 continue;
             }
 
-            if (words.notContains(inputClass)) {
-                ioView.printNotInWordListMessage();
-                continue;
-            }
-
-            if (words.notContains(input)) {
+            if (wordleValidator.isNotIncludedWord(inputClass, words)) {
                 ioView.printNotInWordListMessage();
                 continue;
             }
@@ -59,7 +55,7 @@ public class Wordle {
                 break;
             }
 
-            if (tryCount >= 5 && !ANSWER_TILE.equals(tile)) {
+            if (tryCount == 5) {
                 ioView.printTryCount("X", 6);
                 ioView.printHistories(tileHistory);
                 break;
