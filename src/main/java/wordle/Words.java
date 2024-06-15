@@ -23,4 +23,8 @@ public class Words {
     public boolean notContains(String input) {
         return !words.contains(input);
     }
+
+    public boolean notContains(Input input) {
+        return !words.contains(input.getValue());
+    }
 }

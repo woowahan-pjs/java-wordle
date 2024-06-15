@@ -31,8 +31,15 @@ public class Wordle {
             ioView.printInputAnswerMessage();
             String input = ioView.inputAnswer();
 
-            if (input.length() < 5) {
+            Input inputClass = new Input(input);
+
+            if (inputClass.lessThan(5)) { // 5는 게임 규칙
                 ioView.printNotEnoughLettersMessage();
+                continue;
+            }
+
+            if (words.notContains(inputClass)) {
+                ioView.printNotInWordListMessage();
                 continue;
             }
 
