@@ -1,12 +1,18 @@
 package wordle.domain;
 
 import java.util.Objects;
+import wordle.exception.InvalidPositionException;
 
 public class Position implements Comparable<Position> {
 
+    private static final int MIN_POSITION = 0;
     private final int position;
 
     public Position(int position) {
+        if(position < MIN_POSITION){
+            throw new InvalidPositionException();
+        }
+
         this.position = position;
     }
 
