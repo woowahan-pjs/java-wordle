@@ -3,18 +3,23 @@ package wordle.domain;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Answer extends Word {
+public class Answer {
+    private GameWord compositeWord;
 
-    public Answer(final Word select) {
-        super(select.alphabets());
+    public Answer(GameWord word) {
+        this.compositeWord = word;
     }
 
     public Answer(String word) {
-        super(word);
+        this(new GameWord(word));
+    }
+
+    public Alphabet find(final int index) {
+        return compositeWord.find(index);
     }
 
     public Result examineResult(final Guess guess) {
-        final List<ResultType> resultTypes = IntStream.range(0, guess.alphabets().size())
+        final List<ResultType> resultTypes = IntStream.range(0, guess.size())
                 .mapToObj(i -> examineResultType(guess, i))
                 .toList();
 
@@ -26,17 +31,25 @@ public class Answer extends Word {
         if (alphabet == this.find(index)) {
             return ResultType.MATCHED;
         }
-        long answerCount = countChar(this, alphabet);
-        long guessCount = countChar(new Word(guess.subAlphabets(0, index + 1)), alphabet);
+        long answerCount = countAlphabets(alphabet, size());
+        long guessCount = guess.countAlphabets(alphabet, index + 1);
         if (answerCount >= guessCount) {
             return ResultType.EXIST;
         }
         return ResultType.MISMATCHED;
     }
 
-    private long countChar(Word word, Alphabet alphabet) {
+    private long countChar(GameWord word, Alphabet alphabet) {
         return word.alphabets().stream()
                 .filter(alphabet::equals)
                 .count();
+    }
+
+    public long countAlphabets(final Alphabet alphabet, final int endIndex) {
+        return compositeWord.countAlphabets(alphabet, endIndex);
+    }
+
+    public int size() {
+        return compositeWord.alphabets().size();
     }
 }

@@ -27,7 +27,7 @@ public class WordList {
 
     public Word find(final String word) {
         return wordList.stream()
-                .filter(it -> it.isSameWord(word))
+                .filter(it -> it.equals(word))
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
