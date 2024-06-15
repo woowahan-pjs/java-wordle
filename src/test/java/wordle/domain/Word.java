@@ -25,17 +25,18 @@ public class Word {
         return Collections.unmodifiableList(alphabets);
     }
 
-    public String getWord() {
-        return alphabets.stream()
-                .map(Alphabet::name)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
-                .toString();
-    }
-
     private static void validate(final List<Alphabet> alphabets) {
         if (alphabets.size() != WORD_SIZE) {
             throw new RuntimeException();
         }
+    }
+
+    public boolean isSameWord(final String word) {
+        return this.equals(new Word(word));
+    }
+
+    public Alphabet find(final int index) {
+        return alphabets.get(index);
     }
 
     @Override
@@ -49,9 +50,5 @@ public class Word {
     @Override
     public int hashCode() {
         return Objects.hashCode(alphabets);
-    }
-
-    public boolean isSameWord(final String word) {
-        return this.equals(new Word(word));
     }
 }
