@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class WordList {
-    private List<DictionaryWord> wordList;
+    private List<Word> wordList;
 
-    public WordList(List<DictionaryWord> wordList) {
+    public WordList(List<Word> wordList) {
         this.wordList = wordList;
     }
 
     public WordList(final String... words) {
         this(Arrays.stream(words)
-                .map(DictionaryWord::new)
+                .map(Word::new)
                 .toList());
     }
 
-    public GameWord select(final GameWordSelector gameWordSelector) {
-        return gameWordSelector.select(this);
+    public Word select(final WordSelector wordSelector) {
+        return wordSelector.select(wordList);
     }
 
     public Word find(final String word) {

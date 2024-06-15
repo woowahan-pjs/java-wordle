@@ -1,35 +1,25 @@
 package wordle.domain;
 
-import java.util.List;
-
 public class Guess {
-    private final GameWord compositeWord;
+    private final Word word;
 
-    public Guess(GameWord word) {
-        this.compositeWord = word;
+    public Guess(Word word) {
+        this.word = word;
     }
 
     public Guess(String word) {
-        this(new GameWord(word));
-    }
-
-    public Guess(Word word) {
-        this(new GameWord(word));
+        this(new Word(word));
     }
 
     public int size() {
-        return compositeWord.alphabets().size();
-    }
-
-    public List<Alphabet> subAlphabets(final int startIndex, final int endIndex) {
-        return compositeWord.alphabets().subList(startIndex, endIndex);
+        return word.size();
     }
 
     public Alphabet find(final int index) {
-        return compositeWord.find(index);
+        return word.find(index);
     }
 
     public long countAlphabets(final Alphabet alphabet, final int endIndex) {
-        return compositeWord.countAlphabets(alphabet, endIndex);
+        return word.countAlphabets(alphabet, endIndex);
     }
 }

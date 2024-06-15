@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Answer {
-    private GameWord compositeWord;
+    private Word word;
 
-    public Answer(GameWord word) {
-        this.compositeWord = word;
+    public Answer(Word word) {
+        this.word = word;
     }
 
     public Answer(String word) {
-        this(new GameWord(word));
+        this(new Word(word));
     }
 
     public Alphabet find(final int index) {
-        return compositeWord.find(index);
+        return word.find(index);
     }
 
     public Result examineResult(final Guess guess) {
@@ -39,10 +39,10 @@ public class Answer {
     }
 
     public long countAlphabets(final Alphabet alphabet, final int endIndex) {
-        return compositeWord.countAlphabets(alphabet, endIndex);
+        return word.countAlphabets(alphabet, endIndex);
     }
 
     public int size() {
-        return compositeWord.alphabets().size();
+        return word.size();
     }
 }

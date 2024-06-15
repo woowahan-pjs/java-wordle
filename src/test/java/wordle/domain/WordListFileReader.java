@@ -14,7 +14,7 @@ public class WordListFileReader implements WordListReader {
             final Path path = Paths.get(FILE_PATH);
             return new WordList(Files.readAllLines(path)
                     .stream()
-                    .map(DictionaryWord::new)
+                    .map(Word::new)
                     .toList());
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -22,9 +22,9 @@ public class Game {
         this.wordListReader = wordListReader;
     }
 
-    public void start(final GameWordSelector gameWordSelector) {
+    public void start(final WordSelector wordSelector) {
         final WordList wordList = wordListReader.read();
-        final Answer answer = new Answer(wordList.select(gameWordSelector));
+        final Answer answer = new Answer(wordList.select(wordSelector));
         outputView.welcome(MAX_ATTEMPT);
         execute(wordList, answer);
     }

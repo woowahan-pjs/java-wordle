@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameWordTest {
+public class WordTest {
 
     @Test
     void 게임_단어에_5글자가_아닌_문자열이_들어오면_예외를_발생한다() {
         // given when then
-        assertThrowsExactly(RuntimeException.class, () -> new GameWord("abcdef"));
+        assertThrowsExactly(RuntimeException.class, () -> new Word("abcdef"));
     }
 
     @Test
@@ -17,7 +17,7 @@ public class GameWordTest {
         // given
         String word = "cigar";
 
-        assertDoesNotThrow(() -> new GameWord(word));
+        assertDoesNotThrow(() -> new Word(word));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class GameWordTest {
         String word = "Cigar";
 
         // when & then
-        assertThrows(RuntimeException.class, () -> new GameWord(word));
+        assertThrows(RuntimeException.class, () -> new Word(word));
     }
 }
