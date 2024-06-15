@@ -13,7 +13,7 @@ public class Alphabet {
             throw new InvalidAlphabetException();
         }
 
-        this.alphabet = alphabet;
+        this.alphabet = lowerAlphabet;
     }
 
     @Override
