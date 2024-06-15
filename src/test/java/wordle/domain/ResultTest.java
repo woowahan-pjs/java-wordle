@@ -25,4 +25,18 @@ public class ResultTest {
 
         assertThat(result.isGreen()).isTrue();
     }
+
+    @Test
+    void 타일이_노란색인지_확인할_수_있다() {
+        Result result = ResultFixture.createYellowResult(0);
+
+        assertThat(result.isYellow()).isTrue();
+    }
+
+    @Test
+    void 타일이_회색인지_확인할_수_있다() {
+        Result result = ResultFixture.createGrayResult(0);
+
+        assertThat(result.isGray()).isTrue();
+    }
 }

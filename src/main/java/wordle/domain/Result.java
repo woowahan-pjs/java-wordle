@@ -52,4 +52,10 @@ public class Result implements Comparable<Result> {
     public boolean isGreen() {
         return this.tile == Tile.GREEN;
     }
+    public boolean isYellow() {
+        return this.tile == Tile.YELLOW;
+    }
+    public boolean isGray() {
+        return this.tile == Tile.GRAY;
+    }
 }
