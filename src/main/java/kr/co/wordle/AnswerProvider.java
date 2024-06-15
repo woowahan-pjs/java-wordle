@@ -36,20 +36,14 @@ public class AnswerProvider {
         return words.get(dayDiff % words.size());
     }
 
-    private static int getTodayIndex() {
+    private static int dayDiff() {
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(REFERENCE_DATE, currentDate);
         return period.getDays();
     }
 
-    public static boolean isAnswerInWords(String input) {
-        try {
-            URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
-            List<String> strings = Files.readAllLines(Paths.get(resource.toURI()));
-            return strings.contains(input);
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public static boolean isInputInWords(String input) {
+        List<String> words = readWordsInFile();
+        return words.contains(input);
     }
 }

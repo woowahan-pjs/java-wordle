@@ -17,17 +17,17 @@ public class WordleGame {
         int currentRound = 1;
         console.init();
         while (currentRound <= MAX_ROUND) {
-            String input = console.inputView();
+            String input = console.userInput();
             Round round = new Round(input);
             roundResults.append(round.roundResult(answer)).append("\n");
 
             if (round.isSuccess()) {
                 console.printRound(currentRound, MAX_ROUND);
-                console.printResult(roundResults);
+                console.printRoundResult(roundResults);
                 break;
             }
 
-            console.printResult(roundResults);
+            console.printRoundResult(roundResults);
             currentRound++;
         }
     }
