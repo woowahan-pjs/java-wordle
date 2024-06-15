@@ -2,7 +2,7 @@ package wordle.domain;
 
 import java.time.*;
 
-public class EpochDayBaseAnswerSelector implements Selector {
+public class EpochDayBaseAnswerSelector implements GameWordSelector {
 
     private static final LocalDate BASE_LOCAL_DATE = LocalDate.of(2021, 6, 19);
     private final LocalDate localDate;
@@ -12,13 +12,13 @@ public class EpochDayBaseAnswerSelector implements Selector {
     }
 
     @Override
-    public Word select(final WordList wordList) {
+    public GameWord select(final WordList wordList) {
         final long epochDay = localDate.toEpochDay();
         final long baseEpochDay = BASE_LOCAL_DATE.toEpochDay();
         final long timeDifference = Math.subtractExact(epochDay, baseEpochDay);
         if (timeDifference < 0) {
             throw new RuntimeException();
         }
-        return wordList.get(timeDifference % wordList.size());
+        return new GameWord(wordList.get(timeDifference % wordList.size()));
     }
 }

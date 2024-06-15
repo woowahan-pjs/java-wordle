@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EpochDayBaseAnswerSelectorTest {
+class EpochDayBaseAnswerGameWordSelectorTest {
 
     @Test
     void 날짜_기반_단어_선택기는_주어진_날짜를_기준으로_단어를_선택할_수_있다() {
@@ -20,6 +20,6 @@ class EpochDayBaseAnswerSelectorTest {
         final Word actual = answerSelector.select(wordList);
 
         // then
-        assertEquals(actual, new Word(expectedWord));
+        assertEquals(actual, new GameWord(expectedWord));
     }
 }

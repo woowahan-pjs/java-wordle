@@ -20,6 +20,10 @@ public class GameWord implements Word {
                 .toList());
     }
 
+    public GameWord(Word word) {
+        this(word.toString());
+    }
+
     private static void validate(final List<Alphabet> alphabets) {
         if (alphabets.size() != WORD_SIZE) {
             throw new RuntimeException();

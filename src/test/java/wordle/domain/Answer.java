@@ -22,11 +22,10 @@ public class Answer {
         final List<ResultType> resultTypes = IntStream.range(0, guess.size())
                 .mapToObj(i -> examineResultType(guess, i))
                 .toList();
-
         return new Result(resultTypes);
     }
 
-    private ResultType examineResultType(Guess guess, int index) {
+    private ResultType examineResultType(final Guess guess, int index) {
         final Alphabet alphabet = guess.find(index);
         if (alphabet == this.find(index)) {
             return ResultType.MATCHED;
@@ -37,12 +36,6 @@ public class Answer {
             return ResultType.EXIST;
         }
         return ResultType.MISMATCHED;
-    }
-
-    private long countChar(GameWord word, Alphabet alphabet) {
-        return word.alphabets().stream()
-                .filter(alphabet::equals)
-                .count();
     }
 
     public long countAlphabets(final Alphabet alphabet, final int endIndex) {

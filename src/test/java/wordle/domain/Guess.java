@@ -9,11 +9,11 @@ public class Guess {
         this.compositeWord = word;
     }
 
-    public Guess(List<Alphabet> alphabets) {
-        this(new GameWord(alphabets));
+    public Guess(String word) {
+        this(new GameWord(word));
     }
 
-    public Guess(String word) {
+    public Guess(Word word) {
         this(new GameWord(word));
     }
 

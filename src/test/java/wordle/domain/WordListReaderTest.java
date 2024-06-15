@@ -14,14 +14,14 @@ public class WordListReaderTest {
         WordList wordList = wordListReader.read();
 
         final Word actual = wordList.select(new TestSelector());
-        assertEquals(new Word("apple"), actual);
+        assertEquals(new GameWord("apple"), actual);
     }
 
-    class TestSelector implements Selector {
+    class TestSelector implements GameWordSelector {
 
         @Override
-        public Word select(final WordList wordList) {
-            return wordList.get(0);
+        public GameWord select(final WordList wordList) {
+            return new GameWord(wordList.get(0));
         }
     }
 
@@ -29,7 +29,7 @@ public class WordListReaderTest {
 
         @Override
         public WordList read() {
-            return new WordList(List.of(new Word("apple")));
+            return new WordList(List.of(new DictionaryWord("apple")));
         }
     }
 }
