@@ -8,24 +8,8 @@ public class Round {
     private final RoundResult roundResult;
 
     public Round(String input) {
-        validateInput(input);
         this.input = input;
         this.roundResult = new RoundResult();
-    }
-
-    private void validateInput(String input) {
-        if (input == null) {
-            throw new IllegalArgumentException();
-        }
-        if (input.length() != WORD_LENGTH) {
-            throw new IllegalArgumentException();
-        }
-        char[] inputChars = input.toLowerCase().toCharArray();
-        for (char ch : inputChars) {
-            if (ch < 'a' || ch > 'z') {
-                throw new IllegalArgumentException();
-            }
-        }
     }
 
     public String roundResult(Answer answer) {
