@@ -12,7 +12,7 @@ public class Console {
         System.out.println("정답을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        while (InputValidator.isNotValidateInput(input)) {
+        while (InputValidator.isNotValid(input)) {
             System.out.println("다시 입력해주세요.");
             input = sc.nextLine();
         }

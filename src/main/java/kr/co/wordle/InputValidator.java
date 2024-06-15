@@ -6,10 +6,12 @@ import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
 
 public class InputValidator {
 
+    private static final List<String> words = WordFileReader.readWordsInFile();
+
     private InputValidator() {
     }
 
-    public static boolean isNotValidateInput(String input) {
+    public static boolean isNotValid(String input) {
         if (input == null) {
             return true;
         }
