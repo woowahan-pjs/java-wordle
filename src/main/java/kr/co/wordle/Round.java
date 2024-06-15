@@ -26,10 +26,6 @@ public class Round {
         }
     }
 
-    public boolean isSuccess() {
-        return roundResult.isAllGreen();
-    }
-
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
         int[] countPerCharacter = answer.countPerCharacter();
@@ -58,5 +54,9 @@ public class Round {
             return Tile.YELLOW;
         }
         return Tile.GRAY;
+    }
+
+    public boolean isFinished() {
+        return roundResult.isAllGreen();
     }
 }

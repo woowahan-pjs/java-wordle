@@ -21,7 +21,7 @@ public class WordleGame {
             Round round = new Round(input);
             roundResults.append(round.roundResult(answer)).append("\n");
 
-            if (round.isSuccess()) {
+            if (round.isFinished()) {
                 console.printRound(currentRound, MAX_ROUND);
                 console.printRoundResult(roundResults);
                 break;

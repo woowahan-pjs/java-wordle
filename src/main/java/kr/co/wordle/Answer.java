@@ -8,6 +8,10 @@ public class Answer {
         this.value = AnswerProvider.todayAnswer();
     }
 
+    protected Answer(String value) {
+        this.value = value;
+    }
+
     public char charAt(int index) {
         return value.charAt(index);
     }
