@@ -1,10 +1,10 @@
 package wordle.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
-public class Record {
+public class Record implements Iterable<Results> {
 
     public static final int MAX_COUNT = 6;
     private final List<Results> record;
@@ -28,5 +28,14 @@ public class Record {
         return record
                 .getLast()
                 .isAllGreen();
+    }
+
+    @Override
+    public Iterator<Results> iterator() {
+        return record.iterator();
+    }
+
+    public int size() {
+        return record.size();
     }
 }
