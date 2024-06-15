@@ -36,4 +36,15 @@ public class AnswerProvider {
         Period period = Period.between(reference, today);
         return period.getDays();
     }
+
+    public static boolean isAnswerInWords(String input) {
+        try {
+            URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
+            List<String> strings = Files.readAllLines(Paths.get(resource.toURI()));
+            return strings.contains(input);
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -11,7 +11,12 @@ public class Console {
     public String inputView() {
         System.out.println("정답을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        String input = sc.nextLine();
+        while (!AnswerProvider.isAnswerInWords(input)) {
+            System.out.println("단어가 아니므로 다시 입력해주세요.");
+            input = sc.nextLine();
+        }
+        return input;
     }
 
     public void printResult(StringBuilder roundResults) {
