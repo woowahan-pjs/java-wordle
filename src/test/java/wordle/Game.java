@@ -47,10 +47,8 @@ public class Game {
     private Guess inputWord(WordList wordList) {
         try {
             outputView.insertWord();
-            final String wordString = inputView.inputWord();
-            Guess guess = new Guess(wordList.find(wordString));
-            outputView.insertedWord(wordString);
-            return guess;
+            final Word word = inputView.inputWord();
+            return new Guess(wordList.find(word));
         } catch (final Exception e) {
             outputView.wrongWord();
             return inputWord(wordList);

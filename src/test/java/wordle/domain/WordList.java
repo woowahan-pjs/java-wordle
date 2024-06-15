@@ -21,7 +21,7 @@ public class WordList {
         return wordSelector.select(wordList);
     }
 
-    public Word find(final String word) {
+    public Word find(final Word word) {
         return wordList.stream()
                 .filter(it -> it.equals(word))
                 .findFirst()

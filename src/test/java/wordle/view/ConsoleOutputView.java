@@ -41,9 +41,4 @@ public class ConsoleOutputView implements OutputView {
 
         System.out.println(resultSentence);
     }
-
-    @Override
-    public void insertedWord(final String wordString) {
-        System.out.println(wordString);
-    }
 }

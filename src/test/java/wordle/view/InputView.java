@@ -1,5 +1,7 @@
 package wordle.view;
 
+import wordle.domain.Word;
+
 public interface InputView {
-    String inputWord();
+    Word inputWord();
 }

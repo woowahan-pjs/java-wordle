@@ -10,6 +10,4 @@ public interface OutputView {
     void wrongWord();
 
     void showResults(final Results results, final int attempt, final int maxAttempt);
-
-    void insertedWord(final String wordString);
 }
