@@ -1,5 +1,5 @@
 package wordle.exception;
 
-public class WordNotExistException extends RuntimeException {
+public class WordNotExistException extends WordleInvalidInputException {
 
 }

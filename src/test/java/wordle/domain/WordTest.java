@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import wordle.exception.WordInputNotValidException;
+import wordle.exception.InvalidWordException;
 import wordle.fixture.ResultFixture;
 
 public class WordTest {
@@ -21,7 +21,7 @@ public class WordTest {
     @ValueSource(strings = {"test", "testss"})
     void Word를_생성할_때_다섯글자가_아니면_실패한다(String input) {
         assertThatThrownBy(() -> new Word(input))
-                .isInstanceOf(WordInputNotValidException.class);
+                .isInstanceOf(InvalidWordException.class);
     }
 
     @Test

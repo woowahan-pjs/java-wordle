@@ -1,5 +1,5 @@
 package wordle.exception;
 
-public class InvalidAlphabetException extends IllegalArgumentException {
+public class InvalidAlphabetException extends WordleInvalidInputException {
 
 }

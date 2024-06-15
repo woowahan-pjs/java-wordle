@@ -15,4 +15,6 @@ public interface OutputView {
     void failEnd(Record record);
 
     void wrongAnswer();
+
+    void unexpectedEnd();
 }

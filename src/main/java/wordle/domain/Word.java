@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import wordle.exception.WordInputNotValidException;
+import wordle.exception.InvalidWordException;
 
 public class Word implements Iterable<Letter> {
 
@@ -13,7 +13,7 @@ public class Word implements Iterable<Letter> {
 
     public Word(String input) {
         if (input.length() != WORD_LENGTH) {
-            throw new WordInputNotValidException();
+            throw new InvalidWordException();
         }
 
         this.letters = new ArrayList<>();

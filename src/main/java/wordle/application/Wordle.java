@@ -6,6 +6,8 @@ import wordle.domain.Record;
 import wordle.domain.Results;
 import wordle.domain.Word;
 import wordle.domain.WordBook;
+import wordle.exception.WordleException;
+import wordle.exception.WordleInvalidInputException;
 import wordle.ui.InputView;
 import wordle.ui.OutputView;
 
@@ -61,8 +63,10 @@ public class Wordle {
     private void handleWrongAnswer(Runnable runnable) {
         try {
             runnable.run();
-        } catch (Exception e) {
+        } catch (WordleInvalidInputException e) {
             outputView.wrongAnswer();
+        } catch (WordleException e){
+            outputView.unexpectedEnd();
         }
     }
 }

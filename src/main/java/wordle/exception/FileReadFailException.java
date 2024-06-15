@@ -1,5 +1,5 @@
 package wordle.exception;
 
-public class FileReadFailException extends RuntimeException {
+public class FileReadFailException extends WordleException {
 
 }
