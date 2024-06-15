@@ -32,10 +32,20 @@ public class Round {
 
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
+        int[] countPerCharacter = answer.countPerCharacter();
+
+        for (int i = 0; i< inputChars.length; i++) {
+            if (Tile.GREEN == getTile(answer, i, inputChars[i])) {
+                countPerCharacter[inputChars[i] - 'a']--;
+            }
+        }
+
         for (int i = 0; i < inputChars.length; i++) {
             Tile key = getTile(answer, i, inputChars[i]);
+            if (key == Tile.YELLOW && countPerCharacter[inputChars[i] - 'a'] == 0) {
+                key = Tile.GRAY;
+            }
             roundResult.update(key);
-
         }
         return roundResult.toString();
     }

@@ -15,4 +15,12 @@ public class Answer {
     public boolean contains(char target) {
         return value.indexOf(target) > -1;
     }
+
+    public int[] countPerCharacter() {
+        int[] count = new int[26];
+        for (char ch : value.toCharArray()) {
+            count[ch - 'a']++;
+        }
+        return count;
+    }
 }
