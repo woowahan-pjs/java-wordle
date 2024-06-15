@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 import wordle.exception.InvalidWordException;
 
 public class Word implements Iterable<Letter> {
 
     public static final int WORD_LENGTH = 5;
-    private List<Letter> letters;
+    private final List<Letter> letters;
 
     public Word(String input) {
         if (input.length() != WORD_LENGTH) {
@@ -24,51 +25,60 @@ public class Word implements Iterable<Letter> {
     }
 
     public Results compare(Word inputWord) {
-        boolean[] visit = new boolean[WORD_LENGTH];
-
-        Results results = new Results();
-        for (Letter letter : inputWord) {
-            Result green = findGreen(letter, visit);
-            if (green != null) {
-                results.add(green);
-            }
-        }
-
-        for (Letter letter : inputWord) {
-            Result yellow = findYellow(letter, visit);
-            if (yellow != null) {
-                results.add(yellow);
-            } else {
-                results.add(new Result(Tile.GRAY, letter.getPosition()));
-            }
-        }
-
-        return results;
+        WordComparator wordComparator = new WordComparator(this.letters);
+        return wordComparator.compare(inputWord);
     }
 
-    private Result findYellow(Letter targetLetter, boolean[] visit) {
-        for (int i = 0; i < this.letters.size(); i++) {
-            Letter letter = this.letters.get(i);
-            if(visit[i]){
-                continue;
-            }
-            if (letter.isSameAlphabet(targetLetter)) {
-                visit[i] = true;
-                return new Result(Tile.YELLOW, targetLetter.getPosition());
-            }
-        }
-        return null;
-    }
+    static class WordComparator {
 
-    private Result findGreen(Letter targetLetter, boolean[] visit) {
-        for (int i = 0; i < this.letters.size(); i++) {
-            Letter letter = this.letters.get(i);
-            if (letter.equals(targetLetter)) {
-                visit[i] = true;
-                return new Result(Tile.GREEN, targetLetter.getPosition());
-            }
+        private final List<Letter> pendingLetters;
+        private final Results results;
+
+        public WordComparator(List<Letter> letters) {
+            this.pendingLetters = new ArrayList<>(letters);
+            this.results = new Results();
         }
-        return null;
+
+        public Results compare(Word inputWord) {
+            for (Letter letter : inputWord) {
+                process(letter, letter::equals, Tile.GREEN);
+            }
+
+            for (Letter letter : inputWord) {
+                process(letter, letter::isSameAlphabet, Tile.YELLOW);
+            }
+
+            for (Letter letter : inputWord) {
+                fillEmptyToGray(letter);
+            }
+
+            return results;
+        }
+        
+        private void process(Letter targetLetter, Predicate<Letter> predicate, Tile tile) {
+            Position position = targetLetter.getPosition();
+            if (results.isCheckedPosition(position)) {
+                return;
+            }
+
+            pendingLetters.stream()
+                    .filter(predicate)
+                    .findFirst()
+                    .ifPresent(letter -> {
+                        pendingLetters.remove(letter);
+                        results.add(new Result(tile, position));
+                    });
+        }
+
+        private void fillEmptyToGray(Letter targetLetter) {
+            Position position = targetLetter.getPosition();
+            if (results.isCheckedPosition(position)) {
+                return;
+            }
+
+            pendingLetters.forEach(
+                    letter -> results.add(new Result(Tile.GRAY, position)));
+        }
     }
 
     @Override
