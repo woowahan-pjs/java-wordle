@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class Word {
     public static final int WORD_SIZE = 5;
-    private List<Alphabet> alphabets;
+    private final List<Alphabet> alphabets;
 
-    public Word(List<Alphabet> alphabets) {
+    public Word(final List<Alphabet> alphabets) {
         validate(alphabets);
         this.alphabets = alphabets;
     }
 
-    public Word(String word) {
+    public Word(final String word) {
         this(word.chars()
                 .mapToObj(it -> (char) it)
                 .map(Alphabet::of)

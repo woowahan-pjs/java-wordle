@@ -4,10 +4,10 @@ import wordle.domain.*;
 import wordle.view.InputView;
 import wordle.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public class Game {
+    private static final int START_ATTEMPT = 0;
     private static final int MAX_ATTEMPT = 6;
 
     private final InputView inputView;
@@ -30,21 +30,22 @@ public class Game {
     }
 
     private void execute(final WordList wordList, final Answer answer) {
-        Results results = new Results(new ArrayList<>());
-        IntStream.range(0, MAX_ATTEMPT)
+        final Results results = new Results();
+        IntStream.range(START_ATTEMPT, MAX_ATTEMPT)
                 .boxed()
                 .takeWhile(attempt -> !results.hasAnswer())
-                .forEach(attempt -> examine(wordList, answer, attempt, results));
+                .forEach(attempt -> {
+                    results.add(examine(wordList, answer));
+                    outputView.showResults(results, attempt, MAX_ATTEMPT);
+                });
     }
 
-    private void examine(final WordList wordList, final Answer answer, final Integer attempt, final Results results) {
+    private Result examine(final WordList wordList, final Answer answer) {
         final Guess guess = inputWord(wordList);
-        final Result result = answer.examineResult(guess);
-        results.add(result);
-        outputView.showResults(results, attempt, MAX_ATTEMPT);
+        return answer.examineResult(guess);
     }
 
-    private Guess inputWord(WordList wordList) {
+    private Guess inputWord(final WordList wordList) {
         try {
             outputView.insertWord();
             final Word word = inputView.inputWord();

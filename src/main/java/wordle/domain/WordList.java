@@ -1,20 +1,14 @@
 package wordle.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class WordList {
-    private List<Word> wordList;
+    private final List<Word> wordList;
 
-    public WordList(List<Word> wordList) {
+    public WordList(final List<Word> wordList) {
         this.wordList = wordList;
-    }
-
-    public WordList(final String... words) {
-        this(Arrays.stream(words)
-                .map(Word::new)
-                .toList());
     }
 
     public Word select(final WordSelector wordSelector) {
@@ -32,14 +26,16 @@ public class WordList {
         return wordList.size();
     }
 
-    public Word get(final long index) {
-        return get((int) index);
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final WordList wordList1 = (WordList) o;
+        return Objects.equals(wordList, wordList1.wordList);
     }
 
-    public Word get(final int index) {
-        if (wordList.isEmpty()) {
-            throw new RuntimeException();
-        }
-        return wordList.get(index);
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(wordList);
     }
 }
