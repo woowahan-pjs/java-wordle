@@ -23,9 +23,4 @@ public class AnswerProvider {
         Period period = Period.between(REFERENCE_DATE, currentDate);
         return period.getDays();
     }
-
-    public static boolean isInputInWords(String input) {
-        List<String> words = WordFileReader.readWordsInFile();
-        return words.contains(input);
-    }
 }

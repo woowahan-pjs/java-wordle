@@ -1,5 +1,7 @@
 package kr.co.wordle;
 
+import java.util.List;
+
 import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
 
 public class InputValidator {
@@ -14,12 +16,17 @@ public class InputValidator {
         if (input.length() != WORD_LENGTH) {
             return true;
         }
-        char[] inputChars = input.toLowerCase().toCharArray();
-        for (char ch : inputChars) {
-            if (ch < 'a' || ch > 'z') {
-                return true;
-            }
+        if (isNotAllAlphabet(input)) {
+            return true;
         }
-        return !AnswerProvider.isInputInWords(input);
+        return isNotInWords(input);
+    }
+
+    public static boolean isNotAllAlphabet(String input) {
+        return input.chars().anyMatch(ch -> ch < 'a' || ch > 'z');
+    }
+
+    public static boolean isNotInWords(String input) {
+        return !words.contains(input);
     }
 }
