@@ -24,11 +24,11 @@ public class InputValidator {
         return isNotInWords(input);
     }
 
-    public static boolean isNotAllAlphabet(String input) {
+    private static boolean isNotAllAlphabet(String input) {
         return input.chars().anyMatch(ch -> ch < 'a' || ch > 'z');
     }
 
-    public static boolean isNotInWords(String input) {
+    private static boolean isNotInWords(String input) {
         return !words.contains(input);
     }
 }
