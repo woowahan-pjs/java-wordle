@@ -1,6 +1,6 @@
 package wordle.domain;
 
-import java.time.*;
+import java.time.LocalDate;
 import java.util.List;
 
 public class EpochDayBaseAnswerSelector implements WordSelector {

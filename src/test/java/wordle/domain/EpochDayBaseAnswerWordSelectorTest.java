@@ -1,13 +1,12 @@
 package wordle.domain;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EpochDayBaseAnswerWordSelectorTest {
 
@@ -24,6 +23,6 @@ class EpochDayBaseAnswerWordSelectorTest {
         final Word actual = answerSelector.select(wordList);
 
         // then
-        assertEquals(actual, new Word(expectedWord));
+        Assertions.assertEquals(actual, new Word(expectedWord));
     }
 }

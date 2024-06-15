@@ -3,11 +3,11 @@ package wordle.domain;
 public class Guess {
     private final Word word;
 
-    public Guess(Word word) {
+    public Guess(final Word word) {
         this.word = word;
     }
 
-    public Guess(String word) {
+    public Guess(final String word) {
         this(new Word(word));
     }
 

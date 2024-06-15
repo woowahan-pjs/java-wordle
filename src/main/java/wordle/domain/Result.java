@@ -3,13 +3,11 @@ package wordle.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class Result {
-    private List<ResultType> resultTypes;
+    private final List<ResultType> resultTypes;
 
-    public Result(List<ResultType> resultTypes) {
+    public Result(final List<ResultType> resultTypes) {
         this.resultTypes = resultTypes;
     }
 

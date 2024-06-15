@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Results {
-    private List<Result> results;
+    private final List<Result> results;
 
-    public Results(List<Result> results) {
+    public Results(final List<Result> results) {
         this.results = results;
     }
 
@@ -14,7 +14,7 @@ public class Results {
         return results.stream().anyMatch(Result::allMatched);
     }
 
-    public void add(Result result) {
+    public void add(final Result result) {
         results.add(result);
     }
 
