@@ -33,7 +33,7 @@ public class Game {
         Results results = new Results(new ArrayList<>());
         IntStream.range(0, MAX_ATTEMPT)
                 .boxed()
-                .takeWhile(attempt -> results.hasAnswer())
+                .takeWhile(attempt -> !results.hasAnswer())
                 .forEach(attempt -> examine(wordList, answer, attempt, results));
     }
 
