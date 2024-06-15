@@ -18,4 +18,11 @@ class ResultsTest {
                 ResultFixture.createGreenResult(3),
                 ResultFixture.createGreenResult(4));
     }
+
+    @Test
+    void Results_가_전부_초록색타일인지_알수있다() {
+        Results results = ResultFixture.createGreenResults(5);
+
+        assertThat(results.isAllGreen()).isTrue();
+    }
 }
