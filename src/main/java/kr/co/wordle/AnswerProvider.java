@@ -18,7 +18,7 @@ public class AnswerProvider {
     private AnswerProvider() {
     }
 
-    private static List<String> getWords() {
+    private static List<String> readWordsInFile() {
         try {
             URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
             if (resource != null) {
@@ -31,8 +31,8 @@ public class AnswerProvider {
     }
 
     public static String todayAnswer() {
-        List<String> words = getWords();
-        int dayDiff = getTodayIndex();
+        List<String> words = readWordsInFile();
+        int dayDiff = dayDiff();
         return words.get(dayDiff % words.size());
     }
 
