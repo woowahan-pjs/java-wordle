@@ -2,8 +2,6 @@ package kr.co.wordle;
 
 import java.util.Scanner;
 
-import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
-
 public class Console {
 
     public void init() {
@@ -14,27 +12,11 @@ public class Console {
         System.out.println("정답을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        while (isNotValidateInput(input)) {
+        while (InputValidator.isNotValidateInput(input)) {
             System.out.println("다시 입력해주세요.");
             input = sc.nextLine();
         }
         return input;
-    }
-
-    private boolean isNotValidateInput(String input) {
-        if (input == null) {
-            return true;
-        }
-        if (input.length() != WORD_LENGTH) {
-            return true;
-        }
-        char[] inputChars = input.toLowerCase().toCharArray();
-        for (char ch : inputChars) {
-            if (ch < 'a' || ch > 'z') {
-                return true;
-            }
-        }
-        return !AnswerProvider.isInputInWords(input);
     }
 
     public void printRoundResult(StringBuilder roundResults) {

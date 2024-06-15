@@ -8,6 +8,9 @@ public class Round {
     private final RoundResult roundResult;
 
     public Round(String input) {
+        if (InputValidator.isNotValidateInput(input)) {
+            throw new IllegalArgumentException();
+        }
         this.input = input;
         this.roundResult = new RoundResult();
     }
