@@ -18,10 +18,14 @@ public class Record implements Iterable<Results> {
     }
 
     public boolean isEnd() {
-        return existAllGreen() || record.size() >= MAX_COUNT;
+        return existAllGreen() || isCountOver();
     }
 
-    private boolean existAllGreen() {
+    public boolean isCountOver() {
+        return record.size() >= MAX_COUNT;
+    }
+
+    public boolean existAllGreen() {
         if (record.isEmpty()) {
             return false;
         }
