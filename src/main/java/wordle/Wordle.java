@@ -3,6 +3,8 @@ package wordle;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import org.w3c.dom.css.Counter;
 
 public class Wordle {
 
@@ -25,7 +27,9 @@ public class Wordle {
         Words words = new Words(wordList, LocalDate.of(2021, 6, 19));
         LocalDate now = LocalDate.now();
         String wordOfDay = words.getWordOfDay(now);
-        Answer answer = new Answer(wordOfDay);
+
+        Letters answerLetters = new Letters(wordOfDay);
+        LetterCounter letterCounter = new LetterCounter(answerLetters);
 
         TileHistory tileHistory = new TileHistory();
         int tryCount = 0;
@@ -33,19 +37,19 @@ public class Wordle {
             ioView.printInputAnswerMessage();
             String input = ioView.inputAnswer();
 
-            Input inputClass = new Input(input);
-            if (wordleValidator.isInvalidLength(inputClass)) {
+            Letters inputLetters = new Letters(input);
+            if (wordleValidator.isInvalidLength(inputLetters)) {
                 ioView.printNotEnoughLettersMessage();
                 continue;
             }
 
-            if (wordleValidator.isNotIncludedWord(inputClass, words)) {
+            if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
                 ioView.printNotInWordListMessage();
                 continue;
             }
 
             // Answer vs Input
-            Result result = checkContainsValue(answer, inputClass);
+            Result result = checkContainsValue(answerLetters, inputLetters, letterCounter);
 
             String tile = result.toString();
             tileHistory.add(tile);
@@ -70,8 +74,7 @@ public class Wordle {
         }
     }
 
-    private Result checkContainsValue(Answer answer, Input input) {
-        Result result = new Result(5);
+    private Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
         return null;
     }
 

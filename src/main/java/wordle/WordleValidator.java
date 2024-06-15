@@ -1,13 +1,13 @@
 package wordle;
 
 public class WordleValidator {
-    private static final int VALID_LENGTH = 5;
+    private static final int VALID_SIZE = 5;
 
-    public boolean isInvalidLength(Input inputClass) {
-        return inputClass.lessThan(VALID_LENGTH);
+    public boolean isInvalidLength(Letters letters) {
+        return letters.lessThan(VALID_SIZE);
     }
 
-    public boolean isNotIncludedWord(Input input, Words words) {
-        return words.notContains(input.getValue());
+    public boolean isNotIncludedWord(Letters letters, Words words) {
+        return words.notContains(letters.combine());
     }
 }

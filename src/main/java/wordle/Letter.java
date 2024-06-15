@@ -32,4 +32,8 @@ public class Letter {
     public int hashCode() {
         return Objects.hash(position, value);
     }
+
+    public String getValue() {
+        return String.valueOf(value);
+    }
 }
