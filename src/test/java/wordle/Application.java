@@ -1,7 +1,6 @@
 package wordle;
 
-import wordle.Game;
-import wordle.domain.TimeBaseAnswerSelector;
+import wordle.domain.EpochDayBaseAnswerSelector;
 import wordle.domain.WordListFileReader;
 import wordle.view.ConsoleInputView;
 import wordle.view.ConsoleOutputView;
@@ -14,6 +13,6 @@ public class Application {
         ConsoleOutputView outputView = new ConsoleOutputView();
         WordListFileReader answerFileReader = new WordListFileReader();
         Game game = new Game(inputView, outputView, answerFileReader);
-        game.start(new TimeBaseAnswerSelector(LocalDate.now()));
+        game.start(new EpochDayBaseAnswerSelector(LocalDate.now()));
     }
 }
