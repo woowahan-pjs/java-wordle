@@ -1,9 +1,11 @@
 package wordle.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import wordle.TimeTestSupporter;
@@ -40,5 +42,17 @@ public class FileWordBookTest {
 
             assertThat(actual).isEqualTo(new Word(expected));
         });
+    }
+
+    @Test
+    void WordBook에서_단어를_찾을_수_있다() {
+        Word word = wordBook.find("happy");
+
+        assertThat(word).isNotNull();
+    }
+
+    @Test
+    void WordBook에_없는_단어를_찾으면_예외를_던진다() {
+        assertThatThrownBy(() -> wordBook.find("ghost"));
     }
 }

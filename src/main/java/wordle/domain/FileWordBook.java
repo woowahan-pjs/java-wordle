@@ -1,6 +1,7 @@
 package wordle.domain;
 
 import java.util.List;
+import wordle.exception.WordNotExistException;
 import wordle.infra.FileReader;
 
 public class FileWordBook implements WordBook {
@@ -23,5 +24,14 @@ public class FileWordBook implements WordBook {
     @Override
     public boolean exist(Word word) {
         return words.contains(word);
+    }
+
+    @Override
+    public Word find(String target) {
+        Word targetWord = new Word(target);
+        return words.stream()
+                .filter(targetWord::equals)
+                .findFirst()
+                .orElseThrow(WordNotExistException::new);
     }
 }
