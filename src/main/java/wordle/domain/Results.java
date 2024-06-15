@@ -30,4 +30,8 @@ public class Results implements Iterable<Result> {
 
         return false;
     }
+
+    public boolean isAllGreen() {
+        return results.stream().allMatch(Result::isGreen);
+    }
 }

@@ -15,6 +15,15 @@ public class ResultFixture {
         return results;
     }
 
+    public static Results createResults(Tile tile, Tile... tiles) {
+        Results results = new Results();
+        results.add(new Result(tile, 0));
+        IntStream.range(1, tiles.length + 1)
+                .mapToObj(idx -> new Result(tiles[idx - 1], idx))
+                .forEach(results::add);
+        return results;
+    }
+
     public static Result createGreenResult(int position) {
         return new Result(Tile.GREEN, position);
     }

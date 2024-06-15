@@ -48,4 +48,8 @@ public class Result implements Comparable<Result> {
     public int compareTo(Result o) {
         return position.compareTo(o.position);
     }
+
+    public boolean isGreen() {
+        return this.tile == Tile.GREEN;
+    }
 }
