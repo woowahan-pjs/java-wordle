@@ -1,6 +1,7 @@
 package wordle.ui;
 
 import wordle.domain.Record;
+
 public interface OutputView {
 
     void welcome();
@@ -9,5 +10,9 @@ public interface OutputView {
 
     void showRecord(Record record);
 
-    void end(Record record);
+    void successEnd(Record record);
+
+    void failEnd(Record record);
+
+    void wrongAnswer();
 }

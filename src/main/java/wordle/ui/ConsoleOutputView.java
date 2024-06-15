@@ -26,6 +26,7 @@ public class ConsoleOutputView implements OutputView {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     private static String findTile(Result result) {
@@ -39,8 +40,19 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void end(Record record) {
-        System.out.printf("%d/%d\n\n", record.size(), Record.MAX_COUNT);
+    public void successEnd(Record record) {
+        System.out.printf("\n%d/%d\n\n", record.size(), Record.MAX_COUNT);
         showRecord(record);
+    }
+
+    @Override
+    public void failEnd(Record record) {
+        System.out.printf("\nX/%d\n\n", Record.MAX_COUNT);
+        showRecord(record);
+    }
+
+    @Override
+    public void wrongAnswer() {
+        System.out.println("존재하지 않는 단어입니다.");
     }
 }
