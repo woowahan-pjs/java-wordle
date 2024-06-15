@@ -1,8 +1,8 @@
 package kr.co.wordle;
 
-public class WordleGame {
+import static kr.co.wordle.WordleGameConfig.MAX_ROUND;
 
-    private static final int MAX_ROUND = 6;
+public class WordleGame {
     private final Console console;
     private final Answer answer;
     private final StringBuilder roundResults;

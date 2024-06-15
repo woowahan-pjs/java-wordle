@@ -1,5 +1,7 @@
 package kr.co.wordle;
 
+import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
+
 public class Round {
 
     private final String input;
@@ -15,7 +17,7 @@ public class Round {
         if (input == null) {
             throw new IllegalArgumentException();
         }
-        if (input.length() != 5) {
+        if (input.length() != WORD_LENGTH) {
             throw new IllegalArgumentException();
         }
         char[] inputChars = input.toLowerCase().toCharArray();
@@ -30,13 +32,13 @@ public class Round {
         char[] inputChars = input.toCharArray();
         int[] countPerCharacter = answer.countPerCharacter();
 
-        for (int i = 0; i< inputChars.length; i++) {
+        for (int i = 0; i< WORD_LENGTH; i++) {
             if (Tile.GREEN == getTile(answer, i, inputChars[i])) {
                 countPerCharacter[inputChars[i] - 'a']--;
             }
         }
 
-        for (int i = 0; i < inputChars.length; i++) {
+        for (int i = 0; i < WORD_LENGTH; i++) {
             Tile key = getTile(answer, i, inputChars[i]);
             if (key == Tile.YELLOW && countPerCharacter[inputChars[i] - 'a'] == 0) {
                 key = Tile.GRAY;

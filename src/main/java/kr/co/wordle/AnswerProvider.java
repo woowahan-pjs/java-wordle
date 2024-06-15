@@ -10,9 +10,10 @@ import java.time.Period;
 import java.util.Collections;
 import java.util.List;
 
+import static kr.co.wordle.WordleGameConfig.WORDS_FILE_PATH;
+
 public class AnswerProvider {
 
-    private static final String WORDS_FILE_PATH = "words.txt";
     private static final LocalDate REFERENCE_DATE = LocalDate.of(2021, 6, 19);
 
     private AnswerProvider() {

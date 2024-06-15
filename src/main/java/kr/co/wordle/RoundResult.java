@@ -3,6 +3,8 @@ package kr.co.wordle;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
+
 public class RoundResult {
     private final Map<Tile, Integer> countPerTile;
     private final StringBuilder result;
@@ -18,7 +20,7 @@ public class RoundResult {
     }
 
     public boolean isAllGreen() {
-        return countPerTile.getOrDefault(Tile.GREEN, 0) == 5;
+        return countPerTile.getOrDefault(Tile.GREEN, 0) == WORD_LENGTH;
     }
 
     @Override
