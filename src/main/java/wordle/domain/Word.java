@@ -9,7 +9,7 @@ import wordle.exception.InvalidWordException;
 public class Word implements Iterable<Letter> {
 
     public static final int WORD_LENGTH = 5;
-    private List<Letter> letters;
+    private final List<Letter> letters;
 
     public Word(String input) {
         if (input.length() != WORD_LENGTH) {
@@ -24,51 +24,56 @@ public class Word implements Iterable<Letter> {
     }
 
     public Results compare(Word inputWord) {
-        boolean[] visit = new boolean[WORD_LENGTH];
-
-        Results results = new Results();
+        CurrentResult currentResult = new CurrentResult(new ArrayList<>(this.letters));
         for (Letter letter : inputWord) {
-            Result green = findGreen(letter, visit);
-            if (green != null) {
-                results.add(green);
-            }
+            currentResult.findGreen(letter);
         }
 
         for (Letter letter : inputWord) {
-            Result yellow = findYellow(letter, visit);
-            if (yellow != null) {
-                results.add(yellow);
-            } else {
-                results.add(new Result(Tile.GRAY, letter.getPosition()));
-            }
+            currentResult.findYellow(letter);
         }
 
-        return results;
+        for (Letter letter : inputWord) {
+            currentResult.fillEmptyToGray(letter);
+        }
+
+        return currentResult.results;
     }
 
-    private Result findYellow(Letter targetLetter, boolean[] visit) {
-        for (int i = 0; i < this.letters.size(); i++) {
-            Letter letter = this.letters.get(i);
-            if(visit[i]){
-                continue;
-            }
-            if (letter.isSameAlphabet(targetLetter)) {
-                visit[i] = true;
-                return new Result(Tile.YELLOW, targetLetter.getPosition());
-            }
-        }
-        return null;
-    }
+    static class CurrentResult {
 
-    private Result findGreen(Letter targetLetter, boolean[] visit) {
-        for (int i = 0; i < this.letters.size(); i++) {
-            Letter letter = this.letters.get(i);
-            if (letter.equals(targetLetter)) {
-                visit[i] = true;
-                return new Result(Tile.GREEN, targetLetter.getPosition());
+        private final List<Letter> letters;
+        private final Results results;
+
+        public CurrentResult(List<Letter> letters) {
+            this.letters = letters;
+            this.results = new Results();
+
+        }
+
+        public void findGreen(Letter targetLetter) {
+            for (Letter letter : letters) {
+                if (letter.equals(targetLetter)) {
+                    letters.remove(letter);
+                    results.add(new Result(Tile.GREEN, targetLetter.getPosition()));
+                    return;
+                }
             }
         }
-        return null;
+
+        public void findYellow(Letter targetLetter) {
+            for (Letter letter : letters) {
+                if (letter.isSameAlphabet(targetLetter)) {
+                    letters.remove(letter);
+                    results.add(new Result(Tile.YELLOW, targetLetter.getPosition()));
+                    return;
+                }
+            }
+        }
+
+        public void fillEmptyToGray(Letter targetLetter) {
+            letters.forEach(letter -> results.add(new Result(Tile.GRAY, targetLetter.getPosition())));
+        }
     }
 
     @Override
