@@ -1,5 +1,6 @@
 package wordle.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,12 +9,20 @@ public class Word {
 
     private List<Alphabet> alphabets;
 
+    public Word(final List<Alphabet> alphabets) {
+        validate(alphabets);
+        this.alphabets = alphabets;
+    }
+
     public Word(String word) {
-        validate(word);
-        this.alphabets = word.chars()
+        this(word.chars()
                 .mapToObj(it -> (char) it)
                 .map(Alphabet::of)
-                .toList();
+                .toList());
+    }
+
+    public List<Alphabet> alphabets() {
+        return Collections.unmodifiableList(alphabets);
     }
 
     public String getWord() {
@@ -23,8 +32,8 @@ public class Word {
                 .toString();
     }
 
-    private static void validate(final String word) {
-        if (word.trim().length() != WORD_SIZE) {
+    private static void validate(final List<Alphabet> alphabets) {
+        if (alphabets.size() != WORD_SIZE) {
             throw new RuntimeException();
         }
     }

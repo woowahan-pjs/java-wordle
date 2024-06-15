@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 public class Answer extends Word {
 
     public Answer(final Word select) {
-        this(select.getWord());
+        super(select.alphabets());
     }
 
     public Answer(String word) {
