@@ -44,7 +44,10 @@ public class Wordle {
                 continue;
             }
 
-            String tile = compareLetter(answer, input);
+            // Answer vs Input
+            Result result = checkContainsValue(answer, inputClass);
+
+            String tile = result.toString();
             tileHistory.add(tile);
 
             // 정답이면 탈출, 6번 초과 실패
@@ -67,16 +70,9 @@ public class Wordle {
         }
     }
 
-    private String compareLetter(Answer answer, String input) {
-        List<Letter> inputLetters = new ArrayList<>();
-        char[] inputArr = input.toCharArray();
-        for (int i = 0; i < inputArr.length; i++) {
-            inputLetters.add(new Letter(i, inputArr[i]));
-        }
-
-        Result result = checkContainsValue(answer, inputLetters);
-
-        return result.toString();
+    private Result checkContainsValue(Answer answer, Input input) {
+        Result result = new Result(5);
+        return null;
     }
 
     private Result checkContainsValue(Answer answer, List<Letter> inputLetters) {
