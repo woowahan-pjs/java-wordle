@@ -1,4 +1,4 @@
-package kr.co.wordle;
+package kr.co.wordle.config;
 
 public class WordleGameConfig {
     public static final String WORDS_FILE_PATH = "words.txt";

@@ -1,6 +1,10 @@
 package kr.co.wordle;
 
-import static kr.co.wordle.WordleGameConfig.MAX_ROUND;
+import kr.co.wordle.domain.Answer;
+import kr.co.wordle.domain.Round;
+import kr.co.wordle.view.Console;
+
+import static kr.co.wordle.config.WordleGameConfig.MAX_ROUND;
 
 public class WordleGame {
     private final Console console;

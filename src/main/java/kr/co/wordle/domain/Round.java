@@ -1,8 +1,9 @@
-package kr.co.wordle;
+package kr.co.wordle.domain;
 
+import kr.co.wordle.support.InputValidator;
 import java.util.Arrays;
 
-import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
+import static kr.co.wordle.config.WordleGameConfig.WORD_LENGTH;
 
 public class Round {
 

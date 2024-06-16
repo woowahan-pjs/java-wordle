@@ -1,5 +1,6 @@
-package kr.co.wordle;
+package kr.co.wordle.support;
 
+import kr.co.wordle.domain.provider.AnswerProvider;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -8,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import static kr.co.wordle.WordleGameConfig.WORDS_FILE_PATH;
+import static kr.co.wordle.config.WordleGameConfig.WORDS_FILE_PATH;
 
 public class WordFileReader {
 

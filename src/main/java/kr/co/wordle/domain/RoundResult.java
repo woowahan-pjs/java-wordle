@@ -1,9 +1,9 @@
-package kr.co.wordle;
+package kr.co.wordle.domain;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
+import static kr.co.wordle.config.WordleGameConfig.WORD_LENGTH;
 
 public class RoundResult {
     private final Map<Tile, Integer> countPerTile;

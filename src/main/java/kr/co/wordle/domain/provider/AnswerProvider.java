@@ -1,4 +1,6 @@
-package kr.co.wordle;
+package kr.co.wordle.domain.provider;
+
+import kr.co.wordle.support.WordFileReader;
 
 import java.time.LocalDate;
 import java.time.Period;

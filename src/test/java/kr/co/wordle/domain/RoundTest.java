@@ -1,4 +1,4 @@
-package kr.co.wordle;
+package kr.co.wordle.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

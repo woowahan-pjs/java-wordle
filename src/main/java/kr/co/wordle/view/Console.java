@@ -1,8 +1,9 @@
-package kr.co.wordle;
+package kr.co.wordle.view;
 
+import kr.co.wordle.support.InputValidator;
 import java.util.Scanner;
 
-import static kr.co.wordle.WordleGameConfig.MAX_ROUND;
+import static kr.co.wordle.config.WordleGameConfig.MAX_ROUND;
 
 public class Console {
 

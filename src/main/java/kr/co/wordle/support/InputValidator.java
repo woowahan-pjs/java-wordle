@@ -1,8 +1,8 @@
-package kr.co.wordle;
+package kr.co.wordle.support;
 
 import java.util.List;
 
-import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
+import static kr.co.wordle.config.WordleGameConfig.WORD_LENGTH;
 
 public class InputValidator {
 

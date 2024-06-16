@@ -1,4 +1,4 @@
-package kr.co.wordle;
+package kr.co.wordle.domain;
 
 public enum Tile {
     GREEN("🟩"),

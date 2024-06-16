@@ -1,4 +1,6 @@
-package kr.co.wordle;
+package kr.co.wordle.domain;
+
+import kr.co.wordle.domain.provider.AnswerProvider;
 
 public class Answer {
 
