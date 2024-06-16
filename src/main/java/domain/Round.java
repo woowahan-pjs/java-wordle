@@ -9,11 +9,23 @@ public class Round {
         this.current = current;
     }
 
-    void goNext() {
+    public void goNext() {
         this.current++;
     }
 
     Boolean isLastRound() {
         return this.current >= this.limit;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public boolean isNotFinalRound() {
+        return current <= limit;
     }
 }
