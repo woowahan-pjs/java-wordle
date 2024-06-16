@@ -30,7 +30,7 @@ public class Word {
 
     public MatchResult match(Word word) {
         List<Hint> hints = IntStream.range(0, value.length())
-                .mapToObj(i -> getHint(word.getCharBy(i), i))
+                .mapToObj(i -> getHint(word.value.charAt(i), i))
                 .collect(Collectors.toList());
 
         return new MatchResult(hints);
@@ -44,10 +44,6 @@ public class Word {
             return Hint.EXIST;
         }
         return Hint.NOT_EXIST;
-    }
-
-    private char getCharBy(int i) {
-        return value.charAt(i);
     }
 
     private Boolean exists(char inputChar) {
