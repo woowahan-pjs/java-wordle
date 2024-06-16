@@ -15,7 +15,7 @@ public class MatchResult implements Iterable<Hint>{
         return hints.iterator();
     }
 
-    public boolean isEndGame() {
+    public boolean isWinning() {
         return hints.stream().allMatch(Hint::isCorrect);
     }
 

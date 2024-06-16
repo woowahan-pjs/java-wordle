@@ -17,6 +17,7 @@ public class GameManager {
     private final Round round;
     private final MatchResults matchResults;
     private final Word answer;
+    private boolean isWinning;
 
     private final List<String> availableWords;
 
@@ -24,7 +25,6 @@ public class GameManager {
     private final InputView inputView;
     private final HintView hintView;
     private final RoundView roundView;
-    private boolean isWinning = false;
 
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
@@ -40,7 +40,7 @@ public class GameManager {
 
     public void start() {
         guideTextView.render(round.getLimit());
-        while(!this.isWinning && round.isNotFinalRound()) {
+        while(isNotWinning() && round.isNotFinalRound()) {
             startRound();
         }
     }
@@ -59,7 +59,7 @@ public class GameManager {
 
         checkAnswer(inputWord);
 
-        if(this.isWinning) {
+        if(isWinning()) {
             roundView.render(round.getCurrent(),round.getLimit());
         }
 
@@ -70,8 +70,18 @@ public class GameManager {
     private void checkAnswer(Word inputWord) {
         MatchResult matchResultOfInput = answer.match(inputWord);
         this.matchResults.add(matchResultOfInput);
-
-        this.isWinning = matchResultOfInput.isEndGame();
+        setWinning(matchResultOfInput.isWinning());
     }
 
+    private boolean isNotWinning(){
+        return !isWinning();
+    }
+
+    private boolean isWinning() {
+        return isWinning;
+    }
+
+    private void setWinning(boolean winning) {
+        isWinning = winning;
+    }
 }
