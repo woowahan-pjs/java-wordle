@@ -12,11 +12,13 @@ public class Wordle {
     private final IOView ioView;
     private final WordsReader wordsReader;
     private final WordleValidator wordleValidator;
+    private final TileService tileService;
 
-    public Wordle(IOView ioView, WordsReader wordsReader, WordleValidator wordleValidator) {
+    public Wordle(IOView ioView, WordsReader wordsReader, WordleValidator wordleValidator, TileService tileService) {
         this.ioView = ioView;
         this.wordsReader = wordsReader;
         this.wordleValidator = wordleValidator;
+        this.tileService = tileService;
     }
 
     public void start() {
@@ -49,8 +51,7 @@ public class Wordle {
                 continue;
             }
 
-            // Answer vs Input
-            Tiles tiles = compareLetters(answerLetters, inputLetters);
+            Tiles tiles = tileService.create(answerLetters, inputLetters);
             String tile = tiles.toString();
             tileHistory.add(tile);
 
@@ -70,29 +71,6 @@ public class Wordle {
             }
 
             ioView.printHistories(tileHistory);
-
         }
-    }
-
-    public static Tiles compareLetters(Letters answerLetters, Letters inputLetters) {
-        LetterCounter letterCounter = new LetterCounter(answerLetters);
-        Tiles tiles = new Tiles(answerLetters.size());
-
-        Letters samePositionAndValueLetters = answerLetters.findSamePositionAndValueLetters(inputLetters);
-        letterCounter.decreaseCount(samePositionAndValueLetters);
-        tiles.addGreenTile(samePositionAndValueLetters);
-
-        Letters sameValueLetters = answerLetters.findSameValueLetters(inputLetters);
-        Letters sameValueLettersForGrayTile = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
-        tiles.addGrayTile(sameValueLettersForGrayTile);
-
-        Letters sameValueLettersForYellowTile = letterCounter.filterCanDecreaseCount(sameValueLetters);
-        letterCounter.decreaseCount(sameValueLettersForYellowTile);
-        tiles.addYellowTile(sameValueLettersForYellowTile);
-
-        Letters noneMatchingLetters = answerLetters.findNoneMatchingLetters(inputLetters);
-        tiles.addGrayTile(noneMatchingLetters);
-
-        return tiles;
     }
 }

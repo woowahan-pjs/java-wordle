@@ -46,19 +46,17 @@ public class Letters {
     }
 
     public Letters findSamePositionAndValueLetters(Letters other) {
-        List<Letter> filteredLetters = other.getLetters()
-                .stream()
-                .filter(this::contains)
+        List<Letter> filteredLetters = letters.stream()
+                .filter(other::contains)
                 .toList();
 
         return new Letters(filteredLetters);
     }
 
     public Letters findSameValueLetters(Letters other) {
-        List<Letter> filteredLetters = other.getLetters()
-                .stream()
-                .filter(letter -> !contains(letter))
-                .filter(this::isOnlySameValue)
+        List<Letter> filteredLetters = letters.stream()
+                .filter(letter -> !other.contains(letter))
+                .filter(other::isOnlySameValue)
                 .toList();
 
         return new Letters(filteredLetters);
@@ -70,15 +68,18 @@ public class Letters {
     }
 
     public Letters findNoneMatchingLetters(Letters other) {
-        Set<Character> collect = this.letters.stream()
-            .map(Letter::getValue)
-            .collect(Collectors.toSet());
-
-        List<Letter> filteredLetters = other.letters
-                .stream()
-                .filter(letter -> !collect.contains(letter.getValue()))
+        Set<Character> otherValues = other.extractValues();
+        List<Letter> filteredLetters = letters.stream()
+                .filter(letter -> !otherValues.contains(letter.getValue()))
                 .toList();
+
         return new Letters(filteredLetters);
+    }
+
+    private Set<Character> extractValues() {
+        return letters.stream()
+                .map(Letter::getValue)
+                .collect(Collectors.toSet());
     }
 
     public int size() {
