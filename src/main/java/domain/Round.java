@@ -13,10 +13,6 @@ public class Round {
         this.current++;
     }
 
-    Boolean isLastRound() {
-        return this.current >= this.limit;
-    }
-
     public int getLimit() {
         return limit;
     }

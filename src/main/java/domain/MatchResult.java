@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,10 +8,6 @@ public class MatchResult implements Iterable<Hint>{
 
     public MatchResult(List<Hint> hints) {
         this.hints = hints;
-    }
-
-    public MatchResult() {
-        this.hints = new ArrayList<>();
     }
 
     @Override
