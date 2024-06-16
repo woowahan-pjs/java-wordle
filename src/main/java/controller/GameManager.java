@@ -54,7 +54,14 @@ public class GameManager {
         // 라운드 입력 view
         String input = inputView.input();
 
-        InputWord inputWord = new InputWord(input, this.availableWords);
+        InputWord inputWord;
+        try {
+            inputWord = new InputWord(input, this.availableWords);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         MatchResults matchResultOfInput = inputWord.match(answer);
         this.matchResults.add(matchResultOfInput);
 

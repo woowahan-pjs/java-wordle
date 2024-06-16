@@ -125,7 +125,7 @@ spill
 - [x] 검증
   - [x] 5글자 검증  
   - [x] 영단어 검증
-- [ ] 예외 try catch  
+- [x] 예외 try catch  
 - [ ] GameManager에 있는 List<MatchResults> 의 변수명 변경  
 - [ ] HintView에 3depth 줄이기  
 - [ ] InputWOrd의 마지막 테스트함수 이름  
