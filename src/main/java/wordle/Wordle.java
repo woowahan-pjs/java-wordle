@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Wordle {
 
+    private static final LocalDate CUTOFF_DATE = LocalDate.of(2021, 6, 19);
+    private static final int TRY_COUNT_LIMIT = 6;
     private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
 
     private final IOView ioView;
@@ -21,7 +23,7 @@ public class Wordle {
         ioView.printInitGameMessage();
 
         List<String> wordList = wordsReader.read();
-        Words words = new Words(wordList, LocalDate.of(2021, 6, 19));
+        Words words = new Words(wordList, CUTOFF_DATE);
         LocalDate now = LocalDate.now();
 //        String wordOfDay = words.getWordOfDay(now);
         String wordOfDay = "apple";
@@ -30,8 +32,9 @@ public class Wordle {
 
         TileHistory tileHistory = new TileHistory();
         int tryCount = 0;
-        while (tryCount < 6) {
-            LetterCounter letterCounter = new LetterCounter(answerLetters);
+        while (tryCount < TRY_COUNT_LIMIT) {
+            tryCount++;
+
             ioView.printInputAnswerMessage();
             String input = ioView.inputAnswer();
 
@@ -47,51 +50,49 @@ public class Wordle {
             }
 
             // Answer vs Input
-            Result result = checkContainsValue(answerLetters, inputLetters, letterCounter);
-            String tile = result.toString();
+            Tiles tiles = compareLetters(answerLetters, inputLetters);
+            String tile = tiles.toString();
             tileHistory.add(tile);
 
             // 정답이면 탈출, 6번 초과 실패
             if (ANSWER_TILE.equals(tile)) {
                 // 정답 여부만 체크
-                ioView.printTryCount(tryCount + 1, 6);
+                ioView.printTryCount(tryCount, TRY_COUNT_LIMIT);
                 ioView.printHistories(tileHistory);
                 break;
             }
 
-            if (tryCount == 5) {
-                ioView.printTryCount("X", 6);
+            // 6번째 시도 시 틀렸을 때
+            if (tryCount == TRY_COUNT_LIMIT) {
+                ioView.printTryCount("X", TRY_COUNT_LIMIT);
                 ioView.printHistories(tileHistory);
                 break;
             }
 
             ioView.printHistories(tileHistory);
 
-            tryCount++;
         }
     }
 
-    public static Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
-        Result result = new Result(5);
+    public static Tiles compareLetters(Letters answerLetters, Letters inputLetters) {
+        LetterCounter letterCounter = new LetterCounter(answerLetters);
+        Tiles tiles = new Tiles(answerLetters.size());
 
-        // 초록색 타일
         Letters samePositionAndValueLetters = answerLetters.findSamePositionAndValueLetters(inputLetters);
         letterCounter.decreaseCount(samePositionAndValueLetters);
-        result.addGreenTile(samePositionAndValueLetters);
+        tiles.addGreenTile(samePositionAndValueLetters);
 
-        // 노란색 타일
         Letters sameValueLetters = answerLetters.findSameValueLetters(inputLetters);
-        Letters filteredSameValueLetters = letterCounter.filterCanDecreaseCount(sameValueLetters);
-        Letters filteredSameValueLetters2 = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
-        letterCounter.decreaseCount(filteredSameValueLetters);
-        result.addYellowTile(filteredSameValueLetters);
+        Letters sameValueLettersForGrayTile = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
+        tiles.addGrayTile(sameValueLettersForGrayTile);
 
-        // 회색 타일
-        result.addGrayTile(filteredSameValueLetters2);
+        Letters sameValueLettersForYellowTile = letterCounter.filterCanDecreaseCount(sameValueLetters);
+        letterCounter.decreaseCount(sameValueLettersForYellowTile);
+        tiles.addYellowTile(sameValueLettersForYellowTile);
 
         Letters noneMatchingLetters = answerLetters.findNoneMatchingLetters(inputLetters);
-        result.addGrayTile(noneMatchingLetters);
+        tiles.addGrayTile(noneMatchingLetters);
 
-        return result;
+        return tiles;
     }
 }

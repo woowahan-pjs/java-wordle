@@ -80,4 +80,8 @@ public class Letters {
                 .toList();
         return new Letters(filteredLetters);
     }
+
+    public int size() {
+        return letters.size();
+    }
 }

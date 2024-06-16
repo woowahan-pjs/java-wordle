@@ -1,13 +1,9 @@
 package wordle;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,14 +12,13 @@ class WordleTest {
 
     @ParameterizedTest
     @MethodSource("provideResultData")
-    void checkContainsValue(Letters inputLetters, String resultData) {
+    void compareLetters(Letters inputLetters, String resultData) {
         List<Letter> answerLetterList = List.of(new Letter(0, 'a'), new Letter(1, 'p'), new Letter(2, 'p'), new Letter(3, 'l'), new Letter(4, 'e'));
         Letters answerLetters = new Letters(answerLetterList);
-        LetterCounter letterCounter = new LetterCounter(answerLetters);
 
-        Result result = Wordle.checkContainsValue(answerLetters, inputLetters, letterCounter);
+        Tiles tiles = Wordle.compareLetters(answerLetters, inputLetters);
 
-        assertThat(result.toString()).isEqualTo(resultData);
+        assertThat(tiles.toString()).isEqualTo(resultData);
     }
 
     public static Stream<Arguments> provideResultData() {
