@@ -29,7 +29,7 @@ public class GameManager {
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
-        this.round = new Round(6, 1);
+        this.round = new Round(ROUND_LIMIT);
         this.matchResults = new MatchResults();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();

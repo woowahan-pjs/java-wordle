@@ -4,9 +4,13 @@ public class Round {
     private final int limit;
     private int current;
 
-    public Round(int limit, int current) {
+    private Round(int limit, int current) {
         this.limit = limit;
         this.current = current;
+    }
+
+    public Round(int limit) {
+        this(limit, 1);
     }
 
     public void goNext() {
