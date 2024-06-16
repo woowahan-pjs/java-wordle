@@ -1,19 +1,21 @@
 package controller;
 
-import domain.*;
+import domain.MatchResult;
+import domain.MatchResults;
+import domain.Round;
+import domain.Word;
 import ui.GuideTextView;
 import ui.HintView;
 import ui.InputView;
 import ui.RoundView;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
     private Round round;
     private MatchResults matchResults;
-    private Answer answer;
+    private Word answer;
 
     private List<String> availableWords;
 
@@ -21,13 +23,13 @@ public class GameManager {
     private InputView inputView;
     private HintView hintView;
     private RoundView roundView;
-    private boolean isEndGame = false;
+    private boolean isWinning = false;
 
     protected GameManager() {
     }
 
     public GameManager(List<String> availableWords) {
-        this.answer = new Answer(LocalDate.now(), availableWords);
+        this.answer = Word.createAnswer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
         this.round = new Round(6, 1);
         this.matchResults = new MatchResults();
@@ -40,7 +42,7 @@ public class GameManager {
 
     public void start() {
         guideTextView.render();
-        while(!this.isEndGame && round.isNotFinalRound()) {
+        while(!this.isWinning && round.isNotFinalRound()) {
             startRound();
         }
     }
@@ -49,26 +51,29 @@ public class GameManager {
         // 라운드 입력 view
         String input = inputView.input();
 
-        InputWord inputWord;
+        Word inputWord;
         try {
-            inputWord = new InputWord(input, this.availableWords);
+            inputWord = Word.createInput(input, this.availableWords);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
         }
 
-        MatchResult matchResultOfInput = answer.match(inputWord);
-        this.matchResults.add(matchResultOfInput);
+        checkAnswer(inputWord);
 
-        // 정답 확인
-        boolean isEndGame = matchResultOfInput.isEndGame();
-        if(isEndGame) {
+        if(this.isWinning) {
             roundView.render(round.getCurrent(),round.getLimit());
-            this.isEndGame = isEndGame;
         }
 
-        // 힌트 노출
         hintView.render(this.matchResults);
         round.goNext();
     }
+
+    private void checkAnswer(Word inputWord) {
+        MatchResult matchResultOfInput = answer.match(inputWord);
+        this.matchResults.add(matchResultOfInput);
+
+        this.isWinning = matchResultOfInput.isEndGame();
+    }
+
 }

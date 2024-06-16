@@ -13,9 +13,9 @@ class AnswerTest {
     @DisplayName("정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다")
     void answerSelectTest() {
         List<String> words = List.of("apple", "banana", "cherry", "date", "elderberry");
-        Answer answer = new Answer(LocalDate.of(2021, 6, 20), words);
+        Word answer = Word.createAnswer(LocalDate.of(2021, 6, 20), words);
 
-        assertThat(answer).isEqualTo(new Answer("banana"));
+        assertThat(answer).isEqualTo(new Word("banana"));
     }
 
 
@@ -24,8 +24,8 @@ class AnswerTest {
     void matchTest() {
         List<String> words = List.of("apple", "banan", "cherr");
 
-        InputWord inputWord = new InputWord("cherr", words);
-        Answer answer = new Answer("czzzh");
+        Word inputWord = Word.createInput("cherr", words);
+        Word answer = new Word("czzzh");
         MatchResult matchResults = answer.match(inputWord);
 
         MatchResult expected = new MatchResult(List.of(
@@ -43,8 +43,8 @@ class AnswerTest {
     void matchLocationTest() {
         List<String> words = List.of("rxxrx");
 
-        InputWord inputWord = new InputWord("rxxrx", words);
-        Answer answer = new Answer("cherr");
+        Word inputWord = Word.createInput("rxxrx", words);
+        Word answer = new Word("cherr");
         MatchResult matchResults = answer.match(inputWord);
 
         MatchResult expected = new MatchResult(List.of(
@@ -62,8 +62,8 @@ class AnswerTest {
     void test() {
         List<String> words = List.of("colon");
 
-        InputWord inputWord = new InputWord("colon", words);
-        Answer answer = new Answer("colon");
+        Word inputWord = Word.createInput("colon", words);
+        Word answer = new Word("colon");
         MatchResult matchResults = answer.match(inputWord);
 
         MatchResult expected = new MatchResult(List.of(
