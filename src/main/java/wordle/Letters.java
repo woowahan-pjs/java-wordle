@@ -27,10 +27,6 @@ public class Letters {
         return letters;
     }
 
-    public boolean equalsPositionAndValue(Letter letter) {
-        return letters.contains(letter);
-    }
-
     public boolean lessThan(int size) {
         return letters.size() < size;
     }
