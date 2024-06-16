@@ -32,7 +32,6 @@ public class Word {
         List<Hint> hints = IntStream.range(0, value.length())
                 .mapToObj(i -> getHint(word.getCharBy(i), i))
                 .collect(Collectors.toList());
-
         return new MatchResult(hints);
     }
 
