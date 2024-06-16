@@ -16,7 +16,7 @@ public class MatchResults implements Iterable<MatchResult> {
         return this.results.iterator();
     }
 
-    public void add(MatchResult matchResultOfInput) {
-        this.results.add(matchResultOfInput);
+    public void add(MatchResult matchResult) {
+        this.results.add(matchResult);
     }
 }
