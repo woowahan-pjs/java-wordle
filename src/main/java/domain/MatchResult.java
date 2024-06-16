@@ -1,39 +1,31 @@
 package domain;
 
-public class MatchResult {
-    private char inputChar;
-    private Hint hint;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-    public MatchResult(char inputChar, Hint hint) {
-        this.inputChar = inputChar;
-        this.hint = hint;
+public class MatchResult implements Iterable<Hint>{
+    private final List<Hint> hints;
+
+    public MatchResult(List<Hint> hints) {
+        this.hints = hints;
     }
 
-    public String getTile() {
-        return hint.getTile();
-    }
-
-
-    public boolean isCorrect() {
-        return Hint.CORRECT.equals(hint);
+    public MatchResult() {
+        this.hints = new ArrayList<>();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MatchResult that = (MatchResult) o;
-
-        if (inputChar != that.inputChar) return false;
-        return hint == that.hint;
+    public Iterator<Hint> iterator() {
+        return hints.iterator();
     }
 
-    @Override
-    public int hashCode() {
-        int result = inputChar;
-        result = 31 * result + (hint != null ? hint.hashCode() : 0);
-        return result;
+    public boolean isEndGame() {
+        return hints.stream().allMatch(Hint::isCorrect);
+    }
+    
+    public void add(Hint hint) {
+        hints.add(hint);
     }
 }
 

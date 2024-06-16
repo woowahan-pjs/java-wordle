@@ -7,26 +7,30 @@ public class InputWord {
     private final String value;
     private final static int MAX_LENGTH = 5;
 
-    public MatchResults match(Answer answer){
-        ArrayList<MatchResult> matchResults = new ArrayList<>();
-        for(int i = 0; i< value.length(); i++){
-            char c = value.charAt(i);
-            if(answer.isCorrect(i, c)){
-                matchResults.add(new MatchResult(c, Hint.CORRECT));
-                continue;
-            }
-            if(answer.exists(c)){
-                matchResults.add(new MatchResult(c, Hint.EXIST));
-                continue;
-            }
-            matchResults.add(new MatchResult(c, Hint.NOT_EXIST));
-        }
-        return new MatchResults(matchResults);
-    }
+//    public MatchResults match(Answer answer){
+//        ArrayList<MatchResult> matchResults = new ArrayList<>();
+//        for(int i = 0; i< value.length(); i++){
+//            char c = value.charAt(i);
+//            if(answer.isCorrect(i, c)){
+//                matchResults.add(new MatchResult(c, Hint.CORRECT));
+//                continue;
+//            }
+//            if(answer.exists(c)){
+//                matchResults.add(new MatchResult(c, Hint.EXIST));
+//                continue;
+//            }
+//            matchResults.add(new MatchResult(c, Hint.NOT_EXIST));
+//        }
+//        return new MatchResults(matchResults);
+//    }
 
     public InputWord(String value, List<String> availableWords) {
         this.value = value;
         validate(value, availableWords);
+    }
+
+    public int getLength() {
+        return value.length();
     }
 
     private void validate(String input, List<String> availableWords) {
@@ -39,7 +43,7 @@ public class InputWord {
 
     private void validateOnlyEnglish(String input) {
         if(!input.matches("^[a-zA-Z]+$")){
-            throw new IllegalArgumentException("영단어를 입력해주세요. [{" + input + "}]");
+            throw new IllegalArgumentException("영단어를 입력해주세요. [" + input + "]");
         }
     }
 
@@ -56,5 +60,7 @@ public class InputWord {
     }
 
 
-
+    public char getCharBy(int i) {
+        return value.charAt(i);
+    }
 }

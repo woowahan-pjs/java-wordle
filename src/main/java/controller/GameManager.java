@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Answer;
-import domain.InputWord;
-import domain.MatchResults;
-import domain.Round;
+import domain.*;
 import ui.GuideTextView;
 import ui.HintView;
 import ui.InputView;
@@ -15,7 +12,7 @@ import java.util.List;
 
 public class GameManager {
     private Round round;
-    private List<MatchResults> matchResults;
+    private MatchResults matchResults;
     private Answer answer;
 
     private List<String> availableWords;
@@ -27,15 +24,13 @@ public class GameManager {
     private boolean isEndGame = false;
 
     protected GameManager() {
-        this.matchResults = new ArrayList<>();
-        this.availableWords = new ArrayList<>();
     }
 
     public GameManager(List<String> availableWords) {
         this.answer = new Answer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
         this.round = new Round(6, 1);
-        this.matchResults = new ArrayList<>();
+        this.matchResults = new MatchResults();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
         this.hintView = new HintView();
@@ -62,7 +57,7 @@ public class GameManager {
             return;
         }
 
-        MatchResults matchResultOfInput = inputWord.match(answer);
+        MatchResult matchResultOfInput = answer.match(inputWord);
         this.matchResults.add(matchResultOfInput);
 
         // 정답 확인

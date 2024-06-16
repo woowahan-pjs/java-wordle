@@ -1,6 +1,5 @@
 package domain;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -27,6 +26,24 @@ public class Answer {
         return value.charAt(index) == inputChar;
     }
 
+
+    public MatchResult match(InputWord inputWord) {
+        MatchResult matchResult = new MatchResult();
+        for(int i = 0; i< inputWord.getLength(); i++){
+            char c = inputWord.getCharBy(i);
+            if(isCorrect(i, c)){
+                matchResult.add(Hint.CORRECT);
+                continue;
+            }
+            if(exists(c)){
+                matchResult.add(Hint.EXIST);
+                continue;
+            }
+            matchResult.add(Hint.NOT_EXIST);
+        }
+        return matchResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,4 +58,8 @@ public class Answer {
     public int hashCode() {
         return value != null ? value.hashCode() : 0;
     }
+
+
+
+
 }

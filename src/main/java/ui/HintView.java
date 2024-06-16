@@ -1,16 +1,19 @@
 package ui;
 
+import domain.MatchResult;
 import domain.MatchResults;
 
-import java.util.List;
-
 public class HintView {
-    public void render(List<MatchResults> matchResults) {
+    public void render(MatchResults matchResults) {
         matchResults.forEach(matchResultEachRound -> {
-            matchResultEachRound.forEach(matchResult -> {
-                System.out.print(matchResult.getTile());
-            });
+            renderTiles(matchResultEachRound);
             System.out.println();
+        });
+    }
+
+    private void renderTiles(MatchResult matchResultEachRound) {
+        matchResultEachRound.forEach(matchResult -> {
+            System.out.print(matchResult.getTile());
         });
     }
 }
