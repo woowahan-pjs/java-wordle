@@ -7,28 +7,36 @@ public class WordleGame {
     private final Answer answer;
     private final StringBuilder roundResults;
 
+    private int currentRound;
+
     public WordleGame() {
         this.console = new Console();
         this.answer = new Answer();
         this.roundResults = new StringBuilder();
+        this.currentRound = 0;
     }
 
     public void start() {
-        int currentRound = 1;
         console.init();
-        while (currentRound <= MAX_ROUND) {
-            String input = console.userInput();
-            Round round = new Round(input);
-            roundResults.append(round.roundResult(answer)).append("\n");
-
-            if (round.isFinished()) {
-                console.printRound(currentRound, MAX_ROUND);
-                console.printRoundResult(roundResults);
-                break;
-            }
-
-            console.printRoundResult(roundResults);
+        Round round = null;
+        while (isRoundInProgress(round, roundResults)) {
             currentRound++;
+            String input = console.userInput();
+            round = new Round(input);
+            roundResults.append(round.roundResult(answer)).append("\n");
+            console.printRoundResult(roundResults);
         }
+    }
+
+    private boolean isRoundInProgress(Round round, StringBuilder roundResults) {
+        if (round == null) {
+            return true;
+        }
+        if (round.isFinished()) {
+            console.printRound(currentRound, MAX_ROUND);
+            console.printRoundResult(roundResults);
+            return false;
+        }
+        return currentRound <= MAX_ROUND;
     }
 }

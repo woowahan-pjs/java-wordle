@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-
 public class AnswerProvider {
 
     private static final LocalDate REFERENCE_DATE = LocalDate.of(2021, 6, 19);

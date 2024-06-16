@@ -16,7 +16,8 @@ public class Answer {
     }
 
     private void countPerCharacter() {
-        for (char ch : value.toCharArray()) {
+        char[] chars = value.toCharArray();
+        for (char ch : chars) {
             countPerCharacter[ch - 'a']++;
         }
     }

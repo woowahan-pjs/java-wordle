@@ -16,11 +16,16 @@ public class WordFileReader {
     }
 
     public static List<String> readWordsInFile() {
+        URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
+        if (resource == null) {
+            return Collections.emptyList();
+        }
+        return readAllLines(resource);
+    }
+
+    private static List<String> readAllLines(URL resource) {
         try {
-            URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
-            if (resource != null) {
-                return Files.readAllLines(Paths.get(resource.toURI()));
-            }
+            return Files.readAllLines(Paths.get(resource.toURI()));
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }

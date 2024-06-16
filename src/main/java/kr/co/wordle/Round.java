@@ -1,5 +1,7 @@
 package kr.co.wordle;
 
+import java.util.Arrays;
+
 import static kr.co.wordle.WordleGameConfig.WORD_LENGTH;
 
 public class Round {
@@ -17,7 +19,7 @@ public class Round {
 
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
-        int[] countPerCharacter = answer.getCountPerCharacter();
+        int[] countPerCharacter = Arrays.copyOf(answer.getCountPerCharacter(), 26);
 
         for (int i = 0; i< WORD_LENGTH; i++) {
             Tile key = getTile(countPerCharacter, answer.charAt(i), inputChars[i]);
