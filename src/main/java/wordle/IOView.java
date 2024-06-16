@@ -1,5 +1,6 @@
 package wordle;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
@@ -22,8 +23,10 @@ public class IOView {
         return scanner.nextLine();
     }
 
-    public void printHistories(TileHistory tileHistory) {
-        System.out.println(tileHistory);
+    public void printTiles(List<Tiles> tiles) {
+        for (Tiles tile : tiles) {
+            System.out.println(tile);
+        }
     }
 
     public void printTryCount(int tryCount, int totalCount) {

@@ -1,6 +1,13 @@
 package wordle;
 
+import java.util.List;
+
 public class TileService {
+
+    private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
+
+    private TileStorage tileStorage = new TileStorage();
+
     public Tiles create(Letters answerLetters, Letters inputLetters) {
         LetterCounter letterCounter = new LetterCounter(answerLetters);
         Tiles tiles = new Tiles(answerLetters.size());
@@ -20,6 +27,16 @@ public class TileService {
         Letters noneMatchingLetters = inputLetters.findNoneMatchingLetters(answerLetters);
         tiles.addGrayTile(noneMatchingLetters);
 
+        tileStorage.add(tiles);
+
         return tiles;
+    }
+
+    public boolean isAnswer(Tiles tiles) {
+        return ANSWER_TILE.equals(tiles.toString());
+    }
+
+    public List<Tiles> findAll() {
+        return tileStorage.findAll();
     }
 }

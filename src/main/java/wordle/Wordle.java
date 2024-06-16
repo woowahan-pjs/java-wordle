@@ -7,7 +7,6 @@ public class Wordle {
 
     private static final LocalDate CUTOFF_DATE = LocalDate.of(2021, 6, 19);
     private static final int TRY_COUNT_LIMIT = 6;
-    private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
 
     private final IOView ioView;
     private final WordsReader wordsReader;
@@ -32,7 +31,6 @@ public class Wordle {
 
         Letters answerLetters = new Letters(wordOfDay);
 
-        TileHistory tileHistory = new TileHistory();
         int tryCount = 0;
         while (tryCount < TRY_COUNT_LIMIT) {
             tryCount++;
@@ -52,25 +50,23 @@ public class Wordle {
             }
 
             Tiles tiles = tileService.create(answerLetters, inputLetters);
-            String tile = tiles.toString();
-            tileHistory.add(tile);
 
             // 정답이면 탈출, 6번 초과 실패
-            if (ANSWER_TILE.equals(tile)) {
+            if (tileService.isAnswer(tiles)) {
                 // 정답 여부만 체크
                 ioView.printTryCount(tryCount, TRY_COUNT_LIMIT);
-                ioView.printHistories(tileHistory);
+                ioView.printTiles(tileService.findAll());
                 break;
             }
 
             // 6번째 시도 시 틀렸을 때
             if (tryCount == TRY_COUNT_LIMIT) {
                 ioView.printTryCount("X", TRY_COUNT_LIMIT);
-                ioView.printHistories(tileHistory);
+                ioView.printTiles(tileService.findAll());
                 break;
             }
 
-            ioView.printHistories(tileHistory);
+            ioView.printTiles(tileService.findAll());
         }
     }
 }
