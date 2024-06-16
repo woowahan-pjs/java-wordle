@@ -39,7 +39,7 @@ public class GameManager {
 
 
     public void start() {
-        guideTextView.render();
+        guideTextView.render(round.getLimit());
         while(!this.isWinning && round.isNotFinalRound()) {
             startRound();
         }
