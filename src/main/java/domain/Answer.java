@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.time.Duration;
@@ -20,14 +19,12 @@ public class Answer {
         int index = diffDay % availableWords.size();
         this.value = availableWords.get(index);
     }
-
-
     Boolean exists(char inputChar) {
         return value.indexOf(inputChar) != -1;
     }
 
     Boolean isCorrect(int index, char inputChar) {
-        return value.indexOf(inputChar) == index;
+        return value.charAt(index) == inputChar;
     }
 
     @Override
