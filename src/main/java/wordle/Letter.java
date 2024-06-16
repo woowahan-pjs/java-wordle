@@ -16,6 +16,10 @@ public class Letter {
         return position;
     }
 
+    public char getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -31,9 +35,5 @@ public class Letter {
     @Override
     public int hashCode() {
         return Objects.hash(position, value);
-    }
-
-    public String getValue() {
-        return String.valueOf(value);
     }
 }

@@ -27,11 +27,11 @@ public class Wordle {
         String wordOfDay = "apple";
 
         Letters answerLetters = new Letters(wordOfDay);
-        LetterCounter letterCounter = new LetterCounter(answerLetters);
 
         TileHistory tileHistory = new TileHistory();
         int tryCount = 0;
         while (tryCount < 6) {
+            LetterCounter letterCounter = new LetterCounter(answerLetters);
             ioView.printInputAnswerMessage();
             String input = ioView.inputAnswer();
 
@@ -82,10 +82,13 @@ public class Wordle {
         // 노란색 타일
         Letters sameValueLetters = answerLetters.findSameValueLetters(inputLetters);
         Letters filteredSameValueLetters = letterCounter.filterCanDecreaseCount(sameValueLetters);
+        Letters filteredSameValueLetters2 = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
         letterCounter.decreaseCount(filteredSameValueLetters);
         result.addYellowTile(filteredSameValueLetters);
 
         // 회색 타일
+        result.addGrayTile(filteredSameValueLetters2);
+
         Letters noneMatchingLetters = answerLetters.findNoneMatchingLetters(inputLetters);
         result.addGrayTile(noneMatchingLetters);
 
