@@ -29,10 +29,11 @@ class RoundTest {
 
     @ParameterizedTest
     @CsvSource(value = {"cigar:cigar:GREEN", "stink:marry:GRAY", "marry:karma:YELLOW"}, delimiter = ':')
-    void 정답과_비교(String input, String answer, String tile) {
+    void 정답과_비교(String input, String strAnswer, String tile) {
         Round round = new Round(input);
+        Answer answer = new Answer(strAnswer);
         Tile expected = Tile.valueOf(tile);
-        Tile result = round.getTile(new Answer(answer), 0, input.charAt(0));
+        Tile result = round.getTile(answer.getCountPerCharacter(), answer.charAt(0), input.charAt(0));
         Assertions.assertEquals(expected, result);
     }
 
