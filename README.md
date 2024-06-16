@@ -103,21 +103,8 @@ spill
 - ui
     - 비교 결과, 라운드 출력
 
-
-### 회고
-240608
-- 도메인 클래스만 만들어보기
-- 패키지구조
-- 8:50 ~ 9:30
-
-240611
-- 단어목록 읽어오기
-- 비교로직없이 한사이클 돌기?
-  - ui 전부 구현
-
-
 ## 리팩터링 포인트
-- [ ] final 붙혀주기
+- [x] final 붙혀주기
 - [x] Inputword 에 availableWords 상태로 가지고 있을 필요는 없다.  
 - [x] InputWord와 Answer를 합치기?  
 - [x] match 에 for 문안 함수로 발라내기  
@@ -129,7 +116,9 @@ spill
 - [x] GameManager에 있는 List<MatchResults> 의 변수명 변경  
 - [x] HintView에 3depth 줄이기  
 - [x] InputWord의 마지막 테스트함수 이름  
-- [x] MatchResult에 inputChar가 쓰이지 않고 있어서 클래스 자체를 지우고 그냥 Hint만 쓰기  
-- [ ] GameManager의 의존성 줄여두기  
-- [ ] String 말고 char 배열로 쓸지?  
+- [x] MatchResult에 inputChar가 쓰이지 않고 있어서 클래스 자체를 지우고 그냥 Hint만 쓰기
+- ~~[ ] 구조 변경~~
+  - ~~[ ] GameManager의 의존성 줄여두기~~  
+  - ~~[ ] String 말고 char 배열로 쓸지?  -> 좀 더 고민해보기~~
+  - ~~[ ] 분리된 view 부분 합칠지?~~ 
 
