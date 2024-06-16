@@ -2,6 +2,7 @@ package wordle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Letters {
@@ -43,11 +44,24 @@ public class Letters {
         return letters.contains(letter);
     }
 
-    public Letters findSameLetters(Letters other) {
+    public Letters findSamePositionAndValueLetters(Letters other) {
         List<Letter> filteredLetters = this.letters.stream()
             .filter(other::contains)
             .toList();
 
         return new Letters(filteredLetters);
+    }
+
+    public Letters findSameValueLetters(Letters other) {
+        List<Letter> filteredLetters = this.letters.stream()
+                .filter(other::isOnlySameValue)
+                .toList();
+
+        return new Letters(filteredLetters);
+    }
+
+    private boolean isOnlySameValue(Letter other) {
+        return letters.stream()
+                .anyMatch(letter -> (Objects.equals(letter.getValue(), other.getValue())) && letter.getPosition() != other.getPosition());
     }
 }

@@ -1,6 +1,7 @@
 package wordle;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LetterCounter {
@@ -29,5 +30,14 @@ public class LetterCounter {
 
     public boolean canNotDecreaseCount(Letter inputLetter) {
         return letterCountMap.containsKey(inputLetter) && letterCountMap.get(inputLetter) <= 0;
+    }
+
+    public Letters filterCanDecreaseCount(Letters letters) {
+        List<Letter> filteredLetters = letters.getLetters()
+                .stream()
+                .filter(this::canDecreaseCount)
+                .toList();
+
+        return new Letters(filteredLetters);
     }
 }

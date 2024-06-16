@@ -1,10 +1,7 @@
 package wordle;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import org.w3c.dom.css.Counter;
 
 public class Wordle {
 
@@ -76,10 +73,18 @@ public class Wordle {
 
     private Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
         Result result = new Result(5);
-        Letters sameLetters = answerLetters.findSameLetters(inputLetters);
-        letterCounter.decreaseCount(sameLetters);
-        result.addGreenTile(sameLetters);
 
+        // 초록색 타일
+        Letters samePositionAndValueLetters = answerLetters.findSamePositionAndValueLetters(inputLetters);
+        letterCounter.decreaseCount(samePositionAndValueLetters);
+        result.addGreenTile(samePositionAndValueLetters);
+
+        // 노란색 타일
+        Letters sameValueLetters = answerLetters.findSameValueLetters(inputLetters);
+        Letters filteredSameValueLetters = letterCounter.filterCanDecreaseCount(sameValueLetters);
+        result.addYellowTile(filteredSameValueLetters);
+
+        // 회색 타일
 
         return null;
     }

@@ -38,4 +38,10 @@ public class Result {
     public String toString() {
         return String.join("", tiles);
     }
+
+    public void addYellowTile(Letters letters) {
+        for(Letter letter : letters.getLetters()) {
+            tiles[letter.getPosition()] = YELLOW_TILE;
+        }
+    }
 }
