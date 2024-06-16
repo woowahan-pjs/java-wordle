@@ -23,7 +23,8 @@ public class Wordle {
         List<String> wordList = wordsReader.read();
         Words words = new Words(wordList, LocalDate.of(2021, 6, 19));
         LocalDate now = LocalDate.now();
-        String wordOfDay = words.getWordOfDay(now);
+//        String wordOfDay = words.getWordOfDay(now);
+        String wordOfDay = "apple";
 
         Letters answerLetters = new Letters(wordOfDay);
         LetterCounter letterCounter = new LetterCounter(answerLetters);
@@ -47,7 +48,6 @@ public class Wordle {
 
             // Answer vs Input
             Result result = checkContainsValue(answerLetters, inputLetters, letterCounter);
-
             String tile = result.toString();
             tileHistory.add(tile);
 
@@ -82,11 +82,14 @@ public class Wordle {
         // 노란색 타일
         Letters sameValueLetters = answerLetters.findSameValueLetters(inputLetters);
         Letters filteredSameValueLetters = letterCounter.filterCanDecreaseCount(sameValueLetters);
+        letterCounter.decreaseCount(filteredSameValueLetters);
         result.addYellowTile(filteredSameValueLetters);
 
         // 회색 타일
+        Letters noneMatchingLetters = answerLetters.findNoneMatchingLetters(inputLetters);
+        result.addGrayTile(noneMatchingLetters);
 
-        return null;
+        return result;
     }
 
     private Result checkContainsValue(Answer answer, List<Letter> inputLetters) {

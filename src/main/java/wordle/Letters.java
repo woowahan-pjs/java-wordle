@@ -3,6 +3,7 @@ package wordle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Letters {
@@ -63,5 +64,16 @@ public class Letters {
     private boolean isOnlySameValue(Letter other) {
         return letters.stream()
                 .anyMatch(letter -> (Objects.equals(letter.getValue(), other.getValue())) && letter.getPosition() != other.getPosition());
+    }
+
+    public Letters findNoneMatchingLetters(Letters other) {
+        Set<String> collect = this.letters.stream()
+            .map(Letter::getValue)
+            .collect(Collectors.toSet());
+
+        List<Letter> filteredLetters = other.letters.stream()
+            .filter(letter -> !collect.contains(letter.getValue()))
+            .toList();
+        return new Letters(filteredLetters);
     }
 }

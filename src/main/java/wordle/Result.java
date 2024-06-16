@@ -44,4 +44,10 @@ public class Result {
             tiles[letter.getPosition()] = YELLOW_TILE;
         }
     }
+
+    public void addGrayTile(Letters letters) {
+        for (Letter letter : letters.getLetters()) {
+            tiles[letter.getPosition()] = GRAY_TILE;
+        }
+    }
 }
