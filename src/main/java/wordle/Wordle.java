@@ -71,7 +71,7 @@ public class Wordle {
         }
     }
 
-    private Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
+    public static Result checkContainsValue(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter) {
         Result result = new Result(5);
 
         // 초록색 타일
@@ -91,32 +91,6 @@ public class Wordle {
 
         Letters noneMatchingLetters = answerLetters.findNoneMatchingLetters(inputLetters);
         result.addGrayTile(noneMatchingLetters);
-
-        return result;
-    }
-
-    private Result checkContainsValue(Answer answer, List<Letter> inputLetters) {
-        Result result = new Result(5);
-
-        for (Letter inputLetter : inputLetters) {
-            if (answer.equalsPositionAndValue(inputLetter)) {
-                answer.decreaseCount(inputLetter);
-                result.addGreenTile(inputLetter.getPosition());
-            }
-        }
-
-        for (Letter inputLetter : inputLetters) {
-            if (answer.canDecreaseCount(inputLetter)) {
-                answer.decreaseCount(inputLetter);
-                result.addYellowTile(inputLetter.getPosition());
-            } else if (answer.canNotDecreaseCount(inputLetter)) {
-                if (result.isNullOrNotGreenTile(inputLetter.getPosition())) {
-                    result.addGrayTile(inputLetter.getPosition());
-                }
-            } else {
-                result.addGrayTile(inputLetter.getPosition());
-            }
-        }
 
         return result;
     }

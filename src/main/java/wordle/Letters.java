@@ -57,6 +57,7 @@ public class Letters {
     public Letters findSameValueLetters(Letters other) {
         List<Letter> filteredLetters = other.getLetters()
                 .stream()
+                .filter(letter -> !contains(letter))
                 .filter(this::isOnlySameValue)
                 .toList();
 
