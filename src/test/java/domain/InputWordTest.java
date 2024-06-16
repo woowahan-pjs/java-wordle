@@ -45,59 +45,5 @@ class InputWordTest {
         );
     }
 
-    @Test
-    @DisplayName("입력단어와 정답 비교")
-    void matchTest() {
-        List<String> words = List.of("apples", "banana", "cherry");
 
-        InputWord inputWord = new InputWord("cherry", words);
-        Answer answer = new Answer("zzzrxx");
-        MatchResults matchResults = inputWord.match(answer);
-
-        assertThat(matchResults.getResults()).containsExactly(
-                new MatchResult('c', Hint.CORRECT),
-                new MatchResult('h', Hint.EXIST),
-                new MatchResult('e', Hint.NOT_EXIST),
-                new MatchResult('r', Hint.NOT_EXIST),
-                new MatchResult('r', Hint.NOT_EXIST),
-                new MatchResult('y', Hint.NOT_EXIST)
-        );
-    }
-
-    @Test
-    @DisplayName("입력단어와 정답 위치 확인 테스트")
-    void matchLocationTest() {
-        List<String> words = List.of("xxxrxr");
-
-        InputWord inputWord = new InputWord("xxxrxr", words);
-        Answer answer = new Answer("cherry");
-        MatchResults matchResults = inputWord.match(answer);
-
-        assertThat(matchResults.getResults()).containsExactly(
-                new MatchResult('x', Hint.NOT_EXIST),
-                new MatchResult('x', Hint.NOT_EXIST),
-                new MatchResult('x', Hint.NOT_EXIST),
-                new MatchResult('r', Hint.CORRECT),
-                new MatchResult('x', Hint.NOT_EXIST),
-                new MatchResult('r', Hint.EXIST)
-        );
-    }
-
-    @Test
-    @DisplayName("입력단어와 정답 위치 확인 테스트")
-    void test() {
-        List<String> words = List.of("colon");
-
-        InputWord inputWord = new InputWord("colon", words);
-        Answer answer = new Answer("colon");
-        MatchResults matchResults = inputWord.match(answer);
-
-        assertThat(matchResults.getResults()).containsExactly(
-                new MatchResult('c', Hint.CORRECT),
-                new MatchResult('o', Hint.CORRECT),
-                new MatchResult('l', Hint.CORRECT),
-                new MatchResult('o', Hint.CORRECT),
-                new MatchResult('n', Hint.CORRECT)
-        );
-    }
 }

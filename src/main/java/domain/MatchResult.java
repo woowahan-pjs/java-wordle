@@ -23,9 +23,19 @@ public class MatchResult implements Iterable<Hint>{
     public boolean isEndGame() {
         return hints.stream().allMatch(Hint::isCorrect);
     }
-    
+
     public void add(Hint hint) {
         hints.add(hint);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.hints.equals(((MatchResult) obj).hints);
     }
 }
 
