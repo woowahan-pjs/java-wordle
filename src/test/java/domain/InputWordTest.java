@@ -30,6 +30,13 @@ class InputWordTest {
     }
 
     @Test
+    @DisplayName("입력단어 글자수 유효성 검증 실패 테스트")
+    void validateInputWordLength() {
+        List<String> words = List.of("apple", "abcdef");
+        assertThrows(IllegalArgumentException.class,() -> new InputWord("abcdef", words));
+    }
+
+    @Test
     @DisplayName("입력단어와 정답 비교")
     void matchTest() {
         List<String> words = List.of("apples", "banana", "cherry");
