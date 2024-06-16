@@ -8,8 +8,8 @@ public enum Hint {
 
     private final String tile;
 
-    Hint(String hint) {
-        this.tile = hint;
+    Hint(String tile) {
+        this.tile = tile;
     }
 
     public String getTile() {
