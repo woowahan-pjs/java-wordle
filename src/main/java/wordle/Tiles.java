@@ -1,5 +1,7 @@
 package wordle;
 
+import java.util.Arrays;
+
 public class Tiles {
 
     private static final String GRAY_TILE = "⬜";
@@ -28,6 +30,11 @@ public class Tiles {
         for (Letter letter : letters.getLetters()) {
             tiles[letter.getPosition()] = GRAY_TILE;
         }
+    }
+
+    public boolean isFilledWith(String otherTile) {
+        return Arrays.stream(tiles)
+                .allMatch(tile -> tile.equals(otherTile));
     }
 
     @Override

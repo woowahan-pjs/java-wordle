@@ -14,7 +14,7 @@ class TileServiceTest {
     @ParameterizedTest
     @MethodSource("provideResultData")
     void compareLetters(Letters inputLetters, String resultData) {
-        TileService tileService = new TileService();
+        TileService tileService = new TileService(new TileStorage());
         List<Letter> answerLetterList = List.of(new Letter(0, 'a'), new Letter(1, 'p'), new Letter(2, 'p'), new Letter(3, 'l'), new Letter(4, 'e'));
         Letters answerLetters = new Letters(answerLetterList);
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TileService {
 
-    private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
+    private static final String ANSWER_TILE = "\uD83D\uDFE9";
 
     private final TileStorage tileStorage;
 
@@ -37,7 +37,7 @@ public class TileService {
     }
 
     public boolean isAnswer(Tiles tiles) {
-        return ANSWER_TILE.equals(tiles.toString());
+        return tiles.isFilledWith(ANSWER_TILE);
     }
 
     public List<Tiles> findAll() {
