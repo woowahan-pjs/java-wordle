@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TileStorage {
 
-    private List<Tiles> storage = new ArrayList<>();
+    private final List<Tiles> storage = new ArrayList<>();
 
     public void add(Tiles tiles) {
         storage.add(tiles);

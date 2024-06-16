@@ -6,7 +6,11 @@ public class TileService {
 
     private static final String ANSWER_TILE = "\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9\uD83D\uDFE9";
 
-    private TileStorage tileStorage = new TileStorage();
+    private final TileStorage tileStorage;
+
+    public TileService(TileStorage tileStorage) {
+        this.tileStorage = tileStorage;
+    }
 
     public Tiles create(Letters answerLetters, Letters inputLetters) {
         LetterCounter letterCounter = new LetterCounter(answerLetters);
