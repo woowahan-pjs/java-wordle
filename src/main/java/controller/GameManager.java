@@ -13,20 +13,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GameManager {
-    private Round round;
-    private MatchResults matchResults;
-    private Word answer;
+    private final static int ROUND_LIMIT = 6;
+    private final Round round;
+    private final MatchResults matchResults;
+    private final Word answer;
 
-    private List<String> availableWords;
+    private final List<String> availableWords;
 
-    private GuideTextView guideTextView;
-    private InputView inputView;
-    private HintView hintView;
-    private RoundView roundView;
+    private final GuideTextView guideTextView;
+    private final InputView inputView;
+    private final HintView hintView;
+    private final RoundView roundView;
     private boolean isWinning = false;
-
-    protected GameManager() {
-    }
 
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
