@@ -22,16 +22,6 @@ public class LetterCounter {
         }
     }
 
-    public boolean canDecreaseCount(Letter letter) {
-        char value = letter.getValue();
-        return letterCountMap.containsKey(value) && letterCountMap.get(value) > 0;
-    }
-
-    public boolean canNotDecreaseCount(Letter letter) {
-        char value = letter.getValue();
-        return letterCountMap.containsKey(value) && letterCountMap.get(value) <= 0;
-    }
-
     public Letters filterCanDecreaseCount(Letters letters) {
         List<Letter> filteredLetters = letters.getLetters()
                 .stream()
@@ -41,6 +31,11 @@ public class LetterCounter {
         return new Letters(filteredLetters);
     }
 
+    private boolean canDecreaseCount(Letter letter) {
+        char value = letter.getValue();
+        return letterCountMap.containsKey(value) && letterCountMap.get(value) > 0;
+    }
+
     public Letters filterCanNotDecreaseCount(Letters letters) {
         List<Letter> filteredLetters = letters.getLetters()
                 .stream()
@@ -48,5 +43,9 @@ public class LetterCounter {
                 .toList();
 
         return new Letters(filteredLetters);
+    }
+
+    private boolean canNotDecreaseCount(Letter letter) {
+        return !canDecreaseCount(letter);
     }
 }
