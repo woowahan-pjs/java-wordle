@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MatchResults implements Iterable<MatchResult> {
-    private List<MatchResult> results;
 
     public MatchResults(List<MatchResult> results) {
         this.results = results;
     }
+    private final List<MatchResult> results;
 
     public MatchResults() {
         this.results = new ArrayList<>();

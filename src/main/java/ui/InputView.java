@@ -3,7 +3,7 @@ package ui;
 import java.util.Scanner;
 
 public class InputView {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     public String input() {
         System.out.println("정답을 입력해 주세요.");
 

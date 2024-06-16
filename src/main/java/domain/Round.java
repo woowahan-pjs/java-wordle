@@ -1,7 +1,7 @@
 package domain;
 
 public class Round {
-    private int limit;
+    private final int limit;
     private int current;
 
     public Round(int limit, int current) {
