@@ -1,14 +1,16 @@
 package ui;
 
 import domain.MatchResults;
-import java.util.Scanner;
+
+import java.util.List;
 
 public class HintView {
-    public void render(MatchResults matchResults) {
-//            Scanner sc = new Scanner(System.in);
-//            return sc.nextLine();
-
-        System.out.println("render grid");
+    public void render(List<MatchResults> matchResults) {
+        matchResults.forEach(matchResultEachRound -> {
+            matchResultEachRound.forEach(matchResult -> {
+                System.out.print(matchResult.getTile());
+            });
+            System.out.println();
+        });
     }
 }
-1
