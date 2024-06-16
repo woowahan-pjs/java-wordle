@@ -39,7 +39,7 @@ class AnswerTest {
     }
 
     @Test
-    @DisplayName("입력단어와 정답 위치 확인 테스트")
+    @DisplayName("입력단어와 중복 단어 위치 확인 테스트")
     void matchLocationTest() {
         List<String> words = List.of("rxxrx");
 
@@ -58,7 +58,7 @@ class AnswerTest {
     }
 
     @Test
-    @DisplayName("입력단어와 정답 위치 확인 테스트")
+    @DisplayName("전부정답인 경우")
     void test() {
         List<String> words = List.of("colon");
 
