@@ -46,7 +46,6 @@ public class GameManager {
     }
 
     private void startRound() {
-        // 라운드 입력 view
         String input = inputView.input();
 
         Word inputWord;
