@@ -21,12 +21,10 @@ public class Round {
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
         int[] countPerCharacter = Arrays.copyOf(answer.getCountPerCharacter(), 26);
-
         for (int i = 0; i< WORD_LENGTH; i++) {
             Tile key = getTile(countPerCharacter, answer.charAt(i), inputChars[i]);
             roundResult.update(key);
         }
-
         return roundResult.toString();
     }
 
