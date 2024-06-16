@@ -120,7 +120,7 @@ spill
 - [ ] final 붙혀주기
 - [x] Inputword 에 availableWords 상태로 가지고 있을 필요는 없다.  
 - [x] InputWord와 Answer를 합치기?  
-- [ ] match 에 for 문안 함수로 발라내기  
+- [x] match 에 for 문안 함수로 발라내기  
 - [x] isEndGame 플래그 변수 네이밍 변경
 - [x] 검증
   - [x] 5글자 검증  
@@ -128,7 +128,7 @@ spill
 - [x] 예외 try catch  
 - [x] GameManager에 있는 List<MatchResults> 의 변수명 변경  
 - [x] HintView에 3depth 줄이기  
-- [x] InputWOrd의 마지막 테스트함수 이름  
+- [x] InputWord의 마지막 테스트함수 이름  
 - [x] MatchResult에 inputChar가 쓰이지 않고 있어서 클래스 자체를 지우고 그냥 Hint만 쓰기  
 - [ ] GameManager의 의존성 줄여두기  
 - [ ] String 말고 char 배열로 쓸지?  

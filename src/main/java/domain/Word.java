@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Word {
     private final static int MAX_LENGTH = 5;
-    private String value;
+    private final String value;
 
     protected Word(String value) {
         this.value = value;
@@ -17,6 +19,7 @@ public class Word {
         LocalDate fixedDate = LocalDate.of(2021, 6, 19);
         int diffDay = Period.between(fixedDate, currentDate).getDays();
         int index = diffDay % availableWords.size();
+
         return new Word(availableWords.get(index));
     }
 
@@ -26,28 +29,25 @@ public class Word {
     }
 
     public MatchResult match(Word word) {
-        MatchResult matchResult = new MatchResult();
-        for(int i = 0; i< word.getLength(); i++){
-            char c = word.getCharBy(i);
-            if(isCorrect(i, c)){
-                matchResult.add(Hint.CORRECT);
-                continue;
-            }
-            if(exists(c)){
-                matchResult.add(Hint.EXIST);
-                continue;
-            }
-            matchResult.add(Hint.NOT_EXIST);
+        List<Hint> hints = IntStream.range(0, value.length())
+                .mapToObj(i -> getHint(word.getCharBy(i), i))
+                .collect(Collectors.toList());
+
+        return new MatchResult(hints);
+    }
+
+    private Hint getHint(Character character, int index) {
+        if (isCorrect(index, character)) {
+            return Hint.CORRECT;
         }
-        return matchResult;
+        if (exists(character)) {
+            return Hint.EXIST;
+        }
+        return Hint.NOT_EXIST;
     }
 
     private char getCharBy(int i) {
         return value.charAt(i);
-    }
-
-    private int getLength() {
-        return this.value.length();
     }
 
     private Boolean exists(char inputChar) {
@@ -67,19 +67,19 @@ public class Word {
     }
 
     private static void validateOnlyEnglish(String input) {
-        if(!input.matches("^[a-zA-Z]+$")){
+        if (!input.matches("^[a-zA-Z]+$")) {
             throw new IllegalArgumentException("영단어를 입력해주세요. [" + input + "]");
         }
     }
 
     private static void validateLength(String input) {
-        if(input.length() != MAX_LENGTH){
+        if (input.length() != MAX_LENGTH) {
             throw new IllegalArgumentException(MAX_LENGTH + "자리의 단어를 입력해주세요.");
         }
     }
 
     private static void validateContain(String input, List<String> availableWords) {
-        if(!availableWords.contains(input)){
+        if (!availableWords.contains(input)) {
             throw new IllegalArgumentException("입력 불가능한 단어입니다.");
         }
     }
