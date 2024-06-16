@@ -122,9 +122,9 @@ spill
 - [ ] InputWord와 Answer를 합치기?  
 - [ ] match 에 for 문안 함수로 발라내기  
 - [ ] isEndGame 플래그 변수 네이밍 변경
-- [ ] 검증
+- [x] 검증
   - [x] 5글자 검증  
-  - [ ] 영단어 검증
+  - [x] 영단어 검증
 - [ ] 예외 try catch  
 - [ ] GameManager에 있는 List<MatchResults> 의 변수명 변경  
 - [ ] HintView에 3depth 줄이기  

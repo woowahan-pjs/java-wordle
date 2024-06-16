@@ -2,10 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,6 +31,18 @@ class InputWordTest {
     void validateInputWordLength() {
         List<String> words = List.of("apple", "abcdef");
         assertThrows(IllegalArgumentException.class,() -> new InputWord("abcdef", words));
+    }
+
+
+    @Test
+    @DisplayName("입력단어 영단어 유효성 검증 실패 테스트")
+    void validateInputWordOnlyEnglish() {
+        List<String> words = List.of("apple", "abcd1", "안녕하세요");
+
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class,() -> new InputWord("abcd1", words)),
+                () -> assertThrows(IllegalArgumentException.class,() -> new InputWord("안녕하세요", words))
+        );
     }
 
     @Test
