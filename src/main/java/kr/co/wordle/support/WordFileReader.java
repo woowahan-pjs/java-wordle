@@ -1,12 +1,8 @@
 package kr.co.wordle.support;
 
-import kr.co.wordle.domain.provider.AnswerProvider;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Collections;
+import java.nio.file.Path;
 import java.util.List;
 
 import static kr.co.wordle.config.WordleGameConfig.WORDS_FILE_PATH;
@@ -17,19 +13,11 @@ public class WordFileReader {
     }
 
     public static List<String> readWordsInFile() {
-        URL resource = AnswerProvider.class.getClassLoader().getResource(WORDS_FILE_PATH);
-        if (resource == null) {
-            return Collections.emptyList();
-        }
-        return readAllLines(resource);
-    }
-
-    private static List<String> readAllLines(URL resource) {
+        Path wordsFilePath = Path.of(WORDS_FILE_PATH);
         try {
-            return Files.readAllLines(Paths.get(resource.toURI()));
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
+            return Files.readAllLines(wordsFilePath);
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
         }
-        return Collections.emptyList();
     }
 }
