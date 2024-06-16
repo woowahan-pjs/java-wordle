@@ -1,8 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class MatchResults implements Iterable<MatchResult> {
     private List<MatchResult> results;
@@ -11,16 +11,21 @@ public class MatchResults implements Iterable<MatchResult> {
         this.results = results;
     }
 
-    @Override
-    public Iterator<MatchResult> iterator() {
-        return results.iterator();
+    public MatchResults() {
+        this.results = new ArrayList<>();
     }
+
 
     public List<MatchResult> getResults() {
         return results;
     }
 
-    public boolean isEndGame() {
-        return results.stream().allMatch(MatchResult::isCorrect);
+    @Override
+    public Iterator<MatchResult> iterator() {
+        return this.results.iterator();
+    }
+
+    public void add(MatchResult matchResultOfInput) {
+        this.results.add(matchResultOfInput);
     }
 }

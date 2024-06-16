@@ -15,4 +15,8 @@ public enum Hint {
     public String getTile() {
         return tile;
     }
+
+    public static boolean isCorrect(Hint hint) {
+        return Hint.CORRECT.equals(hint);
+    }
 }
