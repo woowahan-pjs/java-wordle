@@ -11,13 +11,13 @@ public class AnswerTest {
     @Test
     void 정답은_정답과_동일한_답안이_들어오면_모두_MATCHED인_결과를_반환한다() {
         // given
-        Answer answer = new Answer("cigar");
-        Guess guess = new Guess("cigar");
+        final Answer answer = new Answer("cigar");
+        final Guess guess = new Guess("cigar");
 
-        Result expectedResult = new Result(List.of(ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED));
+        final Result expectedResult = new Result(List.of(ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED));
 
         // when
-        Result result = answer.examineResult(guess);
+        final Result result = answer.examineResult(guess);
 
         // then
         assertEquals(result, expectedResult);

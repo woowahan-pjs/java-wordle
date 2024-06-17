@@ -15,7 +15,7 @@ public class WordTest {
     @Test
     void 게임_단어에_5글자_알파벳_소문자_문자가_들어오면_생성할_수_있다() {
         // given
-        String word = "cigar";
+        final String word = "cigar";
 
         assertDoesNotThrow(() -> new Word(word));
     }
@@ -23,7 +23,7 @@ public class WordTest {
     @Test
     void 게임_단어에_알파벳_소문자가_아닌_문자가_들어오면_예외를_반환한다() {
         // given
-        String word = "Cigar";
+        final String word = "Cigar";
 
         // when & then
         assertThrows(RuntimeException.class, () -> new Word(word));
