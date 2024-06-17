@@ -20,13 +20,16 @@ public class ConsoleOutputView implements OutputView {
     @Override
     public void showRecord(Record record) {
         for (Results results : record) {
-            for (Result result : results) {
-                String s = findTile(result);
-                System.out.print(s);
-            }
+            showResults(results);
             System.out.println();
         }
         System.out.println();
+    }
+
+    private static void showResults(Results results) {
+        for (Result result : results) {
+            System.out.print(findTile(result));
+        }
     }
 
     private static String findTile(Result result) {

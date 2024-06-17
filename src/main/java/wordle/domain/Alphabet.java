@@ -5,11 +5,13 @@ import wordle.exception.InvalidAlphabetException;
 
 public class Alphabet {
 
+    private static final char MIN_ALPHABET = 'a';
+    private static final char MAX_ALPHABET = 'z';
     private final char alphabet;
 
     public Alphabet(char alphabet) {
         char lowerAlphabet = Character.toLowerCase(alphabet);
-        if (lowerAlphabet < 'a' || lowerAlphabet > 'z') {
+        if (lowerAlphabet < MIN_ALPHABET || lowerAlphabet > MAX_ALPHABET) {
             throw new InvalidAlphabetException();
         }
 

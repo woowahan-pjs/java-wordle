@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import wordle.exception.WordNotExistException;
 import wordle.infra.FileReader;
 
 public class FileWordBookTest {
@@ -41,6 +42,7 @@ public class FileWordBookTest {
 
     @Test
     void WordBook에_없는_단어를_찾으면_예외를_던진다() {
-        assertThatThrownBy(() -> wordBook.find("ghost"));
+        assertThatThrownBy(() -> wordBook.find("ghost"))
+                .isInstanceOf(WordNotExistException.class);
     }
 }
