@@ -3,6 +3,7 @@ package wordle.domain;
 import java.util.Objects;
 
 public class Result implements Comparable<Result> {
+
     private final Tile tile;
     private final Position position;
 
@@ -32,14 +33,6 @@ public class Result implements Comparable<Result> {
         return Objects.hash(tile, position);
     }
 
-    @Override
-    public String toString() {
-        return "Result{" +
-                "tile=" + tile +
-                ", position=" + position +
-                '}';
-    }
-
     public boolean isSamePosition(Position position) {
         return this.position.equals(position);
     }
@@ -52,9 +45,11 @@ public class Result implements Comparable<Result> {
     public boolean isGreen() {
         return this.tile == Tile.GREEN;
     }
+
     public boolean isYellow() {
         return this.tile == Tile.YELLOW;
     }
+
     public boolean isGray() {
         return this.tile == Tile.GRAY;
     }

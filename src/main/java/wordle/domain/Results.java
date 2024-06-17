@@ -22,13 +22,8 @@ public class Results implements Iterable<Result> {
     }
 
     public boolean isCheckedPosition(Position position) {
-        for (Result result : results) {
-            if (result.isSamePosition(position)) {
-                return true;
-            }
-        }
-
-        return false;
+        return results.stream()
+                .anyMatch(result -> result.isSamePosition(position));
     }
 
     public boolean isAllGreen() {

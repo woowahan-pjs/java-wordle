@@ -9,7 +9,7 @@ public class Position implements Comparable<Position> {
     private final int position;
 
     public Position(int position) {
-        if(position < MIN_POSITION){
+        if (position < MIN_POSITION) {
             throw new InvalidPositionException();
         }
 
@@ -31,10 +31,6 @@ public class Position implements Comparable<Position> {
     @Override
     public int hashCode() {
         return Objects.hash(position);
-    }
-
-    public boolean notEquals(Position position) {
-        return !equals(position);
     }
 
     public int compareTo(Position position) {

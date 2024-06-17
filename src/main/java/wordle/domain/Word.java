@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 import wordle.exception.InvalidWordException;
 
 public class Word implements Iterable<Letter> {
@@ -24,55 +25,59 @@ public class Word implements Iterable<Letter> {
     }
 
     public Results compare(Word inputWord) {
-        CurrentResult currentResult = new CurrentResult(new ArrayList<>(this.letters));
-        for (Letter letter : inputWord) {
-            currentResult.findGreen(letter);
-        }
-
-        for (Letter letter : inputWord) {
-            currentResult.findYellow(letter);
-        }
-
-        for (Letter letter : inputWord) {
-            currentResult.fillEmptyToGray(letter);
-        }
-
-        return currentResult.results;
+        WordComparator wordComparator = new WordComparator(this.letters);
+        return wordComparator.compare(inputWord);
     }
 
-    static class CurrentResult {
+    static class WordComparator {
 
-        private final List<Letter> letters;
+        private final List<Letter> pendingLetters;
         private final Results results;
 
-        public CurrentResult(List<Letter> letters) {
-            this.letters = letters;
+        public WordComparator(List<Letter> letters) {
+            this.pendingLetters = new ArrayList<>(letters);
             this.results = new Results();
-
         }
 
-        public void findGreen(Letter targetLetter) {
-            for (Letter letter : letters) {
-                if (letter.equals(targetLetter)) {
-                    letters.remove(letter);
-                    results.add(new Result(Tile.GREEN, targetLetter.getPosition()));
-                    return;
-                }
+        public Results compare(Word inputWord) {
+            for (Letter letter : inputWord) {
+                process(letter, letter::equals, Tile.GREEN);
             }
-        }
 
-        public void findYellow(Letter targetLetter) {
-            for (Letter letter : letters) {
-                if (letter.isSameAlphabet(targetLetter)) {
-                    letters.remove(letter);
-                    results.add(new Result(Tile.YELLOW, targetLetter.getPosition()));
-                    return;
-                }
+            for (Letter letter : inputWord) {
+                process(letter, letter::isSameAlphabet, Tile.YELLOW);
             }
+
+            for (Letter letter : inputWord) {
+                fillEmptyToGray(letter);
+            }
+
+            return results;
         }
 
-        public void fillEmptyToGray(Letter targetLetter) {
-            letters.forEach(letter -> results.add(new Result(Tile.GRAY, targetLetter.getPosition())));
+        private void process(Letter targetLetter, Predicate<Letter> predicate, Tile tile) {
+            Position position = targetLetter.getPosition();
+            if (results.isCheckedPosition(position)) {
+                return;
+            }
+
+            pendingLetters.stream()
+                    .filter(predicate)
+                    .findFirst()
+                    .ifPresent(letter -> {
+                        pendingLetters.remove(letter);
+                        results.add(new Result(tile, position));
+                    });
+        }
+
+        private void fillEmptyToGray(Letter targetLetter) {
+            Position position = targetLetter.getPosition();
+            if (results.isCheckedPosition(position)) {
+                return;
+            }
+
+            pendingLetters.forEach(
+                    letter -> results.add(new Result(Tile.GRAY, position)));
         }
     }
 

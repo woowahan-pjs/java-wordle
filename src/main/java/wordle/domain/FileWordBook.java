@@ -6,10 +6,11 @@ import wordle.infra.FileReader;
 
 public class FileWordBook implements WordBook {
 
+    public static final String FILE_PATH = "words.txt";
     private final List<Word> words;
 
     public FileWordBook(FileReader fileReader) {
-        this.words = fileReader.readByLine("words.txt")
+        this.words = fileReader.readByLine(FILE_PATH)
                 .stream()
                 .map(Word::new)
                 .toList();

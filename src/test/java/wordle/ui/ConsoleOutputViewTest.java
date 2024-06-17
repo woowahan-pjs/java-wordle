@@ -21,7 +21,7 @@ class ConsoleOutputViewTest {
     private ConsoleOutputView consoleOutputView;
 
     @BeforeEach
-    protected final void init() {
+    void init() {
         standardOut = System.out;
         captor = new ByteArrayOutputStream();
         consoleOutputView = new ConsoleOutputView();
@@ -29,7 +29,7 @@ class ConsoleOutputViewTest {
     }
 
     @AfterEach
-    protected final void printOutput() {
+    void printOutput() {
         System.setOut(standardOut);
     }
 
