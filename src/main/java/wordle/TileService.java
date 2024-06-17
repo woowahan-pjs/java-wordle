@@ -16,10 +16,21 @@ public class TileService {
         LetterCounter letterCounter = new LetterCounter(answerLetters);
         Tiles tiles = new Tiles(answerLetters.size());
 
+        processSamePositionAndValueLetters(answerLetters, inputLetters, letterCounter, tiles);
+        processSameValueLetters(answerLetters, inputLetters, letterCounter, tiles);
+        processNoneMatchLetters(answerLetters, inputLetters, tiles);
+
+        tileStorage.add(tiles);
+        return tiles;
+    }
+
+    private void processSamePositionAndValueLetters(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter, Tiles tiles) {
         Letters samePositionAndValueLetters = inputLetters.findSamePositionAndValueLetters(answerLetters);
         letterCounter.decreaseCount(samePositionAndValueLetters);
         tiles.addGreenTile(samePositionAndValueLetters);
+    }
 
+    private void processSameValueLetters(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter, Tiles tiles) {
         Letters sameValueLetters = inputLetters.findSameValueLetters(answerLetters);
         Letters sameValueLettersForGrayTile = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
         tiles.addGrayTile(sameValueLettersForGrayTile);
@@ -27,13 +38,11 @@ public class TileService {
         Letters sameValueLettersForYellowTile = letterCounter.filterCanDecreaseCount(sameValueLetters);
         letterCounter.decreaseCount(sameValueLettersForYellowTile);
         tiles.addYellowTile(sameValueLettersForYellowTile);
+    }
 
+    private void processNoneMatchLetters(Letters answerLetters, Letters inputLetters, Tiles tiles) {
         Letters noneMatchingLetters = inputLetters.findNoneMatchingLetters(answerLetters);
         tiles.addGrayTile(noneMatchingLetters);
-
-        tileStorage.add(tiles);
-
-        return tiles;
     }
 
     public boolean isAnswer(Tiles tiles) {
