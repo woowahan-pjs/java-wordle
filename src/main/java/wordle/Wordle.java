@@ -63,18 +63,26 @@ public class Wordle {
             String input = console.inputAnswer();
             inputLetters = new Letters(input);
 
-            if (wordleValidator.isInvalidLength(inputLetters)) {
-                console.printInvalidLengthMessage();
-                continue;
-            }
-
-            if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
-                console.printNotInWordListMessage();
+            if (isInputLettersInvalid(words, inputLetters)) {
                 continue;
             }
 
             break;
         }
         return inputLetters;
+    }
+
+    private boolean isInputLettersInvalid(Words words, Letters inputLetters) {
+        if (wordleValidator.isInvalidLength(inputLetters)) {
+            console.printInvalidLengthMessage();
+            return true;
+        }
+
+        if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
+            console.printNotInWordListMessage();
+            return true;
+        }
+
+        return false;
     }
 }
