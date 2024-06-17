@@ -25,10 +25,9 @@ public class Wordle {
 
         List<String> wordList = wordsReader.read();
         Words words = new Words(wordList, CUTOFF_DATE);
-        LocalDate now = LocalDate.now();
-//        String wordOfDay = words.getWordOfDay(now);
-        String wordOfDay = "apple";
 
+        LocalDate now = LocalDate.now();
+        String wordOfDay = words.getWordOfDay(now);
         Letters answerLetters = new Letters(wordOfDay);
 
         int tryCount = 0;
@@ -37,8 +36,8 @@ public class Wordle {
 
             ioView.printInputAnswerMessage();
             String input = ioView.inputAnswer();
-
             Letters inputLetters = new Letters(input);
+
             if (wordleValidator.isInvalidLength(inputLetters)) {
                 ioView.printNotEnoughLettersMessage();
                 continue;
@@ -54,19 +53,27 @@ public class Wordle {
             // 정답이면 탈출, 6번 초과 실패
             if (tileService.isAnswer(tiles)) {
                 // 정답 여부만 체크
-                ioView.printTryCount(tryCount, TRY_COUNT_LIMIT);
-                ioView.printTiles(tileService.findAll());
+                printResult(tryCount);
                 break;
             }
 
             // 6번째 시도 시 틀렸을 때
             if (tryCount == TRY_COUNT_LIMIT) {
-                ioView.printTryCount("X", TRY_COUNT_LIMIT);
-                ioView.printTiles(tileService.findAll());
+                printResult();
                 break;
             }
 
             ioView.printTiles(tileService.findAll());
         }
+    }
+
+    private void printResult(int tryCount) {
+        ioView.printTryCount(tryCount, TRY_COUNT_LIMIT);
+        ioView.printTiles(tileService.findAll());
+    }
+
+    private void printResult() {
+        ioView.printTryCount("X", TRY_COUNT_LIMIT);
+        ioView.printTiles(tileService.findAll());
     }
 }
