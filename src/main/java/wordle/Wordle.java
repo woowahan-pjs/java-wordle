@@ -22,8 +22,7 @@ public class Wordle {
         console.printInitGameMessage();
 
         Words words = wordService.getWords();
-        String wordOfDay = words.getWordOfDay(LocalDate.now());
-        Letters answerLetters = new Letters(wordOfDay);
+        Letters answerLetters = createAnswerLetters(words);
 
         int tryCount = 0;
         while (tryCount < TRY_COUNT_LIMIT) {
@@ -44,6 +43,11 @@ public class Wordle {
 
             console.printTiles(tileService.findAll());
         }
+    }
+
+    private Letters createAnswerLetters(Words words) {
+        String wordOfDay = words.getWordOfDay(LocalDate.now());
+        return new Letters(wordOfDay);
     }
 
     private Letters getInputLetters(Words words) {
