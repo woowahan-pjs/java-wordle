@@ -9,7 +9,7 @@ public class WordTest {
     @Test
     void 게임_단어에_5글자가_아닌_문자열이_들어오면_예외를_발생한다() {
         // given when then
-        assertThrowsExactly(RuntimeException.class, () -> new Word("abcdef"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new Word("abcdef"));
     }
 
     @Test
