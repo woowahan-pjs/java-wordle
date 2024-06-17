@@ -1,5 +1,6 @@
 package wordle.view;
 
+import wordle.domain.Result;
 import wordle.domain.Results;
 
 import java.util.stream.Collectors;
@@ -8,8 +9,10 @@ public class ConsoleOutputView implements OutputView {
 
     private static final String WELCOME_MESSAGE = "WORDLE을 %s번 만에 맞춰 보세요.";
     private static final String RESULT_DESCRIPTION_MESSAGE = "시도의 결과는 타일의 색 변화로 나타납니다.";
-    public static final String INSERT_ANSWER_MESSAGE = "정답을 입력해 주세요.";
-    public static final String WRONG_WORD_MESSAGE = "단어가 올바르지 않습니다.";
+    private static final String INSERT_ANSWER_MESSAGE = "정답을 입력해 주세요.";
+    private static final String WRONG_WORD_MESSAGE = "단어가 올바르지 않습니다.";
+    private static final String NEW_LINE = "\n";
+    private static final String ATTEMPT_RESULT = "%s/%s";
 
     @Override
     public void welcome(final int maxAttempt) {
@@ -30,15 +33,17 @@ public class ConsoleOutputView implements OutputView {
     @Override
     public void showResults(final Results results, final int attempt, final int maxAttempt) {
         if (results.hasAnswer() || attempt == maxAttempt) {
-            System.out.println("%s/%s".formatted(results.size(), maxAttempt));
+            System.out.println(ATTEMPT_RESULT.formatted(results.size(), maxAttempt));
         }
-
         final String resultSentence = results.getResults().stream()
-                .map(it -> it.getResult().stream()
-                        .map(ResultColor::color)
-                        .collect(Collectors.joining())
-                ).collect(Collectors.joining("\n"));
-
+                .map(this::color)
+                .collect(Collectors.joining(NEW_LINE));
         System.out.println(resultSentence);
+    }
+
+    private String color(final Result result) {
+        return result.getResult().stream()
+                .map(ResultColor::color)
+                .collect(Collectors.joining());
     }
 }

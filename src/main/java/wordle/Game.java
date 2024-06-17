@@ -49,15 +49,10 @@ public class Game {
         try {
             outputView.insertWord();
             final Word word = inputView.inputWord();
-            return new Guess(wordList.find(word));
+            return new Guess(wordList.getWordIfExists(word));
         } catch (final Exception e) {
             outputView.wrongWord();
             return inputWord(wordList);
         }
     }
 }
-
-
-
-
-

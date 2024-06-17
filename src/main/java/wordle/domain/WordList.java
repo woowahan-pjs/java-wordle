@@ -15,9 +15,9 @@ public class WordList {
         return wordSelector.select(wordList);
     }
 
-    public Word find(final Word word) {
+    public Word getWordIfExists(final Word word) {
         return wordList.stream()
-                .filter(it -> it.equals(word))
+                .filter(word::equals)
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }

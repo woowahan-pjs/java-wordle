@@ -7,12 +7,12 @@ import java.nio.file.Paths;
 
 public class WordListFileReader implements WordListReader {
     private static final String FILE_PATH = "src/main/resources/words.txt";
-    private static final WordList wordList = initializeWordList();
+    private static final WordList wordList;
 
-    private static WordList initializeWordList() {
+    static {
         try {
             final Path path = Paths.get(FILE_PATH);
-            return new WordList(Files.readAllLines(path)
+            wordList = new WordList(Files.readAllLines(path)
                     .stream()
                     .map(Word::new)
                     .toList());

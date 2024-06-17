@@ -13,6 +13,6 @@ public class Application {
         final ConsoleOutputView outputView = new ConsoleOutputView();
         final WordListFileReader answerFileReader = new WordListFileReader();
         final Game game = new Game(inputView, outputView, answerFileReader);
-        game.start(new EpochDayBaseAnswerSelector(LocalDate.now()));
+        game.start(new EpochDayBaseAnswerSelector());
     }
 }

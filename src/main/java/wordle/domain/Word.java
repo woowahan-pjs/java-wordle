@@ -31,7 +31,7 @@ public class Word {
     }
 
     public Alphabet find(final int index) {
-        if(index < MINIMUM_INDEX || index >= alphabets.size()) {
+        if (index < MINIMUM_INDEX || index >= alphabets.size()) {
             throw new IllegalArgumentException("단어의 길이보다 작거나 같은 인덱스만 들어올 수 있습니다");
         }
         return alphabets.get(index);

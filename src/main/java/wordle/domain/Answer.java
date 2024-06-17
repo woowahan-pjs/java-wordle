@@ -33,8 +33,8 @@ public class Answer {
         if (alphabet == this.find(index)) {
             return ResultType.MATCHED;
         }
-        long answerCount = countAlphabets(alphabet, size());
-        long guessCount = guess.countAlphabets(alphabet, index + EXCLUDE_UNIT);
+        final long answerCount = countAlphabets(alphabet, size());
+        final long guessCount = guess.countAlphabets(alphabet, Math.addExact(index, EXCLUDE_UNIT));
         if (answerCount >= guessCount) {
             return ResultType.EXIST;
         }

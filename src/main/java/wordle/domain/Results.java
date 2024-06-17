@@ -17,7 +17,8 @@ public class Results {
     }
 
     public boolean hasAnswer() {
-        return results.stream().anyMatch(Result::allMatched);
+        return results.stream()
+                .anyMatch(Result::allMatched);
     }
 
     public void add(final Result result) {
