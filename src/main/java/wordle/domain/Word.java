@@ -54,7 +54,7 @@ public class Word implements Iterable<Letter> {
 
             return results;
         }
-        
+
         private void process(Letter targetLetter, Predicate<Letter> predicate, Tile tile) {
             Position position = targetLetter.getPosition();
             if (results.isCheckedPosition(position)) {
