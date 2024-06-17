@@ -1,6 +1,7 @@
 package wordle.model;
 
 public class WordleValidator {
+
     private static final int VALID_SIZE = 5;
 
     public boolean isInvalidLength(Letters letters) {

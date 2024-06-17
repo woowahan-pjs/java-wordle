@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LetterCounter {
+
     private final Map<Character, Integer> letterCountMap;
 
     public LetterCounter(Letters letters) {
