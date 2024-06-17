@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-public class IOView {
+public class Console {
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -15,7 +15,7 @@ public class IOView {
         System.out.println(stringJoiner);
     }
 
-    public void printInputAnswerMessage() {
+    public void printInputRequestMessage() {
         System.out.println("정답을 입력해 주세요.");
     }
 
@@ -37,7 +37,7 @@ public class IOView {
         System.out.println(tryCount + "/" + totalCount);
     }
 
-    public void printNotEnoughLettersMessage() {
+    public void printInvalidLengthMessage() {
         System.out.println("Invalid length!");
     }
 
