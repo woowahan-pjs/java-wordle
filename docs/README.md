@@ -19,29 +19,32 @@
 
 ## 용어 사전
 
-| 한글명    | 영문명            | 설명                                            |
-|--------|----------------|-----------------------------------------------|
-| 워들     | Wordle         | 5글자 영어 단어 맞추기 게임                              |
-| 단어장    | Word Book      | 이 게임에서 사용될 수 있는 단어 모음                         |
-| 입력 단어  | Input Word     | 플레이어가 입력하는 5글자 단어                             |
-| 정답 단어  | Answer Word    | 오늘 게임의 정답인 5글자 단어                             |
-| 글자     | Letter         | 단어를 구성하는 알파벳                                  |
-| 위치     | Position       | 단어를 구성하는 글자의 위치                               |
-| 플레이어   | Player         | 게임에 참여하는 사용자                                  |
-| 결과     | Result         | 입력단어와 정답단어를 비교해서 표현되는 타일모음                    |
-| 비교     | Compare        | 입력단어와 정답단어의 글자와 위치를 비교하는 행위                   |
-| 초록색 타일 | Green Tile     | 글자와 위치가 동일한 경우 표현되는 타일                        |
-| 노란색 타일 | Yellow Tile    | 글자는 포함되지만 위치가 다른 경우 표현되는 타일                   |
-| 회색 타일  | Gray Tile      | 글자와 위치가 모두 다른 경우 표현되는 타일                      |
-| 라운드    | Round          | 플레이어가 단어를 입력하는 횟수(6회)                         |
-| 결과모음   | Results        | 라운드가 진행될 때 마다 누적된 결과모음                        |
-| 기준일    | Base Date      | 오늘의 정답 단어를 계산하는 기준일(2021년 6월 19일)             |
+| 한글명    | 영문명            | 설명                                             |
+|--------|----------------|------------------------------------------------|
+| 워들     | Wordle         | 5글자 영어 단어 맞추기 게임                               |
+| 단어장    | Word Book      | 이 게임에서 사용될 수 있는 단어 모음                          |
+| 입력 단어  | Input Word     | 플레이어가 입력하는 5글자 단어                              |
+| 정답 단어  | Answer Word    | 오늘 게임의 정답인 5글자 단어                              |
+| 글자     | Letter         | 단어를 구성하는 알파벳                                   |
+| 영문     | Alphabet       | 글자를 구성하는 최소단위                                  |
+| 위치     | Position       | 단어를 구성하는 글자의 위치                                |
+| 플레이어   | Player         | 게임에 참여하는 사용자                                   |
+| 결과     | Result         | 입력단어와 정답단어를 비교해서 표현되는 타일모음                     |
+| 비교     | Compare        | 입력단어와 정답단어의 글자와 위치를 비교하는 행위                    |
+| 초록색 타일 | Green Tile     | 글자와 위치가 동일한 경우 표현되는 타일                         |
+| 노란색 타일 | Yellow Tile    | 글자는 포함되지만 위치가 다른 경우 표현되는 타일                    |
+| 회색 타일  | Gray Tile      | 글자와 위치가 모두 다른 경우 표현되는 타일                       |
+| 결과모음   | Results        | 라운드가 진행될 때 마다 누적된 결과모음                         |
+| 기록모음   | Record         | 누적된 결과모음의 기록                                   |
+| 기준일    | Base Date      | 오늘의 정답 단어를 계산하는 기준일(2021년 6월 19일)              |
 | 정답 공식  | Answer Formula | 오늘의 정답 단어를 계산하는 공식 `(현재 날짜 - 기준일) % 단어장의 단어 수` |
-| 시작     | Start          | 플레이어가 워들을 시작하는 행위                             |
-| 종료     | End            | 워들이 종료되는 행위(라운드가 전부 끝났거나, 그 전에 정답을 맞추면 종료된다)  |
+| 시작     | Start          | 플레이어가 워들을 시작하는 행위                              |
+| 종료     | End            | 워들이 종료되는 행위(라운드가 전부 끝났거나, 그 전에 정답을 맞추면 종료된다)   |
 
 ## 모델링
+
 ### 클래스 다이어그램
+
 ```mermaid
 ---
 title: Wordle
@@ -49,53 +52,108 @@ title: Wordle
 classDiagram
     class Word {
         -List<Letter> letters
-        +compare(Word word) Results
-        -compare(Letter letter) Result 
+        +compare(Word inputWord) Results
+        +equals(Object o) boolean
     }
-    class Letter{
-        -char alphabet
+
+    class WordComparator {
+        -List<Letter> pendingLetters
+        -Results results
+        +WordComparator(letters: List<Letter>)
+        +compare(inputWord: Word): Results
+        -process(targetLetter: Letter, predicate: Predicate<Letter>, tile: Tile)
+        -fillEmptyToGray(targetLetter: Letter)
+    }
+
+    Word --|> WordComparator
+
+    class Letter {
+        -Alphabet alphabet
         -Position position
-        +equals(Letter letter) boolean
-        +isSameAlphabetDifferentPosition(Letter letter) boolean 
+        +isSameAlphabet(Letter letter) boolean
+        +getPosition() Position
+        +equals(Object o) boolean
+    }
+
+    class Alphabet {
+        -char alphabet
+        +equals(Object o) boolean
+    }
+
+    class Position {
+        -char position
+        +compareTo(Position position) boolean
+        +equals(Object o) boolean
+    }
+    
+    class Record {
+        -List<Results> record
+        +add(Results results) void
+        +isEnd() boolean
+        +isCountOver() boolean
+        +existAllGreen() boolean
+        +iterator() Iterator<Results>
+        +size() int
     }
     class Results {
-        -Result[] results
+        -SortedSet<Result> results
         +add(Result result) void
         +isCheckedPosition(Position position) boolean
+        +isAllGreen() boolean
     }
     class Result {
         -Tile tile
         -Position poistion
+        +isSamePosition(Position position) boolean
+        +equals(Object o) boolean
+        +compareTo(Result result) int
+        +isGreen() boolean
+        +isYellow() boolean
+        +isGray() boolean
     }
-    class IWordComparable {
-        +compare(Word word) Results 
+    class Tile {
+        <<enumeration>>
+        +GREEN
+        +YELLOW
+        +GRAY
     }
-    class ETile {
-        -TileType type
+    class AnswerFormula {
+        <<interface>>
+        +calculate(int wordCount) int
     }
-    class AnswerFormula{
-        -Date baseDate
-        +calculate()
+    class BaseAnswerFormula {
+        +calculate(int wordCount) int
     }
+    BaseAnswerFormula ..|> AnswerFormula
     class Wordle {
         -WordBook wordBook
-        -Results results
-        -Round round
-        +start()
+        -InputView inputView
+        -OutputView outputView
+        -Record record
+        -AnswerFormula answerFormula
+        +startGame() void
+        -runGame(Word answerWord) void
+        -processTurn(Word answerWord) void
+        -concludeGame() void
+        -handleWrongAnswer(Runnable runnable) void
     }
     class WordBook {
-        -List<String> wordBook
+        <<interface>>
         +pick(AnswerFormula formula) Word
-        +exist(Word inputWord) boolean
+        +exist(Word word) boolean
+        +find(String target) Word
     }
-    class Round {
-        -final int ROUND = 6;
-        -int curruntRound;
-        +isEnd() boolean
+    class FileWordBook {
+        -List<Word> words
+        +pick(AnswerFormula formula) Word
+        +exist(Word word) boolean
+        +find(String target) Word
     }
+    FileWordBook ..|> WordBook
 ```
 
 ## 🚀 세부 요구 사항
+
 - 6x5 격자를 통해서 5글자 단어를 6번 만에 추측한다.
 - 플레이어가 답안을 제출하면 프로그램이 정답과 제출된 단어의 각 알파벳 종류와 위치를 비교해 판별한다.
 - 판별 결과는 흰색의 타일이 세 가지 색(초록색/노란색/회색) 중 하나로 바뀌면서 표현된다.
