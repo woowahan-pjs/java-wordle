@@ -17,7 +17,7 @@ public class AnswerTest {
         final Result expectedResult = new Result(List.of(ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED, ResultType.MATCHED));
 
         // when
-        final Result result = answer.examineResult(guess);
+        final Result result = answer.examine(guess);
 
         // then
         assertEquals(result, expectedResult);

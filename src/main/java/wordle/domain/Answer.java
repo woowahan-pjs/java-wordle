@@ -21,7 +21,7 @@ public class Answer {
         return word.find(index);
     }
 
-    public Result examineResult(final Guess guess) {
+    public Result examine(final Guess guess) {
         final List<ResultType> resultTypes = IntStream.range(START_INDEX, guess.size())
                 .mapToObj(i -> examineResultType(guess, i))
                 .toList();

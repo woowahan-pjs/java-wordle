@@ -26,10 +26,10 @@ public class Game {
         final WordList wordList = wordListReader.read();
         final Answer answer = new Answer(wordList.select(wordSelector));
         outputView.welcome(MAX_ATTEMPT);
-        execute(wordList, answer);
+        play(wordList, answer);
     }
 
-    private void execute(final WordList wordList, final Answer answer) {
+    private void play(final WordList wordList, final Answer answer) {
         final Results results = new Results();
         IntStream.range(START_ATTEMPT, MAX_ATTEMPT)
                 .boxed()
@@ -42,7 +42,7 @@ public class Game {
 
     private Result examine(final WordList wordList, final Answer answer) {
         final Guess guess = inputWord(wordList);
-        return answer.examineResult(guess);
+        return answer.examine(guess);
     }
 
     private Guess inputWord(final WordList wordList) {

@@ -22,10 +22,6 @@ public class WordList {
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public int size() {
-        return wordList.size();
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
