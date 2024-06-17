@@ -33,6 +33,7 @@ public class Position implements Comparable<Position> {
         return Objects.hash(position);
     }
 
+    @Override
     public int compareTo(Position position) {
         return Integer.compare(this.position, position.position);
     }
