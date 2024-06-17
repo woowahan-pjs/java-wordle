@@ -34,20 +34,7 @@ public class Wordle {
         while (tryCount < TRY_COUNT_LIMIT) {
             tryCount++;
 
-            ioView.printInputAnswerMessage();
-            String input = ioView.inputAnswer();
-            Letters inputLetters = new Letters(input);
-
-            if (wordleValidator.isInvalidLength(inputLetters)) {
-                ioView.printNotEnoughLettersMessage();
-                continue;
-            }
-
-            if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
-                ioView.printNotInWordListMessage();
-                continue;
-            }
-
+            Letters inputLetters = getInputLetters(words);
             Tiles tiles = tileService.create(answerLetters, inputLetters);
 
             // 정답이면 탈출, 6번 초과 실패
@@ -65,6 +52,28 @@ public class Wordle {
 
             ioView.printTiles(tileService.findAll());
         }
+    }
+
+    private Letters getInputLetters(Words words) {
+        Letters inputLetters;
+        while (true) {
+            ioView.printInputAnswerMessage();
+            String input = ioView.inputAnswer();
+            inputLetters = new Letters(input);
+
+            if (wordleValidator.isInvalidLength(inputLetters)) {
+                ioView.printNotEnoughLettersMessage();
+                continue;
+            }
+
+            if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
+                ioView.printNotInWordListMessage();
+                continue;
+            }
+
+            break;
+        }
+        return inputLetters;
     }
 
     private void printResult(int tryCount) {

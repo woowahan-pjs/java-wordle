@@ -38,7 +38,7 @@ public class IOView {
     }
 
     public void printNotEnoughLettersMessage() {
-        System.out.println("Not enough letters!");
+        System.out.println("Invalid length!");
     }
 
     public void printNotInWordListMessage() {
