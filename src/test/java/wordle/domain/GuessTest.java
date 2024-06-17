@@ -26,4 +26,13 @@ public class GuessTest {
 
         assertThrowsExactly(IllegalArgumentException.class, () -> guess.countAlphabets(Alphabet.t, 6));
     }
+
+    @Test
+    void 인덱스가_들어오면_해당_인덱스의_알파벳을_반환한다() {
+        final Guess guess = new Guess("tasty");
+
+        final Alphabet alphabet = guess.find(0);
+
+        assertEquals(alphabet, Alphabet.t);
+    }
 }
