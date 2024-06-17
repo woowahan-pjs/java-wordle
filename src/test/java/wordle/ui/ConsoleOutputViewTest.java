@@ -39,7 +39,7 @@ class ConsoleOutputViewTest {
 
         consoleOutputView.showRecord(record);
 
-        assertThat(captor.toString()).isEqualTo("""
+        assertThat(captor.toString()).isEqualToNormalizingNewlines("""
                 ⬜🟩⬜🟨⬜
                 ⬜⬜⬜🟨⬜
                 ⬜🟩🟨🟨⬜
@@ -56,7 +56,7 @@ class ConsoleOutputViewTest {
 
         consoleOutputView.successEnd(record);
 
-        assertThat(captor.toString()).isEqualTo("""
+        assertThat(captor.toString()).isEqualToNormalizingNewlines("""
                 
                 6/6
                                 
@@ -75,7 +75,7 @@ class ConsoleOutputViewTest {
 
         consoleOutputView.failEnd(record);
 
-        assertThat(captor.toString()).isEqualTo("""
+        assertThat(captor.toString()).isEqualToNormalizingNewlines("""
                 
                 X/6
                                 
