@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Word {
-    public static final int WORD_SIZE = 5;
+    private static final int FROM_INDEX = 0;
+    private static final int WORD_SIZE = 5;
     private final List<Alphabet> alphabets;
 
     public Word(final List<Alphabet> alphabets) {
@@ -33,11 +34,11 @@ public class Word {
         return alphabets.get(index);
     }
 
-    public long countAlphabets(final Alphabet alphabet, final int endIndex) {
-        if (endIndex > alphabets.size()) {
+    public long countAlphabets(final Alphabet alphabet, final int toIndex) {
+        if (toIndex > alphabets.size()) {
             throw new IllegalArgumentException("단어의 길이보다 작거나 같은 인덱스만 들어올 수 있습니다");
         }
-        return alphabets.subList(0, endIndex)
+        return alphabets.subList(FROM_INDEX, toIndex)
                 .stream()
                 .filter(it -> it.equals(alphabet))
                 .count();
