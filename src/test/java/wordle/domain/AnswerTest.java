@@ -36,4 +36,13 @@ public class AnswerTest {
 
         assertEquals(2, count);
     }
+
+
+    @Test
+    void 답안_길이보다_긴_인덱스가_들어오면_예외를_발생한다() {
+        final Answer answer = new Answer("tasty");
+
+        assertThrowsExactly(IllegalArgumentException.class, () -> answer.countAlphabets(Alphabet.t, 6));
+    }
+
 }
