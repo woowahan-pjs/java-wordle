@@ -37,20 +37,6 @@ public class Wordle {
         }
     }
 
-    private boolean isEnd(Tiles tiles, int tryCount) {
-        if (tileService.isAnswer(tiles)) {
-            console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
-            return true;
-        }
-
-        if (tryCount == TRY_COUNT_LIMIT) {
-            console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
-            return true;
-        }
-
-        return false;
-    }
-
     private Letters createAnswerLetters(Words words) {
         String wordOfDay = words.getWordOfDay(LocalDate.now());
         return new Letters(wordOfDay);
@@ -80,6 +66,20 @@ public class Wordle {
 
         if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
             console.printNotInWordListMessage();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isEnd(Tiles tiles, int tryCount) {
+        if (tileService.isAnswer(tiles)) {
+            console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
+            return true;
+        }
+
+        if (tryCount == TRY_COUNT_LIMIT) {
+            console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
             return true;
         }
 
