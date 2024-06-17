@@ -54,4 +54,11 @@ public class AnswerTest {
 
         assertEquals(alphabet, Alphabet.t);
     }
+
+    @Test
+    void 알파벳_조회시_답안_길이보다_긴_인덱스가_들어오면_예외를_발생한다() {
+        final Answer answer = new Answer("tasty");
+
+        assertThrows(IllegalArgumentException.class, () -> answer.find(5));
+    }
 }
