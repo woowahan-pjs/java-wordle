@@ -2,8 +2,7 @@ package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GuessTest {
 
@@ -34,5 +33,12 @@ public class GuessTest {
         final Alphabet alphabet = guess.find(0);
 
         assertEquals(alphabet, Alphabet.t);
+    }
+
+    @Test
+    void 알파벳_조회시_답안_길이보다_긴_인덱스가_들어오면_예외를_발생한다() {
+        final Guess guess = new Guess("tasty");
+
+        assertThrows(IllegalArgumentException.class, () -> guess.find(5));
     }
 }
