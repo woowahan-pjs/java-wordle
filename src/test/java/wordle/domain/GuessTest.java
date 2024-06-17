@@ -2,13 +2,12 @@ package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class GuessTest {
 
     @Test
     void 답안은_5글자가_아니면_예외를_발생한다() {
-        assertThrows(RuntimeException.class, () -> new Guess("abcdef"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new Guess("abcdef"));
     }
 }
-
