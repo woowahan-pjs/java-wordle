@@ -1,5 +1,4 @@
-apple
 hello
-abcde
-spike
-happy
+label
+spell
+spill

@@ -29,12 +29,12 @@ public class FileWordBookTest {
     @Test
     void WordBook에서_공식을_통해_오늘의_정답_단어를_뽑는다() {
         Word actual = wordBook.pick((wordCount) -> 0);
-        assertThat(actual).isEqualTo(new Word("apple"));
+        assertThat(actual).isEqualTo(new Word("hello"));
     }
 
     @Test
     void WordBook에서_단어를_찾을_수_있다() {
-        Word word = wordBook.find("happy");
+        Word word = wordBook.find("spill");
 
         assertThat(word).isNotNull();
     }

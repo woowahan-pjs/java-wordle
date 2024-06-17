@@ -24,7 +24,7 @@ public class FileReaderTest {
     void FileReader로_텍스트파일을_읽어온다() {
         List<String> textList = fileReader.readByLine("words.txt");
 
-        assertThat(textList).containsExactly("apple","hello","abcde","spike","happy");
+        assertThat(textList).containsExactly("hello","label","spell","spill");
     }
 
     @ParameterizedTest
