@@ -1,21 +1,19 @@
 package wordle;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Wordle {
 
-    private static final LocalDate CUTOFF_DATE = LocalDate.of(2021, 6, 19);
     private static final int TRY_COUNT_LIMIT = 6;
 
     private final Console console;
-    private final WordsReader wordsReader;
+    private final WordService wordService;
     private final WordleValidator wordleValidator;
     private final TileService tileService;
 
-    public Wordle(Console console, WordsReader wordsReader, WordleValidator wordleValidator, TileService tileService) {
+    public Wordle(Console console, WordService wordService, WordleValidator wordleValidator, TileService tileService) {
         this.console = console;
-        this.wordsReader = wordsReader;
+        this.wordService = wordService;
         this.wordleValidator = wordleValidator;
         this.tileService = tileService;
     }
@@ -23,11 +21,8 @@ public class Wordle {
     public void start() {
         console.printInitGameMessage();
 
-        List<String> wordList = wordsReader.read();
-        Words words = new Words(wordList, CUTOFF_DATE);
-
-        LocalDate now = LocalDate.now();
-        String wordOfDay = words.getWordOfDay(now);
+        Words words = wordService.getWords();
+        String wordOfDay = words.getWordOfDay(LocalDate.now());
         Letters answerLetters = new Letters(wordOfDay);
 
         int tryCount = 0;
