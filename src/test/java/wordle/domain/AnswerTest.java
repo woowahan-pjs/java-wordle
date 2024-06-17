@@ -27,4 +27,13 @@ public class AnswerTest {
     void 정답은_5글자가_아니면_예외를_발생한다() {
         assertThrowsExactly(IllegalArgumentException.class, () -> new Answer("abcdef"));
     }
+
+
+    @Test
+    void 알파벳과_인덱스가_들어오면_해당_인덱스_이전의_알파벳_개수를_반환한다() {
+        final Answer answer = new Answer("tasty");
+        final long count = answer.countAlphabets(Alphabet.t, 4);
+
+        assertEquals(2, count);
+    }
 }
