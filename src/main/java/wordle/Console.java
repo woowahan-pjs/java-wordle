@@ -33,6 +33,16 @@ public class Console {
         System.out.println(tryCount + "/" + totalCount);
     }
 
+    public void printResult(int tryCount, int tryCountLimit, List<Tiles> tiles) {
+        printTryCount(tryCount, tryCountLimit);
+        printTiles(tiles);
+    }
+
+    public void printResult(int tryCountLimit, List<Tiles> tiles) {
+        printTryCount("X", tryCountLimit);
+        printTiles(tiles);
+    }
+
     public void printTryCount(String tryCount, int totalCount) {
         System.out.println(tryCount + "/" + totalCount);
     }

@@ -38,12 +38,12 @@ public class Wordle {
             Tiles tiles = tileService.create(answerLetters, inputLetters);
 
             if (tileService.isAnswer(tiles)) {
-                printResult(tryCount);
+                console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
                 break;
             }
 
             if (tryCount == TRY_COUNT_LIMIT) {
-                printResult();
+                console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
                 break;
             }
 
@@ -71,15 +71,5 @@ public class Wordle {
             break;
         }
         return inputLetters;
-    }
-
-    private void printResult(int tryCount) {
-        console.printTryCount(tryCount, TRY_COUNT_LIMIT);
-        console.printTiles(tileService.findAll());
-    }
-
-    private void printResult() {
-        console.printTryCount("X", TRY_COUNT_LIMIT);
-        console.printTiles(tileService.findAll());
     }
 }
