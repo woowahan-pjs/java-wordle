@@ -34,6 +34,9 @@ public class Word {
     }
 
     public long countAlphabets(final Alphabet alphabet, final int endIndex) {
+        if (endIndex > alphabets.size()) {
+            throw new IllegalArgumentException("단어의 길이보다 작거나 같은 인덱스만 들어올 수 있습니다");
+        }
         return alphabets.subList(0, endIndex)
                 .stream()
                 .filter(it -> it.equals(alphabet))
