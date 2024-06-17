@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnswerTest {
 
@@ -21,5 +21,10 @@ public class AnswerTest {
 
         // then
         assertEquals(result, expectedResult);
+    }
+
+    @Test
+    void 정답은_5글자가_아니면_예외를_발생한다() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> new Answer("abcdef"));
     }
 }
