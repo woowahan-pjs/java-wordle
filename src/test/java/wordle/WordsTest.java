@@ -18,11 +18,16 @@ class WordsTest {
     @ParameterizedTest
     @MethodSource("provideLocalDateAndAnswer")
     void getWordOfDay(LocalDate localDate, String answer) {
-        List<String> wordList = List.of("apple", "hello", "lemon");
-        Words words = new Words(wordList, LocalDate.of(2021, 6, 19));
+        // given
+        Words words = new Words(
+                List.of("apple", "hello", "lemon"),
+                LocalDate.of(2021, 6, 19)
+        );
 
+        // when
         String wordOfDay = words.getWordOfDay(localDate);
 
+        // then
         assertThat(wordOfDay).isEqualTo(answer);
     }
 
