@@ -25,24 +25,30 @@ public class Wordle {
         Letters answerLetters = createAnswerLetters(words);
 
         int tryCount = 0;
-        while (tryCount < TRY_COUNT_LIMIT) {
-            tryCount++;
-
+        while (tryCount++ < TRY_COUNT_LIMIT) {
             Letters inputLetters = getInputLetters(words);
             Tiles tiles = tileService.create(answerLetters, inputLetters);
 
-            if (tileService.isAnswer(tiles)) {
-                console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
-                break;
-            }
-
-            if (tryCount == TRY_COUNT_LIMIT) {
-                console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
+            if (isEnd(tiles, tryCount)) {
                 break;
             }
 
             console.printTiles(tileService.findAll());
         }
+    }
+
+    private boolean isEnd(Tiles tiles, int tryCount) {
+        if (tileService.isAnswer(tiles)) {
+            console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
+            return true;
+        }
+
+        if (tryCount == TRY_COUNT_LIMIT) {
+            console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
+            return true;
+        }
+
+        return false;
     }
 
     private Letters createAnswerLetters(Words words) {
