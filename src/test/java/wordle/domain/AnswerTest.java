@@ -45,4 +45,13 @@ public class AnswerTest {
         assertThrowsExactly(IllegalArgumentException.class, () -> answer.countAlphabets(Alphabet.t, 6));
     }
 
+
+    @Test
+    void 인덱스가_들어오면_해당_인덱스의_알파벳을_반환한다() {
+        final Answer answer = new Answer("tasty");
+
+        final Alphabet alphabet = answer.find(0);
+
+        assertEquals(alphabet, Alphabet.t);
+    }
 }
