@@ -1,89 +1,171 @@
 # 미션 - 워들
+- 참여자 : 우지, 구월
 
-## 🔍 진행 방식
+## 시퀀스 다이어그램
+```mermaid
+sequenceDiagram
+actor User
+participant OutputView
+participant InputView
+participant Game
+Note right of Game: 게임 시작
 
-- 미션은 **과제 진행 요구 사항**, **기능 요구 사항**, **프로그래밍 요구 사항** 세 가지로 구성되어 있다.
-- 세 개의 요구 사항을 만족하기 위해 노력한다. 특히 기능을 구현하기 전에 기능 목록을 만들고, 기능 단위로 커밋 하는 방식으로 진행한다.
-- **기능 요구 사항에 기재되지 않은 내용은 스스로 판단하여 구현한다.**
+Game ->> OutputView: User 에게 환영 문구를 보여줘라
+OutputView ->> User: WORDLE을 6번 만에 맞춰 보세요.<br>시도의 결과는 타일의 색 변화로 나타납니다.
+Game ->> WordListReader: 사전 요청
+WordListReader ->> Game: 사전 응답
+Game ->> WordList: 정답 요청
+WordList ->> Game: 정답 응답
+loop 게임시작 6라운드
+loop 단어 검증
+Game ->> OutputView: 정답 입력 문구를 보여줘라
+OutputView ->> User: 정답을 입력해 주세요.
+User ->> InputView: 예상 단어 입력
+InputView->>Game: 예상 단어 입력
+activate Game
+Game->>WordList: 단어 확인
+WordList->>Game: 단어 확인 결과  
+alt is 잘못된 단어
+Game ->> OutputView: 잘못된 단어라고 알려줘라
+OutputView ->> User: 잘못된 단어를 입력하셨습니다.
+else is 올바른 단어
+end
+end
+Game ->> Word: 정답인지 확인해라
+Word ->> Answer: 체점해줘
+Answer ->> Word: 체점완료
+Word ->> Game: 정답 결과 반환
+Game ->> Results: 정답인가?
+Results ->> Game: 정답여부 반환
 
----
-
-## 🚀 기능 요구 사항
-
-선풍적인 인기를 끌었던 영어 단어 맞추기 게임이다.
-
-- 6x5 격자를 통해서 5글자 단어를 6번 만에 추측한다.
-- 플레이어가 답안을 제출하면 프로그램이 정답과 제출된 단어의 각 알파벳 종류와 위치를 비교해 판별한다.
-- 판별 결과는 흰색의 타일이 세 가지 색(초록색/노란색/회색) 중 하나로 바뀌면서 표현된다.
-    - 맞는 글자는 초록색, 위치가 틀리면 노란색, 없으면 회색
-    - 두 개의 동일한 문자를 입력하고 그중 하나가 회색으로 표시되면 해당 문자 중 하나만 최종 단어에 나타난다.
-- 정답과 답안은 `words.txt`에 존재하는 단어여야 한다.
-- 정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다.
-
-### 입출력 요구 사항
-
-#### 실행 결과 예시
-
-```
-WORDLE을 6번 만에 맞춰 보세요.
-시도의 결과는 타일의 색 변화로 나타납니다.
-정답을 입력해 주세요.
-hello
-
-⬜⬜🟨🟩⬜
-
-정답을 입력해 주세요.
-label
-
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-
-정답을 입력해 주세요.
-spell
-
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-🟩🟩⬜🟩🟩
-
-정답을 입력해 주세요.
-spill
-
-4/6
-
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-🟩🟩⬜🟩🟩
-🟩🟩🟩🟩🟩
+	break when Results 가 정답일 경우 
+      Game ->> OutputView: 결과를 화면에 나타내라
+			OutputView ->> User: 4/6<br> [1][1][1][1][1][1]
+			Note right of Game: 게임 종료
+end
+Game ->> Results: 기회를 다 사용했는가?
+Results ->> Game: 기회 사용 여부 반환
+break when 기회를 다 사용했다면
+Game ->> OutputView: 결과를 화면에 나타내라
+OutputView ->> User: 6/6<br> [1][1][1][1][1][0]
+Note right of Game: 게임 종료
+end
+deactivate Game
+end
 ```
 
 ---
 
-## 🎯 프로그래밍 요구 사항
+## 클래스 설계
 
-- JDK 21 버전에서 실행 가능해야 한다.
-- 프로그램 실행의 시작점은 `wordle.Application`의 `main()`이다.
-- `build.gradle` 파일은 변경할 수 없으며, **제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.**
-- 프로그램 종료 시 `System.exit()`를 호출하지 않는다.
-- 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
-- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-    - 기본적으로 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)를 원칙으로 한다.
-    - 단, 들여쓰기는 '2 spaces'가 아닌 '4 spaces'로 한다.
-- indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
-    - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-    - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메서드)를 분리하면 된다.
-- 3항 연산자를 쓰지 않는다.
-- 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-- JUnit 5와 AssertJ를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인한다.
-    - 테스트 도구 사용법이 익숙하지 않다면 아래 문서를 참고하여 학습한 후 테스트를 구현한다.
-        - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide)
-        - [AssertJ User Guide](https://assertj.github.io/doc)
-        - [AssertJ Exception Assertions](https://www.baeldung.com/assertj-exception-assertion)
-        - [Guide to JUnit 5 Parameterized Tests](https://www.baeldung.com/parameterized-tests-junit-5)
-- 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
-    - 함수(또는 메서드)가 한 가지 일만 잘 하도록 구현한다.
-- else 예약어를 쓰지 않는다.
-    - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
-    - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
-- 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(System.out, System.in, Scanner) 로직은 제외한다.
-    - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.
-    - 힌트: MVC 패턴 기반으로 구현한 후, View와 Controller를 제외한 Model에 대한 단위 테스트 추가에 집중한다.
+### view
+
+```mermaid
+classDiagram
+	class Game {
+		start()
+	}
+	class InputView {
+		Scanner scanner
+		Word inputWord()
+	}
+	class OutputView {
+		void welcome()
+		void insertWord()
+		void wrongWord()
+		void showResults(Results results)
+	}
+	class enum ResultColor {
+		String color // 🟩, 🟨, ⬜
+		ResultType type
+		
+		String color(ResultType type)
+	}
+```
+
+### Word
+
+```mermaid
+classDiagram
+	Answer -- WordSelector
+	class Word {
+		List<Alphabet> alphabets
+	}
+	Word -- Alphabet
+	class Alphabet {
+		
+	}
+	Word <|-- Answer
+	class Answer {
+		Word word
+		Result examineResult(Guess guess)
+	}
+	class EpochDayBaseAnswerSelector {
+		Word select()
+	}
+	class WordSelector {
+		Word select()	
+	}
+	WordSelector <|-- EpochDayBaseAnswerSelector
+	
+	Word <|-- Guess
+	class Guess {
+		Word word
+	}
+	
+	class WordList {
+		Word find(Word word)
+		Word select(Selector selector)
+	}
+	
+	class WordListReader {
+		WordList read()
+	}
+	class WordListFileReader {
+		WordList read()	
+	}
+	WordListReader <|-- WordListFileReader
+	WordList -- WordListReader
+```
+
+### Result
+
+```mermaid
+classDiagram
+	class Result {
+		List<ResultType> resultTypes
+		boolean allMatched()
+	}
+	
+	class Results {
+		List<Result> resultList
+		boolean hasAnswer()
+	}
+	
+	class enum ResultType {
+		char type // MATCHED, EXIST, MISMATCHED
+	}
+```
+---
+
+## 테스트케이스
+
+- Game
+    - [x]  게임은 지정된 횟수만큼 입력받고 종료된다.
+- Word
+    - [x]  단어에 알파벳 소문자가 아닌 문자가 들어오면 예외를 반환한다.
+    - [x]  단어는 5글자이다.
+    - [x]  단어가 5글자가 아니면 예외를 반환한다.
+- Answer
+    - [x]  정답은 답안을 기반으로 결과를 반환할 수 있다.
+- AnswerSelector
+    - [x]  정답은 매일 바뀌며 `((현재 날짜 - 2021년 6월 19일) % 배열의 크기)` 번째의 단어이다.
+- WordList
+    - [x]  주어진 단어가 WordList 안에 있으면 true를 반환한다.
+    - [x]  주어진 단어가 WordList 안에 없으면 false를 반환한다.
+    - [x]  주어진 Selector의 조건에 해당하는 단어를 추출한다.
+- Result
+    - [x]  판별 결과는 세 가지 색(초록색/노란색/회색) 중 하나로 표현되어야 한다.
+- Results
+    - [x]  정답을 포함하고 있는 경우 true를 반환한다.
+    - [x]  정답을 포함하고 있지 않은 경우 false를 반환한다.
