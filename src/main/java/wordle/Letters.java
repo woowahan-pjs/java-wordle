@@ -11,7 +11,8 @@ public class Letters {
     private final List<Letter> letters;
 
     public Letters(String word) {
-        char[] wordArr = word.toCharArray();
+        String lowerCase = word.toLowerCase();
+        char[] wordArr = lowerCase.toCharArray();
 
         this.letters = new ArrayList<>();
         for (int i = 0; i < wordArr.length; i++) {
