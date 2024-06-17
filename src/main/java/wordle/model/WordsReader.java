@@ -7,8 +7,10 @@ import java.util.List;
 
 public class WordsReader {
 
+    private static final String WORDS_FILE_PATH = "src/main/resources/words.txt";
+
     public List<String> read() {
-        Path path = Path.of("src/main/resources/words.txt");
+        Path path = Path.of(WORDS_FILE_PATH);
 
         try {
             return Files.readAllLines(path);
