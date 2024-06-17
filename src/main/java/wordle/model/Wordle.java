@@ -1,6 +1,7 @@
-package wordle;
+package wordle.model;
 
 import java.time.LocalDate;
+import wordle.view.Console;
 
 public class Wordle {
 

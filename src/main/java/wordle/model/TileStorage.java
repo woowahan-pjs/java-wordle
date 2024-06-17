@@ -1,4 +1,4 @@
-package wordle;
+package wordle.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

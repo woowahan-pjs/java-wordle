@@ -1,8 +1,9 @@
-package wordle;
+package wordle.view;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import wordle.model.Tiles;
 
 public class Console {
 

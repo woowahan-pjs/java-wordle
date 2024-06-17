@@ -1,4 +1,4 @@
-package wordle;
+package wordle.model;
 
 import java.util.HashMap;
 import java.util.List;

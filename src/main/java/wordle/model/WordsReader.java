@@ -1,4 +1,4 @@
-package wordle;
+package wordle.model;
 
 import java.io.IOException;
 import java.nio.file.Files;
