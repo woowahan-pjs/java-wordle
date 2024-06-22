@@ -1,5 +1,6 @@
 package wordle.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TileService {
@@ -30,14 +31,24 @@ public class TileService {
         tiles.addGreenTile(samePositionAndValueLetters);
     }
 
+    // TODO: 알고리즘에 오류가 있어 급한대로 정상 동작하게 변경하였음. 다시 잘 생각해보자.....
     private void processSameValueLetters(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter, Tiles tiles) {
         Letters sameValueLetters = inputLetters.findSameValueLetters(answerLetters);
-        Letters sameValueLettersForGrayTile = letterCounter.filterCanNotDecreaseCount(sameValueLetters);
-        tiles.addGrayTile(sameValueLettersForGrayTile);
 
-        Letters sameValueLettersForYellowTile = letterCounter.filterCanDecreaseCount(sameValueLetters);
-        letterCounter.decreaseCount(sameValueLettersForYellowTile);
-        tiles.addYellowTile(sameValueLettersForYellowTile);
+        List<Letter> lettersForYellowTile = new ArrayList<>();
+        List<Letter> lettersForGrayTile = new ArrayList<>();
+        for (Letter letter : sameValueLetters.getLetters()) {
+            if (letterCounter.canDecreaseCount(letter)) {
+                lettersForYellowTile.add(letter);
+                letterCounter.decreaseCount(letter);
+                continue;
+            }
+
+            lettersForGrayTile.add(letter);
+        }
+
+        tiles.addYellowTile(new Letters(lettersForYellowTile));
+        tiles.addGrayTile(new Letters(lettersForGrayTile));
     }
 
     private void processNoneMatchLetters(Letters answerLetters, Letters inputLetters, Tiles tiles) {
