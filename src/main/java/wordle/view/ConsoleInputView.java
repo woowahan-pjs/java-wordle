@@ -1,7 +1,5 @@
 package wordle.view;
 
-import wordle.domain.Word;
-
 import java.util.Scanner;
 
 public class ConsoleInputView implements InputView {
@@ -16,7 +14,7 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public Word inputWord() {
-        return new Word(scanner.nextLine());
+    public String inputWord() {
+        return scanner.nextLine();
     }
 }

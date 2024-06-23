@@ -4,40 +4,39 @@ import wordle.domain.*;
 import wordle.view.InputView;
 import wordle.view.OutputView;
 
-import java.util.stream.IntStream;
-
 public class Game {
-    private static final int START_ATTEMPT = 0;
     private static final int MAX_ATTEMPT = 6;
 
     private final InputView inputView;
     private final OutputView outputView;
     private final WordListReader wordListReader;
+    private final AnswerSelector answerSelector;
 
     public Game(final InputView inputView,
                 final OutputView outputView,
-                final WordListReader wordListReader) {
+                final WordListReader wordListReader,
+                final AnswerSelector answerSelector) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.wordListReader = wordListReader;
+        this.answerSelector = answerSelector;
     }
 
-    public void start(final WordSelector wordSelector) {
+    public void start() {
         final WordList wordList = wordListReader.read();
-        final Answer answer = new Answer(wordList.select(wordSelector));
-        outputView.welcome(MAX_ATTEMPT);
+        final Answer answer = new Answer(wordList.select(answerSelector));
         play(wordList, answer);
     }
 
     private void play(final WordList wordList, final Answer answer) {
-        final Results results = new Results();
-        IntStream.range(START_ATTEMPT, MAX_ATTEMPT)
-                .boxed()
-                .takeWhile(attempt -> !results.hasAnswer())
-                .forEach(attempt -> {
-                    results.add(examine(wordList, answer));
-                    outputView.showResults(results, attempt, MAX_ATTEMPT);
-                });
+        Attempt attempt = new Attempt(MAX_ATTEMPT);
+        Results results = new Results();
+        outputView.welcome(attempt.last());
+        do {
+            attempt = attempt.next();
+            results = results.add(examine(wordList, answer));
+            outputView.showResults(results, attempt);
+        } while (attempt.isRunning() && results.hasNotAnswer());
     }
 
     private Result examine(final WordList wordList, final Answer answer) {
@@ -48,8 +47,8 @@ public class Game {
     private Guess inputWord(final WordList wordList) {
         try {
             outputView.insertWord();
-            final Word word = inputView.inputWord();
-            return new Guess(wordList.getWordIfExists(word));
+            final String guess = inputView.inputWord();
+            return new Guess(wordList.getWord(guess));
         } catch (final Exception e) {
             outputView.wrongWord();
             return inputWord(wordList);

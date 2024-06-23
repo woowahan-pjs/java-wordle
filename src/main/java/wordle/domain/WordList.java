@@ -11,13 +11,13 @@ public class WordList {
         this.wordList = wordList;
     }
 
-    public Word select(final WordSelector wordSelector) {
-        return wordSelector.select(wordList);
+    public Word select(final AnswerSelector answerSelector) {
+        return answerSelector.select(wordList);
     }
 
-    public Word getWordIfExists(final Word word) {
+    public Word getWord(final String word) {
         return wordList.stream()
-                .filter(word::equals)
+                .filter(it -> it.isSameAs(word))
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }

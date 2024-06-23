@@ -8,22 +8,23 @@ public class Word {
     private static final int WORD_SIZE = 5;
     private final List<Alphabet> alphabets;
 
-    public Word(final List<Alphabet> alphabets) {
-        validate(alphabets);
-        this.alphabets = alphabets;
-    }
-
-    public Word(final String word) {
-        this(word.chars()
+    private static List<Alphabet> alphabets(final String word) {
+        return word.toLowerCase().chars()
                 .mapToObj(it -> (char) it)
                 .map(Alphabet::of)
-                .toList());
+                .toList();
     }
 
-    private static void validate(final List<Alphabet> alphabets) {
+
+    public Word(final String word) {
+        this(alphabets(word));
+    }
+
+    public Word(final List<Alphabet> alphabets) {
         if (alphabets.size() != WORD_SIZE) {
             throw new IllegalArgumentException("단어는 5글자의 소문자 알파벳으로 이루어져야 합니다");
         }
+        this.alphabets = alphabets;
     }
 
     public int size() {
@@ -43,8 +44,12 @@ public class Word {
         }
         return alphabets.subList(MINIMUM_INDEX, toIndex)
                 .stream()
-                .filter(it -> it.equals(alphabet))
+                .filter(it -> it == alphabet)
                 .count();
+    }
+
+    public boolean isSameAs(final String word) {
+        return alphabets.equals(alphabets(word));
     }
 
     @Override

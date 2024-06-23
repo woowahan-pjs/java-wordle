@@ -16,13 +16,17 @@ public class Results {
         this.results = results;
     }
 
-    public boolean hasAnswer() {
-        return results.stream()
-                .anyMatch(Result::allMatched);
+    public boolean hasNotAnswer() {
+        return !(hasAnswer());
     }
 
-    public void add(final Result result) {
+    public boolean hasAnswer() {
+        return results.stream().anyMatch(Result::allMatched);
+    }
+
+    public Results add(final Result result) {
         results.add(result);
+        return new Results(results);
     }
 
     public int size() {

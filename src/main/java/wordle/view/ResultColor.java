@@ -19,9 +19,9 @@ public enum ResultColor {
 
     public static String color(final ResultType resultType) {
         return Arrays.stream(ResultColor.values())
-                .filter(it -> it.resultType == resultType)
+                .filter(it -> resultType == it.resultType)
                 .map(it -> it.color)
                 .findFirst()
-                .orElseGet(() -> WHITE.color);
+                .orElse(WHITE.color);
     }
 }

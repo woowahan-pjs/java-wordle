@@ -1,5 +1,6 @@
 package wordle.view;
 
+import wordle.domain.Attempt;
 import wordle.domain.Result;
 import wordle.domain.Results;
 
@@ -31,9 +32,9 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void showResults(final Results results, final int attempt, final int maxAttempt) {
-        if (results.hasAnswer() || attempt == maxAttempt) {
-            System.out.println(ATTEMPT_RESULT.formatted(results.size(), maxAttempt));
+    public void showResults(final Results results, final Attempt attempt) {
+        if (results.hasAnswer()) {
+            System.out.println(ATTEMPT_RESULT.formatted(attempt.current(), attempt.last()));
         }
         final String resultSentence = results.getResults().stream()
                 .map(this::color)

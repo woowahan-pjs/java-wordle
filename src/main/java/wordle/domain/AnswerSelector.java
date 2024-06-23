@@ -4,6 +4,6 @@ package wordle.domain;
 import java.util.List;
 
 @FunctionalInterface
-public interface WordSelector {
+public interface AnswerSelector {
     Word select(final List<Word> wordList);
 }
