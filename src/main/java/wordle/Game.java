@@ -5,8 +5,6 @@ import wordle.view.InputView;
 import wordle.view.OutputView;
 
 public class Game {
-    private static final int MAX_ATTEMPT = 6;
-
     private final InputView inputView;
     private final OutputView outputView;
     private final DictionaryReader dictionaryReader;
@@ -29,19 +27,16 @@ public class Game {
     }
 
     private void play(final Dictionary dictionary, final Answer answer) {
-        Attempt attempt = new Attempt(MAX_ATTEMPT);
+        Attempt attempt = new Attempt();
         Results results = new Results();
         outputView.welcome(attempt.last());
         do {
+            final Guess guess = guess(dictionary);
+            final Result result = answer.examine(guess);
+            results = results.add(result);
             attempt = attempt.next();
-            results = results.add(examine(dictionary, answer));
             outputView.showResults(results, attempt);
         } while (attempt.isRunning() && results.hasNotAnswer());
-    }
-
-    private Result examine(final Dictionary dictionary, final Answer answer) {
-        final Guess guess = guess(dictionary);
-        return answer.examine(guess);
     }
 
     private Guess guess(final Dictionary dictionary) {
