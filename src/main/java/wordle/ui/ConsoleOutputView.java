@@ -18,21 +18,19 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void showRecord(Record record) {
-        for (Results results : record) {
+    public void showRecord(final Record record) {
+        for (final Results results : record) {
             showResults(results);
             System.out.println();
         }
         System.out.println();
     }
 
-    private void showResults(Results results) {
-        for (Result result : results) {
-            System.out.print(findTile(result));
-        }
+    private static void showResults(final Results results) {
+        results.forEach(result -> System.out.print(findTile(result)));
     }
 
-    private static String findTile(Result result) {
+    private static String findTile(final Result result) {
         if (result.isGreen()) {
             return "🟩";
         }
@@ -43,13 +41,13 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void successEnd(Record record) {
+    public void successEnd(final Record record) {
         System.out.printf("\n%d/%d\n\n", record.size(), Record.MAX_COUNT);
         showRecord(record);
     }
 
     @Override
-    public void failEnd(Record record) {
+    public void failEnd(final Record record) {
         System.out.printf("\nX/%d\n\n", Record.MAX_COUNT);
         showRecord(record);
     }
