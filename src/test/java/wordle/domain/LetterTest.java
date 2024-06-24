@@ -1,9 +1,11 @@
 package wordle.domain;
 
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-import org.junit.jupiter.api.Test;
 
 public class LetterTest {
 
@@ -43,5 +45,21 @@ public class LetterTest {
         final Letter letter = new Letter('a', 0);
 
         assertThat(letter.isSamePosition(new Letter('b', 0))).isTrue();
+    }
+
+    @Test
+    void 정렬을_하면_위치값_기준으로_정렬_된다() {
+        final List<Letter> letters = List.of(
+                new Letter('a', 0),
+                new Letter('a', 4),
+                new Letter('a', 3),
+                new Letter('a', 1),
+                new Letter('a', 2)
+        );
+
+        // When
+        final List<Letter> sortedList = letters.stream().sorted().toList();
+
+        assertThat(sortedList).isSorted();
     }
 }

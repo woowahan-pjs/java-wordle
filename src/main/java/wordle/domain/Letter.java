@@ -2,7 +2,7 @@ package wordle.domain;
 
 import java.util.Objects;
 
-public class Letter {
+public class Letter implements Comparable<Letter> {
 
     private final Alphabet alphabet;
     private final Position position;
@@ -40,5 +40,10 @@ public class Letter {
     @Override
     public int hashCode() {
         return Objects.hash(alphabet, position);
+    }
+
+    @Override
+    public int compareTo(final Letter o) {
+        return position.compareTo(o.position);
     }
 }
