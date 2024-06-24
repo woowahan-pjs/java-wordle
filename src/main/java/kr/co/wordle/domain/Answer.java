@@ -2,10 +2,14 @@ package kr.co.wordle.domain;
 
 import kr.co.wordle.domain.provider.AnswerProvider;
 
+import java.util.Arrays;
+
+import static kr.co.wordle.config.WordleGameConfig.ALPHABET_COUNT;
+
 public class Answer {
 
     private final String value;
-    private final int[] countPerCharacter = new int[26];
+    private final int[] countPerCharacter = new int[ALPHABET_COUNT];
 
     public Answer() {
         this.value = AnswerProvider.todayAnswer();
@@ -25,7 +29,7 @@ public class Answer {
     }
 
     public int[] getCountPerCharacter() {
-        return countPerCharacter;
+        return Arrays.copyOf(countPerCharacter, ALPHABET_COUNT);
     }
 
     public char charAt(int index) {

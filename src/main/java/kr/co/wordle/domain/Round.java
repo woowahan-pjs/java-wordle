@@ -1,7 +1,6 @@
 package kr.co.wordle.domain;
 
 import kr.co.wordle.support.InputValidator;
-import java.util.Arrays;
 
 import static kr.co.wordle.config.WordleGameConfig.WORD_LENGTH;
 
@@ -41,7 +40,7 @@ public class Round {
 
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
-        int[] countPerCharacter = Arrays.copyOf(answer.getCountPerCharacter(), 26);
+        int[] countPerCharacter = answer.getCountPerCharacter();
         for (int i = 0; i< WORD_LENGTH; i++) {
             Tile key = getTile(countPerCharacter, answer.charAt(i), inputChars[i]);
             roundResult.update(key);
