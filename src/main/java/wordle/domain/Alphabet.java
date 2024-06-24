@@ -9,8 +9,8 @@ public class Alphabet {
     private static final char MAX_ALPHABET = 'z';
     private final char alphabet;
 
-    public Alphabet(char alphabet) {
-        char lowerAlphabet = Character.toLowerCase(alphabet);
+    public Alphabet(final char alphabet) {
+        final char lowerAlphabet = Character.toLowerCase(alphabet);
         if (lowerAlphabet < MIN_ALPHABET || lowerAlphabet > MAX_ALPHABET) {
             throw new InvalidAlphabetException();
         }
@@ -19,14 +19,14 @@ public class Alphabet {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Alphabet alphabet1 = (Alphabet) o;
+        final Alphabet alphabet1 = (Alphabet) o;
         return alphabet == alphabet1.alphabet;
     }
 
