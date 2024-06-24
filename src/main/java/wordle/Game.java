@@ -8,21 +8,21 @@ public class Game {
     private final InputView inputView;
     private final OutputView outputView;
     private final DictionaryReader dictionaryReader;
-    private final AnswerSelector answerSelector;
+    private final WordSelector wordSelector;
 
     public Game(final InputView inputView,
                 final OutputView outputView,
                 final DictionaryReader dictionaryReader,
-                final AnswerSelector answerSelector) {
+                final WordSelector wordSelector) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.dictionaryReader = dictionaryReader;
-        this.answerSelector = answerSelector;
+        this.wordSelector = wordSelector;
     }
 
     public void start() {
         final Dictionary dictionary = dictionaryReader.read();
-        final Answer answer = dictionary.answer(answerSelector);
+        final Answer answer = dictionary.answer(wordSelector);
         play(dictionary, answer);
     }
 

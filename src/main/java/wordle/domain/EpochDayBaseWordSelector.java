@@ -3,7 +3,7 @@ package wordle.domain;
 import java.time.LocalDate;
 import java.util.List;
 
-public class EpochDayBaseAnswerSelector implements AnswerSelector {
+public class EpochDayBaseWordSelector implements WordSelector {
     private static final LocalDate BASE_LOCAL_DATE = LocalDate.of(2021, 6, 19);
 
     @Override

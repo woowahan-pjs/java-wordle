@@ -11,17 +11,17 @@ public class Dictionary {
         this.words = words;
     }
 
-    public Answer answer(final AnswerSelector answerSelector) {
-        final Word word = answerSelector.select(words);
+    public Answer answer(final WordSelector wordSelector) {
+        final Word word = wordSelector.select(words);
         return new Answer(word.word());
     }
 
     public Guess guess(final String word) {
         return words.stream()
                 .filter(it -> it.isSameAs(word))
-                .findFirst()
                 .map(Word::word)
                 .map(Guess::new)
+                .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
