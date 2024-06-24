@@ -41,6 +41,6 @@ public class WordleGame {
             console.printRoundResult(roundResults);
             return false;
         }
-        return currentRound <= MAX_ROUND;
+        return currentRound < MAX_ROUND;
     }
 }
