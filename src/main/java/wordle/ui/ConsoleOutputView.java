@@ -26,7 +26,7 @@ public class ConsoleOutputView implements OutputView {
         System.out.println();
     }
 
-    private static void showResults(Results results) {
+    private void showResults(Results results) {
         for (Result result : results) {
             System.out.print(findTile(result));
         }
