@@ -26,11 +26,11 @@ public class ConsoleOutputView implements OutputView {
         System.out.println();
     }
 
-    private static void showResults(final Results results) {
+    private void showResults(final Results results) {
         results.forEach(result -> System.out.print(findTile(result)));
     }
 
-    private static String findTile(final Result result) {
+    private String findTile(final Result result) {
         if (result.isGreen()) {
             return "🟩";
         }
