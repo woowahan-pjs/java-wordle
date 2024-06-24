@@ -23,7 +23,7 @@ public class Wordle {
 
     private final AnswerFormula answerFormula;
 
-    public Wordle(WordBook wordBook, InputView inputView, OutputView outputView) {
+    public Wordle(final WordBook wordBook, final InputView inputView, final OutputView outputView) {
         this.wordBook = wordBook;
         this.inputView = inputView;
         this.outputView = outputView;
@@ -32,23 +32,23 @@ public class Wordle {
     }
 
     public void startGame() {
-        Word answerWord = wordBook.pick(answerFormula);
+        final Word answerWord = wordBook.pick(answerFormula);
         outputView.welcome();
         runGame(answerWord);
         concludeGame();
     }
 
-    private void runGame(Word answerWord) {
+    private void runGame(final Word answerWord) {
         while (!record.isEnd()) {
             outputView.showRecord(record);
-            handleWrongAnswer(() -> processTurn(answerWord));
+            handleWrongAnswer(() -> process(answerWord));
         }
     }
 
-    private void processTurn(Word answerWord) {
+    private void process(final Word answerWord) {
         outputView.askAnswer();
-        Word inputWord = wordBook.find(inputView.input());
-        Results results = answerWord.compare(inputWord);
+        final Word inputWord = wordBook.find(inputView.input());
+        final Results results = answerWord.compare(inputWord);
         record.add(results);
     }
 
@@ -60,12 +60,12 @@ public class Wordle {
         outputView.failEnd(record);
     }
 
-    private void handleWrongAnswer(Runnable runnable) {
+    private void handleWrongAnswer(final Runnable runnable) {
         try {
             runnable.run();
-        } catch (WordleInvalidInputException e) {
+        } catch (final WordleInvalidInputException e) {
             outputView.wrongAnswer();
-        } catch (WordleException e) {
+        } catch (final WordleException e) {
             outputView.unexpectedEnd();
         }
     }
