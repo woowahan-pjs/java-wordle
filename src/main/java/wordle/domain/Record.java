@@ -21,7 +21,7 @@ public class Record implements Iterable<Results> {
         return existAllGreen() || isCountOver();
     }
 
-    public boolean isCountOver() {
+    private boolean isCountOver() {
         return record.size() >= MAX_COUNT;
     }
 
