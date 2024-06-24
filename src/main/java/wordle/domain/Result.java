@@ -5,41 +5,15 @@ import java.util.Objects;
 public class Result implements Comparable<Result> {
 
     private final Tile tile;
-    private final Position position;
+    private final Letter letter;
 
-    public Result(Tile tile, int position) {
-        this(tile, new Position(position));
-    }
-
-    public Result(Tile tile, Position position) {
+    public Result(final Tile tile, final Letter letter) {
         this.tile = tile;
-        this.position = position;
+        this.letter = letter;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Result result = (Result) o;
-        return tile == result.tile && Objects.equals(position, result.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(tile, position);
-    }
-
-    public boolean isSamePosition(Position position) {
-        return this.position.equals(position);
-    }
-
-    @Override
-    public int compareTo(Result o) {
-        return position.compareTo(o.position);
+    public boolean isSamePosition(final Letter letter) {
+        return this.letter.isSamePosition(letter);
     }
 
     public boolean isGreen() {
@@ -52,5 +26,23 @@ public class Result implements Comparable<Result> {
 
     public boolean isGray() {
         return this.tile == Tile.GRAY;
+    }
+
+    @Override
+    public int compareTo(final Result o) {
+        return letter.compareTo(o.letter);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Result result = (Result) o;
+        return tile == result.tile && Objects.equals(letter, result.letter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tile, letter);
     }
 }

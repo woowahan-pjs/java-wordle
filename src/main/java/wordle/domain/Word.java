@@ -12,20 +12,20 @@ public class Word implements Iterable<Letter> {
     public static final int WORD_LENGTH = 5;
     private final List<Letter> letters;
 
-    public Word(String input) {
+    public Word(final String input) {
         if (input.length() != WORD_LENGTH) {
             throw new InvalidWordException();
         }
 
         this.letters = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
-            Letter letter = new Letter(input.charAt(i), i);
+            final Letter letter = new Letter(input.charAt(i), i);
             this.letters.add(letter);
         }
     }
 
-    public Results compare(Word inputWord) {
-        WordComparator wordComparator = new WordComparator(this.letters);
+    public Results compare(final Word inputWord) {
+        final WordComparator wordComparator = new WordComparator(this.letters);
         return wordComparator.compare(inputWord);
     }
 
@@ -34,30 +34,29 @@ public class Word implements Iterable<Letter> {
         private final List<Letter> pendingLetters;
         private final Results results;
 
-        public WordComparator(List<Letter> letters) {
+        public WordComparator(final List<Letter> letters) {
             this.pendingLetters = new ArrayList<>(letters);
             this.results = new Results();
         }
 
-        public Results compare(Word inputWord) {
-            for (Letter letter : inputWord) {
+        public Results compare(final Word inputWord) {
+            for (final Letter letter : inputWord) {
                 process(letter, letter::equals, Tile.GREEN);
             }
 
-            for (Letter letter : inputWord) {
+            for (final Letter letter : inputWord) {
                 process(letter, letter::isSameAlphabet, Tile.YELLOW);
             }
 
-            for (Letter letter : inputWord) {
+            for (final Letter letter : inputWord) {
                 fillEmptyToGray(letter);
             }
 
             return results;
         }
 
-        private void process(Letter targetLetter, Predicate<Letter> predicate, Tile tile) {
-            Position position = targetLetter.getPosition();
-            if (results.isCheckedPosition(position)) {
+        private void process(final Letter targetLetter, final Predicate<Letter> predicate, final Tile tile) {
+            if (results.isCheckedPosition(targetLetter)) {
                 return;
             }
 
@@ -66,30 +65,29 @@ public class Word implements Iterable<Letter> {
                     .findFirst()
                     .ifPresent(letter -> {
                         pendingLetters.remove(letter);
-                        results.add(new Result(tile, position));
+                        results.add(new Result(tile, targetLetter));
                     });
         }
 
-        private void fillEmptyToGray(Letter targetLetter) {
-            Position position = targetLetter.getPosition();
-            if (results.isCheckedPosition(position)) {
+        private void fillEmptyToGray(final Letter targetLetter) {
+            if (results.isCheckedPosition(targetLetter)) {
                 return;
             }
 
             pendingLetters.forEach(
-                    letter -> results.add(new Result(Tile.GRAY, position)));
+                    letter -> results.add(new Result(Tile.GRAY, targetLetter)));
         }
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Word word = (Word) o;
+        final Word word = (Word) o;
         return Objects.equals(letters, word.letters);
     }
 

@@ -17,13 +17,13 @@ public class Results implements Iterable<Result> {
         return results.iterator();
     }
 
-    public void add(Result result) {
+    public void add(final Result result) {
         results.add(result);
     }
 
-    public boolean isCheckedPosition(Position position) {
+    public boolean isCheckedPosition(final Letter letter) {
         return results.stream()
-                .anyMatch(result -> result.isSamePosition(position));
+                .anyMatch(result -> result.isSamePosition(letter));
     }
 
     public boolean isAllGreen() {

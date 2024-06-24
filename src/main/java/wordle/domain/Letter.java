@@ -20,10 +20,6 @@ public class Letter implements Comparable<Letter> {
         return letter.position.equals(position);
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
