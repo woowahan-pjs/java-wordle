@@ -12,8 +12,12 @@ public class Letter {
         this.position = new Position(position);
     }
 
-    public boolean isSameAlphabet(Letter letter) {
+    public boolean isSameAlphabet(final Letter letter) {
         return letter.alphabet.equals(this.alphabet);
+    }
+
+    public boolean isSamePosition(final Letter letter) {
+        return letter.position.equals(position);
     }
 
     public Position getPosition() {
@@ -21,14 +25,14 @@ public class Letter {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Letter letter = (Letter) o;
+        final Letter letter = (Letter) o;
         return Objects.equals(alphabet, letter.alphabet) && Objects.equals(position,
                 letter.position);
     }
