@@ -18,6 +18,10 @@ public class Round {
         this.roundResult = new RoundResult();
     }
 
+    protected Round(String input) {
+        this(0, input);
+    }
+
     private Round(int value, String input) {
         if (InputValidator.isNotValid(input)) {
             throw new IllegalArgumentException();
