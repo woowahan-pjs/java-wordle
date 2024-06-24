@@ -7,7 +7,7 @@ public class EpochDayBaseAnswerSelector implements AnswerSelector {
     private static final LocalDate BASE_LOCAL_DATE = LocalDate.of(2021, 6, 19);
 
     @Override
-    public Word select(final List<Word> wordList) {
+    public Word select(final List<? extends Word> wordList) {
         final LocalDate now = LocalDate.now();
         final long nowEpochDay = now.toEpochDay();
         final long baseEpochDay = BASE_LOCAL_DATE.toEpochDay();

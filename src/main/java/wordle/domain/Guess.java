@@ -1,14 +1,14 @@
 package wordle.domain;
 
 public class Guess {
-    private final Word word;
+    private final GameWord word;
 
-    public Guess(final Word word) {
+    public Guess(final GameWord word) {
         this.word = word;
     }
 
     public Guess(final String word) {
-        this(new Word(word));
+        this(new GameWord(word));
     }
 
     public int size() {

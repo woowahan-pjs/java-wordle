@@ -5,16 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class WordListFileReader implements WordListReader {
+public class DictionaryFileReader implements DictionaryReader {
     private static final String FILE_PATH = "src/main/resources/words.txt";
-    private static final WordList wordList;
+    private static final Dictionary DICTIONARY;
 
     static {
         try {
             final Path path = Paths.get(FILE_PATH);
-            wordList = new WordList(Files.readAllLines(path)
+            DICTIONARY = new Dictionary(Files.readAllLines(path)
                     .stream()
-                    .map(Word::new)
+                    .map(DictionaryWord::new)
                     .toList());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -22,7 +22,7 @@ public class WordListFileReader implements WordListReader {
     }
 
     @Override
-    public WordList read() {
-        return wordList;
+    public Dictionary read() {
+        return DICTIONARY;
     }
 }

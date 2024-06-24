@@ -7,14 +7,14 @@ public class Answer {
     private static final int START_INDEX = 0;
     private static final int EXCLUDE_UNIT = 1;
 
-    private final Word word;
+    private final GameWord word;
 
-    public Answer(final Word word) {
+    public Answer(final GameWord word) {
         this.word = word;
     }
 
     public Answer(final String word) {
-        this(new Word(word));
+        this(new GameWord(word));
     }
 
     public Alphabet find(final int index) {
