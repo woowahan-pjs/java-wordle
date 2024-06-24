@@ -11,22 +11,18 @@ public class WordleGame {
     private final Answer answer;
     private final StringBuilder roundResults;
 
-    private int currentRound;
-
     public WordleGame() {
         this.console = new Console();
         this.answer = new Answer();
         this.roundResults = new StringBuilder();
-        this.currentRound = 0;
     }
 
     public void start() {
         console.init();
-        Round round = null;
+        Round round = new Round();
         while (isRoundInProgress(round, roundResults)) {
-            currentRound++;
             String input = console.userInput();
-            round = new Round(input);
+            round = round.next(input);
             roundResults.append(round.roundResult(answer)).append("\n");
             console.printRoundResult(roundResults);
         }
@@ -37,10 +33,10 @@ public class WordleGame {
             return true;
         }
         if (round.isFinished()) {
-            console.printRound(currentRound, MAX_ROUND);
+            console.printRound(round.currentRound(), MAX_ROUND);
             console.printRoundResult(roundResults);
             return false;
         }
-        return currentRound < MAX_ROUND;
+        return round.isInProgress(MAX_ROUND);
     }
 }

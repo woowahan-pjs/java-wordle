@@ -7,15 +7,32 @@ import static kr.co.wordle.config.WordleGameConfig.WORD_LENGTH;
 
 public class Round {
 
+    private final int value;
+
     private final String input;
     private final RoundResult roundResult;
 
-    public Round(String input) {
+    public Round() {
+        this.value = 0;
+        this.input = null;
+        this.roundResult = new RoundResult();
+    }
+
+    private Round(int value, String input) {
         if (InputValidator.isNotValid(input)) {
             throw new IllegalArgumentException();
         }
+        this.value = value;
         this.input = input;
         this.roundResult = new RoundResult();
+    }
+
+    public Round next(String input) {
+        return new Round(value + 1, input);
+    }
+
+    public int currentRound() {
+        return this.value;
     }
 
     public String roundResult(Answer answer) {
@@ -41,5 +58,9 @@ public class Round {
 
     public boolean isFinished() {
         return roundResult.isAllGreen();
+    }
+
+    public boolean isInProgress(int maxRound) {
+        return value < maxRound;
     }
 }
