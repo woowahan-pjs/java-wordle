@@ -20,15 +20,19 @@ public class Result {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Result result = (Result) o;
+        final Result result = (Result) o;
         return Objects.equals(resultTypes, result.resultTypes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultTypes);
+        return Objects.hashCode(resultTypes);
+    }
+
+    public ResultType get(final int index) {
+        return resultTypes.get(index);
     }
 }

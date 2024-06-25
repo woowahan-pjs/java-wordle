@@ -19,7 +19,11 @@ public class Guess {
         return word.find(index);
     }
 
-    public long countAlphabets(final Alphabet alphabet, final int endIndex) {
+    public long count(final Alphabet alphabet, final int endIndex) {
         return word.countAlphabets(alphabet, endIndex);
+    }
+
+    public long count(final Alphabet alphabet) {
+        return word.count(alphabet);
     }
 }

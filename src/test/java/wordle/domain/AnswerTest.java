@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static wordle.domain.ResultType.*;
 
 public class AnswerTest {
 
@@ -30,23 +31,6 @@ public class AnswerTest {
 
 
     @Test
-    void 알파벳과_인덱스가_들어오면_해당_인덱스_이전의_알파벳_개수를_반환한다() {
-        final Answer answer = new Answer("tasty");
-        final long count = answer.countAlphabets(Alphabet.t, 4);
-
-        assertEquals(2, count);
-    }
-
-
-    @Test
-    void 답안_길이보다_긴_인덱스가_들어오면_예외를_발생한다() {
-        final Answer answer = new Answer("tasty");
-
-        assertThrowsExactly(IllegalArgumentException.class, () -> answer.countAlphabets(Alphabet.t, 6));
-    }
-
-
-    @Test
     void 인덱스가_들어오면_해당_인덱스의_알파벳을_반환한다() {
         final Answer answer = new Answer("tasty");
 
@@ -60,5 +44,15 @@ public class AnswerTest {
         final Answer answer = new Answer("tasty");
 
         assertThrows(IllegalArgumentException.class, () -> answer.find(5));
+    }
+
+    @Test
+    void 매칭_타입_단어와_동일한_단어가_앞에_존재할_경우_미존재_타입으로_처리한다() {
+        final Answer answer = new Answer("apple");
+        final Guess guess = new Guess("hello");
+        final Result expected = new Result(List.of(MISMATCHED, EXIST, MISMATCHED, MATCHED, MISMATCHED));
+
+        final Result actual = answer.examine(guess);
+        assertEquals(expected, actual);
     }
 }

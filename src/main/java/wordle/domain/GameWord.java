@@ -49,6 +49,12 @@ public class GameWord implements Word {
                 .count();
     }
 
+    public long count(final Alphabet alphabet) {
+        return alphabets.stream()
+                .filter(alphabet::equals)
+                .count();
+    }
+
     public boolean isSameAs(final String word) {
         return word().equals(word);
     }
@@ -72,4 +78,5 @@ public class GameWord implements Word {
     public int hashCode() {
         return Objects.hashCode(alphabets);
     }
+
 }

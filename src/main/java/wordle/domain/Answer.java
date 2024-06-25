@@ -1,11 +1,16 @@
 package wordle.domain;
 
+
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Answer {
     private static final int START_INDEX = 0;
-    private static final int EXCLUDE_UNIT = 1;
+    public static final long DEFAULT_COUNT = 0L;
+    public static final long DECREASE_COUNT_UNIT = 1L;
 
     private final GameWord word;
 
@@ -22,27 +27,37 @@ public class Answer {
     }
 
     public Result examine(final Guess guess) {
+        final List<ResultType> matchedResults = IntStream.range(START_INDEX, word.size())
+                .mapToObj(index -> {
+                    final Alphabet answerAlphabet = find(index);
+                    final Alphabet guessAlphabet = guess.find(index);
+                    if (answerAlphabet.equals(guessAlphabet)) {
+                        return ResultType.MATCHED;
+                    }
+                    return ResultType.NONE;
+                })
+                .toList();
+
+        final Map<Alphabet, Long> unmatchedAnswerCounts = IntStream.range(START_INDEX, word.size())
+                .filter(index -> ResultType.NONE.equals(matchedResults.get(index)))
+                .mapToObj(this::find)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
         final List<ResultType> resultTypes = IntStream.range(START_INDEX, guess.size())
-                .mapToObj(i -> examineResultType(guess, i))
+                .mapToObj(index -> {
+                    if (ResultType.MATCHED.equals(matchedResults.get(index))) {
+                        return ResultType.MATCHED;
+                    }
+                    final Alphabet alphabet = guess.find(index);
+                    final long count = unmatchedAnswerCounts.getOrDefault(alphabet, DEFAULT_COUNT);
+                    if (count > 0) {
+                        unmatchedAnswerCounts.put(alphabet, Math.subtractExact(count, DECREASE_COUNT_UNIT));
+                        return ResultType.EXIST;
+                    }
+                    return ResultType.MISMATCHED;
+                })
                 .toList();
         return new Result(resultTypes);
-    }
-
-    private ResultType examineResultType(final Guess guess, final int index) {
-        final Alphabet alphabet = guess.find(index);
-        if (alphabet.equals(find(index))) {
-            return ResultType.MATCHED;
-        }
-        final long answerCount = countAlphabets(alphabet, size());
-        final long guessCount = guess.countAlphabets(alphabet, Math.addExact(index, EXCLUDE_UNIT));
-        if (answerCount >= guessCount) {
-            return ResultType.EXIST;
-        }
-        return ResultType.MISMATCHED;
-    }
-
-    public long countAlphabets(final Alphabet alphabet, final int endIndex) {
-        return word.countAlphabets(alphabet, endIndex);
     }
 
     public int size() {
