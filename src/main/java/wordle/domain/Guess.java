@@ -11,19 +11,7 @@ public class Guess {
         this(new GameWord(word));
     }
 
-    public int size() {
-        return word.size();
-    }
-
     public Alphabet find(final int index) {
         return word.find(index);
-    }
-
-    public long count(final Alphabet alphabet, final int endIndex) {
-        return word.countAlphabets(alphabet, endIndex);
-    }
-
-    public long count(final Alphabet alphabet) {
-        return word.count(alphabet);
     }
 }

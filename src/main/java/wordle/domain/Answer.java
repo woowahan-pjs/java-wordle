@@ -43,7 +43,7 @@ public class Answer {
                 .mapToObj(this::find)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        final List<ResultType> resultTypes = IntStream.range(START_INDEX, guess.size())
+        final List<ResultType> resultTypes = IntStream.range(START_INDEX, matchedResults.size())
                 .mapToObj(index -> {
                     if (ResultType.MATCHED.equals(matchedResults.get(index))) {
                         return ResultType.MATCHED;
@@ -58,9 +58,5 @@ public class Answer {
                 })
                 .toList();
         return new Result(resultTypes);
-    }
-
-    public int size() {
-        return word.size();
     }
 }

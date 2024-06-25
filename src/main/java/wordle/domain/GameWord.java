@@ -11,7 +11,7 @@ public class GameWord implements Word {
     private final List<Alphabet> alphabets;
 
     private static List<Alphabet> alphabets(final String word) {
-        return word.toLowerCase().codePoints()
+        return word.codePoints()
                 .boxed()
                 .map(Alphabet::of)
                 .toList();
@@ -37,22 +37,6 @@ public class GameWord implements Word {
             throw new IllegalArgumentException("단어의 길이보다 작거나 같은 인덱스만 들어올 수 있습니다");
         }
         return alphabets.get(index);
-    }
-
-    public long countAlphabets(final Alphabet alphabet, final int toIndex) {
-        if (toIndex > alphabets.size()) {
-            throw new IllegalArgumentException("단어의 길이보다 작거나 같은 인덱스만 들어올 수 있습니다");
-        }
-        return alphabets.subList(MINIMUM_INDEX, toIndex)
-                .stream()
-                .filter(alphabet::equals)
-                .count();
-    }
-
-    public long count(final Alphabet alphabet) {
-        return alphabets.stream()
-                .filter(alphabet::equals)
-                .count();
     }
 
     public boolean isSameAs(final String word) {
