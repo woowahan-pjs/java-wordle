@@ -22,7 +22,8 @@ public class Game {
 
     public void start() {
         final Dictionary dictionary = dictionaryReader.read();
-        final Answer answer = dictionary.answer(wordSelector);
+        final Word word = dictionary.select(wordSelector);
+        final Answer answer = new Answer(word.word());
         play(dictionary, answer);
     }
 
@@ -43,7 +44,10 @@ public class Game {
         try {
             outputView.insertWord();
             final String word = inputView.inputWord();
-            return dictionary.guess(word);
+            if(dictionary.isExist(word)) {
+                return new Guess(word);
+            }
+            return guess(dictionary);
         } catch (final Exception e) {
             outputView.wrongWord();
             return guess(dictionary);

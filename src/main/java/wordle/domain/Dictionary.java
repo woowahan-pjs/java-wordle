@@ -1,28 +1,21 @@
 package wordle.domain;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class Dictionary {
-    private final List<? extends Word> words;
+    private final List<DictionaryWord> words;
 
-    public Dictionary(final List<? extends Word> words) {
+    public Dictionary(final List<DictionaryWord> words) {
         this.words = words;
     }
 
-    public Answer answer(final WordSelector wordSelector) {
-        final Word word = wordSelector.select(words);
-        return new Answer(word.word());
+    public Word select(final WordSelector wordSelector) {
+        return wordSelector.select(words);
     }
 
-    public Guess guess(final String word) {
-        return words.stream()
-                .filter(it -> it.isSameAs(word))
-                .map(Word::word)
-                .map(Guess::new)
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+    public boolean isExist(final String word) {
+        return words.stream().anyMatch(word::equals);
     }
 
     @Override

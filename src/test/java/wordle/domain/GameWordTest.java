@@ -48,14 +48,6 @@ public class GameWordTest {
     }
 
     @ValueSource(strings = {"abcde", "fghij", "klmno", "pqrst", "uvwxy", "zxcvb", "ABCDE", "AbcdE"})
-    @ParameterizedTest(name = "게임 단어는 {0} 와 같은 단어인지 확인할 수 있다")
-    void 게임_단어는_주어진_문자열과_같은_단어인지_확인할_수_있다(final String word) {
-        final GameWord gameWord = new GameWord(word);
-
-        assertTrue(gameWord.isSameAs(word));
-    }
-
-    @ValueSource(strings = {"abcde", "fghij", "klmno", "pqrst", "uvwxy", "zxcvb", "ABCDE", "AbcdE"})
     @ParameterizedTest(name = "게임 단어는 가지고 있는 단어를 문자열 {0}로 반환할 수 있다")
     void 게임_단어는_가지고_있는_단어를_문자열로_반환할_수_있다(final String expected) {
         final GameWord gameWord = new GameWord(expected);

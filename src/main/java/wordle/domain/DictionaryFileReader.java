@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class DictionaryFileReader implements DictionaryReader {
     private static final String FILE_PATH = "src/main/resources/words.txt";
