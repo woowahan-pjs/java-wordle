@@ -1,9 +1,10 @@
 package wordle.view;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
-import wordle.model.Tiles;
+import java.util.stream.Collectors;
+import wordle.model.Result;
+import wordle.model.Results;
 
 public class Console {
 
@@ -24,24 +25,30 @@ public class Console {
         return scanner.nextLine();
     }
 
-    public void printTiles(List<Tiles> tiles) {
-        for (Tiles tile : tiles) {
-            System.out.println(tile);
-        }
+    public void print(Results results) {
+        String tiles = results.stream()
+                .map(this::convertToString)
+                .collect(Collectors.joining("\n"));
+
+        System.out.println(tiles);
     }
 
+    private String convertToString(Result result) {
+        return String.join("", result.getTiles());
+    }
+    
     public void printTryCount(int tryCount, int totalCount) {
         System.out.println(tryCount + "/" + totalCount);
     }
 
-    public void printResult(int tryCount, int tryCountLimit, List<Tiles> tiles) {
+    public void printResult(int tryCount, int tryCountLimit, Results results) {
         printTryCount(tryCount, tryCountLimit);
-        printTiles(tiles);
+        print(results);
     }
 
-    public void printResult(int tryCountLimit, List<Tiles> tiles) {
+    public void printResult(int tryCountLimit, Results results) {
         printTryCount("X", tryCountLimit);
-        printTiles(tiles);
+        print(results);
     }
 
     public void printTryCount(String tryCount, int totalCount) {

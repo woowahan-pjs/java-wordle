@@ -1,19 +1,16 @@
 package wordle.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LetterCounter {
 
     private final Map<Character, Integer> letterCountMap;
 
     public LetterCounter(Letters letters) {
-        this.letterCountMap = new HashMap<>();
-        for (Letter answerLetter : letters) {
-            char value = answerLetter.getValue();
-            letterCountMap.put(value, letterCountMap.getOrDefault(value, 0) + 1);
-        }
+        this.letterCountMap = letters.stream()
+                .collect(Collectors.toMap(Letter::getValue, letter -> 1, Integer::sum));
     }
 
     public void decreaseCount(Letters letters) {

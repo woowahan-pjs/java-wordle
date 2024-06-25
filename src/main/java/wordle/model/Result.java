@@ -1,8 +1,9 @@
 package wordle.model;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class Tiles {
+public class Result {
 
     private static final String GRAY_TILE = "⬜";
     private static final String YELLOW_TILE = "\uD83D\uDFE8";
@@ -10,7 +11,7 @@ public class Tiles {
 
     private final String[] tiles;
 
-    public Tiles(int size) {
+    public Result(int size) {
         this.tiles = new String[size];
         Arrays.fill(tiles, GRAY_TILE);
     }
@@ -27,13 +28,12 @@ public class Tiles {
         }
     }
 
-    public boolean isFilledWith(String otherTile) {
+    public boolean isAnswer() {
         return Arrays.stream(tiles)
-                .allMatch(tile -> tile.equals(otherTile));
+                .allMatch(tile -> tile.equals(GREEN_TILE));
     }
 
-    @Override
-    public String toString() {
-        return String.join("", tiles);
+    public List<String> getTiles() {
+        return List.of(tiles);
     }
 }

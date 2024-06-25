@@ -10,37 +10,37 @@ public class Wordle {
     private final Console console;
     private final WordService wordService;
     private final WordleValidator wordleValidator;
-    private final TileService tileService;
 
-    public Wordle(Console console, WordService wordService, WordleValidator wordleValidator, TileService tileService) {
+    public Wordle(Console console, WordService wordService, WordleValidator wordleValidator) {
         this.console = console;
         this.wordService = wordService;
         this.wordleValidator = wordleValidator;
-        this.tileService = tileService;
     }
 
     public void start() {
         console.printInitGameMessage();
 
         Words words = wordService.getWords();
-        Letters answerLetters = createAnswerLetters(words);
+        Answer answer = createAnswer(words);
+        Results results = new Results();
 
         int tryCount = 0;
         while (tryCount++ < TRY_COUNT_LIMIT) {
             Letters inputLetters = getInputLetters(words);
-            Tiles tiles = tileService.create(answerLetters, inputLetters);
+            Result result = answer.evaluate(inputLetters);
+            results.add(result);
 
-            if (isEnd(tiles, tryCount)) {
+            if (isEnd(results, tryCount)) {
                 break;
             }
 
-            console.printTiles(tileService.findAll());
+            console.print(results);
         }
     }
 
-    private Letters createAnswerLetters(Words words) {
+    private Answer createAnswer(Words words) {
         String wordOfDay = words.getWordOfDay(LocalDate.now());
-        return new Letters(wordOfDay);
+        return new Answer(new Letters(wordOfDay));
     }
 
     private Letters getInputLetters(Words words) {
@@ -73,14 +73,14 @@ public class Wordle {
         return false;
     }
 
-    private boolean isEnd(Tiles tiles, int tryCount) {
-        if (tileService.isAnswer(tiles)) {
-            console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
+    private boolean isEnd(Results results, int tryCount) {
+        if (results.containsAnswer()) {
+            console.printResult(tryCount, TRY_COUNT_LIMIT, results);
             return true;
         }
 
         if (tryCount == TRY_COUNT_LIMIT) {
-            console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
+            console.printResult(TRY_COUNT_LIMIT, results);
             return true;
         }
 

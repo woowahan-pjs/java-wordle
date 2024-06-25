@@ -1,12 +1,10 @@
-package wordle;
+package wordle.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wordle.model.Letter;
-import wordle.model.Letters;
 
 class LettersTest {
 
