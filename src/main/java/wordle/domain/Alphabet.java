@@ -15,7 +15,7 @@ public enum Alphabet {
 
     public static Alphabet of(final String alphabet) {
         return Arrays.stream(values())
-                .filter(it -> it.name().equals(alphabet))
+                .filter(it -> it.name().equals(alphabet.toLowerCase()))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
