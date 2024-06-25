@@ -50,7 +50,7 @@ public class Answer {
                     }
                     final Alphabet alphabet = guess.find(index);
                     final long count = unmatchedAnswerCounts.getOrDefault(alphabet, DEFAULT_COUNT);
-                    if (count > 0) {
+                    if (count > DEFAULT_COUNT) {
                         unmatchedAnswerCounts.put(alphabet, Math.subtractExact(count, DECREASE_COUNT_UNIT));
                         return ResultType.EXIST;
                     }

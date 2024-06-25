@@ -39,10 +39,6 @@ public class GameWord implements Word {
         return alphabets.get(index);
     }
 
-    public boolean isSameAs(final String word) {
-        return word().equals(word);
-    }
-
     @Override
     public String word() {
         return alphabets.stream()

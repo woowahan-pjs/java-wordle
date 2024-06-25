@@ -44,7 +44,7 @@ public class Game {
         try {
             outputView.insertWord();
             final String word = inputView.inputWord();
-            if(dictionary.isExist(word)) {
+            if (dictionary.isExist(word)) {
                 return new Guess(word);
             }
             return guess(dictionary);

@@ -1,8 +1,8 @@
 package wordle;
 
-import wordle.domain.EpochDayBaseWordSelector;
 import wordle.domain.DictionaryFileReader;
 import wordle.domain.DictionaryReader;
+import wordle.domain.EpochDayBaseWordSelector;
 import wordle.domain.WordSelector;
 import wordle.view.ConsoleInputView;
 import wordle.view.ConsoleOutputView;
