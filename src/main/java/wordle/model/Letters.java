@@ -2,7 +2,6 @@ package wordle.model;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -41,6 +40,10 @@ public class Letters implements Iterable<Letter> {
         return letters.contains(letter);
     }
 
+    public boolean notContains(Letter letter) {
+        return !contains(letter);
+    }
+
     public Letters findSamePositionAndValueLetters(Letters other) {
         List<Letter> filteredLetters = letters.stream()
                 .filter(other::contains)
@@ -51,16 +54,16 @@ public class Letters implements Iterable<Letter> {
 
     public Letters findSameValueLetters(Letters other) {
         List<Letter> filteredLetters = letters.stream()
-                .filter(letter -> !other.contains(letter))
-                .filter(other::isOnlySameValue)
+                .filter(other::notContains)
+                .filter(other::containsOnlySameValueLetter)
                 .toList();
 
         return new Letters(filteredLetters);
     }
 
-    private boolean isOnlySameValue(Letter other) {
+    private boolean containsOnlySameValueLetter(Letter other) {
         return letters.stream()
-                .anyMatch(letter -> (Objects.equals(letter.getValue(), other.getValue())) && letter.getPosition() != other.getPosition());
+                .anyMatch(letter -> letter.isOnlySameValue(other));
     }
 
     public Letters findNoneMatchingLetters(Letters other) {

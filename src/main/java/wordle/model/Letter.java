@@ -20,6 +20,10 @@ public class Letter {
         return value;
     }
 
+    public boolean isOnlySameValue(Letter other) {
+        return (value == other.value) && (position != other.position);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
