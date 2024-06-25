@@ -30,7 +30,7 @@ class LetterCounterTest {
         Letters actual = letterCounter.filterCanDecreaseCount(target);
 
         // then
-        assertThat(actual.getLetters()).containsExactly(new Letter(0, 'b'));
+        assertThat(actual).containsExactly(new Letter(0, 'b'));
     }
 
     @DisplayName("카운트를 감소시킬 수 없는 Letter만 필터링한다.")
@@ -53,7 +53,7 @@ class LetterCounterTest {
         Letters actual = letterCounter.filterCanNotDecreaseCount(target);
 
         // then
-        assertThat(actual.getLetters()).containsExactly(new Letter(0, 'c'));
+        assertThat(actual).containsExactly(new Letter(0, 'c'));
     }
 
 }

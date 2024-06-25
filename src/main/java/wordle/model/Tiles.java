@@ -15,19 +15,19 @@ public class Tiles {
     }
 
     public void addGreenTile(Letters letters) {
-        for(Letter letter : letters.getLetters()) {
+        for(Letter letter : letters) {
             tiles[letter.getPosition()] = GREEN_TILE;
         }
     }
 
     public void addYellowTile(Letters letters) {
-        for(Letter letter : letters.getLetters()) {
+        for(Letter letter : letters) {
             tiles[letter.getPosition()] = YELLOW_TILE;
         }
     }
 
     public void addGrayTile(Letters letters) {
-        for (Letter letter : letters.getLetters()) {
+        for (Letter letter : letters) {
             tiles[letter.getPosition()] = GRAY_TILE;
         }
     }

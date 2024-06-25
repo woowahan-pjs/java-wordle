@@ -10,14 +10,14 @@ public class LetterCounter {
 
     public LetterCounter(Letters letters) {
         this.letterCountMap = new HashMap<>();
-        for (Letter answerLetter : letters.getLetters()) {
+        for (Letter answerLetter : letters) {
             char value = answerLetter.getValue();
             letterCountMap.put(value, letterCountMap.getOrDefault(value, 0) + 1);
         }
     }
 
     public void decreaseCount(Letters letters) {
-        for (Letter letter : letters.getLetters()) {
+        for (Letter letter : letters) {
             char value = letter.getValue();
             letterCountMap.put(value, letterCountMap.get(value) - 1);
         }
@@ -29,8 +29,7 @@ public class LetterCounter {
     }
 
     public Letters filterCanDecreaseCount(Letters letters) {
-        List<Letter> filteredLetters = letters.getLetters()
-                .stream()
+        List<Letter> filteredLetters = letters.stream()
                 .filter(this::canDecreaseCount)
                 .toList();
 
@@ -43,8 +42,7 @@ public class LetterCounter {
     }
 
     public Letters filterCanNotDecreaseCount(Letters letters) {
-        List<Letter> filteredLetters = letters.getLetters()
-                .stream()
+        List<Letter> filteredLetters = letters.stream()
                 .filter(this::canNotDecreaseCount)
                 .toList();
 

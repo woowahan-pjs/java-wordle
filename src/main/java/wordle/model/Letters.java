@@ -1,31 +1,26 @@
 package wordle.model;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class Letters {
+public class Letters implements Iterable<Letter> {
 
     private final List<Letter> letters;
 
     public Letters(String word) {
         String lowerCase = word.toLowerCase();
-        char[] wordArr = lowerCase.toCharArray();
-
-        this.letters = new ArrayList<>();
-        for (int i = 0; i < wordArr.length; i++) {
-            letters.add(new Letter(i, wordArr[i]));
-        }
+        this.letters = IntStream.range(0, lowerCase.length())
+                .mapToObj(i -> new Letter(i, lowerCase.charAt(i)))
+                .toList();
     }
 
     public Letters(List<Letter> letters) {
         this.letters = letters;
-    }
-
-    public List<Letter> getLetters() {
-        return letters;
     }
 
     public boolean lessThan(int size) {
@@ -85,5 +80,14 @@ public class Letters {
 
     public int size() {
         return letters.size();
+    }
+
+    @Override
+    public Iterator<Letter> iterator() {
+        return letters.iterator();
+    }
+
+    public Stream<Letter> stream() {
+        return letters.stream();
     }
 }

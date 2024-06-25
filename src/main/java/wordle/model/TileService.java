@@ -37,7 +37,7 @@ public class TileService {
 
         List<Letter> lettersForYellowTile = new ArrayList<>();
         List<Letter> lettersForGrayTile = new ArrayList<>();
-        for (Letter letter : sameValueLetters.getLetters()) {
+        for (Letter letter : sameValueLetters) {
             if (letterCounter.canDecreaseCount(letter)) {
                 lettersForYellowTile.add(letter);
                 letterCounter.decreaseCount(letter);

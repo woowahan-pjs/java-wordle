@@ -49,7 +49,7 @@ class LettersTest {
         Letters result = letters.findSamePositionAndValueLetters(other);
 
         // then
-        assertThat(result.getLetters()).containsExactly(new Letter(1, 'e'));
+        assertThat(result).containsExactly(new Letter(1, 'e'));
     }
 
     @DisplayName("위치는 다르지만 값이 같은 Letter 리스트를 찾아서 반환한다.")
@@ -73,7 +73,7 @@ class LettersTest {
         Letters result = letters.findSameValueLetters(other);
 
         // then
-        assertThat(result.getLetters()).containsExactly(new Letter(0, 'h'));
+        assertThat(result).containsExactly(new Letter(0, 'h'));
     }
 
     @DisplayName("비교 대상 Letter의 값 집합에 포함되지 않는 Letter 리스트를 찾아서 반환한다.")
@@ -97,6 +97,6 @@ class LettersTest {
         Letters result = letters.findNoneMatchingLetters(other);
 
         // then
-        assertThat(result.getLetters()).containsExactly(new Letter(2, 'l'));
+        assertThat(result).containsExactly(new Letter(2, 'l'));
     }
 }
