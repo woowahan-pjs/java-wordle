@@ -22,7 +22,7 @@ public class Letters implements Iterable<Letter> {
         this.letters = letters;
     }
 
-    public String combine() {
+    public String toWord() {
         return letters.stream()
             .map(letter -> String.valueOf(letter.getValue()))
             .collect(Collectors.joining(""));

@@ -10,7 +10,7 @@ class LettersTest {
 
     @DisplayName("Letters를 문자열로 변환한다.")
     @Test
-    void combine() {
+    void toWord() {
         // given
         Letters letters = new Letters(
                 List.of(
@@ -22,7 +22,7 @@ class LettersTest {
                 ));
 
         // when
-        String result = letters.combine();
+        String result = letters.toWord();
 
         // then
         assertThat(result).isEqualTo("hello");

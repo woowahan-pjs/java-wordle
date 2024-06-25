@@ -9,6 +9,6 @@ public class WordleValidator {
     }
 
     public boolean isNotIncludedWord(Letters letters, Words words) {
-        return words.notContains(letters.combine());
+        return words.notContains(letters.toWord());
     }
 }
