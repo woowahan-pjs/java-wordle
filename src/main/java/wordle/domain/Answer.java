@@ -9,8 +9,8 @@ import java.util.stream.IntStream;
 
 public class Answer {
     private static final int START_INDEX = 0;
-    public static final long DEFAULT_COUNT = 0L;
-    public static final long DECREASE_COUNT_UNIT = 1L;
+    private static final long DEFAULT_COUNT = 0L;
+    private static final long DECREASE_COUNT_UNIT = 1L;
 
     private final GameWord word;
 
