@@ -11,8 +11,8 @@ public class GameWord implements Word {
     private final List<Alphabet> alphabets;
 
     private static List<Alphabet> alphabets(final String word) {
-        return word.toLowerCase().chars()
-                .mapToObj(it -> (char) it)
+        return word.toLowerCase().codePoints()
+                .boxed()
                 .map(Alphabet::of)
                 .toList();
     }
@@ -45,7 +45,7 @@ public class GameWord implements Word {
         }
         return alphabets.subList(MINIMUM_INDEX, toIndex)
                 .stream()
-                .filter(it -> it == alphabet)
+                .filter(alphabet::equals)
                 .count();
     }
 

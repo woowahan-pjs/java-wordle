@@ -30,7 +30,7 @@ public class Answer {
 
     private ResultType examineResultType(final Guess guess, final int index) {
         final Alphabet alphabet = guess.find(index);
-        if (alphabet == this.find(index)) {
+        if (alphabet.equals(find(index))) {
             return ResultType.MATCHED;
         }
         final long answerCount = countAlphabets(alphabet, size());

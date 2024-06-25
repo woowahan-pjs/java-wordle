@@ -19,7 +19,7 @@ public enum ResultColor {
 
     public static String color(final ResultType resultType) {
         return Arrays.stream(ResultColor.values())
-                .filter(it -> resultType == it.resultType)
+                .filter(it -> resultType.equals(it.resultType))
                 .map(it -> it.color)
                 .findFirst()
                 .orElse(WHITE.color);
