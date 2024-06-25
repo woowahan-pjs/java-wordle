@@ -15,6 +15,10 @@ public class Result {
         return resultTypes.stream().allMatch(ResultType.MATCHED::equals);
     }
 
+    public ResultType get(final int index) {
+        return resultTypes.get(index);
+    }
+
     public List<ResultType> getResult() {
         return Collections.unmodifiableList(resultTypes);
     }
@@ -30,9 +34,5 @@ public class Result {
     @Override
     public int hashCode() {
         return Objects.hashCode(resultTypes);
-    }
-
-    public ResultType get(final int index) {
-        return resultTypes.get(index);
     }
 }
