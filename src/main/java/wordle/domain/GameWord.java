@@ -23,7 +23,7 @@ public class GameWord implements Word {
 
     public GameWord(final List<Alphabet> alphabets) {
         if (alphabets.size() != WORD_SIZE) {
-            throw new IllegalArgumentException("단어는 5글자의 소문자 알파벳으로 이루어져야 합니다");
+            throw new IllegalArgumentException("단어는 5글자의 알파벳으로 이루어져야 합니다");
         }
         this.alphabets = alphabets;
     }
