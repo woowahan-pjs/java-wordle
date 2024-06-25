@@ -19,7 +19,6 @@ public class TileService {
 
         processSamePositionAndValueLetters(answerLetters, inputLetters, letterCounter, tiles);
         processSameValueLetters(answerLetters, inputLetters, letterCounter, tiles);
-        processNoneMatchLetters(answerLetters, inputLetters, tiles);
 
         tileStorage.add(tiles);
         return tiles;
@@ -31,29 +30,17 @@ public class TileService {
         tiles.addGreenTile(samePositionAndValueLetters);
     }
 
-    // TODO: 알고리즘에 오류가 있어 급한대로 정상 동작하게 변경하였음. 다시 잘 생각해보자.....
     private void processSameValueLetters(Letters answerLetters, Letters inputLetters, LetterCounter letterCounter, Tiles tiles) {
         Letters sameValueLetters = inputLetters.findSameValueLetters(answerLetters);
-
         List<Letter> lettersForYellowTile = new ArrayList<>();
-        List<Letter> lettersForGrayTile = new ArrayList<>();
         for (Letter letter : sameValueLetters) {
             if (letterCounter.canDecreaseCount(letter)) {
                 lettersForYellowTile.add(letter);
                 letterCounter.decreaseCount(letter);
-                continue;
             }
-
-            lettersForGrayTile.add(letter);
         }
 
         tiles.addYellowTile(new Letters(lettersForYellowTile));
-        tiles.addGrayTile(new Letters(lettersForGrayTile));
-    }
-
-    private void processNoneMatchLetters(Letters answerLetters, Letters inputLetters, Tiles tiles) {
-        Letters noneMatchingLetters = inputLetters.findNoneMatchingLetters(answerLetters);
-        tiles.addGrayTile(noneMatchingLetters);
     }
 
     public boolean isAnswer(Tiles tiles) {

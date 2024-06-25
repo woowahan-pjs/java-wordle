@@ -12,6 +12,7 @@ public class Tiles {
 
     public Tiles(int size) {
         this.tiles = new String[size];
+        Arrays.fill(tiles, GRAY_TILE);
     }
 
     public void addGreenTile(Letters letters) {
@@ -23,12 +24,6 @@ public class Tiles {
     public void addYellowTile(Letters letters) {
         for(Letter letter : letters) {
             tiles[letter.getPosition()] = YELLOW_TILE;
-        }
-    }
-
-    public void addGrayTile(Letters letters) {
-        for (Letter letter : letters) {
-            tiles[letter.getPosition()] = GRAY_TILE;
         }
     }
 
