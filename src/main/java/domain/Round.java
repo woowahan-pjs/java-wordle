@@ -1,24 +1,17 @@
 package domain;
 
 public class Round {
+    public final static int ROUND_LIMIT = 3;
     private final int limit;
     private int current;
 
-    private Round(int limit, int current) {
-        this.limit = limit;
-        this.current = current;
-    }
-
-    public Round(int limit) {
-        this(limit, 1);
+    public Round() {
+        limit = ROUND_LIMIT;
+        current = 1;
     }
 
     public void goNext() {
         this.current++;
-    }
-
-    public int getLimit() {
-        return limit;
     }
 
     public int getCurrent() {

@@ -36,6 +36,10 @@ public class Word {
         return new MatchResult(hints);
     }
 
+    public String getString() {
+        return letters;
+    }
+
     private Hint matchLetter(Word otherWord, boolean[] visited, int index) {
         if(isCorrect(index, otherWord.letters.charAt(index))){
             visited[index] = true;
@@ -102,4 +106,5 @@ public class Word {
     public int hashCode() {
         return letters != null ? letters.hashCode() : 0;
     }
+
 }

@@ -4,44 +4,39 @@ import domain.MatchResult;
 import domain.MatchResults;
 import domain.Round;
 import domain.Word;
-import ui.GuideTextView;
-import ui.HintView;
-import ui.InputView;
-import ui.RoundView;
+import ui.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class GameManager {
-    private final static int ROUND_LIMIT = 6;
-    private final Round round;
     private final MatchResults matchResults;
     private final Word answer;
-    private boolean isWinning;
-
     private final List<String> availableWords;
-
     private final GuideTextView guideTextView;
     private final InputView inputView;
     private final HintView hintView;
     private final RoundView roundView;
+    private final AnswerView answerView;
 
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
-        this.round = new Round(ROUND_LIMIT);
         this.matchResults = new MatchResults();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
         this.hintView = new HintView();
         this.roundView = new RoundView();
+        this.answerView = new AnswerView();
     }
 
-
     public void start() {
-        guideTextView.render(round.getLimit());
-        while(isNotWinning() && round.isNotFinalRound()) {
+        guideTextView.render(Round.ROUND_LIMIT);
+        while(matchResults.shouldContinueGame()) {
             startRound();
+        }
+        if(matchResults.isNotWinning()) {
+            answerView.render(answer);
         }
     }
 
@@ -50,37 +45,18 @@ public class GameManager {
 
         Word inputWord;
         try {
-            inputWord = Word.createInput(input, this.availableWords);
+            inputWord = Word.createInput(input, availableWords);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
         }
 
-        checkAnswer(inputWord);
-
-        if(isWinning()) {
-            roundView.render(round.getCurrent(),round.getLimit());
+        MatchResult matchResult = answer.match(inputWord);
+        if(matchResult.isWinning()) {
+            roundView.render(matchResults.currentRound(), Round.ROUND_LIMIT);
         }
+        matchResults.add(matchResult);
 
-        hintView.render(this.matchResults);
-        round.goNext();
-    }
-
-    private void checkAnswer(Word inputWord) {
-        MatchResult matchResultOfInput = answer.match(inputWord);
-        this.matchResults.add(matchResultOfInput);
-        setWinning(matchResultOfInput.isWinning());
-    }
-
-    private boolean isNotWinning(){
-        return !isWinning();
-    }
-
-    private boolean isWinning() {
-        return isWinning;
-    }
-
-    private void setWinning(boolean winning) {
-        isWinning = winning;
+        hintView.render(matchResults);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MatchResults implements Iterable<MatchResult> {
+    private final Round round = new Round();
     private final List<MatchResult> results;
 
     public MatchResults() {
@@ -17,6 +18,23 @@ public class MatchResults implements Iterable<MatchResult> {
     }
 
     public void add(MatchResult matchResult) {
-        this.results.add(matchResult);
+        results.add(matchResult);
+        round.goNext();
+    }
+
+    public boolean shouldContinueGame() {
+        return round.isNotFinalRound() && isNotWinning();
+    }
+
+    public int currentRound() {
+        return round.getCurrent();
+    }
+
+    public boolean isWinning() {
+        return this.results.stream().anyMatch(MatchResult::isWinning);
+    }
+
+    public boolean isNotWinning() {
+        return !isWinning();
     }
 }
