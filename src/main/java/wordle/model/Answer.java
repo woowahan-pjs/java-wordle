@@ -21,6 +21,12 @@ public class Answer {
         return result;
     }
 
+    private void processSamePositionAndValue(Letters target, LetterCounter letterCounter, Result result) {
+        Letters samePositionAndValueLetters = target.findSamePositionAndValueLetters(letters);
+        letterCounter.decreaseCount(samePositionAndValueLetters);
+        result.addGreenTile(samePositionAndValueLetters);
+    }
+
     private void processOnlySameValue(Letters target, LetterCounter letterCounter, Result result) {
         Letters sameValueLetters = target.findSameValueLetters(letters);
         List<Letter> lettersForYellowTile = new ArrayList<>();
@@ -31,11 +37,5 @@ public class Answer {
             }
         }
         result.addYellowTile(new Letters(lettersForYellowTile));
-    }
-
-    private void processSamePositionAndValue(Letters target, LetterCounter letterCounter, Result result) {
-        Letters samePositionAndValueLetters = target.findSamePositionAndValueLetters(letters);
-        letterCounter.decreaseCount(samePositionAndValueLetters);
-        result.addGreenTile(samePositionAndValueLetters);
     }
 }
