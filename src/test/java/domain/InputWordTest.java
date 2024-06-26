@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class InputWordTest {
+    @Test
     @DisplayName("입력단어 유효성 검증 성공 테스트")
     void validateSuccessInputWord() {
-        List<String> words = List.of("apples", "cherry");
-        assertDoesNotThrow(() -> Word.createInput("cherry", words));
-
+        List<String> words = List.of("apple", "xxxxx");
+        assertDoesNotThrow(() -> Word.createInput("apple", words));
     }
 
 
