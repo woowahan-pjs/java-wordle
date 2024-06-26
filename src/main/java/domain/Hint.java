@@ -16,7 +16,7 @@ public enum Hint {
         return tile;
     }
 
-    public static boolean isCorrect(Hint hint) {
-        return Hint.CORRECT.equals(hint);
+    public boolean isCorrect() {
+        return this == CORRECT;
     }
 }
