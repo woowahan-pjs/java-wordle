@@ -4,15 +4,14 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Word {
     private final static int MAX_LENGTH = 5;
-    private final String value;
+    private final String letters;
 
     protected Word(String value) {
-        this.value = value;
+        this.letters = value;
     }
 
     public static Word createAnswer(LocalDate currentDate, List<String> availableWords) {
@@ -28,30 +27,39 @@ public class Word {
         return new Word(value);
     }
 
-    public MatchResult match(Word word) {
-        List<Hint> hints = IntStream.range(0, value.length())
-                .mapToObj(i -> getHint(word.value.charAt(i), i))
-                .collect(Collectors.toList());
+    public MatchResult match(Word otherWord) {
+        boolean[] visited = new boolean[letters.length()];
+        List<Hint> hints = IntStream.range(0, letters.length())
+                .mapToObj(i -> matchLetter(otherWord, visited, i))
+                .toList();
 
         return new MatchResult(hints);
     }
 
-    private Hint getHint(Character character, int index) {
-        if (isCorrect(index, character)) {
+    private Hint matchLetter(Word otherWord, boolean[] visited, int index) {
+        if(isCorrect(index, otherWord.letters.charAt(index))){
+            visited[index] = true;
             return Hint.CORRECT;
         }
-        if (exists(character)) {
+
+        char otherWordChar = otherWord.letters.charAt(index);
+        if(this.exists(otherWordChar, visited)){
+            visited[letters.indexOf(otherWordChar)] = true;
             return Hint.EXIST;
         }
+
         return Hint.NOT_EXIST;
     }
 
-    private Boolean exists(char inputChar) {
-        return value.indexOf(inputChar) != -1;
+    private Boolean exists(char letter, boolean[] visited) {
+        return IntStream.range(0, letters.length())
+                .filter(i -> !visited[i] && letters.charAt(i) == letter)
+                .findFirst()
+                .isPresent();
     }
 
     private Boolean isCorrect(int index, char inputChar) {
-        return value.charAt(index) == inputChar;
+        return letters.charAt(index) == inputChar;
     }
 
     private static void validate(String input, List<String> availableWords) {
@@ -87,11 +95,11 @@ public class Word {
 
         Word answer = (Word) o;
 
-        return Objects.equals(value, answer.value);
+        return Objects.equals(letters, answer.letters);
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        return letters != null ? letters.hashCode() : 0;
     }
 }
