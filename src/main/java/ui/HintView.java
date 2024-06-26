@@ -1,10 +1,10 @@
 package ui;
 
 import domain.MatchResult;
-import domain.MatchResults;
+import domain.GameState;
 
 public class HintView {
-    public void render(MatchResults matchResults) {
+    public void render(GameState matchResults) {
         matchResults.forEach(matchResultEachRound -> {
             renderTiles(matchResultEachRound);
             System.out.println();

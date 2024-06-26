@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MatchResults implements Iterable<MatchResult> {
+public class GameState implements Iterable<MatchResult> {
     private final Round round = new Round();
-    private final List<MatchResult> results;
+    private final List<MatchResult> matchResults;
 
-    public MatchResults() {
-        this.results = new ArrayList<>();
+    public GameState() {
+        this.matchResults = new ArrayList<>();
     }
 
     @Override
     public Iterator<MatchResult> iterator() {
-        return this.results.iterator();
+        return matchResults.iterator();
     }
 
     public void add(MatchResult matchResult) {
-        results.add(matchResult);
+        matchResults.add(matchResult);
         round.goNext();
     }
 
@@ -31,7 +31,7 @@ public class MatchResults implements Iterable<MatchResult> {
     }
 
     public boolean isWinning() {
-        return this.results.stream().anyMatch(MatchResult::isWinning);
+        return matchResults.stream().anyMatch(MatchResult::isWinning);
     }
 
     public boolean isNotWinning() {

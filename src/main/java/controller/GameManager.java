@@ -1,7 +1,7 @@
 package controller;
 
 import domain.MatchResult;
-import domain.MatchResults;
+import domain.GameState;
 import domain.Round;
 import domain.Word;
 import ui.*;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GameManager {
-    private final MatchResults matchResults;
+    private final GameState state;
     private final Word answer;
     private final List<String> availableWords;
     private final GuideTextView guideTextView;
@@ -22,7 +22,7 @@ public class GameManager {
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
-        this.matchResults = new MatchResults();
+        this.state = new GameState();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
         this.hintView = new HintView();
@@ -32,10 +32,10 @@ public class GameManager {
 
     public void start() {
         guideTextView.render(Round.ROUND_LIMIT);
-        while(matchResults.shouldContinueGame()) {
+        while(state.shouldContinueGame()) {
             startRound();
         }
-        if(matchResults.isNotWinning()) {
+        if(state.isNotWinning()) {
             answerView.render(answer);
         }
     }
@@ -53,10 +53,10 @@ public class GameManager {
 
         MatchResult matchResult = answer.match(inputWord);
         if(matchResult.isWinning()) {
-            roundView.render(matchResults.currentRound(), Round.ROUND_LIMIT);
+            roundView.render(state.currentRound(), Round.ROUND_LIMIT);
         }
-        matchResults.add(matchResult);
+        state.add(matchResult);
 
-        hintView.render(matchResults);
+        hintView.render(state);
     }
 }
