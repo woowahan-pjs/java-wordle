@@ -1,7 +1,6 @@
 package domain;
-
 public class Round {
-    public final static int ROUND_LIMIT = 3;
+    public final static int ROUND_LIMIT = 6;
     private final int limit;
     private int current;
 
