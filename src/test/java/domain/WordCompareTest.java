@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AnswerTest {
+class WordCompareTest {
 
     @Test
     void 전부_일치인_경우() {
