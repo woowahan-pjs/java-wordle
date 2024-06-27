@@ -1,5 +1,8 @@
 package domain;
 
+import domain.exception.LetterNotEnglishException;
+import domain.exception.OverMaxLengthException;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -59,19 +62,13 @@ public class Word {
 
     private static void validateOnlyEnglish(String input) {
         if (!input.matches("^[a-zA-Z]+$")) {
-            throw new IllegalArgumentException("영단어를 입력해주세요. [" + input + "]");
+            throw new LetterNotEnglishException("영단어를 입력해주세요. [" + input + "]");
         }
     }
 
     private static void validateLength(String input) {
         if (input.length() != MAX_LENGTH) {
-            throw new IllegalArgumentException(MAX_LENGTH + "자리의 단어를 입력해주세요.");
-        }
-    }
-
-    private static void validateContain(String input, List<String> availableWords) {
-        if (!availableWords.contains(input)) {
-            throw new IllegalArgumentException("입력 불가능한 단어입니다.");
+            throw new OverMaxLengthException(MAX_LENGTH + "자리의 단어를 입력해주세요.");
         }
     }
 
