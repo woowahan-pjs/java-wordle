@@ -10,21 +10,9 @@ public class Word {
     private final static int MAX_LENGTH = 5;
     private final String letters;
 
-    protected Word(String value) {
-        this.letters = value;
-    }
-
-    public static Word createAnswer(LocalDate currentDate, List<String> availableWords) {
-        LocalDate fixedDate = LocalDate.of(2021, 6, 19);
-        int diffDay = Period.between(fixedDate, currentDate).getDays();
-        int index = diffDay % availableWords.size();
-
-        return new Word(availableWords.get(index));
-    }
-
-    public static Word createInput(String value, List<String> availableWords) {
-        validate(value, availableWords);
-        return new Word(value);
+    public Word(String letters) {
+        validate(letters);
+        this.letters = letters;
     }
 
     public MatchResult match(Word otherWord) {
@@ -66,12 +54,9 @@ public class Word {
         return letters.charAt(index) == inputChar;
     }
 
-    private static void validate(String input, List<String> availableWords) {
+    private static void validate(String input) {
         validateLength(input);
-
         validateOnlyEnglish(input);
-
-        validateContain(input, availableWords);
     }
 
     private static void validateOnlyEnglish(String input) {

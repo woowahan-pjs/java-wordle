@@ -1,9 +1,6 @@
 package controller;
 
-import domain.MatchResult;
-import domain.GameState;
-import domain.Round;
-import domain.Word;
+import domain.*;
 import ui.*;
 
 import java.time.LocalDate;
@@ -11,17 +8,15 @@ import java.util.List;
 
 public class GameManager {
     private final GameState state;
-    private final Word answer;
-    private final List<String> availableWords;
     private final GuideTextView guideTextView;
     private final InputView inputView;
     private final HintView hintView;
     private final RoundView roundView;
     private final AnswerView answerView;
+    private final WordDictionary wordDictionary;
 
-    public GameManager(List<String> availableWords) {
-        this.answer = Word.createAnswer(LocalDate.now(), availableWords);
-        this.availableWords = availableWords;
+    public GameManager(List<String> wordStringList) {
+        this.wordDictionary = new WordDictionary(wordStringList);
         this.state = new GameState();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
@@ -31,21 +26,21 @@ public class GameManager {
     }
 
     public void start() {
+        Word answer = wordDictionary.answerWord(LocalDate.now());
         guideTextView.render(Round.ROUND_LIMIT);
         while(state.shouldContinueGame()) {
-            startRound();
+            startRound(answer);
         }
         if(state.isNotWinning()) {
             answerView.render(answer);
         }
     }
 
-    private void startRound() {
+    private void startRound(Word answer) {
         String input = inputView.input();
-
         Word inputWord;
         try {
-            inputWord = Word.createInput(input, availableWords);
+            inputWord = new Word(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
