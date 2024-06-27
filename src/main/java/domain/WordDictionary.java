@@ -5,15 +5,21 @@ import java.time.Period;
 import java.util.List;
 
 public class WordDictionary {
-    private final List<String> words;
+    private final List<Word> words;
 
     public WordDictionary(List<String> words) {
-        this.words = words;
+        this.words = words.stream()
+                .map(Word::new)
+                .toList();
     }
 
     public Word answerWord(LocalDate currentDate) {
         int index = getIndex(currentDate);
-        return new Word(words.get(index));
+        return words.get(index);
+    }
+
+    public boolean hasNot(Word word) {
+        return !words.contains(word);
     }
 
     private int getIndex(LocalDate currentDate) {

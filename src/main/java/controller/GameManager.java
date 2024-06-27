@@ -28,10 +28,10 @@ public class GameManager {
     public void start() {
         Word answer = wordDictionary.answerWord(LocalDate.now());
         guideTextView.render(Round.ROUND_LIMIT);
-        while(state.shouldContinueGame()) {
+        while (state.shouldContinueGame()) {
             startRound(answer);
         }
-        if(state.isNotWinning()) {
+        if (state.isNotWinning()) {
             answerView.render(answer);
         }
     }
@@ -45,9 +45,13 @@ public class GameManager {
             System.out.println(e.getMessage());
             return;
         }
+        if (wordDictionary.hasNot(inputWord)) {
+            System.out.println("사전에 없는 단어입니다.");
+            return;
+        }
 
         MatchResult matchResult = answer.match(inputWord);
-        if(matchResult.isWinning()) {
+        if (matchResult.isWinning()) {
             roundView.render(state.currentRound(), Round.ROUND_LIMIT);
         }
         state.add(matchResult);
