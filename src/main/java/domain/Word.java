@@ -1,7 +1,5 @@
 package domain;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -29,7 +27,7 @@ public class Word {
     }
 
     private Hint matchLetter(Word otherWord, boolean[] visited, int index) {
-        if(isCorrect(index, otherWord.letters.charAt(index))){
+        if(hasCorrect(index, otherWord.letters.charAt(index))){
             visited[index] = true;
             return Hint.CORRECT;
         }
@@ -50,8 +48,8 @@ public class Word {
                 .isPresent();
     }
 
-    private Boolean isCorrect(int index, char inputChar) {
-        return letters.charAt(index) == inputChar;
+    private Boolean hasCorrect(int index, char letter) {
+        return letters.charAt(index) == letter;
     }
 
     private static void validate(String input) {
