@@ -7,11 +7,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WordLoaderTest {
+class WordStringLoaderTest {
     @Test
     @DisplayName("단어목록파일 읽기")
     void loadWordsFromFile(){
-        List<String> words = WordLoader.read("src/test/resources/words.txt");
+        List<String> words = WordStringLoader.readAll("src/test/resources/words.txt");
         assertThat(words).hasSize(5);
     }
 }
