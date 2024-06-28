@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WordLoader {
 
-    public  WordLoader() {
+    protected WordLoader() {
     }
 
     public static List<String> read(String filePath) {
