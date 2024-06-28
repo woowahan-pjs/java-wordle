@@ -3,13 +3,13 @@ package wordle.model;
 import java.time.LocalDate;
 import java.util.List;
 
-public class WordService {
+public class WordLoader {
 
     private static final LocalDate CUTOFF_DATE = LocalDate.of(2021, 6, 19);
 
     private final WordsReader wordsReader;
 
-    public WordService(WordsReader wordsReader) {
+    public WordLoader(WordsReader wordsReader) {
         this.wordsReader = wordsReader;
     }
 

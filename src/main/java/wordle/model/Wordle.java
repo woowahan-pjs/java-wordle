@@ -8,13 +8,13 @@ public class Wordle {
     private static final int TRY_COUNT_LIMIT = 6;
 
     private final Console console;
-    private final WordService wordService;
+    private final WordLoader wordLoader;
     private final WordleValidator wordleValidator;
     private final TileService tileService;
 
-    public Wordle(Console console, WordService wordService, WordleValidator wordleValidator, TileService tileService) {
+    public Wordle(Console console, WordLoader wordLoader, WordleValidator wordleValidator, TileService tileService) {
         this.console = console;
-        this.wordService = wordService;
+        this.wordLoader = wordLoader;
         this.wordleValidator = wordleValidator;
         this.tileService = tileService;
     }
@@ -22,7 +22,7 @@ public class Wordle {
     public void start() {
         console.printInitGameMessage();
 
-        Words words = wordService.getWords();
+        Words words = wordLoader.getWords();
         Letters answerLetters = createAnswerLetters(words);
 
         int tryCount = 0;
