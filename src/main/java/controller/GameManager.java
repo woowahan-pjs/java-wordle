@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GameManager {
+
+    private final static int LIMIT = 6;
+    private final static int CURRENT = 1;
     private final Round round;
     private final MatchResults matchResults;
     private final Word answer;
@@ -26,7 +29,7 @@ public class GameManager {
     public GameManager(List<String> availableWords) {
         this.answer = Word.createAnswer(LocalDate.now(), availableWords);
         this.availableWords = availableWords;
-        this.round = new Round(6, 1);
+        this.round = new Round(LIMIT, CURRENT);
         this.matchResults = new MatchResults();
         this.guideTextView = new GuideTextView();
         this.inputView = new InputView();
