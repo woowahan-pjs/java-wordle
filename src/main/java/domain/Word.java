@@ -30,9 +30,13 @@ public class Word {
 
     public MatchResult match(Word word) {
         List<Hint> hints = IntStream.range(0, value.length())
-                .mapToObj(i -> getHint(value.charAt(i), i))
+                .mapToObj(i -> getHint(word.getChar(i), i))
                 .collect(Collectors.toList());
         return new MatchResult(hints);
+    }
+
+    private Character getChar(int i) {
+        return value.charAt(i);
     }
 
     private Hint getHint(Character character, int index) {
