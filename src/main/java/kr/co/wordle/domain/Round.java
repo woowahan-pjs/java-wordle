@@ -40,23 +40,32 @@ public class Round {
 
     public String roundResult(Answer answer) {
         char[] inputChars = input.toCharArray();
-        int[] countPerCharacter = answer.getCountPerCharacter();
-        for (int i = 0; i< WORD_LENGTH; i++) {
+        int[] countPerCharacter = countGreen(answer, inputChars);
+        for (int i = 0; i < WORD_LENGTH; i++) {
             Tile key = getTile(countPerCharacter, answer.charAt(i), inputChars[i]);
             roundResult.update(key);
         }
         return roundResult.toString();
     }
 
-    public Tile getTile(int[] counts, char source, char target) {
-        if(counts[target - 'a'] == 0) {
-            return Tile.GRAY;
+    private int[] countGreen(Answer answer, char[] inputChars) {
+        int[] countPerCharacter = answer.getCountPerCharacter();
+        for (int i = 0; i < WORD_LENGTH; i++) {
+            if (answer.charAt(i) == inputChars[i]) {
+                countPerCharacter[inputChars[i] - 'a']--;
+            }
         }
-        if(source != target) {
+        return countPerCharacter;
+    }
+
+    public Tile getTile(int[] counts, char source, char target) {
+        if (source == target) {
+            return Tile.GREEN;
+        }
+        if (counts[target - 'a'] > 0) {
             return Tile.YELLOW;
         }
-        counts[target - 'a']--;
-        return Tile.GREEN;
+        return Tile.GRAY;
     }
 
     public boolean isFinished() {

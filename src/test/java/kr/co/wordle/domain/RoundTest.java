@@ -38,7 +38,13 @@ class RoundTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"cigar:cigar:🟩🟩🟩🟩🟩", "marry:karma:🟨🟩🟩⬜️⬜️", "major:marry:🟩🟩⬜️⬜️🟨"}, delimiter = ':')
+    @CsvSource(value = {
+            "cigar:cigar:🟩🟩🟩🟩🟩",
+            "marry:karma:🟨🟩🟩⬜️⬜️",
+            "major:marry:🟩🟩⬜️⬜️🟨",
+            "hello:apple:⬜️🟨⬜️🟩⬜️",
+            "happy:apple:⬜️🟨🟩🟨⬜️"
+    }, delimiter = ':')
     void 라운드_결과_확인(String input, String answer, String expected) {
         Round round = new Round(input);
         String result = round.roundResult(new Answer(answer));
