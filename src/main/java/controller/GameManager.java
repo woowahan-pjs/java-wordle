@@ -72,7 +72,6 @@ public class GameManager {
     private void checkAnswer(Word inputWord) {
         MatchResult matchResultOfInput = answer.match(inputWord);
         this.matchResults.add(matchResultOfInput);
-
         this.isWinning = matchResultOfInput.isEndGame();
     }
 
