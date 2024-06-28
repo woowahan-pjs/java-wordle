@@ -48,26 +48,39 @@ public class GameManager {
     }
 
     private void startRound() {
-        // 라운드 입력 view
-        String input = inputView.input();
+        Word inputWord = null;
+        boolean canCreateInputWord = false;
 
-        Word inputWord;
-        try {
+        while (!canCreateInputWord) {
+            String input = inputView.input();
             inputWord = Word.createInput(input, this.availableWords);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
+            canCreateInputWord = inputWord.getAvailableWord();
         }
 
         checkAnswer(inputWord);
-
-        if(this.isWinning) {
-            roundView.render(round.getCurrent(),round.getLimit());
-        }
-
-        hintView.render(this.matchResults);
+        renderResult();
         round.goNext();
     }
+
+    private void renderResult() {
+        checkRenderRound();
+        hintView.render(matchResults);
+        checkFinalRound();
+    }
+
+    private void checkRenderRound() {
+        if(this.isWinning || !round.isNotFinalRound()) {
+            roundView.render(round.getCurrent(),round.getLimit());
+        }
+    }
+
+    private void checkFinalRound() {
+        if(!this.isWinning && round.isFinalRound()) {
+            roundView.render(round.getCurrent(),round.getLimit());
+            roundView.renderLoseGame();;
+        }
+    }
+
 
     private void checkAnswer(Word inputWord) {
         MatchResult matchResultOfInput = answer.match(inputWord);
