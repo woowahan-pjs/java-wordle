@@ -1,48 +1,70 @@
 package domain;
 
+import infra.WordLoader;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class InputWordTest {
+
+    private final List<String> words = getWordList();
+
+    @ParameterizedTest
     @DisplayName("입력단어 유효성 검증 성공 테스트")
-    void validateSuccessInputWord() {
-        List<String> words = List.of("apples", "cherry");
-        assertDoesNotThrow(() -> Word.createInput("cherry", words));
-
+    @MethodSource("provideContainedInputWords")
+    void validateSuccessInputWord(String input) {
+        assertTrue(words.contains(input));
     }
 
-
-    @Test
+    @ParameterizedTest
     @DisplayName("입력단어 유효성 검증 실패 테스트")
-    void
-    validateFailInputWord() {
-        List<String> words = List.of("apples", "banana");
-        assertThrows(IllegalArgumentException.class,() -> Word.createInput("pangyo", words));
+    @ValueSource(strings = {"banana", "hello", "test", "world"})
+    void validateFailInputWord(String input) {
+        Word word = Word.createInput(input, words);
+        assertFalse(word.getAvailableWord());
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"people"})
     @DisplayName("입력단어 글자수 유효성 검증 실패 테스트")
-    void validateInputWordLength() {
-        List<String> words = List.of("apple", "abcdef");
-        assertThrows(IllegalArgumentException.class,() -> Word.createInput("abcdef", words));
+    void validateInputWordLength(String input) {
+        assertTrue(words.contains(input));
+        Word word = Word.createInput(input, words);
+        assertFalse(word.getAvailableWord());
     }
 
-
-    @Test
+    @ParameterizedTest
     @DisplayName("입력단어 영단어 유효성 검증 실패 테스트")
-    void validateInputWordOnlyEnglish() {
-        List<String> words = List.of("apple", "abcd1", "안녕하세요");
+    @MethodSource("provideWordsWithLength")
+    void validateInputWordOnlyEnglish(String input, boolean isRightWord) {
+        if (!isRightWord) {
+            Word word = Word.createInput(input, words);
+            assertFalse(word.getAvailableWord());
+        } else {
+            assertTrue(words.contains(input));
+        }
+    }
 
-        assertAll(
-                () -> assertThrows(IllegalArgumentException.class,() -> Word.createInput("abcd1", words)),
-                () -> assertThrows(IllegalArgumentException.class,() -> Word.createInput("안녕하세요", words))
+    private static List<String> getWordList() {
+        return WordLoader.read("src/test/resources/words.txt");
+    }
+    private static Stream<String> provideContainedInputWords() {
+        return Stream.of("serve", "sssss", "eeeee", "naval");
+    }
+
+    public static Stream<Object[]> provideWordsWithLength() {
+        return Stream.of(
+                new Object[]{"안녕하세요", false},
+                new Object[]{"12345", false},
+                new Object[]{"serve", true}
         );
     }
-
-
 }

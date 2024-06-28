@@ -82,11 +82,11 @@ public class Word {
         return Hint.NOT_EXIST;
     }
 
-    private Boolean exists(char inputChar) {
+    private boolean exists(char inputChar) {
         return value.indexOf(inputChar) != -1;
     }
 
-    private Boolean isCorrect(int index, char inputChar) {
+    private boolean isCorrect(int index, char inputChar) {
         return value.charAt(index) == inputChar;
     }
 
