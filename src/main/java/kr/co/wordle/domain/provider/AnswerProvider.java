@@ -9,12 +9,12 @@ import java.util.List;
 public class AnswerProvider {
 
     private static final LocalDate REFERENCE_DATE = LocalDate.of(2021, 6, 19);
+    private static final List<String> words = WordFileReader.readWordsInFile();
 
     private AnswerProvider() {
     }
 
     public static String todayAnswer() {
-        List<String> words = WordFileReader.readWordsInFile();
         int dayDiff = dayDiff();
         return words.get(dayDiff % words.size());
     }
