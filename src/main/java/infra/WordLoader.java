@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class WordLoader {
-
     protected WordLoader() {
     }
 

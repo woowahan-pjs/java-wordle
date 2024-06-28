@@ -6,24 +6,15 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MatchResult {
-
     private final List<HintLetter> hints;
-
     public MatchResult(List<HintLetter> hints) {
         this.hints = hints;
     }
-
-    protected MatchResult() {
-        this.hints = new ArrayList<>();
-    }
-
 
     public boolean isEndGame() {
         return hints.stream()
                 .allMatch(HintLetter::isCorrectHint);
     }
-
-
     public void add(HintLetter hintLetter) {
         hints.add(hintLetter);
     }

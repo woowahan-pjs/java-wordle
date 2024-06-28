@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Word {
     private final static int MAX_LENGTH = 5;
     private final String value;
-    private boolean availableWord;
+    private final boolean availableWord;
 
     public Word(String value) {
         this.value = value;
@@ -29,7 +29,7 @@ public class Word {
     }
 
     public static Word createInput(String value, List<String> availableWords) {
-        boolean availableWord = isvalidate(value, availableWords);
+        boolean availableWord = isValidate(value, availableWords);
         return new Word(value, availableWord);
     }
 
@@ -37,21 +37,24 @@ public class Word {
         List<Character> correctedChar = new ArrayList<>();
 
         List<HintLetter> hintLetters = getHintLetters(word, correctedChar);
-
         hintLetters.forEach(hintLetter -> hintLetter.changeCorrectToNotExist(correctedChar));
 
         return new MatchResult(hintLetters);
     }
 
+    public boolean getAvailableWord() {
+        return availableWord;
+    }
+
     private List<HintLetter> getHintLetters(Word word, List<Character> correctedChar) {
         return Stream.iterate(0, i -> i + 1)
                 .limit(value.length())
-                .map(i -> getHintLetter(value, word, i, correctedChar))
+                .map(i -> getHintLetter(word, i, correctedChar))
                 .toList();
     }
 
 
-    private HintLetter getHintLetter(String value, Word word, Integer i, List<Character> correctedChar) {
+    private HintLetter getHintLetter(Word word, Integer i, List<Character> correctedChar) {
         Hint hint = getHint(word, i);
 
         if (Hint.isCorrect(hint)) {
@@ -87,7 +90,7 @@ public class Word {
         return value.charAt(index) == inputChar;
     }
 
-    private static boolean isvalidate(String input, List<String> availableWords) {
+    private static boolean isValidate(String input, List<String> availableWords) {
         if(validateLength(input)) {
             return false;
         }
@@ -96,8 +99,7 @@ public class Word {
             return false;
         }
 
-//        return !validateContain(input, availableWords);
-        return true;
+        return !validateContain(input, availableWords);
     }
 
     private static boolean validateOnlyEnglish(String input) {
@@ -122,10 +124,6 @@ public class Word {
             return true;
         }
         return false;
-    }
-
-    public boolean getAvailableWord() {
-        return availableWord;
     }
 
     @Override
