@@ -1,7 +1,7 @@
 package domain;
 
 public class Round {
-    private int limit;
+    private final int limit;
     private int current;
 
     public Round(int limit, int current) {
@@ -11,10 +11,6 @@ public class Round {
 
     public void goNext() {
         this.current++;
-    }
-
-    Boolean isLastRound() {
-        return this.current >= this.limit;
     }
 
     public int getLimit() {
