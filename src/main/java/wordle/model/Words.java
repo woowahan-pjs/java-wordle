@@ -1,6 +1,7 @@
 package wordle.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class Words {
@@ -14,9 +15,8 @@ public class Words {
     }
 
     public String getWordOfDay(LocalDate localDate) {
-        long nowEpochDay = localDate.toEpochDay();
-        long cutoffEpochDay = cutoffDate.toEpochDay();
-        int wordIndex = (int) (nowEpochDay - cutoffEpochDay) % words.size();
+        int diffDay = Period.between(cutoffDate, localDate).getDays();
+        int wordIndex = diffDay % words.size();
         return words.get(wordIndex);
     }
 
