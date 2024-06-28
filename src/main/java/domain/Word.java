@@ -2,10 +2,7 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Word {
@@ -25,27 +22,51 @@ public class Word {
     }
 
     public static Word createInput(String value, List<String> availableWords) {
-        validate(value, availableWords);
+//        validate(value, availableWords);
         return new Word(value);
     }
 
     public MatchResult match(Word word) {
-        List<Hint> hints = Stream.iterate(0, i -> i + 1)
-                .limit(value.length())
-                .map(i -> getHint(word.getChar(i), i))
-                .toList();
-        return new MatchResult(hints);
+        List<Character> correctedChar = new ArrayList<>();
+
+        List<HintLetter> hintLetters = getHintLetters(word, correctedChar);
+
+        hintLetters.forEach(hintLetter -> hintLetter.changeCorrectToNotExist(correctedChar));
+
+        return new MatchResult(hintLetters);
     }
+
+    private List<HintLetter> getHintLetters(Word word, List<Character> correctedChar) {
+        return Stream.iterate(0, i -> i + 1)
+                .limit(value.length())
+                .map(i -> getHintLetter(value, word, i, correctedChar))
+                .toList();
+    }
+
+
+    private HintLetter getHintLetter(String value, Word word, Integer i, List<Character> correctedChar) {
+        Hint hint = getHint(word, i);
+
+        if (Hint.isCorrect(hint)) {
+            correctedChar.add(word.getChar(i));
+        }
+
+        return new HintLetter(word.getChar(i), hint);
+    }
+
 
     private Character getChar(int i) {
         return value.charAt(i);
     }
 
-    private Hint getHint(Character character, int index) {
-        if (isCorrect(index, character)) {
+    private Hint getHint(Word word, int index) {
+        char inputChar = word.getChar(index);
+
+        if (isCorrect(index, inputChar)) {
             return Hint.CORRECT;
         }
-        if (exists(character)) {
+
+        if (exists(inputChar)) {
             return Hint.EXIST;
         }
         return Hint.NOT_EXIST;
