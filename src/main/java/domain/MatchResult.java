@@ -1,41 +1,51 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class MatchResult implements Iterable<Hint>{
-    private final List<Hint> hints;
+public class MatchResult {
 
-    public MatchResult(List<Hint> hints) {
+    private final List<HintLetter> hints;
+
+    public MatchResult(List<HintLetter> hints) {
         this.hints = hints;
     }
 
-    public MatchResult() {
+    protected MatchResult() {
         this.hints = new ArrayList<>();
     }
 
-    @Override
-    public Iterator<Hint> iterator() {
-        return hints.iterator();
-    }
 
     public boolean isEndGame() {
-        return hints.stream().allMatch(Hint::isCorrect);
+        return hints.stream()
+                .allMatch(HintLetter::isCorrectHint);
     }
 
-    public void add(Hint hint) {
-        hints.add(hint);
+
+    public void add(HintLetter hintLetter) {
+        hints.add(hintLetter);
+    }
+
+    public String getHintTiles() {
+        return hints.stream()
+                .map(HintLetter::getHintTile)
+                .collect(Collectors.joining());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchResult that = (MatchResult) o;
+        return Objects.equals(hints, that.hints);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return this.hints.equals(((MatchResult) obj).hints);
+        return Objects.hashCode(hints);
     }
 }
 

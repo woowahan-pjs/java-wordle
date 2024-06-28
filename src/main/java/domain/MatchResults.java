@@ -7,7 +7,7 @@ import java.util.List;
 public class MatchResults implements Iterable<MatchResult> {
     private List<MatchResult> results;
 
-    public MatchResults(List<MatchResult> results) {
+    protected MatchResults(List<MatchResult> results) {
         this.results = results;
     }
 
@@ -15,17 +15,13 @@ public class MatchResults implements Iterable<MatchResult> {
         this.results = new ArrayList<>();
     }
 
-
-    public List<MatchResult> getResults() {
-        return results;
+    public void add(MatchResult matchResultOfInput) {
+        this.results.add(matchResultOfInput);
     }
+
 
     @Override
     public Iterator<MatchResult> iterator() {
         return this.results.iterator();
-    }
-
-    public void add(MatchResult matchResultOfInput) {
-        this.results.add(matchResultOfInput);
     }
 }
