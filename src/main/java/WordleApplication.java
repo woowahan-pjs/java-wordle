@@ -9,9 +9,7 @@ public class WordleApplication {
 
         List<String> words = WordLoader.read(FileConfig.FILE_PATH);
         GameManager gameManager = new GameManager(words);
-
         gameManager.start();
-
     }
 
 }
