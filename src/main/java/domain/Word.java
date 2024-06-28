@@ -8,9 +8,16 @@ import java.util.stream.Stream;
 public class Word {
     private final static int MAX_LENGTH = 5;
     private final String value;
+    private boolean availableWord;
 
-    protected Word(String value) {
+    public Word(String value) {
         this.value = value;
+        this.availableWord = false;
+    }
+
+    public Word(String value, boolean availableWord) {
+        this.value = value;
+        this.availableWord = availableWord;
     }
 
     public static Word createAnswer(LocalDate currentDate, List<String> availableWords) {
@@ -22,8 +29,8 @@ public class Word {
     }
 
     public static Word createInput(String value, List<String> availableWords) {
-//        validate(value, availableWords);
-        return new Word(value);
+        boolean availableWord = isvalidate(value, availableWords);
+        return new Word(value, availableWord);
     }
 
     public MatchResult match(Word word) {
@@ -80,30 +87,45 @@ public class Word {
         return value.charAt(index) == inputChar;
     }
 
-    private static void validate(String input, List<String> availableWords) {
-        validateLength(input);
+    private static boolean isvalidate(String input, List<String> availableWords) {
+        if(validateLength(input)) {
+            return false;
+        }
 
-        validateOnlyEnglish(input);
+        if(validateOnlyEnglish(input)) {
+            return false;
+        }
 
-        validateContain(input, availableWords);
+//        return !validateContain(input, availableWords);
+        return true;
     }
 
-    private static void validateOnlyEnglish(String input) {
+    private static boolean validateOnlyEnglish(String input) {
         if (!input.matches("^[a-zA-Z]+$")) {
-            throw new IllegalArgumentException("영단어를 입력해주세요. [" + input + "]");
+            System.out.println("영단어를 입력해주세요. [" + input + "]");
+            return true;
         }
+        return false;
     }
 
-    private static void validateLength(String input) {
+    private static boolean validateLength(String input) {
         if (input.length() != MAX_LENGTH) {
-            throw new IllegalArgumentException(MAX_LENGTH + "자리의 단어를 입력해주세요.");
+            System.out.println(MAX_LENGTH + "자리의 단어를 입력해주세요.");
+            return true;
         }
+        return false;
     }
 
-    private static void validateContain(String input, List<String> availableWords) {
+    private static boolean validateContain(String input, List<String> availableWords) {
         if (!availableWords.contains(input)) {
-            throw new IllegalArgumentException("입력 불가능한 단어입니다.");
+            System.out.println("입력 불가능한 단어입니다.");
+            return true;
         }
+        return false;
+    }
+
+    public boolean getAvailableWord() {
+        return availableWord;
     }
 
     @Override
@@ -120,4 +142,6 @@ public class Word {
     public int hashCode() {
         return value != null ? value.hashCode() : 0;
     }
+
+
 }

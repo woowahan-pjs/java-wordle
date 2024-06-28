@@ -24,4 +24,8 @@ public class Round {
     public boolean isNotFinalRound() {
         return current <= limit;
     }
+
+    public boolean isFinalRound() {
+        return current == limit;
+    }
 }
