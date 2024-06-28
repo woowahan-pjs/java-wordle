@@ -91,18 +91,18 @@ public class Word {
     }
 
     private static boolean isValidate(String input, List<String> availableWords) {
-        if(validateLength(input)) {
+        if(isWrongLength(input)) {
             return false;
         }
 
-        if(validateOnlyEnglish(input)) {
+        if(notOnlyEnglish(input)) {
             return false;
         }
 
-        return !validateContain(input, availableWords);
+        return !isNotContain(input, availableWords);
     }
 
-    private static boolean validateOnlyEnglish(String input) {
+    public static boolean notOnlyEnglish(String input) {
         if (!input.matches("^[a-zA-Z]+$")) {
             System.out.println("영단어를 입력해주세요. [" + input + "]");
             return true;
@@ -110,7 +110,7 @@ public class Word {
         return false;
     }
 
-    private static boolean validateLength(String input) {
+    public static boolean isWrongLength(String input) {
         if (input.length() != MAX_LENGTH) {
             System.out.println(MAX_LENGTH + "자리의 단어를 입력해주세요.");
             return true;
@@ -118,7 +118,7 @@ public class Word {
         return false;
     }
 
-    private static boolean validateContain(String input, List<String> availableWords) {
+    public static boolean isNotContain(String input, List<String> availableWords) {
         if (!availableWords.contains(input)) {
             System.out.println("입력 불가능한 단어입니다.");
             return true;

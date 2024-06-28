@@ -36,9 +36,7 @@ class InputWordTest {
     @ValueSource(strings = {"people"})
     @DisplayName("입력단어 글자수 유효성 검증 실패 테스트")
     void validateInputWordLength(String input) {
-        assertTrue(words.contains(input));
-        Word word = Word.createInput(input, words);
-        assertFalse(word.getAvailableWord());
+        assertTrue(Word.isWrongLength(input));
     }
 
     @ParameterizedTest
@@ -49,7 +47,7 @@ class InputWordTest {
             Word word = Word.createInput(input, words);
             assertFalse(word.getAvailableWord());
         } else {
-            assertTrue(words.contains(input));
+            assertFalse(Word.notOnlyEnglish(input));
         }
     }
 
