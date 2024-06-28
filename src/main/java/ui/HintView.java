@@ -5,15 +5,11 @@ import domain.MatchResults;
 
 public class HintView {
     public void render(MatchResults matchResults) {
-        matchResults.forEach(matchResultEachRound -> {
-            renderTiles(matchResultEachRound);
-            System.out.println();
-        });
+        matchResults.forEach(HintView::drawTiles);
     }
 
-    private void renderTiles(MatchResult matchResultEachRound) {
-        matchResultEachRound.forEach(matchResult -> {
-            System.out.print(matchResult.getTile());
-        });
+    private static void drawTiles(MatchResult matchResultEachRound) {
+        System.out.print(matchResultEachRound.getHintTiles());
+        System.out.println();
     }
 }
