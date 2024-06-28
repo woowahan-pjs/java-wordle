@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Word {
     private final static int MAX_LENGTH = 5;
@@ -29,9 +30,10 @@ public class Word {
     }
 
     public MatchResult match(Word word) {
-        List<Hint> hints = IntStream.range(0, value.length())
-                .mapToObj(i -> getHint(word.getChar(i), i))
-                .collect(Collectors.toList());
+        List<Hint> hints = Stream.iterate(0, i -> i + 1)
+                .limit(value.length())
+                .map(i -> getHint(word.getChar(i), i))
+                .toList();
         return new MatchResult(hints);
     }
 
