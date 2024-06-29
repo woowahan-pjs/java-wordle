@@ -18,20 +18,21 @@ public class Record implements Iterable<Results> {
     }
 
     public boolean isEnd() {
-        return existAllGreen() || isCountOver();
+        return existAnswer() || isCountOver();
     }
 
     public boolean isCountOver() {
         return record.size() >= MAX_COUNT;
     }
 
-    public boolean existAllGreen() {
+    public boolean existAnswer() {
         if (record.isEmpty()) {
             return false;
         }
+
         return record
                 .getLast()
-                .isAllGreen();
+                .isAnswer();
     }
 
     @Override

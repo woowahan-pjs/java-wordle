@@ -14,7 +14,7 @@ public class RecordTest {
     void Record에_초록색타일_5개_인_결과모음이_있으면_종료여부가_true이다() {
         Record record = createAllGreenRecord();
 
-        assertThat(record.existAllGreen()).isTrue();
+        assertThat(record.existAnswer()).isTrue();
     }
 
     @Test
