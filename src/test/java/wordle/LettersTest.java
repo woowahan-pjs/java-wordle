@@ -56,18 +56,8 @@ class LettersTest {
     @Test
     void findSameValueLetters() {
         // given
-        Letters letters = new Letters(
-                List.of(
-                        new Letter(0, 'h'),
-                        new Letter(1, 'e'),
-                        new Letter(2, 'l')
-                ));
-        Letters other = new Letters(
-                List.of(
-                        new Letter(0, 'm'),
-                        new Letter(1, 'e'),
-                        new Letter(2, 'h')
-                ));
+        Letters letters = sourceLetters();
+        Letters other = targetLetters();
 
         // when
         Letters result = letters.findSameValueLetters(other);
@@ -80,23 +70,31 @@ class LettersTest {
     @Test
     void findNoneMatchingLetters() {
         // given
-        Letters letters = new Letters(
-                List.of(
-                        new Letter(0, 'h'),
-                        new Letter(1, 'e'),
-                        new Letter(2, 'l')
-                ));
-        Letters other = new Letters(
-                List.of(
-                        new Letter(0, 'm'),
-                        new Letter(1, 'e'),
-                        new Letter(2, 'h')
-                ));
+        Letters letters = sourceLetters();
+        Letters other = targetLetters();
 
         // when
         Letters result = letters.findNoneMatchingLetters(other);
 
         // then
         assertThat(result.getLetters()).containsExactly(new Letter(2, 'l'));
+    }
+
+    private Letters sourceLetters() {
+        return new Letters(
+                List.of(
+                        new Letter(0, 'h'),
+                        new Letter(1, 'e'),
+                        new Letter(2, 'l')
+                ));
+    }
+
+    private Letters targetLetters() {
+        return new Letters(
+            List.of(
+                new Letter(0, 'm'),
+                new Letter(1, 'e'),
+                new Letter(2, 'h')
+            ));
     }
 }
