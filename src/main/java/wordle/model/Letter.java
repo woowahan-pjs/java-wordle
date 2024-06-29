@@ -19,6 +19,10 @@ public class Letter {
     public char getValue() {
         return value;
     }
+    
+    public boolean isOnlyEqualToValue(Letter other) {
+        return (Objects.equals(this.getValue(), other.getValue())) && (this.getPosition() != other.getPosition());
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -2,7 +2,6 @@ package wordle.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,7 +64,7 @@ public class Letters {
 
     private boolean isOnlySameValue(Letter other) {
         return letters.stream()
-                .anyMatch(letter -> (Objects.equals(letter.getValue(), other.getValue())) && letter.getPosition() != other.getPosition());
+            .anyMatch(letter -> letter.isOnlyEqualToValue(other));
     }
 
     public Letters findNoneMatchingLetters(Letters other) {
