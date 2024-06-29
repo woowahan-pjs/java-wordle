@@ -23,6 +23,6 @@ class ResultsTest {
     void Results_가_전부_초록색타일인지_알수있다() {
         Results results = ResultFixture.createGreenResults(5);
 
-        assertThat(results.isAllGreen()).isTrue();
+        assertThat(results.isAnswer()).isTrue();
     }
 }

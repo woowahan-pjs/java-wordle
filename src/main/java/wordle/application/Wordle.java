@@ -53,7 +53,7 @@ public class Wordle {
     }
 
     private void concludeGame() {
-        if (record.existAllGreen()) {
+        if (record.existAnswer()) {
             outputView.successEnd(record);
             return;
         }

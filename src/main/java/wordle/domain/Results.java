@@ -26,7 +26,7 @@ public class Results implements Iterable<Result> {
                 .anyMatch(result -> result.isSamePosition(position));
     }
 
-    public boolean isAllGreen() {
+    public boolean isAnswer() {
         return results.stream().allMatch(Result::isGreen);
     }
 }
