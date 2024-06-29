@@ -47,7 +47,7 @@ public class Game {
             if (dictionary.isExist(word)) {
                 return new Guess(word);
             }
-            return guess(dictionary);
+            throw new IllegalArgumentException();
         } catch (final Exception e) {
             outputView.wrongWord();
             return guess(dictionary);
