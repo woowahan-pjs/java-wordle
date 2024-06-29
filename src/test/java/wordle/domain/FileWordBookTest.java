@@ -35,14 +35,8 @@ public class FileWordBookTest {
 
     @Test
     void WordBook에서_단어를_찾을_수_있다() {
-        Word word = wordBook.find("spill");
+        Word word = wordBook.find("spill").get();
 
         assertThat(word).isNotNull();
-    }
-
-    @Test
-    void WordBook에_없는_단어를_찾으면_예외를_던진다() {
-        assertThatThrownBy(() -> wordBook.find("ghost"))
-                .isInstanceOf(WordNotExistException.class);
     }
 }

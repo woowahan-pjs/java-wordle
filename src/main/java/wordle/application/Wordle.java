@@ -6,6 +6,7 @@ import wordle.domain.Record;
 import wordle.domain.Results;
 import wordle.domain.Word;
 import wordle.domain.WordBook;
+import wordle.exception.WordNotExistException;
 import wordle.exception.WordleException;
 import wordle.exception.WordleInvalidInputException;
 import wordle.ui.InputView;
@@ -47,7 +48,8 @@ public class Wordle {
 
     private void processTurn(Word answerWord) {
         outputView.askAnswer();
-        Word inputWord = wordBook.find(inputView.input());
+        Word inputWord = wordBook.find(inputView.input())
+                .orElseThrow(WordNotExistException::new);
         Results results = answerWord.compare(inputWord);
         record.add(results);
     }
