@@ -12,7 +12,7 @@ public class Word {
 
     public Word(String value) {
         this.value = value;
-        this.availableWord = false;
+        this.availableWord = true;
     }
 
     public Word(String value, boolean availableWord) {
@@ -126,20 +126,16 @@ public class Word {
         return false;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Word answer = (Word) o;
-
-        return Objects.equals(value, answer.value);
+        if (!(o instanceof Word word)) return false;
+        return getAvailableWord() == word.getAvailableWord() && Objects.equals(value, word.value);
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        return Objects.hash(value, getAvailableWord());
     }
-
-
 }

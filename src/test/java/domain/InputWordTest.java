@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class InputWordTest {
-
     private final List<String> words = getWordList();
 
     @ParameterizedTest

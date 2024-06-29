@@ -12,6 +12,6 @@ class WordLoaderTest {
     @DisplayName("단어목록파일 읽기")
     void loadWordsFromFile(){
         List<String> words = WordLoader.read("src/test/resources/words.txt");
-        assertThat(words).hasSize(5);
+        assertThat(words).hasSize(18);
     }
 }
