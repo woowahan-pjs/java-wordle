@@ -1,6 +1,7 @@
 package wordle.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import wordle.view.Console;
 
 public class Wordle {
@@ -44,28 +45,25 @@ public class Wordle {
     }
 
     private Letters getInputLetters(Words words) {
-        Letters inputLetters;
         while (true) {
             console.printInputRequestMessage();
-            String input = console.inputAnswer();
-            inputLetters = new Letters(input);
 
-            if (isInputLettersInvalid(words, inputLetters)) {
+            String input = console.inputAnswer();
+            if (isInputLettersInvalid(words, input)) {
                 continue;
             }
 
-            break;
+            return new Letters(input);
         }
-        return inputLetters;
     }
 
-    private boolean isInputLettersInvalid(Words words, Letters inputLetters) {
-        if (wordleValidator.isInvalidLength(inputLetters)) {
+    private boolean isInputLettersInvalid(Words words, String input) {
+        if (wordleValidator.isInvalidLength(input)) {
             console.printInvalidLengthMessage();
             return true;
         }
 
-        if (wordleValidator.isNotIncludedWord(inputLetters, words)) {
+        if (wordleValidator.isNotIncludedWord(input, words)) {
             console.printNotInWordListMessage();
             return true;
         }

@@ -27,14 +27,6 @@ public class Letters {
         return letters;
     }
 
-    public boolean lessThan(int size) {
-        return letters.size() < size;
-    }
-
-    public boolean higherThan(int size) {
-        return letters.size() > size;
-    }
-
     public String combine() {
         return letters.stream()
             .map(letter -> String.valueOf(letter.getValue()))

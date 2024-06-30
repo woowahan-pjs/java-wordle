@@ -4,11 +4,11 @@ public class WordleValidator {
 
     private static final int VALID_SIZE = 5;
 
-    public boolean isInvalidLength(Letters letters) {
-        return letters.lessThan(VALID_SIZE) || letters.higherThan(VALID_SIZE);
+    public boolean isInvalidLength(String input) {
+        return input.length() < VALID_SIZE || input.length() > VALID_SIZE;
     }
 
-    public boolean isNotIncludedWord(Letters letters, Words words) {
-        return words.notContains(letters.combine());
+    public boolean isNotIncludedWord(String input, Words words) {
+        return words.notContains(input);
     }
 }
