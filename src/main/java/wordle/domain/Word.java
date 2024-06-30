@@ -12,21 +12,21 @@ public class Word implements Iterable<Letter> {
     public static final int WORD_LENGTH = 5;
     private final List<Letter> letters;
 
-    public Word(String input) {
-        if (input.length() != WORD_LENGTH) {
-            throw new InvalidWordException();
+    public Word(String word) {
+        if (word.length() != WORD_LENGTH) {
+            throw new InvalidWordException("단어는 5글자여야 합니다. (" + word + ")");
         }
 
         this.letters = new ArrayList<>();
-        for (int i = 0; i < input.length(); i++) {
-            Letter letter = new Letter(input.charAt(i), i);
+        for (int i = 0; i < word.length(); i++) {
+            Letter letter = new Letter(word.charAt(i), i);
             this.letters.add(letter);
         }
     }
 
-    public Results compare(Word inputWord) {
+    public Results compare(Word targetWord) {
         WordComparator wordComparator = new WordComparator(this.letters);
-        return wordComparator.compare(inputWord);
+        return wordComparator.compare(targetWord);
     }
 
     static class WordComparator {
@@ -39,16 +39,16 @@ public class Word implements Iterable<Letter> {
             this.results = new Results();
         }
 
-        public Results compare(Word inputWord) {
-            for (Letter letter : inputWord) {
+        public Results compare(Word targetWord) {
+            for (Letter letter : targetWord) {
                 process(letter, letter::equals, Tile.GREEN);
             }
 
-            for (Letter letter : inputWord) {
+            for (Letter letter : targetWord) {
                 process(letter, letter::isSameAlphabet, Tile.YELLOW);
             }
 
-            for (Letter letter : inputWord) {
+            for (Letter letter : targetWord) {
                 fillEmptyToGray(letter);
             }
 
