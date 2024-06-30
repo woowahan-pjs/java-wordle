@@ -10,7 +10,7 @@ public class Position implements Comparable<Position> {
 
     public Position(int position) {
         if (position < MIN_POSITION) {
-            throw new InvalidPositionException();
+            throw new InvalidPositionException("0보다 작은 위치는 존재할 수 없습니다.");
         }
 
         this.position = position;
