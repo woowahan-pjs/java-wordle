@@ -7,14 +7,19 @@ public class WordLoader {
 
     private static final LocalDate CUTOFF_DATE = LocalDate.of(2021, 6, 19);
 
-    private final WordsReader wordsReader;
+    private final Words words;
 
     public WordLoader(WordsReader wordsReader) {
-        this.wordsReader = wordsReader;
+        List<String> wordList = wordsReader.read();
+        words = new Words(wordList, CUTOFF_DATE);
     }
 
-    public Words getWords() {
-        List<String> wordList = wordsReader.read();
-        return new Words(wordList, CUTOFF_DATE);
+    public Letters getAnswer() {
+        String wordOfDay = words.getWordOfDay(LocalDate.now());
+        return new Letters(wordOfDay);
+    }
+
+    public boolean isNotIncludedWord(String input) {
+        return words.notContains(input);
     }
 }

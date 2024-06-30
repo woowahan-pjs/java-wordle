@@ -1,7 +1,5 @@
 package wordle.model;
 
-import java.time.LocalDate;
-import java.util.List;
 import wordle.view.Console;
 
 public class Wordle {
@@ -23,12 +21,11 @@ public class Wordle {
     public void start() {
         console.printInitGameMessage();
 
-        Words words = wordLoader.getWords();
-        Letters answerLetters = createAnswerLetters(words);
+        Letters answerLetters = wordLoader.getAnswer();
 
         int tryCount = 0;
         while (tryCount++ < TRY_COUNT_LIMIT) {
-            Letters inputLetters = getInputLetters(words);
+            Letters inputLetters = getInputLetters();
             Tiles tiles = tileService.create(answerLetters, inputLetters);
 
             if (isEnd(tiles, tryCount)) {
@@ -39,17 +36,12 @@ public class Wordle {
         }
     }
 
-    private Letters createAnswerLetters(Words words) {
-        String wordOfDay = words.getWordOfDay(LocalDate.now());
-        return new Letters(wordOfDay);
-    }
-
-    private Letters getInputLetters(Words words) {
+    private Letters getInputLetters() {
         while (true) {
             console.printInputRequestMessage();
 
             String input = console.inputAnswer();
-            if (isInputLettersInvalid(words, input)) {
+            if (isInputLettersInvalid(input)) {
                 continue;
             }
 
@@ -57,13 +49,13 @@ public class Wordle {
         }
     }
 
-    private boolean isInputLettersInvalid(Words words, String input) {
+    private boolean isInputLettersInvalid(String input) {
         if (wordleValidator.isInvalidLength(input)) {
             console.printInvalidLengthMessage();
             return true;
         }
 
-        if (wordleValidator.isNotIncludedWord(input, words)) {
+        if (wordLoader.isNotIncludedWord(input)) {
             console.printNotInWordListMessage();
             return true;
         }
