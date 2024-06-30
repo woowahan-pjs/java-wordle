@@ -2,10 +2,7 @@ package wordle.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import wordle.fixture.ResultFixture;
 
 public class RecordTest {
@@ -22,19 +19,6 @@ public class RecordTest {
         Record record = createAllGrayRecord();
 
         assertThat(record.isCountOver()).isTrue();
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideRecord")
-    void Record가_5개_인_결과모음이_있거나_결과모음이_6개이상이면_종료여부가_true이다(Record record) {
-        assertThat(record.isEnd()).isTrue();
-    }
-
-    private static Stream<Record> provideRecord() {
-        return Stream.of(
-                createAllGreenRecord(),
-                createAllGrayRecord()
-        );
     }
 
     private static Record createAllGreenRecord() {

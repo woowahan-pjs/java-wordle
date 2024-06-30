@@ -17,10 +17,6 @@ public class Record implements Iterable<Results> {
         record.add(results);
     }
 
-    public boolean isEnd() {
-        return existAnswer() || isCountOver();
-    }
-
     public boolean isCountOver() {
         return record.size() >= MAX_COUNT;
     }
