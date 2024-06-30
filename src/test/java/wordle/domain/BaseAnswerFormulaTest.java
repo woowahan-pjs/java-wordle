@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import wordle.TimeTestSupporter;
-import wordle.exception.AnswerFormulaException;
+import wordle.exception.AnswerFormulaWordCountException;
 
 public class BaseAnswerFormulaTest {
 
@@ -29,6 +29,6 @@ public class BaseAnswerFormulaTest {
         BaseAnswerFormula answerFormula = new BaseAnswerFormula();
 
         assertThatThrownBy(() -> answerFormula.calculate(wordCount))
-                .isInstanceOf(AnswerFormulaException.class);
+                .isInstanceOf(AnswerFormulaWordCountException.class);
     }
 }

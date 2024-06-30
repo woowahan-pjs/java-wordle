@@ -2,7 +2,7 @@ package wordle.domain;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import wordle.exception.AnswerFormulaException;
+import wordle.exception.AnswerFormulaWordCountException;
 
 public class BaseAnswerFormula implements AnswerFormula {
 
@@ -11,7 +11,7 @@ public class BaseAnswerFormula implements AnswerFormula {
 
     public int calculate(int wordCount) {
         if (wordCount < MIN_WORD_COUNT) {
-            throw new AnswerFormulaException();
+            throw new AnswerFormulaWordCountException();
         }
 
         return (int) ChronoUnit.DAYS.between(BASE, LocalDate.now()) % wordCount;
