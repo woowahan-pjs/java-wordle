@@ -65,10 +65,8 @@ public class Wordle {
     private void handleWrongAnswer(Runnable runnable) {
         try {
             runnable.run();
-        } catch (WordleInvalidInputException e) {
-            outputView.wrongAnswer();
         } catch (WordleException e) {
-            outputView.unexpectedEnd();
+            outputView.unexpectedEnd(e.getMessage());
         }
     }
 }

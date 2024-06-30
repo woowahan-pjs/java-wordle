@@ -55,12 +55,7 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void wrongAnswer() {
-        System.out.println("올바르지 않은 단어입니다.");
-    }
-
-    @Override
-    public void unexpectedEnd() {
-        System.out.println("비정상적으로 게임이 종료되었습니다.");
+    public void unexpectedEnd(String message) {
+        System.out.println(message);
     }
 }
