@@ -1,13 +1,11 @@
 package wordle.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import wordle.exception.WordNotExistException;
 import wordle.infra.FileReader;
 
 public class FileWordBookTest {
@@ -20,7 +18,7 @@ public class FileWordBookTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"hello:true", "exist:false"}, delimiter = ':')
+    @CsvSource(value = {"hello:true", "exist:false" }, delimiter = ':')
     void WordBook에_단어가_존재하는지_확인_할_수있다(String input, boolean expected) {
         final boolean actual = wordBook.exist(new Word(input));
 

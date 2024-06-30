@@ -49,7 +49,7 @@ public class Wordle {
     private void processTurn(Word answerWord) {
         outputView.askAnswer();
         Word inputWord = wordBook.find(inputView.input())
-                .orElseThrow(WordNotExistException::new);
+                .orElseThrow(() -> new WordNotExistException(inputView.input()));
         Results results = answerWord.compare(inputWord);
         record.add(results);
     }
