@@ -3,7 +3,7 @@ package wordle.view;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
-import wordle.model.Tiles;
+import wordle.model.Result;
 
 public class Console {
 
@@ -24,9 +24,9 @@ public class Console {
         return scanner.nextLine();
     }
 
-    public void printTiles(List<Tiles> tiles) {
-        for (Tiles tile : tiles) {
-            System.out.println(tile);
+    public void printResults(List<Result> results) {
+        for (Result result : results) {
+            System.out.println(result);
         }
     }
 
@@ -34,14 +34,14 @@ public class Console {
         System.out.println(tryCount + "/" + totalCount);
     }
 
-    public void printResult(int tryCount, int tryCountLimit, List<Tiles> tiles) {
+    public void printResults(int tryCount, int tryCountLimit, List<Result> results) {
         printTryCount(tryCount, tryCountLimit);
-        printTiles(tiles);
+        printResults(results);
     }
 
-    public void printResult(int tryCountLimit, List<Tiles> tiles) {
+    public void printResults(int tryCountLimit, List<Result> results) {
         printTryCount("X", tryCountLimit);
-        printTiles(tiles);
+        printResults(results);
     }
 
     public void printTryCount(String tryCount, int totalCount) {

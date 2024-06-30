@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import wordle.model.*;
 
-class TileServiceTest {
+class LetterComparatorTest {
 
     @ParameterizedTest
     @MethodSource("provideResultData")
     void compareLetters(Letters inputLetters, String resultData) {
         // given
-        TileService tileService = new TileService(new TileStorage());
+        LetterComparator letterComparator = new LetterComparator(new ResultStorage());
         Letters answerLetters = new Letters(
                 List.of(
                         new Letter(0, 'a'),
@@ -26,10 +26,10 @@ class TileServiceTest {
                 ));
 
         // when
-        Tiles tiles = tileService.create(answerLetters, inputLetters);
+        Result result = letterComparator.compare(answerLetters, inputLetters);
 
         // then
-        assertThat(tiles.toString()).isEqualTo(resultData);
+        assertThat(result.toString()).isEqualTo(resultData);
     }
 
     public static Stream<Arguments> provideResultData() {

@@ -2,7 +2,7 @@ package wordle.model;
 
 import java.util.Arrays;
 
-public class Tiles {
+public class Result {
 
     private static final String GRAY_TILE = "⬜";
     private static final String YELLOW_TILE = "\uD83D\uDFE8";
@@ -10,18 +10,18 @@ public class Tiles {
 
     private final String[] tiles;
 
-    public Tiles(int size) {
+    public Result(int size) {
         this.tiles = new String[size];
     }
 
     public void addGreenTile(Letters letters) {
-        for(Letter letter : letters.getLetters()) {
+        for (Letter letter : letters.getLetters()) {
             tiles[letter.getPosition()] = GREEN_TILE;
         }
     }
 
     public void addYellowTile(Letters letters) {
-        for(Letter letter : letters.getLetters()) {
+        for (Letter letter : letters.getLetters()) {
             tiles[letter.getPosition()] = YELLOW_TILE;
         }
     }
@@ -32,9 +32,9 @@ public class Tiles {
         }
     }
 
-    public boolean isFilledWith(String otherTile) {
+    public boolean isAnswer() {
         return Arrays.stream(tiles)
-                .allMatch(tile -> tile.equals(otherTile));
+            .allMatch(tile -> tile.equals(GREEN_TILE));
     }
 
     @Override

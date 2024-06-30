@@ -9,13 +9,13 @@ public class Wordle {
     private final Console console;
     private final WordLoader wordLoader;
     private final WordleValidator wordleValidator;
-    private final TileService tileService;
+    private final LetterComparator letterComparator;
 
-    public Wordle(Console console, WordLoader wordLoader, WordleValidator wordleValidator, TileService tileService) {
+    public Wordle(Console console, WordLoader wordLoader, WordleValidator wordleValidator, LetterComparator letterComparator) {
         this.console = console;
         this.wordLoader = wordLoader;
         this.wordleValidator = wordleValidator;
-        this.tileService = tileService;
+        this.letterComparator = letterComparator;
     }
 
     public void start() {
@@ -26,13 +26,13 @@ public class Wordle {
         int tryCount = 0;
         while (tryCount++ < TRY_COUNT_LIMIT) {
             Letters inputLetters = getInputLetters();
-            Tiles tiles = tileService.create(answerLetters, inputLetters);
+            Result result = letterComparator.compare(answerLetters, inputLetters);
 
-            if (isEnd(tiles, tryCount)) {
+            if (isEnd(result, tryCount)) {
                 break;
             }
 
-            console.printTiles(tileService.findAll());
+            console.printResults(letterComparator.getAllResults());
         }
     }
 
@@ -63,14 +63,14 @@ public class Wordle {
         return false;
     }
 
-    private boolean isEnd(Tiles tiles, int tryCount) {
-        if (tileService.isAnswer(tiles)) {
-            console.printResult(tryCount, TRY_COUNT_LIMIT, tileService.findAll());
+    private boolean isEnd(Result result, int tryCount) {
+        if (result.isAnswer()) {
+            console.printResults(tryCount, TRY_COUNT_LIMIT, letterComparator.getAllResults());
             return true;
         }
 
         if (tryCount == TRY_COUNT_LIMIT) {
-            console.printResult(TRY_COUNT_LIMIT, tileService.findAll());
+            console.printResults(TRY_COUNT_LIMIT, letterComparator.getAllResults());
             return true;
         }
 
