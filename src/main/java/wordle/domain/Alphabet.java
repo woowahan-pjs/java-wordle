@@ -12,7 +12,7 @@ public class Alphabet {
     public Alphabet(char alphabet) {
         char lowerAlphabet = Character.toLowerCase(alphabet);
         if (lowerAlphabet < MIN_ALPHABET || lowerAlphabet > MAX_ALPHABET) {
-            throw new InvalidAlphabetException();
+            throw new InvalidAlphabetException("올바르지 않은 알파벳입니다. (" + alphabet + ")");
         }
 
         this.alphabet = lowerAlphabet;
