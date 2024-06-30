@@ -8,7 +8,6 @@ import wordle.domain.Word;
 import wordle.domain.WordBook;
 import wordle.exception.WordNotExistException;
 import wordle.exception.WordleException;
-import wordle.exception.WordleInvalidInputException;
 import wordle.ui.InputView;
 import wordle.ui.OutputView;
 
@@ -35,31 +34,27 @@ public class Wordle {
     public void startGame() {
         Word answerWord = wordBook.pick(answerFormula);
         outputView.welcome();
-        runGame(answerWord);
-        concludeGame();
+        concludeGame(runGame(answerWord));
     }
 
-    private void runGame(Word answerWord) {
-        while (!record.isEnd()) {
+    private boolean runGame(Word answerWord) {
+        while (!record.isCountOver()) {
             outputView.showRecord(record);
-            handleWrongAnswer(() -> processTurn(answerWord));
+            handleWrongAnswer(() -> processRound(answerWord));
+
+            if (record.existAnswer()) {
+                return true;
+            }
         }
+        return false;
     }
 
-    private void processTurn(Word answerWord) {
+    private void processRound(Word answerWord) {
         outputView.askAnswer();
         Word inputWord = wordBook.find(inputView.input())
                 .orElseThrow(() -> new WordNotExistException(inputView.input()));
         Results results = answerWord.compare(inputWord);
         record.add(results);
-    }
-
-    private void concludeGame() {
-        if (record.existAnswer()) {
-            outputView.successEnd(record);
-            return;
-        }
-        outputView.failEnd(record);
     }
 
     private void handleWrongAnswer(Runnable runnable) {
@@ -68,5 +63,13 @@ public class Wordle {
         } catch (WordleException e) {
             outputView.unexpectedEnd(e.getMessage());
         }
+    }
+
+    private void concludeGame(boolean isGameWon) {
+        if (isGameWon) {
+            outputView.successEnd(record);
+            return;
+        }
+        outputView.failEnd(record);
     }
 }
