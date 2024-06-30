@@ -10,26 +10,6 @@ import wordle.model.Letters;
 
 class LettersTest {
 
-    @DisplayName("Letters를 문자열로 변환한다.")
-    @Test
-    void combine() {
-        // given
-        Letters letters = new Letters(
-                List.of(
-                        new Letter(0, 'h'),
-                        new Letter(1, 'e'),
-                        new Letter(2, 'l'),
-                        new Letter(3, 'l'),
-                        new Letter(4, 'o')
-                ));
-
-        // when
-        String result = letters.combine();
-
-        // then
-        assertThat(result).isEqualTo("hello");
-    }
-
     @DisplayName("위치와 값이 같은 Letter 리스트를 찾아서 반환한다.")
     @Test
     void findSamePositionAndValueLetters() {

@@ -27,12 +27,6 @@ public class Letters {
         return letters;
     }
 
-    public String combine() {
-        return letters.stream()
-            .map(letter -> String.valueOf(letter.getValue()))
-            .collect(Collectors.joining(""));
-    }
-
     public boolean contains(Letter letter) {
         return letters.contains(letter);
     }
