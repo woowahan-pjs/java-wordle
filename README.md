@@ -1,5 +1,12 @@
 # 미션 - 워들
 
+## 페어 프로그래밍 룰 
+- [룰](./readme/PairProgrammingRule.md)
+
+## 기능 명세
+- [기능 설명](./readme/FunctionDescription.md)
+- [클래스 설명](./readme/ClassDescription.md)
+
 ## 🔍 진행 방식
 
 - 미션은 **과제 진행 요구 사항**, **기능 요구 사항**, **프로그래밍 요구 사항** 세 가지로 구성되어 있다.
